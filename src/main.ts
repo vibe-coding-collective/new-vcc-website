@@ -5,16 +5,18 @@ import './styles/tokens.css'
 import './styles/fonts.css'
 import './styles/base.css'
 import './styles/sections.css'
+import './styles/interactions.css'
+import './interactions'
 
 /**
  * Application entry point.
  *
- * For the contracts phase this only wires the global stylesheets and resolves
- * the mount node. Section markup is inlined into index.html at BUILD time by the
- * `vcc-html-includes` Vite plugin (see vite.config.ts), so there is nothing to
- * render here yet. Interactive behavior (sticky/smooth-scroll nav, scroll-reveal,
- * sponsor marquee) arrives in a later phase against the data-attribute contract
- * documented in docs/ARCHITECTURE.md.
+ * Wires the global stylesheets and the interactions module. Section markup is
+ * inlined into index.html at BUILD time by the `vcc-html-includes` Vite plugin
+ * (see vite.config.ts), so nothing renders from here. Interactive behavior
+ * (smooth-scroll via [data-scroll-target], scroll-reveal via [data-reveal])
+ * lives in ./interactions.ts against the data-attribute contract in
+ * docs/ARCHITECTURE.md §9; the sponsor marquee is pure CSS in section 03.
  */
 export function getAppRoot(): HTMLElement | null {
   return document.querySelector<HTMLElement>('#app')

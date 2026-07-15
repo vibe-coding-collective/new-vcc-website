@@ -102,6 +102,8 @@
 
   /* --- Shadows (spec §5) — single hard neo-brutalist offset, no blur ---- */
   --shadow-hard: 6px 6px 0 0 var(--shadow-grey);
+  --red: #eb3722; /* brand red from the retro wordmark fill; requested by the
+                     §02 (hero collage blob) and §11 (footer mascot) builders */
 
   /* --- Layout constants ------------------------------------------------- */
   --nav-height: 96px; /* MEASURED height of the pinned nav (section 01 builder,

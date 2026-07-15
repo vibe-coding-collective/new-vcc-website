@@ -144,6 +144,12 @@ Where the three DOM copies disagree, **desktop (1280) copy is canonical**. Known
   handled), avatars simplified to rounded rects (VISUAL-PASS ITEM: original blob-mask +
   blend tint), WebP-optimized assets, founders 2-up on mobile fixed at gate.
 
+- **§11 footer + interactions** — see `docs/deviations/11-footer.md`: WhatsApp kept as a
+  link (`_self`) per ratified policy, real retro mark + wordmark SVGs sourced from the
+  CDN, wordmark watermark capture-verified, mascots as eyeless placeholders (asset-
+  recovery task), reveal params approximation, no-JS gate (`html.js`), reduced-motion
+  paths, `--red` token added at merge for the brand red.
+
 ## Progressive enhancement
 
 - **[arch] No `#container{display:none}` boot-gate or `<noscript>` "enable JavaScript"
