@@ -1,0 +1,36 @@
+/* ==========================================================================
+   Interactions layer — scroll-reveal presentation (GLOBAL, not section-scoped).
+   --------------------------------------------------------------------------
+   Behavior lives in src/interactions.ts; ALL reveal CSS lives here (never in
+   section files). Contract: docs/ARCHITECTURE.md §9 · docs/spec/40-interactions.md.
+
+   The `html.js` gate is the no-JS safety net: interactions.ts stamps
+   <html class="js"> at init, so [data-reveal] blocks are hidden ONLY while JS is
+   present to reveal them again. With no JS the class is never added and every
+   block stays fully visible — content is never hidden unconditionally.
+   ========================================================================== */
+
+/* Hidden entry state — applied only when JS is running (html.js present). */
+html.js [data-reveal] {
+  opacity: 0;
+  translate: 0 24px;
+  transition:
+    opacity 0.5s ease-out,
+    translate 0.5s ease-out;
+}
+
+/* Revealed state — interactions.ts adds .is-revealed on first viewport entry. */
+html.js [data-reveal].is-revealed {
+  opacity: 1;
+  translate: 0;
+}
+
+/* Reduced motion: neutralize the reveal — no hidden state, no slide, no transition
+   (interactions.ts also reveals everything immediately in this mode). */
+@media (prefers-reduced-motion: reduce) {
+  html.js [data-reveal] {
+    opacity: 1;
+    translate: 0;
+    transition: none;
+  }
+}

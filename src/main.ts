@@ -5,6 +5,8 @@ import './styles/tokens.css'
 import './styles/fonts.css'
 import './styles/base.css'
 import './styles/sections.css'
+import './styles/interactions.css'
+import './interactions'
 
 /**
  * Application entry point.
