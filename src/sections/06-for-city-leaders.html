@@ -1,6 +1,193 @@
 <!-- Section 06 — FOR CITY LEADERS (yellow card). Root <section>.
      Owner: builder(06-for-city-leaders).
-     CONTRACT: keep root id="for-city-leaders" (nav "for hosts" scroll target). -->
+     CONTRACT: keep root id="for-city-leaders" (nav "for hosts" scroll target).
+     Spec: docs/spec/20-sections/06-for-city-leaders.md · Deviations: docs/deviations/06-for-city-leaders.md
+     Copy is byte-exact from the spec (straight apostrophes in "You're"/"WHO'S";
+     trailing spaces preserved on "Flien Groeneveld " and "Poppy Astrini "). -->
 <section class="s-for-city-leaders" id="for-city-leaders">
-  <!-- TODO(builder 06-for-city-leaders): implement per docs/spec/20-sections/06-for-city-leaders.md -->
+  <div class="section-card">
+    <!-- ===== Header band (yellow): pitch + panoramic map ===== -->
+    <div class="band--header fcl-header">
+      <div class="fcl-intro" data-reveal>
+        <p class="eyebrow">FOR CITY LEADERS</p>
+        <div class="fcl-heading">
+          <h2 class="t-h2 fcl-title">START A CHAPTER IN YOUR CITY!</h2>
+          <p class="t-body fcl-lede">You pick the location. You host the first event. The community grows from there. 1,200+ members started exactly where you are now.</p>
+        </div>
+      </div>
+      <figure class="fcl-map" data-reveal>
+        <!-- City labels (EDINBURGH, LONDON, AMSTERDAM, DELFT, BERLIN, KYIV, BOSTON,
+             NEW YORK, LISBON, ISLAMABAD, OSAKA) are baked into this map image — they
+             are NOT DOM text nodes in any capture. See deviations doc. -->
+        <img
+          class="fcl-map-img"
+          src="/assets/for-city-leaders/city-leaders-map.webp"
+          width="2634"
+          height="822"
+          alt="World map marking Vibe Coding Collective chapter cities: Edinburgh, London, Amsterdam, Delft, Berlin, Kyiv, Lisbon, Boston, New York, Islamabad and Osaka"
+          loading="lazy"
+          decoding="async"
+        />
+      </figure>
+    </div>
+
+    <!-- ===== Body band (yellow tint): How It Works + Who's Doing This ===== -->
+    <div class="band--body fcl-body">
+      <!-- How It Works -->
+      <div class="fcl-how container container--1400" data-reveal>
+        <h3 class="t-band-title fcl-block-title">How It Works</h3>
+        <ol class="fcl-steps">
+          <li class="fcl-step">
+            <img class="fcl-step-icon" src="/assets/for-city-leaders/step-1.svg" alt="" width="170" height="170" loading="lazy" decoding="async" />
+            <div class="fcl-step-text">
+              <h4 class="t-card-title fcl-step-title">1/ RUN first pop-up</h4>
+              <p class="t-body fcl-step-body">Pick a venue: a cafe, studio, bar, and host your first 2-hour event. We handle the framework. You bring the community.</p>
+            </div>
+          </li>
+          <li class="fcl-step">
+            <img class="fcl-step-icon" src="/assets/for-city-leaders/step-2.svg" alt="" width="170" height="170" loading="lazy" decoding="async" />
+            <div class="fcl-step-text">
+              <h4 class="t-card-title fcl-step-title">2/ support your folks</h4>
+              <p class="t-body fcl-step-body">People show up. They bring friends. You become the familiar face. Word spreads because the experience is real.</p>
+            </div>
+          </li>
+          <li class="fcl-step">
+            <img class="fcl-step-icon" src="/assets/for-city-leaders/step-3.svg" alt="" width="170" height="170" loading="lazy" decoding="async" />
+            <div class="fcl-step-text">
+              <h4 class="t-card-title fcl-step-title">3/ LEAD community</h4>
+              <p class="t-body fcl-step-body">You're no longer running an event. You're leading a movement in your city. The builders trust you. The culture is yours.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+
+      <!-- Who's Doing This (12-person desktop-canonical roster, Dan first) -->
+      <div class="fcl-team container container--1400" data-reveal>
+        <h3 class="t-band-title fcl-block-title">WHO'S DOING THIS</h3>
+
+        <!-- Founders: larger avatars, first row of two -->
+        <ul class="fcl-founders">
+          <li class="fcl-member fcl-member--founder">
+            <div class="fcl-avatar fcl-avatar--lg">
+              <img class="fcl-avatar-img" src="/assets/for-city-leaders/team-dan-porder.webp" alt="Dan Porder" loading="lazy" decoding="async" />
+            </div>
+            <div class="fcl-member-meta">
+              <p class="t-team-role fcl-role">Founder</p>
+              <p class="t-team-name fcl-name">Dan Porder</p>
+            </div>
+          </li>
+          <li class="fcl-member fcl-member--founder">
+            <div class="fcl-avatar fcl-avatar--lg">
+              <img class="fcl-avatar-img" src="/assets/for-city-leaders/team-sofiia-matsiutsia.webp" alt="Sofiia Matsiutsia" loading="lazy" decoding="async" />
+            </div>
+            <div class="fcl-member-meta">
+              <p class="t-team-role fcl-role">Founder</p>
+              <p class="t-team-name fcl-name">Sofiia Matsiutsia</p>
+            </div>
+          </li>
+        </ul>
+
+        <!-- Remaining team -->
+        <ul class="fcl-members">
+          <li class="fcl-member">
+            <div class="fcl-avatar">
+              <img class="fcl-avatar-img" src="/assets/for-city-leaders/team-abhinav.webp" alt="Abhinav" loading="lazy" decoding="async" />
+            </div>
+            <div class="fcl-member-meta">
+              <p class="t-team-role fcl-role">AI Engineer / Mumbai Lead</p>
+              <p class="t-team-name fcl-name">Abhinav</p>
+            </div>
+          </li>
+          <li class="fcl-member">
+            <div class="fcl-avatar">
+              <img class="fcl-avatar-img" src="/assets/for-city-leaders/team-cavan-judge.webp" alt="Cavan Judge" loading="lazy" decoding="async" />
+            </div>
+            <div class="fcl-member-meta">
+              <p class="t-team-role fcl-role">Creative Technologies</p>
+              <p class="t-team-name fcl-name">CAVAN JUDGE</p>
+            </div>
+          </li>
+          <li class="fcl-member">
+            <div class="fcl-avatar">
+              <img class="fcl-avatar-img" src="/assets/for-city-leaders/team-liberatus-fusi.webp" alt="Liberatus Fusi" loading="lazy" decoding="async" />
+            </div>
+            <div class="fcl-member-meta">
+              <p class="t-team-role fcl-role">AI Engineer</p>
+              <p class="t-team-name fcl-name">Liberatus Fusi</p>
+            </div>
+          </li>
+          <li class="fcl-member">
+            <div class="fcl-avatar">
+              <img class="fcl-avatar-img" src="/assets/for-city-leaders/team-joseph-wan.webp" alt="Joseph Wan" loading="lazy" decoding="async" />
+            </div>
+            <div class="fcl-member-meta">
+              <p class="t-team-role fcl-role">Creative Technologies</p>
+              <p class="t-team-name fcl-name">JOSEPH WAN</p>
+            </div>
+          </li>
+          <li class="fcl-member">
+            <div class="fcl-avatar">
+              <img class="fcl-avatar-img" src="/assets/for-city-leaders/team-erika-tsai.webp" alt="Erika Tsai" loading="lazy" decoding="async" />
+            </div>
+            <div class="fcl-member-meta">
+              <p class="t-team-role fcl-role">Product Manager</p>
+              <p class="t-team-name fcl-name">ERIKA TSAI</p>
+            </div>
+          </li>
+          <li class="fcl-member">
+            <div class="fcl-avatar">
+              <img class="fcl-avatar-img" src="/assets/for-city-leaders/team-luisa-von-funcke.webp" alt="Luisa Von Funcke" loading="lazy" decoding="async" />
+            </div>
+            <div class="fcl-member-meta">
+              <p class="t-team-role fcl-role">Community Lead</p>
+              <p class="t-team-name fcl-name">Luisa Von Funcke</p>
+            </div>
+          </li>
+          <li class="fcl-member">
+            <div class="fcl-avatar">
+              <img class="fcl-avatar-img" src="/assets/for-city-leaders/team-flien-groeneveld.webp" alt="Flien Groeneveld" loading="lazy" decoding="async" />
+            </div>
+            <div class="fcl-member-meta">
+              <p class="t-team-role fcl-role">Amsterdam Lead</p>
+              <p class="t-team-name fcl-name">Flien Groeneveld </p>
+            </div>
+          </li>
+          <li class="fcl-member">
+            <div class="fcl-avatar">
+              <img class="fcl-avatar-img" src="/assets/for-city-leaders/team-eric-lonergan.webp" alt="Eric Lonergan" loading="lazy" decoding="async" />
+            </div>
+            <div class="fcl-member-meta">
+              <p class="t-team-role fcl-role">Berlin Lead</p>
+              <p class="t-team-name fcl-name">Eric Lonergan</p>
+            </div>
+          </li>
+          <li class="fcl-member">
+            <div class="fcl-avatar">
+              <img class="fcl-avatar-img" src="/assets/for-city-leaders/team-uvin-withana.webp" alt="Uvin Withana" loading="lazy" decoding="async" />
+            </div>
+            <div class="fcl-member-meta">
+              <p class="t-team-role fcl-role">Berlin Lead</p>
+              <p class="t-team-name fcl-name">Uvin Withana</p>
+            </div>
+          </li>
+          <li class="fcl-member">
+            <div class="fcl-avatar">
+              <img class="fcl-avatar-img" src="/assets/for-city-leaders/team-poppy-astrini.webp" alt="Poppy Astrini" loading="lazy" decoding="async" />
+            </div>
+            <div class="fcl-member-meta">
+              <p class="t-team-role fcl-role">Delft Lead</p>
+              <p class="t-team-name fcl-name">Poppy Astrini </p>
+            </div>
+          </li>
+        </ul>
+
+        <a
+          class="btn btn--light fcl-cta"
+          href="https://docs.google.com/forms/d/e/1FAIpQLSdF9cGO8BJeZdCznidPJDBajWgC3ER7OR1BI-xSsVV8niZUsg/viewform"
+          target="_blank"
+          rel="noopener"
+        >Join our team</a>
+      </div>
+    </div>
+  </div>
 </section>
