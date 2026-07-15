@@ -43,9 +43,9 @@ scroll links), and the nav logo button. `boston` and `Edinburgh`/`edinburgh` are
 plain text, not links. `What'sApp` / `What'sapp` in the footer is plain text (no href).
 `dan.porder@vibecoders.global` is plain text (not a `mailto:` link).
 
-> **UNKNOWN — needs visual check:** the exact JS behaviour of `find an event` and the three
-> `for …` nav buttons (scroll‑to‑section vs. open a panel). Best inference: they smooth‑scroll
-> to the matching section. Documented in `40-interactions.md`.
+> **Verified visually by orchestrator, 2026‑07‑15:** `find an event` and the three `for …`
+> nav buttons are JS `<button>`s that **smooth‑scroll** to sections (measured landing positions
+> in `40-interactions.md` §3). `find an event` scrolls (does not open a panel).
 
 ---
 
@@ -144,9 +144,10 @@ Numbered files live in `20-sections/`. Desktop (1280) order:
   Color is set with **both** `color` and `-webkit-text-fill-color`. Emoji/symbol runs fall
   back through Noto Sans / Noto Sans Symbols / Noto Sans Math.
 - **Runtime‑only content:** two visual regions are **empty in the static HTML** and populated
-  by the Figma runtime — the hero's 862×350 graphic block and the `supported BY` sponsor‑logo
-  strip. Both are documented with what the Figma page data (`_index.json`) reveals, and flagged
-  `UNKNOWN — needs visual check`.
+  by the Figma runtime — the hero's 862×350 graphic block (renders live as a photo collage) and
+  the `supported BY` sponsor‑logo strip (renders live as an auto‑scrolling logo marquee). Both
+  were confirmed live by the orchestrator on 2026‑07‑15; details in `02-hero-header.md` /
+  `03-stats.md` / `40-interactions.md`.
 - **No `<iframe>`, `<video>`, `<embed>`, `<canvas>`, or forms** in the page (the runtime bundle
   supports Rive/Lottie/video generically, but this page uses none). All media is `<img>` (PNG)
   or inline‑referenced SVG.

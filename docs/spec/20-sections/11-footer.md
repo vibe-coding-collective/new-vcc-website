@@ -6,13 +6,20 @@
 ## Layout
 
 - **Large watermark wordmark** — `css-nu3ilp` (**708×202**, `position:absolute; left:50%;
-  top:201px; transform:translateX(-50%)`), a big faint VCC logotype behind the content:
+  top:201px; transform:translateX(-50%)`), a big centered VCC logotype behind the content:
   `/_assets/v11/34e7cef03b76dea60414a4e330b3d08f8d43e2af.svg`.
 - **Logo mark** — `css-ssdydo` (**100×93**): `/_assets/v11/562debcb4a3ae6307669b96af0bfe1e8ffa3d39a.svg`.
 - **Two‑column row** (`css-jvpnk3`, `justify:space-between`):
   - **Left column** (`css-i5hden`, ~245px): three stacked items —
     `What'sApp` (**plain text, no link**), then `Meetups` and `LinkedIn` links.
   - **Right column** (`css-f4flf`, `align:flex-end; gap:12px`): copyright lines.
+
+> **Verified visually by orchestrator, 2026‑07‑15:** the footer is a black band with a
+> **centered white retro VCC logo**; along the **bottom edge sits a row of six googly‑eyed blob
+> mascots** peeking up, colored (left→right) **red, orange, yellow, green, teal, blue**. Left
+> links are uppercase teal (`WHAT'SAPP / MEETUPS / LINKEDIN`); right text is
+> `All rights reserved` / `London, UK. 2026`. (The mascot row is a footer element not present in
+> the static `/_assets` references itemised above — reproduce it as a decorative bottom‑edge row.)
 
 ## Copy (verbatim)
 

@@ -17,6 +17,12 @@ TECH-LITE
 BUILDERS
 ```
 
+> **Verified visually by orchestrator, 2026‑07‑15:** live, the headline row **interleaves
+> small rounded‑square photo chips** (with yellow / green / teal backgrounds) and **one orange
+> googly‑eyes blob** between/after the words — e.g. `COMMUNITIES [photo chip] FOR / [photo chip]
+> TECH-LITE [orange googly blob] / BUILDERS [photo chip]`. These chips are runtime‑injected
+> (absent from static HTML, which shows only the four `<p>` words).
+
 Lead paragraph (`max-width:900px`, centered):
 
 ```
@@ -61,15 +67,15 @@ After `</header>`, inside wrapper `css-dczajm`, sits:
    css-nevt4e = margin-bottom:-60px; display:block;
 ```
 
-This is an **empty 862×350 block** (the next block overlaps it upward by 60px via the negative
-margin). In the Figma page data it is a FRAME named `Container` with `"fills":[]` and **no
-children** — it renders as **blank space** in both the server HTML and the post‑JS snapshot.
+In the **static HTML** this is an empty 862×350 block — a Figma FRAME named `Container` with
+`"fills":[]` and no children. The next block overlaps it upward by 60px via the negative margin.
 
-> **UNKNOWN — needs visual check.** This looks like a placeholder for a hero illustration but
-> is currently empty. If the live site shows a graphic here, it is runtime‑injected and not in
-> any static asset reference. Candidate images present in the Figma data (unconfirmed placement):
-> `members1/2/3` (~525×532) and `map` (1200×363). A faithful clone should reproduce a 862×350
-> (max 1400px) empty block with `margin-bottom:-60px` unless a visual check says otherwise.
+> **Verified visually by orchestrator, 2026‑07‑15 — the block is NOT blank live.** It renders a
+> runtime‑injected **photo collage**: event photos masked into flower/cloud blob shapes on
+> colored rounded blobs (teal, yellow, red visible), partially overlapping, occupying this
+> 862×350 (max 1400px) frame just below the CTA buttons (`margin-bottom:-60px`). The same collage
+> style renders on the tablet DOM. Because it is runtime‑injected, it is not in any static asset
+> reference. **A faithful clone should reproduce the 862×350 collage here, not empty space.**
 
 ## Responsive
 

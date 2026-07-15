@@ -9,6 +9,7 @@ Two columns:
 
 1. **Left — illustration** `css-4onwt9` (**300×298**), SVG:
    `/_assets/v11/14c2673a765c25af90dd14c74544b1c7faa8b46c.svg`.
+   *(Verified visually by orchestrator, 2026‑07‑15: it is a hand‑drawn **yellow smiley‑sun doodle**.)*
 2. **Right — text column** `css-eyvxf1` (`flex:1; column; align:center; gap:32px`):
    - Heading + paragraph block (`css-a8ckuu`):
      ```
@@ -32,7 +33,8 @@ Two columns:
 | `Email:` | Golos Medium 24px | **`#000` black** | `css-nbet0w`+`css-iguuiu` |
 | `dan.porder@vibecoders.global` | Golos Medium 24px | **green `#498d44`** | `css-rnvkzt`+`css-813ies` |
 
-The email address is **plain text**, not a `mailto:` link.
+The email address is **plain text**, not a `mailto:` link. (Green styling confirmed live by
+orchestrator, 2026‑07‑15.)
 
 ## Breakpoint note
 

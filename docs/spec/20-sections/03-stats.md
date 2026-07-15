@@ -70,10 +70,13 @@ Directly after the `supported BY` label is an **empty container** in the static 
 | `image 121` | `5e973f77aa7840ba2e45e3022b81ae09b4b35c41` | ~249×80 |
 | `image 123` | `8e452d45246a391069309df65da2fde56013812f` | ~183×80 |
 
-> **UNKNOWN — needs visual check.** Only `macpaw 1` is a named brand (MacPaw). The others are
-> generic `image N` nodes. Whether the strip renders live (and whether it scrolls/marquees —
-> the runtime has marquee support) could not be confirmed: it is empty in both the SSR HTML and
-> the post‑JS DOM snapshot. Treat as a horizontal row of ~50–80px‑tall partner logos.
+> **Verified visually by orchestrator, 2026‑07‑15 — it renders live as an auto‑scrolling
+> marquee.** Seven partner logos, **each in a white rounded pill**, cycle continuously under
+> `supported BY` in this order: **OK Tech → MacPaw → Microsoft → ElevenLabs → Softr → Valae →
+> Lovable → (repeat)**. Slow continuous horizontal drift; approximate a full loop at **~30–40s**
+> (approximation — exact speed/direction not measured). Only `macpaw 1`'s hash is confirmed
+> (`4f79c701…`); the other six brand names come from the live capture and are **not** individually
+> mapped to the remaining `image N` hashes above.
 
 ## Interactions
 

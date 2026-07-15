@@ -61,6 +61,11 @@ name (Golos Black 32px UC); right = an **arrow icon** for linked cities
 unlaunched cities. Linked city names are **blue `#0056a1`** (`css-q9ufa1`/`css-7j6izm`); `TBA`
 city names are `#181814` (`css-d5zdmh`) and `TBA` uses `css-edy0ng`.
 
+> Note: this "All cities" list is **separate from** the labeled city markers drawn on the yellow
+> section's map banner (EDINBURGH, LONDON, AMSTERDAM, LISBON, DELFT, BERLIN, KYIV, BOSTON,
+> NEW YORK, ISLAMABAD, OSAKA — see `06-for-city-leaders.md`). The two city sets deliberately
+> differ; document both, do not reconcile.
+
 **The city list differs per breakpoint — reproduce each exactly (casing + flag + link):**
 
 ### 375 (mobile) — order & verbatim
@@ -76,7 +81,7 @@ city names are `#181814` (`css-d5zdmh`) and `TBA` uses `css-edy0ng`.
 ```
 🇩🇪 berlin           → https://www.meetup.com/vibe-coding-collective-eu/
 🇳🇱 delft            → https://luma.com/z32gtwo6
-🇵🇹 Lisbon           (link UNKNOWN — see note)
+🇵🇹 Lisbon           (no link — plain text; verified 2026‑07‑15)
 🏴󠁧󠁢󠁥󠁮󠁧󠁿 London           → https://luma.com/bhfumnou
 🇺🇸 boston   TBA     (no link)
 🇯🇵 Edinburgh TBA    (no link)   ← note: Japan flag on Edinburgh (as‑is in source)
@@ -95,8 +100,9 @@ Differences: mobile lists `Delft` (capital D) first and `edinburgh` (lowercase);
 matches tablet order but keeps `Kyiv` and the Scotland flag. `berlin` is always lowercase;
 `boston` always lowercase.
 
-> **UNKNOWN:** the `Lisbon` (800 only) href — it was not captured. Likely a Luma link or none.
-> All `target="_blank"` except `London` which had one instance of `target="_self"`.
+> **Verified visually by orchestrator, 2026‑07‑15:** `Lisbon` (800 only) is **not a link** — no
+> `<a>` in any live breakpoint variant contains "Lisbon"; treat as plain text. All city links
+> open `target="_blank"` except one `London` sub‑link (the arrow image) with `target="_self"`.
 
 ## 4.4 "Your city isn't here?" CTA
 

@@ -23,6 +23,12 @@ You pick the location. You host the first event. The community grows from there.
 tablet variant `css-10elgb` = `aspect-ratio:1200/396`), `object-fit:cover`:
 `/_assets/v11/547a46b0dfe6a0bca6b9549c32a0783d6344f680.png` (native 2634px wide; srcSet up to 2560w).
 
+> **Verified visually by orchestrator, 2026‑07‑15:** the map banner shows labeled city markers
+> (diamond markers; black or red text, some rotated): **EDINBURGH, LONDON, AMSTERDAM, LISBON,
+> DELFT, BERLIN, KYIV, BOSTON, NEW YORK, ISLAMABAD, OSAKA**. This city set **deliberately differs**
+> from the green section's "All cities" list (`04-for-vibe-coders.md` §4.3) — document both, do
+> not reconcile.
+
 > Note: the Figma data also contains a separate runtime image named `map`
 > (`a7692bab7f6ad9b37f37dab5d266e3ca035326fa`, 1200×363) not present in static HTML. The visible
 > banner is the `547a46b0…png` above.
@@ -80,9 +86,10 @@ Grid of member cards in `space-between` rows (`css-jvpnk3`); each member `css-cf
   `5af4bfba75e7e7192f379e5ef04869392ecaf3fe.svg`, `9fca8ea511ee…svg`, `03709987aa34…svg`,
   `3cb9dac8fbd4…png`, `3e9082a3bec7…png`.
 
-> **UNKNOWN:** the exact photo‑hash → person mapping is not reliably determinable from static
-> files (the masked composites use different hashes than the Figma `dan/sofiia/…` refs). Team
-> photo assets are inventoried generically in `30-assets.md`. Use real assets or placeholders.
+> **UNKNOWN (still unresolved — orchestrator 2026‑07‑15):** the exact photo‑hash → person mapping
+> is not reliably determinable from static files (the masked composites use different hashes than
+> the Figma `dan/sofiia/…` refs). Team photo assets are inventoried generically in `30-assets.md`.
+> Use real assets or placeholders.
 
 ### Roster — **differs by breakpoint**
 
