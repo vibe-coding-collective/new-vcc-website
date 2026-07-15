@@ -1,0 +1,10 @@
+/* ==========================================================================
+   Section 09 — for companies (blue card on off-white)
+   Owner: builder(09-for-companies). SCOPE EVERY selector under `.s-for-companies`.
+   Spec: docs/spec/20-sections/09-for-companies.md · Contract: docs/ARCHITECTURE.md
+   Same shell as sponsors: root `background: var(--off-white)`;
+   bands `--band-color: var(--blue)` / `--band-tint: var(--blue-tint)`;
+   eyebrow `--eyebrow-bg: var(--teal)`; heading/body text light (--off-white).
+   Assets: public/assets/for-companies/
+   (Intentionally empty — the section builder fills this in.)
+   ========================================================================== */

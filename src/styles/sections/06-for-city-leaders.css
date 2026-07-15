@@ -1,0 +1,11 @@
+/* ==========================================================================
+   Section 06 — FOR CITY LEADERS (yellow card)
+   Owner: builder(06-for-city-leaders). SCOPE EVERY selector under
+   `.s-for-city-leaders`. Spec: docs/spec/20-sections/06-for-city-leaders.md
+   Contract: docs/ARCHITECTURE.md
+   Bands: `--band-color: var(--yellow)` / `--band-tint: var(--yellow-tint)`;
+   eyebrow `--eyebrow-bg: var(--orange)`.
+   ID: root id "for-city-leaders" (nav "for hosts" target) + scroll-margin-top.
+   Assets: public/assets/for-city-leaders/
+   (Intentionally empty — the section builder fills this in.)
+   ========================================================================== */

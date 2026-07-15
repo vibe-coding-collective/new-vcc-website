@@ -1,0 +1,9 @@
+/* ==========================================================================
+   Section 01 — Sticky nav bar (global)
+   Owner: builder(01-nav-sticky). SCOPE EVERY selector under `.s-nav-sticky`.
+   Spec: docs/spec/20-sections/01-nav-sticky.md · Contract: docs/ARCHITECTURE.md
+   Pinning: use `position: fixed; top: 0; inset-inline: 0; z-index: var(--z-nav)`
+   on `.s-nav-sticky` (nav is first-in-DOM inside a short <header>, so `sticky`
+   would only pin within that header). Assets: public/assets/nav-sticky/
+   (Intentionally empty — the section builder fills this in.)
+   ========================================================================== */

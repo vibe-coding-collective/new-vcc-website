@@ -1,0 +1,9 @@
+/* ==========================================================================
+   Section 10 — Contact CTA (off-white card)
+   Owner: builder(10-contact-cta). SCOPE EVERY selector under `.s-contact-cta`.
+   Spec: docs/spec/20-sections/10-contact-cta.md · Contract: docs/ARCHITECTURE.md
+   Card uses `background: var(--off-white)`, radius var(--radius-card).
+   Note: this section's `contact for more` CTA is target="_self" (see spec).
+   Assets: public/assets/contact-cta/
+   (Intentionally empty — the section builder fills this in.)
+   ========================================================================== */

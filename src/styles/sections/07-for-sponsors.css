@@ -1,0 +1,11 @@
+/* ==========================================================================
+   Section 07 — FOR sponsors (blue card on off-white)
+   Owner: builder(07-for-sponsors). SCOPE EVERY selector under `.s-for-sponsors`.
+   Spec: docs/spec/20-sections/07-for-sponsors.md · Contract: docs/ARCHITECTURE.md
+   Section sits on off-white: set `background: var(--off-white)` on the root.
+   Bands: `--band-color: var(--blue)` / `--band-tint: var(--blue-tint)`;
+   eyebrow `--eyebrow-bg: var(--teal)`; heading/body text is light (--off-white).
+   ID: root id "for-sponsors" (nav "for sponsors" target) + scroll-margin-top.
+   Assets: public/assets/for-sponsors/
+   (Intentionally empty — the section builder fills this in.)
+   ========================================================================== */

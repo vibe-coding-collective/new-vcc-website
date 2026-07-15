@@ -1,0 +1,8 @@
+/* ==========================================================================
+   Section 08 — reviews / "what people say" (cream)
+   Owner: builder(08-reviews). SCOPE EVERY selector under `.s-reviews`.
+   Spec: docs/spec/20-sections/08-reviews.md · Contract: docs/ARCHITECTURE.md
+   Eyebrow: `--eyebrow-bg: var(--orange)`. Quote boxes use `--yellow`.
+   Assets: public/assets/reviews/
+   (Intentionally empty — the section builder fills this in.)
+   ========================================================================== */
