@@ -2,6 +2,7 @@
 name: tester
 description: Runs the verification gate — typecheck, build, lint, and the test suite — and reports pass/fail with real output. Also scaffolds missing test/build infrastructure and, later, CI checks. Use as the gate before a branch is eligible to merge.
 model: claude-opus-4-8
+effort: max
 tools: Read, Edit, Write, Bash, Grep, Glob
 ---
 

@@ -2,6 +2,7 @@
 name: researcher
 description: Studies the live site (https://vibecoders.global/) as a user and produces a structured spec/inventory — pages, sections, components, copy, layout, assets, and interactions — to reverse-engineer it into code. Read-only for app code; writes only under docs/spec/. Use to build the source-of-truth spec before implementation.
 model: claude-opus-4-8
+effort: max
 tools: Read, Write, WebFetch, Bash, Grep, Glob
 ---
 

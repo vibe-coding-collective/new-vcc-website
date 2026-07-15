@@ -2,6 +2,7 @@
 name: reviewer
 description: Adversarial reviewer. Given a branch or diff, reviews it for correctness bugs, scope violations (files touched outside the builder's assignment), drift from the shared contracts, and missing tests. Read-focused; does not implement fixes. Use before merging any worker's branch.
 model: claude-opus-4-8
+effort: max
 tools: Read, Bash, Grep, Glob
 ---
 

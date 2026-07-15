@@ -14,7 +14,7 @@ These exist to prevent the failure modes that break parallel agent work:
 
 1. **Decompose by file ownership, not by feature.** Before any parallel work, split the task so **no two workers can touch the same file**. State each worker's owned paths explicitly in its task. *(Prevents file-clobber collisions.)*
 2. **Contracts first, sequentially.** Shared interfaces, types, design tokens, and routes are defined and committed by **one** worker (or you) *before* dependent workers start. Workers build against the committed contract and never silently change it. *(Prevents intent drift.)*
-3. **One worker = one git worktree = one branch.** Every builder works in its own worktree so edits are physically isolated. Never let a worker edit on `main`.
+3. **One worker = one git worktree = one branch.** The `builder` role sets `isolation: worktree`, so Claude Code gives each builder its own worktree automatically — edits are physically isolated and cannot collide. Never let a worker edit the main checkout. If a worker ever creates a worktree by hand, the convention is `git worktree add -b <task-slug> .claude/worktrees/<task-slug>` (that path is gitignored).
 4. **Verify before merge.** A branch is not "done" until the `tester` gate is green (typecheck / build / lint / tests) **and** a `reviewer` has adversarially reviewed it. Trust real command output, never a worker's self-reported "done."
 5. **Integrate through a single gate — you.** Pull worker branches into `main` one at a time, re-running the gate after each. Workers never merge to `main` directly. *(This is the PM / integration role.)*
 
