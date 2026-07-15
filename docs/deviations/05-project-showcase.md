@@ -4,23 +4,16 @@ Owner: builder(05-project-showcase). The integrator consolidates these into
 `docs/DEVIATIONS.md`. Legend: **[arch]** structural · **[content]** copy/data ·
 **[a11y]** accessibility · **[perf]** payload/assets · **[approx]** approximated.
 
-## ⚠️ OPEN QUESTION — eyebrow color: contract says ORANGE, live site is GREEN
+## Eyebrow color — GREEN (resolved; contract corrected to match the capture)
 
-- **[content] The contract and the live capture disagree, and I need the integrator to
-  decide.** I implemented **orange** to honor the committed contract (do not silently
-  diverge), but the evidence says the real eyebrow is **green**:
-  - `ARCHITECTURE.md §6` and `spec/20-sections/05-project-showcase.md §5.1` both say the
-    eyebrow is **orange `#ec6c23`** (spec cites class `css-r7xudp`).
-  - **But the captured DOM/CSS shows the project eyebrow is green `#498d44` on all three
-    breakpoints:** desktop `css-oyzv css-4uqxnc` and tablet `…css-4uqxnc` → `background:#498d44`;
-    mobile pill background `css-8ikb59` → `#498d44`.
-  - The orange class the spec cites (`css-r7xudp`, `#ec6c23`) is actually used on the
-    **FOR CITY LEADERS** and **reviews** eyebrows — not here. Looks like a transcription
-    mix-up that propagated spec → architecture.
-- **Implemented:** `--eyebrow-bg: var(--orange)` (one line in `05-project-showcase.css`).
-  **Recommendation:** if fidelity to the live site wins, flip that one line to
-  `var(--green)`. Flagged in the CSS with an inline note. Not changing it unilaterally
-  because eyebrow color is a contract-stated value and this is the integrator's call.
+- **[content] The eyebrow pill is green `#498d44` (`--eyebrow-bg: var(--green)`), matching
+  both the contract and the live capture — this is no longer a divergence.** The original
+  spec text / ARCHITECTURE §6 had it as orange `#ec6c23` (citing class `css-r7xudp`), but
+  the capture showed the project eyebrow is green on all three breakpoints (`css-4uqxnc`
+  desktop/tablet, `css-8ikb59` mobile); the orange `css-r7xudp` actually belongs to the
+  city-leaders and reviews eyebrows. The orchestrator verified this and corrected the spec
+  + ARCHITECTURE §6 on main (commit `8aa14af`), so the implementation now matches the
+  written contract and the live site.
 
 ## Copy (desktop-canonical, per `DEVIATIONS.md`)
 

@@ -14,12 +14,11 @@
    rhythm), centered column. The page gutter, max-width and 80px inter-section
    gap are owned by `main#app` (base.css) per the ratified contract amendment,
    so this section carries no page gutter of its own.
-   Eyebrow color hook: the contract (ARCHITECTURE §6 + spec §5.1) specifies
-   ORANGE. NOTE: the live capture's actual eyebrow is GREEN (#498d44) on all
-   three breakpoints — see docs/deviations/05-project-showcase.md. Flip this one
-   line to `var(--green)` if fidelity is chosen over the written contract. */
+   Eyebrow color hook: GREEN (#498d44). Matches both the corrected contract
+   (ARCHITECTURE §6 / spec §5.1 — fixed on main @ 8aa14af) and the live capture
+   (css-4uqxnc / css-8ikb59). See docs/deviations/05-project-showcase.md. */
 .s-project-showcase {
-  --eyebrow-bg: var(--orange);
+  --eyebrow-bg: var(--green);
 
   display: flex;
   flex-direction: column;
