@@ -1,7 +1,140 @@
 <!-- Section 04 — FOR vibe coders (green card). Root <section>.
      Owner: builder(04-for-vibe-coders).
      CONTRACT: keep root id="for-vibe-coders" (nav "for vibe coders" scroll target),
-     and add id="cities" to the "All cities" block (nav "find an event" scroll target). -->
+     and add id="cities" to the "All cities" block (nav "find an event" scroll target).
+     Copy is byte-exact from docs/spec/20-sections/04-for-vibe-coders.md (desktop-canonical).
+     Note the glyphs: straight double quotes in `No "someday."`, straight apostrophe in
+     `You'll`, and a CURLY apostrophe in `Your city isn’t here?`. -->
 <section class="s-for-vibe-coders" id="for-vibe-coders">
-  <!-- TODO(builder 04-for-vibe-coders): implement per docs/spec/20-sections/04-for-vibe-coders.md -->
+  <div class="container container--1600">
+    <div class="section-card">
+      <!-- HEADER BAND (solid green-bright): eyebrow + heading -->
+      <div class="band--header">
+        <div class="fvc-header-inner" data-reveal>
+          <p class="eyebrow">FOR vibe coders</p>
+          <div class="fvc-heading-group">
+            <h2 class="t-h2 fvc-heading">2-HOUR HACKATHONS THAT ACTUALLY WORK</h2>
+            <p class="t-body fvc-subtitle">Working apps. Real projects. The kind of stuff you can show people. No "someday." You walk out with something.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- BODY BAND (green tint): value cards, All cities, chapter CTA -->
+      <div class="band--body">
+        <div class="fvc-body-inner">
+          <!-- 3 value cards (flower-masked photos on blue / orange / green blobs) -->
+          <ul class="fvc-values" data-reveal>
+            <li class="fvc-value">
+              <img
+                class="fvc-value-img"
+                src="/assets/for-vibe-coders/value-tech-folks.png"
+                width="250"
+                height="250"
+                loading="lazy"
+                decoding="async"
+                alt="Four people gathered around a laptop at a candlelit pub table, building together"
+              />
+              <div class="fvc-value-text">
+                <h3 class="t-card-title fvc-value-title">not only for TECH folks</h3>
+                <p class="t-body fvc-value-body">Your day job can be anything. Designer, chef, accountant, teacher. You bring passion. We handle the framework.</p>
+              </div>
+            </li>
+            <li class="fvc-value">
+              <img
+                class="fvc-value-img"
+                src="/assets/for-vibe-coders/value-low-barrier.png"
+                width="250"
+                height="250"
+                loading="lazy"
+                decoding="async"
+                alt="A presenter smiling beside a projector screen showing a playful demo app with cat-ear filters"
+              />
+              <div class="fvc-value-text">
+                <h3 class="t-card-title fvc-value-title">LOW BARRIER, HIGH IMPACT</h3>
+                <p class="t-body fvc-value-body">No prerequisites. No gatekeeping. If you can think of an idea, you can build it here. Beginners ship real apps alongside experienced builders.</p>
+              </div>
+            </li>
+            <li class="fvc-value">
+              <img
+                class="fvc-value-img"
+                src="/assets/for-vibe-coders/value-learn-room.png"
+                width="250"
+                height="250"
+                loading="lazy"
+                decoding="async"
+                alt="A group leaning in around laptops at a bar table, learning from each other"
+              />
+              <div class="fvc-value-text">
+                <h3 class="t-card-title fvc-value-title">LEARN FROM THE ROOM</h3>
+                <p class="t-body fvc-value-body">Best ideas in the room become your ideas. Peer learning beats tutorials every time. You'll see how others think and solve problems differently.</p>
+              </div>
+            </li>
+          </ul>
+
+          <!-- ALL CITIES — nav "find an event" smooth-scroll target (id="cities") -->
+          <div class="fvc-cities" id="cities" data-reveal>
+            <h3 class="t-band-title fvc-cities-title">All cities</h3>
+            <ul class="fvc-city-list">
+              <li class="fvc-city">
+                <a class="fvc-city-link" href="https://www.meetup.com/vibe-coding-collective-eu/" target="_blank" rel="noopener">
+                  <span class="fvc-city-label">
+                    <span class="fvc-flag" aria-hidden="true">🇩🇪</span>
+                    <span class="t-card-title fvc-city-name">berlin</span>
+                  </span>
+                  <img class="fvc-city-arrow" src="/assets/for-vibe-coders/icon-city-arrow.svg" alt="" width="32" height="32" />
+                </a>
+              </li>
+              <li class="fvc-city">
+                <a class="fvc-city-link" href="https://luma.com/z32gtwo6" target="_blank" rel="noopener">
+                  <span class="fvc-city-label">
+                    <span class="fvc-flag" aria-hidden="true">🇳🇱</span>
+                    <span class="t-card-title fvc-city-name">delft</span>
+                  </span>
+                  <img class="fvc-city-arrow" src="/assets/for-vibe-coders/icon-city-arrow.svg" alt="" width="32" height="32" />
+                </a>
+              </li>
+              <li class="fvc-city">
+                <a class="fvc-city-link" href="https://luma.com/zxoxma81" target="_blank" rel="noopener">
+                  <span class="fvc-city-label">
+                    <span class="fvc-flag" aria-hidden="true">🇺🇦</span>
+                    <span class="t-card-title fvc-city-name">Kyiv</span>
+                  </span>
+                  <img class="fvc-city-arrow" src="/assets/for-vibe-coders/icon-city-arrow.svg" alt="" width="32" height="32" />
+                </a>
+              </li>
+              <li class="fvc-city">
+                <a class="fvc-city-link" href="https://luma.com/bhfumnou" target="_blank" rel="noopener">
+                  <span class="fvc-city-label">
+                    <span class="fvc-flag" aria-hidden="true">🏴󠁧󠁢󠁥󠁮󠁧󠁿</span>
+                    <span class="t-card-title fvc-city-name">London</span>
+                  </span>
+                  <img class="fvc-city-arrow" src="/assets/for-vibe-coders/icon-city-arrow.svg" alt="" width="32" height="32" />
+                </a>
+              </li>
+              <li class="fvc-city fvc-city--tba">
+                <span class="fvc-city-label">
+                  <span class="fvc-flag" aria-hidden="true">🇺🇸</span>
+                  <span class="t-card-title fvc-city-name">boston</span>
+                </span>
+                <span class="t-body fvc-city-tba">TBA</span>
+              </li>
+              <li class="fvc-city fvc-city--tba">
+                <span class="fvc-city-label">
+                  <span class="fvc-flag" aria-hidden="true">🏴󠁧󠁢󠁳󠁣󠁴󠁿</span>
+                  <span class="t-card-title fvc-city-name">Edinburgh</span>
+                </span>
+                <span class="t-body fvc-city-tba">TBA</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Your city isn't here? — curly apostrophe in "isn’t" -->
+          <div class="fvc-chapter" data-reveal>
+            <p class="t-card-title fvc-chapter-prompt">Your city isn’t here?</p>
+            <a class="btn btn--light fvc-chapter-btn" href="https://calendar.app.google/z9XuskPpZPvE5A5h7" target="_blank" rel="noopener">Start a chapter</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>

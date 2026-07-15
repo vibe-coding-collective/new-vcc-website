@@ -1,12 +1,213 @@
 /* ==========================================================================
    Section 04 — FOR vibe coders (green card)
-   Owner: builder(04-for-vibe-coders). SCOPE EVERY selector under
+   Owner: builder(04-for-vibe-coders). EVERY selector is scoped under
    `.s-for-vibe-coders`. Spec: docs/spec/20-sections/04-for-vibe-coders.md
-   Contract: docs/ARCHITECTURE.md
-   Bands: set `--band-color: var(--green-bright)` on .band--header and
-   `--band-tint: var(--green-tint)` on .band--body; eyebrow `--eyebrow-bg: var(--green)`.
-   IDs: root id "for-vibe-coders" (nav target) is set in the HTML; also give the
-   "All cities" block `id="cities"` (nav "find an event" target) + scroll-margin-top.
-   Assets: public/assets/for-vibe-coders/
-   (Intentionally empty — the section builder fills this in.)
+   Contract: docs/ARCHITECTURE.md · Deviations: docs/deviations/04-for-vibe-coders.md
+   Bands/eyebrow reuse the shared .section-card / .band--header / .band--body /
+   .eyebrow classes (base.css); this file sets only the color hooks + layout.
    ========================================================================== */
+
+.s-for-vibe-coders {
+  /* Color hooks read by the shared .eyebrow / .band--header / .band--body. */
+  --eyebrow-bg: var(--green);
+  --band-color: var(--green-bright);
+  --band-tint: var(--green-tint);
+
+  /* Outer page gutter + vertical rhythm. The original carried these on a
+     shared <main> wrapper (max-1600, 40px side gutter, 80px inter-section gap)
+     that our per-section DOM doesn't have, so each section owns its own outer
+     spacing. 40px top+bottom yields the original's ~80px gap between adjacent
+     sections IF siblings adopt the same convention — flagged for a shared
+     decision (see docs/deviations/04-for-vibe-coders.md). */
+  padding-block: var(--space-40);
+  padding-inline: var(--space-40);
+}
+
+/* --- Header band: eyebrow + heading, centered, 900px column --------------- */
+.s-for-vibe-coders .fvc-header-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-32);
+  max-width: var(--content-900);
+  margin-inline: auto;
+}
+
+.s-for-vibe-coders .fvc-heading-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+}
+
+.s-for-vibe-coders .fvc-heading,
+.s-for-vibe-coders .fvc-subtitle {
+  text-align: center;
+  color: var(--ink);
+}
+
+/* --- Body band inner stack: value cards / cities / chapter (80px rhythm) --- */
+.s-for-vibe-coders .fvc-body-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-80);
+}
+
+/* --- Value cards: 3-across on desktop, capped at 1400 --------------------- */
+.s-for-vibe-coders .fvc-values {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: var(--space-32);
+  width: 100%;
+  max-width: var(--content-1400);
+}
+
+.s-for-vibe-coders .fvc-value {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-16);
+}
+
+.s-for-vibe-coders .fvc-value-img {
+  width: 250px;
+  max-width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
+.s-for-vibe-coders .fvc-value-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-8);
+  max-width: var(--content-350);
+}
+
+.s-for-vibe-coders .fvc-value-title,
+.s-for-vibe-coders .fvc-value-body {
+  text-align: center;
+  color: var(--ink);
+}
+
+/* --- All cities: nav "find an event" smooth-scroll target ----------------- */
+.s-for-vibe-coders .fvc-cities {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-32);
+  width: 100%;
+  /* Clear the fixed nav when scrolled to (contract: data-scroll-target). */
+  scroll-margin-top: var(--nav-height);
+}
+
+.s-for-vibe-coders .fvc-cities-title {
+  text-align: center;
+  color: var(--ink);
+}
+
+.s-for-vibe-coders .fvc-city-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-40);
+  width: var(--content-400);
+  max-width: 100%;
+}
+
+.s-for-vibe-coders .fvc-city {
+  display: flex;
+  align-items: center;
+}
+
+/* Linked rows: the whole row is one <a> (name + arrow), space-between.
+   TBA rows: the <li> itself is the space-between row. */
+.s-for-vibe-coders .fvc-city-link,
+.s-for-vibe-coders .fvc-city--tba {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-16);
+  width: 100%;
+}
+
+.s-for-vibe-coders .fvc-city-label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  min-width: 0;
+}
+
+.s-for-vibe-coders .fvc-flag {
+  font-size: var(--fs-card-title);
+  line-height: 1;
+}
+
+/* Linked city names are blue (#0056a1); TBA city names are ink. */
+.s-for-vibe-coders .fvc-city-name {
+  color: var(--blue);
+}
+
+.s-for-vibe-coders .fvc-city--tba .fvc-city-name {
+  color: var(--ink);
+}
+
+.s-for-vibe-coders .fvc-city-arrow {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+}
+
+.s-for-vibe-coders .fvc-city-tba {
+  flex-shrink: 0;
+  color: var(--ink);
+}
+
+/* --- "Your city isn't here?" + Start a chapter --------------------------- */
+.s-for-vibe-coders .fvc-chapter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-12);
+}
+
+.s-for-vibe-coders .fvc-chapter-prompt {
+  text-align: center;
+  color: var(--ink);
+}
+
+/* ==========================================================================
+   Tablet (800–1279): value cards stack; tighten inner rhythm.
+   ========================================================================== */
+@media (width < 1280px) {
+  .s-for-vibe-coders .fvc-values {
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-40);
+    max-width: none;
+  }
+
+  .s-for-vibe-coders .fvc-body-inner {
+    gap: var(--space-52);
+  }
+}
+
+/* ==========================================================================
+   Mobile (<800): smaller gutter/rhythm; flag shrinks to 20px (as in original).
+   ========================================================================== */
+@media (width < 800px) {
+  .s-for-vibe-coders {
+    padding-block: var(--space-24);
+    padding-inline: var(--space-16);
+  }
+
+  .s-for-vibe-coders .fvc-body-inner {
+    gap: var(--space-40);
+  }
+
+  .s-for-vibe-coders .fvc-flag {
+    font-size: var(--fs-body);
+  }
+}
