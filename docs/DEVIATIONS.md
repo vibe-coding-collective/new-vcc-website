@@ -138,6 +138,11 @@ Where the three DOM copies disagree, **desktop (1280) copy is canonical**. Known
 - **§05 project-showcase** — see `docs/deviations/05-project-showcase.md`: eyebrow
   green per corrected contract, cards stay a row at all breakpoints (capture-confirmed
   over the spec's guess), CDN images optimized, heading hierarchy.
+- **§06 for-city-leaders** — see `docs/deviations/06-for-city-leaders.md`: map labels
+  baked into the image (capture-verified, alt text carries the city list), 12-person
+  desktop roster with capture-derived photo mapping (Luisa/Poppy shared-photo anomaly
+  handled), avatars simplified to rounded rects (VISUAL-PASS ITEM: original blob-mask +
+  blend tint), WebP-optimized assets, founders 2-up on mobile fixed at gate.
 
 ## Progressive enhancement
 

@@ -2,10 +2,276 @@
    Section 06 — FOR CITY LEADERS (yellow card)
    Owner: builder(06-for-city-leaders). SCOPE EVERY selector under
    `.s-for-city-leaders`. Spec: docs/spec/20-sections/06-for-city-leaders.md
-   Contract: docs/ARCHITECTURE.md
-   Bands: `--band-color: var(--yellow)` / `--band-tint: var(--yellow-tint)`;
-   eyebrow `--eyebrow-bg: var(--orange)`.
-   ID: root id "for-city-leaders" (nav "for hosts" target) + scroll-margin-top.
-   Assets: public/assets/for-city-leaders/
-   (Intentionally empty — the section builder fills this in.)
+   Contract: docs/ARCHITECTURE.md · Deviations: docs/deviations/06-for-city-leaders.md
+
+   Structure: shared .section-card → .band--header (yellow #ffd226: eyebrow,
+   headline, lede, panoramic map) → .band--body (yellow-tint: "How It Works"
+   3 steps + "WHO'S DOING THIS" 12-person roster + "Join our team" CTA).
+   Desktop-first (>=1280 canonical); overrides at 1280 then 800.
    ========================================================================== */
+
+/* --- Section root: color hooks + page rhythm ----------------------------- */
+.s-for-city-leaders {
+  /* Band/eyebrow color hooks read by the shared classes (base.css). */
+  --band-color: var(--yellow);
+  --band-tint: var(--yellow-tint);
+  --eyebrow-bg: var(--orange);
+
+  /* Local avatar sizing (overridden at breakpoints). */
+  --fcl-avatar: 150px;
+  --fcl-avatar-lg: 190px;
+  --fcl-step-icon: 170px;
+
+  /* Nav "for hosts" smooth-scroll target clears the fixed nav. Page gutter,
+     max-width (1600) and the 80px inter-section gap are owned by main#app
+     (base.css) per the ratified contract amendment — this section carries only
+     INTERNAL spacing (band padding + gaps inside the yellow card). */
+  scroll-margin-top: var(--nav-height);
+}
+
+/* =========================================================================
+   Header band — pitch + map
+   ========================================================================= */
+.s-for-city-leaders .fcl-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-40);
+}
+
+.s-for-city-leaders .fcl-intro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-32);
+  width: 100%;
+  max-width: var(--content-900);
+  text-align: center;
+}
+
+/* Text group fills its parent width (default stretch) so copy WRAPS instead of
+   sizing to max-content and overflowing narrow viewports; centred via text-align. */
+.s-for-city-leaders .fcl-heading {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+  width: 100%;
+}
+
+.s-for-city-leaders .fcl-title,
+.s-for-city-leaders .fcl-lede {
+  text-align: center;
+}
+
+/* Panoramic world map: full-width banner, natural aspect ratio (no crop, so
+   every baked-in city label stays visible). City labels live in the image. */
+.s-for-city-leaders .fcl-map {
+  width: 100%;
+  margin: 0;
+}
+
+.s-for-city-leaders .fcl-map-img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 2634 / 822;
+  object-fit: cover;
+}
+
+/* =========================================================================
+   Body band — How It Works + Who's Doing This
+   ========================================================================= */
+.s-for-city-leaders .fcl-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 64px;
+}
+
+/* ----- How It Works ----- */
+.s-for-city-leaders .fcl-how {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-40);
+}
+
+.s-for-city-leaders .fcl-block-title {
+  text-align: center;
+}
+
+.s-for-city-leaders .fcl-steps {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: var(--space-32);
+  width: 100%;
+}
+
+.s-for-city-leaders .fcl-step {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-16);
+  text-align: center;
+}
+
+.s-for-city-leaders .fcl-step-icon {
+  width: var(--fcl-step-icon);
+  height: var(--fcl-step-icon);
+}
+
+.s-for-city-leaders .fcl-step-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  width: 100%;
+}
+
+/* ----- Who's Doing This (team) ----- */
+.s-for-city-leaders .fcl-team {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-40);
+}
+
+/* Founders: their own centred row, larger avatars. */
+.s-for-city-leaders .fcl-founders {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-46);
+  width: 100%;
+}
+
+/* Founder cards get an explicit width so long names wrap under the avatar
+   (and two fit per row on mobile) instead of stretching the flex row. */
+.s-for-city-leaders .fcl-member--founder {
+  width: 230px;
+}
+
+/* Remaining team: explicit column counts per breakpoint keep rows balanced
+   (desktop 5×2, tablet 3+3+3+1, mobile 2×5) instead of the fixed-pixel rows
+   the original hard-codes. */
+.s-for-city-leaders .fcl-members {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--space-40) var(--space-24);
+  width: 100%;
+}
+
+.s-for-city-leaders .fcl-member {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-16);
+  text-align: center;
+}
+
+/* Avatar frame: rounded-rect photo (20px radius per design tokens). The
+   original's organic blob-mask + mix-blend tint + per-person SVG frame is
+   simplified to a clean frame — see deviations doc. */
+.s-for-city-leaders .fcl-avatar {
+  flex-shrink: 0;
+  width: var(--fcl-avatar);
+  height: var(--fcl-avatar);
+  border-radius: var(--radius-card-mobile); /* 20px */
+  overflow: hidden;
+  background: var(--off-white);
+}
+
+.s-for-city-leaders .fcl-avatar--lg {
+  width: var(--fcl-avatar-lg);
+  height: var(--fcl-avatar-lg);
+}
+
+.s-for-city-leaders .fcl-avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%; /* bias toward faces */
+}
+
+.s-for-city-leaders .fcl-member-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+}
+
+/* CTA sits below the grid (band gap handles spacing). */
+.s-for-city-leaders .fcl-cta {
+  margin-top: var(--space-8);
+}
+
+/* =========================================================================
+   Tablet (800–1279)
+   ========================================================================= */
+@media (width < 1280px) {
+  /* Steps stack (spec §6.2: 3-across → stacked at 800/375). */
+  .s-for-city-leaders .fcl-steps {
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-40);
+  }
+
+  .s-for-city-leaders .fcl-step {
+    max-width: var(--content-600);
+  }
+
+  /* Team → 3 columns. */
+  .s-for-city-leaders .fcl-members {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* =========================================================================
+   Mobile (<800)
+   ========================================================================= */
+@media (width < 800px) {
+  .s-for-city-leaders {
+    --fcl-avatar: 120px;
+    /* 136px (not 150) so two founder cards + 16px gap fit the 295px available
+       at a 375px viewport — see the founder-width note below. */
+    --fcl-avatar-lg: 136px;
+    --fcl-step-icon: 130px;
+  }
+
+  /* Scale display type down so it fits 375px (desktop scale is canonical but
+     unusable at 375 — a documented mobile adaptation). */
+  .s-for-city-leaders .fcl-title {
+    font-size: 34px;
+    letter-spacing: 0.68px;
+  }
+
+  .s-for-city-leaders .fcl-block-title {
+    font-size: 30px;
+    letter-spacing: 0.6px;
+  }
+
+  .s-for-city-leaders .fcl-step-title {
+    font-size: 24px;
+    letter-spacing: 0.48px;
+  }
+
+  .s-for-city-leaders .fcl-body {
+    gap: var(--space-40);
+  }
+
+  /* Team → 2 columns; founders shrink + tighten so two fit a 375px row. */
+  .s-for-city-leaders .fcl-members {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .s-for-city-leaders .fcl-founders {
+    gap: var(--space-16);
+  }
+
+  .s-for-city-leaders .fcl-member--founder {
+    /* Must satisfy 2×width + 16px gap ≤ 295px available at 375px viewport
+       (375 − 32 wrapper gutter − 48 band padding), or the second founder
+       wraps. 136px gives 288px total — reviewer-caught geometry fix. */
+    width: 136px;
+  }
+}
