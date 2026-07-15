@@ -1,0 +1,130 @@
+/* ==========================================================================
+   Design tokens — Vibe Coding Collective
+   --------------------------------------------------------------------------
+   Every value is transcribed from docs/spec/10-design-tokens.md, which was in
+   turn extracted from the live site's own inline <style> (not guessed).
+   DESKTOP (1280) values are canonical; author desktop-first and override
+   downward at the two breakpoints documented at the bottom of this file.
+
+   This file owns ONLY custom properties (:root). Component styles live in
+   base.css; section styles live in src/styles/sections/NN-slug.css.
+   ========================================================================== */
+
+:root {
+  /* --- Color palette (spec §1) ------------------------------------------ */
+  --cream: #fde9c9; /* page background / base canvas */
+  --ink: #181814; /* primary text; dark buttons; footer bg; button outline */
+  --off-white: #f6f5f2; /* light text on dark/colored areas; light button + nav pill; sponsors/companies/contact bg */
+  --green: #498d44; /* vibe-coders eyebrow; green stat numbers; city links; email */
+  --green-bright: #91bd3c; /* vibe-coders card HEADER band */
+  --green-tint: rgba(145, 189, 60, 0.4); /* vibe-coders card BODY band */
+  --blue: #0056a1; /* sponsors/companies header band; some city links; nav scroll-link text */
+  --blue-tint: rgba(0, 86, 161, 0.4); /* sponsors/companies BODY band */
+  --yellow: #ffd226; /* city-leaders header band; testimonial quote-chip bg */
+  --yellow-tint: rgba(255, 210, 38, 0.4); /* city-leaders BODY band */
+  --orange: #ec6c23; /* eyebrows for projects/reviews/city-leaders; default eyebrow */
+  --teal: #1ca9b0; /* sponsors/companies eyebrows; footer links */
+  --shadow-grey: #878787; /* hard drop-shadow color on buttons */
+  --grey-200: #d9d9d9; /* team-avatar tint layer */
+  --black: #000; /* the "Email:" label only */
+  --white: #fff; /* two team-avatar tint layers */
+
+  /* --- Typography: family & weights (spec §2.1) ------------------------- */
+  --font-sans: "Golos Text", system-ui, sans-serif;
+  --fw-medium: 500; /* body copy / paragraphs / bullets */
+  --fw-bold: 700; /* rare 20px variant */
+  --fw-black: 900; /* all display: headings, eyebrows, buttons, names */
+
+  /* --- Type scale (spec §2.2), DESKTOP/1280 canonical -------------------
+     Naming: --fs-* size, --lh-* unitless line-height, --ls-* letter-spacing.
+     Every "display" style is text-transform:uppercase (applied in base.css). */
+  --fs-hero: 80px; /* hero words, "4,000+" */
+  --lh-hero: 1;
+  --ls-hero: 1.6px;
+
+  --fs-stat: 60px; /* "9", "100%" */
+  --lh-stat: 1.2;
+  --ls-stat: 1.2px;
+
+  --fs-h2: 60px; /* section H2 headings */
+  --lh-h2: 1.2;
+  --ls-h2: 1.2px;
+
+  --fs-band-title: 52px; /* in-band titles: "All cities", "How It Works"… */
+  --lh-band-title: 1.5;
+  --ls-band-title: 1.04px;
+
+  --fs-card-title: 32px; /* value/project/step/company card titles; city names */
+  --lh-card-title: 1.5;
+  --ls-card-title: 0.64px;
+
+  --fs-card-title-alt: 28px; /* breakpoint variant of card title */
+  --ls-card-title-alt: 0.56px;
+
+  --fs-eyebrow: 20px; /* eyebrow label; team name; team role */
+  --fs-body-lg: 24px; /* hero lead; email; 24px body */
+  --fs-body: 20px; /* most body copy & bullets */
+  --fs-body-sm: 18px; /* some subtitles */
+  --fs-body-xs: 16px; /* dense text at small breakpoints */
+  --fs-btn: 16px; /* button label; nav/footer link */
+
+  --lh-tight: 1.2;
+  --lh-normal: 1.5;
+
+  /* --- Spacing scale (spec §3) — flex gaps & paddings, px --------------- */
+  --space-8: 8px;
+  --space-10: 10px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-24: 24px;
+  --space-28: 28px;
+  --space-32: 32px;
+  --space-40: 40px;
+  --space-46: 46px;
+  --space-52: 52px; /* section side padding + header/body band vertical padding */
+  --space-60: 60px;
+  --space-80: 80px; /* cream-section padding/gap + footer padding */
+
+  /* --- Content max-widths (spec §3) ------------------------------------ */
+  --content-350: 350px; /* card text columns */
+  --content-400: 400px; /* cities column */
+  --content-600: 600px; /* stat subtext */
+  --content-700: 700px; /* a wide text block */
+  --content-900: 900px; /* header & section-header text */
+  --content-1200: 1200px; /* project cards */
+  --content-1400: 1400px; /* wide rows / hero graphic */
+  --content-1600: 1600px; /* main content wrapper */
+
+  /* --- Border radius (spec §4) ----------------------------------------- */
+  --radius-btn: 12px; /* buttons + their 4px outline */
+  --radius-card-mobile: 20px; /* section cards, pills & rounded blocks at <800 */
+  --radius-card: 32px; /* section cards, pills & rounded blocks at >=800 */
+
+  /* --- Shadows (spec §5) — single hard neo-brutalist offset, no blur ---- */
+  --shadow-hard: 6px 6px 0 0 var(--shadow-grey);
+
+  /* --- Layout constants ------------------------------------------------- */
+  --nav-height: 72px; /* APPROX height of the pinned nav bar (8px pad ×2 + ~56px pill).
+                         Used for scroll-padding so smooth-scroll targets clear the
+                         fixed nav. If section 01 lands on a materially different
+                         height, report it so this token is updated. */
+  --z-nav: 100; /* pinned nav sits above section content */
+
+  /* --- Per-section component hooks (defaults live in base.css) ----------
+     Each section sets ONLY these variables on its own scope:
+       --eyebrow-bg : eyebrow pill color   (default var(--orange), see .eyebrow)
+       --band-color : solid header-band bg  (set on .band--header)
+       --band-tint  : 40%-tint body-band bg (set on .band--body)  */
+}
+
+/* --------------------------------------------------------------------------
+   BREAKPOINTS ARE DOCUMENTED CONSTANTS.
+   CSS media queries cannot read custom properties, so the two thresholds are
+   hard-coded literals everywhere they are used:
+
+       Tablet  boundary =  800px  →  @media (width < 800px)   targets MOBILE
+       Desktop boundary = 1280px  →  @media (width < 1280px)  targets TABLET+MOBILE
+
+   Author desktop-first (values above are the ≥1280 canon), then override
+   downward: first @media (width < 1280px), then @media (width < 800px).
+   -------------------------------------------------------------------------- */

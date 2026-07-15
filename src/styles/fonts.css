@@ -1,0 +1,50 @@
+/* ==========================================================================
+   Self-hosted web font — Golos Text
+   --------------------------------------------------------------------------
+   Golos Text is SIL Open Font License 1.1 (OFL) — by ParaType. Self-hosting is
+   permitted. Files were downloaded from Google Fonts (NOT from vibecoders.global)
+   on 2026-07-15.
+
+   PROVENANCE
+   - CSS API (fetched with a woff2-capable Chrome User-Agent so gstatic returns
+     woff2, requesting the three weights the design uses):
+       https://fonts.googleapis.com/css2?family=Golos+Text:wght@500;700;900&display=swap
+   - Google serves Golos Text as a single VARIABLE woff2 per unicode-range
+     subset (the woff2 URL is byte-identical across weights 500/700/900 — only
+     the unicode-range differs). Verified with fontTools: one `wght` axis,
+     min 400 → max 900. So two files cover every weight; declaring
+     `font-weight: 400 900` lets the browser instance 500 (Medium), 700 (Bold)
+     and 900 (Black) from them.
+   - Downloaded woff2 sources → local files (in public/fonts/, served at /fonts/):
+       …/golostext/v7/q5uCsoe9Lv5t7Meb31EcExN8hA.woff2   → golos-text-latin.woff2
+       …/golostext/v7/q5uCsoe9Lv5t7Meb31EcEx18hLxR.woff2 → golos-text-latin-ext.woff2
+     (host: https://fonts.gstatic.com/s/)
+
+   SUBSET SCOPE: only `latin` + `latin-ext` are bundled (all site copy is
+   Latin). The Cyrillic / Cyrillic-ext subsets Google also offers are dropped —
+   there is no Cyrillic content. Jost (loaded-but-unused on the original) and
+   the Noto emoji/symbol fallbacks are intentionally NOT bundled; emoji fall
+   back to the system emoji stack. See docs/DEVIATIONS.md.
+   ========================================================================== */
+
+@font-face {
+  font-family: "Golos Text";
+  font-style: normal;
+  font-weight: 400 900; /* variable wght axis; design uses 500 / 700 / 900 */
+  font-display: swap;
+  src: url("/fonts/golos-text-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Golos Text";
+  font-style: normal;
+  font-weight: 400 900;
+  font-display: swap;
+  src: url("/fonts/golos-text-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF,
+    U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020,
+    U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
