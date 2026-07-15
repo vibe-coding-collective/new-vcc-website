@@ -2,7 +2,158 @@
    Section 08 — reviews / "what people say" (cream)
    Owner: builder(08-reviews). SCOPE EVERY selector under `.s-reviews`.
    Spec: docs/spec/20-sections/08-reviews.md · Contract: docs/ARCHITECTURE.md
-   Eyebrow: `--eyebrow-bg: var(--orange)`. Quote boxes use `--yellow`.
+   Eyebrow: `--eyebrow-bg: var(--orange)` (css-r7xudp). Quote boxes use `--yellow`.
+   Values transcribed from the live capture (css-rules.css). Desktop-first; the
+   cards wrap on desktop (css-zcybxd) and stack < 1280 (css-a8cijb). The page
+   gutter, max-width and 80px inter-section gap are owned by `main#app` (base.css),
+   so this section carries only its own internal spacing.
    Assets: public/assets/reviews/
-   (Intentionally empty — the section builder fills this in.)
    ========================================================================== */
+
+/* --- Section wrapper (css-jdk4aq: padding 40px 0; column; center; gap 52px) ----
+   Cream-on-cream (transparent); the original's inert rounded-top corners (no bg)
+   are omitted — see docs/deviations/08-reviews.md. */
+.s-reviews {
+  --eyebrow-bg: var(--orange);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-52);
+  padding-block: var(--space-40);
+}
+
+/* --- Eyebrow + heading intro (css-zfht8b: column; center; gap 32) ------------- */
+.s-reviews .rv-intro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-32);
+}
+
+.s-reviews .rv-heading {
+  text-align: center;
+}
+
+/* --- Testimonials list -------------------------------------------------------
+   Desktop: wrap row, centered (css-zcybxd: flex-wrap; justify-center; gap 46;
+   padding-right 40). Within the ratified main#app max-width the three 500px cards
+   resolve to 2-per-row + 1 wrapped-and-centered (the original resolves the same at
+   its own ~1600px max-width; true 3-across is unreachable under the 1600 cap). This
+   is faithful to the flex rules — see docs/deviations/08-reviews.md. */
+.s-reviews .rv-list {
+  width: 100%;
+}
+
+.s-reviews .rv-cards {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: var(--space-46);
+  padding-right: var(--space-40);
+}
+
+/* --- One testimonial card (css-i5fjj5: width 500px; shrinks to 100% < 800) ---- */
+.s-reviews .rv-card {
+  width: 500px;
+  max-width: 100%;
+}
+
+.s-reviews .rv-figure {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Quote box + flourish, left-aligned (css-tgvl21) */
+.s-reviews .rv-quote-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* Yellow quote box (css-d1un8n radius + css-hqf24s bg + css-ldpngt padding).
+   Padding is T24 R32 B24 L40 (css-ldpngt). */
+.s-reviews .rv-quote-box {
+  width: 100%;
+  margin: 0;
+  padding: var(--space-24) var(--space-32) var(--space-24) var(--space-40);
+  border-radius: var(--radius-card);
+  background: var(--yellow);
+  overflow: clip;
+}
+
+/* Rating/quote flourish under the box (css-sluck7: 180x32) */
+.s-reviews .rv-flourish {
+  width: 180px;
+  height: 32px;
+}
+
+/* --- Reviewer row (css-yostx2: padding-left 32; align-center; gap 16) --------- */
+.s-reviews .rv-reviewer {
+  display: flex;
+  align-items: center;
+  gap: var(--space-16);
+  padding-left: var(--space-32);
+}
+
+/* Avatar box 100x100 (css-uyaw1n). The reviewer SVGs are non-square with
+   preserveAspectRatio="none"; rendering at 93.334% width + auto height keeps each
+   at its natural aspect, centered — reproducing the original's per-avatar insets
+   (css-lfulrq/l0b87e/57hdr) with one rule. See docs/deviations/08-reviews.md. */
+.s-reviews .rv-avatar {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 100px;
+  height: 100px;
+}
+
+.s-reviews .rv-avatar-img {
+  width: 93.334%;
+  height: auto;
+}
+
+/* Name / role / location column (css-kd4wqv: gap 4) */
+.s-reviews .rv-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+/* Name + role on one line (css-810q0y: row; align-center; gap 8) */
+.s-reviews .rv-nameline {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+}
+
+.s-reviews .rv-name,
+.s-reviews .rv-role,
+.s-reviews .rv-location {
+  white-space: nowrap;
+}
+
+/* --- Tablet + mobile (< 1280): stack the cards (css-a8cijb: column; gap 46) ---- */
+@media (width < 1280px) {
+  .s-reviews .rv-cards {
+    flex-direction: column;
+    /* css-a8cijb is flex-start: the original pins the 500px cards flush-left
+       against the page gutter on tablet — reviewer-caught fidelity fix. */
+    align-items: flex-start;
+    padding-right: 0;
+  }
+}
+
+/* --- Mobile (< 800): quote type 20 -> 16 (css-42ggai); card-mobile radius ------ */
+@media (width < 800px) {
+  .s-reviews .rv-quote-box {
+    border-radius: var(--radius-card-mobile);
+  }
+
+  .s-reviews .rv-quote {
+    font-size: var(--fs-body-xs);
+  }
+}

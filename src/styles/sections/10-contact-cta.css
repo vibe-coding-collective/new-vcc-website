@@ -1,9 +1,129 @@
 /* ==========================================================================
-   Section 10 — Contact CTA (off-white card)
+   Section 10 — Contact CTA (off-white rounded card)
    Owner: builder(10-contact-cta). SCOPE EVERY selector under `.s-contact-cta`.
    Spec: docs/spec/20-sections/10-contact-cta.md · Contract: docs/ARCHITECTURE.md
-   Card uses `background: var(--off-white)`, radius var(--radius-card).
-   Note: this section's `contact for more` CTA is target="_self" (see spec).
+   Card: `background: var(--off-white)` (css-axoe5v), radius 32 / 20 (css-d1un8n /
+   css-9hp8h3). Values transcribed from the live capture (css-rules.css).
+   Desktop-first: illustration + text side-by-side (css-k74qhi row); stacks column
+   < 1280 (css-d8w1zi / css-t040yc). The page gutter, max-width and 80px
+   inter-section gap are owned by `main#app` (base.css); this card fills that inner
+   width and carries only its own internal padding.
    Assets: public/assets/contact-cta/
-   (Intentionally empty — the section builder fills this in.)
    ========================================================================== */
+
+/* --- Card (css-axoe5v bg + css-d1un8n radius) -------------------------------- */
+.s-contact-cta {
+  background: var(--off-white);
+  border-radius: var(--radius-card);
+}
+
+/* --- Inner: row on desktop (css-k74qhi: center; gap 32; padding 80 52) -------- */
+.s-contact-cta .cta-inner {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-32);
+  padding: var(--space-80) var(--space-52);
+}
+
+/* --- Illustration (css-4onwt9 300x298 desktop; css-rt5org 191x189.7 < 1280).
+   The SVG has preserveAspectRatio="none"; aspect-ratio keeps the box proportional
+   as it scales, so the artwork is never distorted. --------------------------- */
+.s-contact-cta .cta-illustration {
+  flex-shrink: 0;
+  width: 300px;
+  max-width: 100%;
+  aspect-ratio: 300 / 298;
+}
+
+.s-contact-cta .cta-illustration img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* --- Text column (css-eyvxf1: flex 1; column; center; gap 32) ----------------- */
+.s-contact-cta .cta-text {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-32);
+}
+
+/* Heading + paragraph (css-a8ckuu: gap 12), centered */
+.s-contact-cta .cta-heading-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-12);
+  text-align: center;
+}
+
+/* Email row (css-7403bt: center; align-start; gap 8). Label black + address green,
+   both PLAIN TEXT (not a mailto). Wraps on narrow so the "Email:" label — kept at
+   all breakpoints per DEVIATIONS.md — never overflows. */
+.s-contact-cta .cta-email {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  column-gap: var(--space-8);
+  row-gap: 4px;
+}
+
+.s-contact-cta .cta-email-label {
+  color: var(--black); /* css-iguuiu #000 */
+}
+
+.s-contact-cta .cta-email-address {
+  color: var(--green); /* css-813ies #498d44 */
+  white-space: nowrap;
+}
+
+/* --- Tablet + mobile (< 1280): stack illustration above text (css-d8w1zi) ----- */
+@media (width < 1280px) {
+  .s-contact-cta .cta-inner {
+    flex-direction: column;
+    padding: var(--space-52) var(--space-24);
+  }
+
+  .s-contact-cta .cta-illustration {
+    width: 191px;
+  }
+
+  .s-contact-cta .cta-text {
+    gap: 20px; /* css-93wns8 */
+  }
+}
+
+/* --- Mobile (< 800): card-mobile radius; tighter padding; type scales down ----- */
+@media (width < 800px) {
+  .s-contact-cta {
+    border-radius: var(--radius-card-mobile); /* css-9hp8h3 20px */
+  }
+
+  .s-contact-cta .cta-inner {
+    gap: var(--space-28);
+    padding: var(--space-32) var(--space-12) var(--space-40); /* css-t040yc */
+  }
+
+  .s-contact-cta .cta-text {
+    gap: var(--space-16); /* css-93wn6p */
+  }
+
+  .s-contact-cta .cta-heading {
+    font-size: var(--fs-body); /* 32 -> 20 (css-z2l67j) */
+    letter-spacing: 0.4px;
+  }
+
+  .s-contact-cta .cta-lede {
+    font-size: var(--fs-body-sm); /* 24 -> 18 (css-rqghrp) */
+  }
+
+  .s-contact-cta .cta-email-label,
+  .s-contact-cta .cta-email-address {
+    font-size: var(--fs-body-sm); /* 24 -> 18 (css-7qompo) */
+  }
+}

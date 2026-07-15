@@ -151,6 +151,14 @@ Where the three DOM copies disagree, **desktop (1280) copy is canonical**. Known
 - **§09 for-companies** — see `docs/deviations/09-for-companies.md`: CDN images
   re-encoded to WebP with alpha, off-white root compositing, 20px card-gap literal,
   mobile h2 scaling, noopener.
+- **§08 reviews** — see `docs/deviations/08-reviews.md`: figure/blockquote semantics
+  upgrade, descriptive avatar alts (contract-ratified), 2+1 wrap faithful to the
+  original under the 1600 cap, illustrated-avatar inset rule capture-validated,
+  tablet flex-start alignment fixed at gate, left-offset artifact to visual pass.
+- **§10 contact-cta** — see `docs/deviations/10-contact-cta.md`: email plain text
+  (not mailto) per capture, `_self` CTA quirk preserved, smiley-sun doodle sourced
+  from capture (was wrongly presumed runtime-injected), Email: label kept at all
+  breakpoints (desktop-canonical).
 - **§11 footer + interactions** — see `docs/deviations/11-footer.md`: WhatsApp kept as a
   link (`_self`) per ratified policy, real retro mark + wordmark SVGs sourced from the
   CDN, wordmark watermark capture-verified, mascots as eyeless placeholders (asset-
