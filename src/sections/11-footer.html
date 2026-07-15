@@ -1,5 +1,87 @@
 <!-- Section 11 — Footer (dark). Root <footer> = the page contentinfo landmark
-     (inlined directly into <body>, not wrapped). Owner: builder(11-footer). -->
+     (inlined directly into <body>, OUTSIDE main#app — handles its own full-bleed
+     layout like the nav). Owner: builder(11-footer).
+     Spec: docs/spec/20-sections/11-footer.md · Contract: docs/ARCHITECTURE.md.
+     WhatsApp kept as a LINK per the ratified DEVIATIONS policy (desktop original is
+     plain text) — target="_self" per capture. Meetups/LinkedIn open in a new tab.
+     Watermark wordmark + googly-blob mascot row are decorative (aria-hidden); the
+     mascots' real googly-eye artwork is runtime-injected on the original and pending
+     the asset-recovery task. See docs/deviations/11-footer.md. -->
 <footer class="s-footer" id="footer">
-  <!-- TODO(builder 11-footer): implement per docs/spec/20-sections/11-footer.md -->
+  <!-- Colorful retro VCC wordmark, faint watermark behind the content (spec css-nu3ilp). -->
+  <div class="footer-watermark" aria-hidden="true">
+    <img
+      class="footer-watermark-img"
+      src="/assets/footer/logo-footer-wordmark.svg"
+      alt=""
+      width="708"
+      height="202"
+      loading="lazy"
+      decoding="async"
+    />
+  </div>
+
+  <div class="footer-inner" data-reveal>
+    <!-- Centered white retro VCC logo mark (spec css-ssdydo, 100×93). -->
+    <img
+      class="footer-mark"
+      src="/assets/footer/logo-footer-mark.svg"
+      alt="Vibe Coding Collective"
+      width="100"
+      height="93"
+      loading="lazy"
+      decoding="async"
+    />
+
+    <div class="footer-row">
+      <ul class="footer-links">
+        <li>
+          <a
+            class="footer-link t-link"
+            href="https://chat.whatsapp.com/BxLUpQMiXwo6d1vG7YSirT"
+            target="_self"
+          >
+            What’sApp
+          </a>
+        </li>
+        <li>
+          <a
+            class="footer-link t-link"
+            href="https://www.meetup.com/vibe-coding-collective/"
+            target="_blank"
+            rel="noopener"
+          >
+            Meetups
+          </a>
+        </li>
+        <li>
+          <a
+            class="footer-link t-link"
+            href="https://www.linkedin.com/company/vibe-coding-collective/posts"
+            target="_blank"
+            rel="noopener"
+          >
+            LinkedIn
+          </a>
+        </li>
+      </ul>
+
+      <div class="footer-copy">
+        <p class="footer-copy-line t-body">All rights reserved</p>
+        <p class="footer-copy-line t-body">London, UK. 2026</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Decorative googly-blob mascot row peeking from the bottom edge (live observation:
+       red / orange / yellow / green / teal / blue, left→right). CSS placeholder blobs —
+       no invented eye artwork; real mascots are runtime-injected on the original. -->
+  <div class="footer-mascots" aria-hidden="true">
+    <span class="footer-mascot footer-mascot--red"></span>
+    <span class="footer-mascot footer-mascot--orange"></span>
+    <span class="footer-mascot footer-mascot--yellow"></span>
+    <span class="footer-mascot footer-mascot--green"></span>
+    <span class="footer-mascot footer-mascot--teal"></span>
+    <span class="footer-mascot footer-mascot--blue"></span>
+  </div>
 </footer>

@@ -2,8 +2,171 @@
    Section 11 — Footer (dark)
    Owner: builder(11-footer). SCOPE EVERY selector under `.s-footer`.
    Spec: docs/spec/20-sections/11-footer.md · Contract: docs/ARCHITECTURE.md
-   Root is the <footer> contentinfo landmark: `background: var(--ink)`;
-   links teal (--teal), copyright light (--off-white).
-   Assets: public/assets/footer/
-   (Intentionally empty — the section builder fills this in.)
+   Root is the <footer> contentinfo landmark, full-bleed OUTSIDE main#app (it
+   carries its own gutter, like the nav): `background: var(--ink)`; links teal
+   (--teal), copyright light (--off-white). Assets: public/assets/footer/.
    ========================================================================== */
+
+.s-footer {
+  position: relative; /* positioning context for the watermark + mascot row */
+  overflow: hidden; /* clips the mascots peeking past the bottom edge */
+  background: var(--ink);
+  color: var(--off-white);
+}
+
+/* --- Colorful retro wordmark, faint watermark behind the content (css-nu3ilp).
+   The capture places it position:absolute; the exact opacity/offset aren't in
+   the capture, so it's centered and dialled back to read as a watermark. -------- */
+.s-footer .footer-watermark {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.s-footer .footer-watermark-img {
+  width: min(708px, 82%);
+  height: auto;
+  opacity: 0.16;
+}
+
+/* --- Content column (css-suww2: column; align-items:center; padding:80px). ------ */
+.s-footer .footer-inner {
+  position: relative;
+  z-index: 1; /* above the watermark */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: var(--content-1600);
+  margin-inline: auto;
+  padding: var(--space-80) var(--space-40);
+}
+
+/* Centered white retro logo mark (css-ssdydo, 100×93). */
+.s-footer .footer-mark {
+  width: 100px;
+  height: 93px;
+  margin-block-end: var(--space-40); /* separates the mark from the two-column row
+    (spec's captured 10px column gap reads too tight in the rebuilt proportions) */
+}
+
+/* Two-column row (css-jvpnk3, justify:space-between). */
+.s-footer .footer-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-24);
+  width: 100%;
+}
+
+/* Left column (css-i5hden, ~245px): three stacked links. */
+.s-footer .footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+  width: 245px;
+  max-width: 245px;
+}
+
+.s-footer .footer-link {
+  color: var(--teal);
+  white-space: nowrap; /* spec: Meetups / LinkedIn are nowrap */
+}
+
+/* Right column (css-f4flf, align:flex-end; gap:12px): copyright lines. */
+.s-footer .footer-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--space-12);
+  text-align: end;
+}
+
+.s-footer .footer-copy-line {
+  color: var(--off-white);
+}
+
+/* --- Decorative googly-blob mascot row (live observation). No eye artwork; the
+   blobs peek up from the bottom edge and their lower halves are clipped by the
+   footer's overflow:hidden. Colors left→right: red / orange / yellow / green /
+   teal / blue. No --red token exists, so red is the brand red (#eb3722, sourced
+   from the real footer wordmark asset) as a logged literal. ---------------------- */
+.s-footer .footer-mascots {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  z-index: 0; /* decorative; sits below the content column */
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: var(--space-24);
+  pointer-events: none;
+}
+
+.s-footer .footer-mascot {
+  width: 64px;
+  height: 64px;
+  /* organic blob silhouette (not a perfect circle) */
+  border-radius: 46% 46% 50% 50% / 56% 56% 44% 44%;
+  translate: 0 46%; /* peek: lower ~46% is clipped by the footer's overflow:hidden */
+}
+
+.s-footer .footer-mascot--red {
+  background: #eb3722;
+} /* logged literal — no --red token (matches the brand red in the real wordmark) */
+.s-footer .footer-mascot--orange {
+  background: var(--orange);
+}
+.s-footer .footer-mascot--yellow {
+  background: var(--yellow);
+}
+.s-footer .footer-mascot--green {
+  background: var(--green-bright); /* the playful lime used in the real retro logo */
+}
+.s-footer .footer-mascot--teal {
+  background: var(--teal);
+}
+.s-footer .footer-mascot--blue {
+  background: var(--blue);
+}
+
+/* --- Tablet (800–1279): unchanged from desktop. ------------------------------- */
+
+/* --- Mobile (<800): stack the two-column row, center everything, shrink padding
+   and mascots so six blobs fit a 375px viewport. ------------------------------- */
+@media (width < 800px) {
+  .s-footer .footer-inner {
+    padding: var(--space-60) var(--space-24);
+  }
+
+  .s-footer .footer-row {
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-32);
+    text-align: center;
+  }
+
+  .s-footer .footer-links {
+    align-items: center;
+    width: auto;
+    max-width: none;
+  }
+
+  .s-footer .footer-copy {
+    align-items: center;
+    text-align: center;
+  }
+
+  .s-footer .footer-mascots {
+    gap: var(--space-16);
+  }
+
+  .s-footer .footer-mascot {
+    width: 40px;
+    height: 40px;
+  }
+}
