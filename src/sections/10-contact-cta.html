@@ -1,5 +1,33 @@
-<!-- Section 10 — Contact CTA (off-white card). Root <section>.
-     Owner: builder(10-contact-cta). -->
+<!-- Section 10 — Contact CTA (off-white rounded card). Root <section>.
+     Owner: builder(10-contact-cta).
+     Spec: docs/spec/20-sections/10-contact-cta.md · Deviations: docs/deviations/10-contact-cta.md
+     - The email address is PLAIN TEXT (not a mailto: link), styled green — faithful
+       to the capture (css-813ies). See deviations for the a11y note.
+     - This "contact for more" CTA is target="_self" — the single CTA exception on the
+       page (spec §7 / 40-interactions.md §6). rel="noopener" is added. See deviations.
+     - "Email:" label kept at all breakpoints (desktop-canonical, per DEVIATIONS.md);
+       the original omits it < 1280. Illustration is the runtime-observed yellow
+       smiley-sun doodle; the SVG has a determinable asset URL so it is downloaded. -->
 <section class="s-contact-cta" id="contact-cta">
-  <!-- TODO(builder 10-contact-cta): implement per docs/spec/20-sections/10-contact-cta.md -->
+  <div class="cta-inner" data-reveal>
+    <div class="cta-illustration">
+      <img src="/assets/contact-cta/contact-illustration.svg" alt="" width="300" height="298" loading="lazy" decoding="async" />
+    </div>
+    <div class="cta-text">
+      <div class="cta-heading-group">
+        <h2 class="t-card-title cta-heading">up for a collaboration?</h2>
+        <p class="t-body-lg cta-lede">Get in touch if you'd like to partner with us or just to have a coffee-chat.</p>
+      </div>
+      <div class="cta-email">
+        <span class="t-body-lg cta-email-label">Email:</span>
+        <span class="t-body-lg cta-email-address">dan.porder@vibecoders.global</span>
+      </div>
+      <a
+        class="btn btn--light cta-button"
+        href="https://calendar.app.google/z9XuskPpZPvE5A5h7"
+        target="_self"
+        rel="noopener"
+      >contact for more</a>
+    </div>
+  </div>
 </section>

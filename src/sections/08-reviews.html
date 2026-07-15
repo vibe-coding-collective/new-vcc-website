@@ -1,5 +1,93 @@
 <!-- Section 08 — reviews / "what people say" (cream). Root <section>.
-     Owner: builder(08-reviews). -->
+     Owner: builder(08-reviews).
+     Spec: docs/spec/20-sections/08-reviews.md · Deviations: docs/deviations/08-reviews.md
+     Copy is byte-exact from the spec: STRAIGHT apostrophes in "I'd"/"didn't"/"it's",
+     the 🫣 (U+1FAE3) emoji in card 2 preserved exactly, and no trailing spaces.
+     Eyebrow is ORANGE (css-r7xudp = #ec6c23), capture-verified. Quote boxes are yellow. -->
 <section class="s-reviews" id="reviews">
-  <!-- TODO(builder 08-reviews): implement per docs/spec/20-sections/08-reviews.md -->
+  <!-- Eyebrow + heading (entrance-reveal block 1; css-zfht8b) -->
+  <div class="rv-intro" data-reveal>
+    <p class="eyebrow rv-eyebrow">reviews</p>
+    <h2 class="t-h2 rv-heading">what people say</h2>
+  </div>
+
+  <!-- Testimonials (entrance-reveal block 2). The capture carried the STRONGER
+       reveal (opacity:0.5 / translateY(30px)) on this block — to be honored in the
+       JS phase; the marker is the shared data-reveal for now (no pre-hiding in CSS).
+       Layout: wrap row on desktop (css-zcybxd), stacked column < 1280 (css-a8cijb). -->
+  <div class="rv-list" data-reveal>
+    <ul class="rv-cards">
+      <!-- Card 1 — Tomoki -->
+      <li class="rv-card">
+        <figure class="rv-figure">
+          <div class="rv-quote-col">
+            <blockquote class="rv-quote-box">
+              <p class="t-body rv-quote">Thank you for giving me an experience that changed my attitude toward tech!</p>
+            </blockquote>
+            <img class="rv-flourish" src="/assets/reviews/testimonial-flourish.svg" alt="" width="180" height="32" loading="lazy" decoding="async" />
+          </div>
+          <figcaption class="rv-reviewer">
+            <span class="rv-avatar">
+              <img class="rv-avatar-img" src="/assets/reviews/reviewer-tomoki.svg" alt="Illustrated avatar of Tomoki" width="93" height="79" loading="lazy" decoding="async" />
+            </span>
+            <span class="rv-meta">
+              <span class="rv-nameline">
+                <span class="t-team-name rv-name">Tomoki</span>
+                <span class="t-team-role rv-role">Photographer</span>
+              </span>
+              <span class="t-body rv-location">Osaka Pop-up</span>
+            </span>
+          </figcaption>
+        </figure>
+      </li>
+
+      <!-- Card 2 — Heeezil (long quote; contains the 🫣 emoji) -->
+      <li class="rv-card">
+        <figure class="rv-figure">
+          <div class="rv-quote-col">
+            <blockquote class="rv-quote-box">
+              <p class="t-body rv-quote">My partner was raving about the vibe coding collective so I popped along last month - it was so inspiring! Turns out I'd been vibe coding for work for aaaages, just didn't know it was a thing 🫣</p>
+            </blockquote>
+            <img class="rv-flourish" src="/assets/reviews/testimonial-flourish.svg" alt="" width="180" height="32" loading="lazy" decoding="async" />
+          </div>
+          <figcaption class="rv-reviewer">
+            <span class="rv-avatar">
+              <img class="rv-avatar-img" src="/assets/reviews/reviewer-heeezil.svg" alt="Illustrated avatar of Heeezil" width="93" height="81" loading="lazy" decoding="async" />
+            </span>
+            <span class="rv-meta">
+              <span class="rv-nameline">
+                <span class="t-team-name rv-name">Heeezil</span>
+                <span class="t-team-role rv-role">3D Artist</span>
+              </span>
+              <span class="t-body rv-location">London chapter</span>
+            </span>
+          </figcaption>
+        </figure>
+      </li>
+
+      <!-- Card 3 — Christian -->
+      <li class="rv-card">
+        <figure class="rv-figure">
+          <div class="rv-quote-col">
+            <blockquote class="rv-quote-box">
+              <p class="t-body rv-quote">Coding has always puzzled me, but now it's a lot more accessible, and this community is great for both improving my own skills as well as seeing cool stuff other are doing.</p>
+            </blockquote>
+            <img class="rv-flourish" src="/assets/reviews/testimonial-flourish.svg" alt="" width="180" height="32" loading="lazy" decoding="async" />
+          </div>
+          <figcaption class="rv-reviewer">
+            <span class="rv-avatar">
+              <img class="rv-avatar-img" src="/assets/reviews/reviewer-christian.svg" alt="Illustrated avatar of Christian" width="93" height="50" loading="lazy" decoding="async" />
+            </span>
+            <span class="rv-meta">
+              <span class="rv-nameline">
+                <span class="t-team-name rv-name">Christian</span>
+                <span class="t-team-role rv-role">Developer</span>
+              </span>
+              <span class="t-body rv-location">London chapter</span>
+            </span>
+          </figcaption>
+        </figure>
+      </li>
+    </ul>
+  </div>
 </section>
