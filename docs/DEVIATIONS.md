@@ -123,6 +123,12 @@ Where the three DOM copies disagree, **desktop (1280) copy is canonical**. Known
 
 ## Per-section logs (consolidated at merge by the integrator)
 
+- **§01 nav-sticky** — see `docs/deviations/01-nav-sticky.md`: single deduplicated logo
+  SVG (three per-breakpoint files were the same art), logo as scroll-to-top button,
+  nav-height measured 96/76px (token updated on main), active link styled like siblings.
+- **§02 hero-header** — see `docs/deviations/02-hero-header.md`: chips/blob/collage as
+  aria-hidden CSS placeholders (runtime-injected originals; asset-recovery task queued),
+  clamp() mobile headline, -60px hero→stats overlap kept, data-reveal added at gate.
 - **§03 stats** — see `docs/deviations/03-stats.md`: sponsor logos as accessible
   text pills (artwork not reproducible; per-brand gap log), marquee approximations
   (36s loop, 1400px cap, pause-on-hover), flags aria-hidden, 9-vs-8-flags preserved.
