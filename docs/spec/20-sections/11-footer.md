@@ -26,8 +26,8 @@
 Left column (teal `#1ca9b0`; `What's` uses a **curly** apostrophe). **Casing differs by
 breakpoint:** desktop `What'sApp`, mobile & tablet `What'sapp`:
 ```
-What'sapp   (mobile 375 & tablet 800)  → https://chat.whatsapp.com/BxLUpQMiXwo6d1vG7YSirT   (target=_self)
-What'sApp   (desktop 1280)             — plain text, no href
+What’sapp   (mobile 375 & tablet 800)  → https://chat.whatsapp.com/BxLUpQMiXwo6d1vG7YSirT   (target=_self)
+What’sApp   (desktop 1280)             — plain text, no href
 Meetups              → https://www.meetup.com/vibe-coding-collective/   (target=_blank)
 LinkedIn             → https://www.linkedin.com/company/vibe-coding-collective/posts   (target=_blank)
 ```
