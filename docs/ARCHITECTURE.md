@@ -37,9 +37,11 @@ which are owned one-each by the section builders. **Never edit a file you don't 
 | `src/styles/base.css` | contracts | reset + shared component classes |
 | `src/styles/sections.css` | contracts | the 11 `@import` lines (do not reorder) |
 | `public/fonts/*` | contracts | self-hosted woff2 |
-| `docs/ARCHITECTURE.md`, `docs/DEVIATIONS.md` | contracts | this + the deviation log |
+| `docs/ARCHITECTURE.md` | contracts | this document |
+| `docs/DEVIATIONS.md` | integrator (orchestrator) | consolidated deviation log — **builders never edit it** |
 | **`src/sections/NN-slug.html`** | **section builder NN** | your section's markup |
 | **`src/styles/sections/NN-slug.css`** | **section builder NN** | your section's styles |
+| **`docs/deviations/NN-slug.md`** | **section builder NN** | your section's deviation notes; the integrator consolidates them into `DEVIATIONS.md` at merge time |
 | `public/assets/<slug>/*` | section builder | your section's images (see §8) |
 
 The 11 slugs (root class = `s-<slug>`, root id = `<slug>`):
@@ -251,7 +253,9 @@ content with CSS (there's no reveal script yet — hidden content would just dis
 - **Pinned nav (section 01 only):** pin with `position: fixed; top:0; inset-inline:0;
   z-index: var(--z-nav)` on `.s-nav-sticky`. (It is first-in-DOM inside a short
   `<header>`, so `position: sticky` would only pin within that header — use `fixed`.)
-  Nav does not need `data-reveal`.
+  Nav does not need `data-reveal`. First-screen clearance under the fixed nav comes from
+  the hero's own `padding-top: 200px` (section 02's file, per its spec) — do **not** add
+  any body/main-level offset; that would be a shared-file scope violation.
 - **Hover/press:** the original has no hover styles; any press affordance (e.g. nudging a
   button toward its shadow) is an **optional approximation** — keep it minimal and note it.
 

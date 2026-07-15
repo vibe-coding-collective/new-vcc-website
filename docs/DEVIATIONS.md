@@ -1,9 +1,10 @@
 # DEVIATIONS — intentional differences from the original
 
 Every deliberate departure from `https://vibecoders.global/` (as captured in
-`docs/spec/`), each with a one-line rationale. Seeded by the contracts task;
-**section builders append** their own entries (e.g. final URL choices, mobile
-adaptations, hover/press approximations) rather than leaving them undocumented.
+`docs/spec/`), each with a one-line rationale. Seeded by the contracts task.
+**Section builders never edit this file** — each logs its entries (final URL choices,
+mobile adaptations, hover/press approximations) in its own `docs/deviations/NN-slug.md`,
+which the integrator (orchestrator) consolidates here at merge time.
 
 Legend: **[arch]** structural · **[content]** copy/data · **[a11y]** accessibility ·
 **[perf]** payload/assets · **[approx]** unverifiable-so-approximated.
@@ -50,7 +51,8 @@ Where the three DOM copies disagree, **desktop (1280) copy is canonical**. Known
 - **[content] Footer WhatsApp casing (§11).** Use desktop `What'sApp` (curly apostrophe).
   BUT the original makes desktop `What'sApp` **plain text** while mobile/tablet link it —
   the footer builder should keep it a **link** (href
-  `https://chat.whatsapp.com/BxLUpQMiXwo6d1vG7YSirT`) for usable UX, and log that choice.
+  `https://chat.whatsapp.com/BxLUpQMiXwo6d1vG7YSirT`) for usable UX, and log that choice
+  in `docs/deviations/11-footer.md`.
 - **[content] Nav contents per breakpoint (§01) are RESPONSIVE, not a copy conflict.**
   Keep all three states as show/hide: mobile = logo + `contact for more`; tablet = +
   `find an event`; desktop = + the three `for …` scroll links.
@@ -69,7 +71,8 @@ Where the three DOM copies disagree, **desktop (1280) copy is canonical**. Known
   `…/events/312898072/`) that will go stale. Recommend the base URLs as canonical
   (`berlin → https://www.meetup.com/vibe-coding-collective-eu/`,
   `London → https://luma.com/bhfumnou`). **Final per-link choice is the section 04
-  builder's**, and each substitution must be logged here by that builder.
+  builder's**, and each substitution must be logged in `docs/deviations/04-for-vibe-coders.md`
+  (consolidated here by the integrator).
 - **[content] `target` behavior** from spec §7 is otherwise reproduced (most CTAs/city
   links `_blank`; the Contact-CTA `contact for more` and footer WhatsApp are `_self`).
 
