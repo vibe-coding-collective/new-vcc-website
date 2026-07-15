@@ -2,8 +2,224 @@
    Section 03 — Stats + "supported BY"
    Owner: builder(03-stats). SCOPE EVERY selector under `.s-stats`.
    Spec: docs/spec/20-sections/03-stats.md · Contract: docs/ARCHITECTURE.md
-   Note: the "supported BY" marquee is THIS section's own CSS @keyframes
-   animation (must include a prefers-reduced-motion fallback).
-   Assets: public/assets/stats/
-   (Intentionally empty — the section builder fills this in.)
+   Type sizes are desktop/tablet canonical (identical in the capture); only the
+   < 800px block scales down, transcribed from the site's own mobile CSS.
+   The "supported BY" marquee is THIS section's own @keyframes animation with a
+   prefers-reduced-motion fallback (contract §9).
    ========================================================================== */
+
+/* --- Section wrapper -------------------------------------------------------
+   Cream section. INTERNAL spacing only — the page gutter, max-width and the
+   80px inter-section gap are owned by `main#app` (base.css) per the ratified
+   contract amendment, so this section carries no page gutter of its own.
+   Asymmetric internal top padding: the hero graphic overlaps downward into this
+   block on the original, so it starts close (24px) and closes at 80px. 80px
+   rhythm between the stats cluster and the "supported BY" strip. */
+.s-stats {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-80);
+  padding-block: var(--space-24) var(--space-80);
+}
+
+/* --- Stats cluster --------------------------------------------------------- */
+.s-stats__cluster {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-52);
+  width: 100%;
+}
+
+/* Headline + descriptive paragraph (.container--900 supplies width/max/center). */
+.s-stats__intro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-12);
+}
+
+.s-stats__headline {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-12);
+  text-align: center;
+}
+
+/* "4,000+" — hero scale, green. */
+.s-stats__count {
+  color: var(--green);
+}
+
+.s-stats__desc {
+  text-align: center;
+}
+
+/* --- Stat figures (two side-by-side columns) ------------------------------- */
+.s-stats__figures {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: var(--space-24);
+  width: 100%;
+  max-width: var(--content-600);
+}
+
+.s-stats__figure {
+  flex: 1 0 0;
+  min-width: 1px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-12);
+  text-align: center;
+}
+
+/* "9" / "100%" — stat scale, green. */
+.s-stats__num {
+  color: var(--green);
+}
+
+.s-stats__figure-labels {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Flag run keeps the 32px card-title size; uppercase has no effect on emoji and
+   the OS emoji font is used per the fonts/emoji deviation (regional-indicator
+   flags render natively on modern platforms). */
+.s-stats__flags {
+  text-transform: none;
+}
+
+/* --- "supported BY" + sponsor marquee -------------------------------------- */
+.s-stats__supported {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-32);
+  width: 100%;
+}
+
+.s-stats__supported-title {
+  text-align: center;
+}
+
+/* Marquee viewport clips the over-wide, scrolling track. Capped at 1400px (and
+   centered by the parent's align-items) so the two-copy track is ALWAYS wider
+   than the viewport — otherwise a seam gap could appear on very wide monitors. */
+.s-stats__marquee {
+  width: 100%;
+  max-width: var(--content-1400);
+  overflow: hidden;
+}
+
+/* The track holds two identical sponsor groups; animating it by -50% shifts it
+   left by exactly one group so the second group lands where the first began —
+   a seamless loop. ~36s = mid-point of the observed ~30–40s cycle. */
+.s-stats__marquee-track {
+  display: flex;
+  width: max-content;
+  animation: s-stats-marquee 36s linear infinite;
+}
+
+/* Courtesy pause-on-hover (the original's marquee system documented it) so a
+   sponsor can be read. Optional pure-CSS approximation, no JS. */
+.s-stats__marquee:hover .s-stats__marquee-track {
+  animation-play-state: paused;
+}
+
+.s-stats__sponsors {
+  display: flex;
+  align-items: center;
+  gap: var(--space-24);
+  padding-inline-end: var(--space-24); /* trailing gap == seam spacing */
+  margin: 0;
+}
+
+/* White rounded "pill" per the live observation. Brand-name text stands in for
+   the runtime-injected logo artwork (only "MacPaw" is hash-confirmed in the
+   assets doc; third-party marks are not fabricated — see deviations). */
+.s-stats__sponsor {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  min-width: 180px;
+  height: 80px;
+  padding-inline: var(--space-32);
+  background: var(--off-white);
+  border-radius: var(--radius-card);
+}
+
+.s-stats__sponsor-name {
+  font-weight: var(--fw-black);
+  font-size: var(--fs-body);
+  line-height: var(--lh-normal);
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+@keyframes s-stats-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Reduced-motion fallback (contract requirement): no animation; show ONE static
+   group, wrapped and centered; hide the duplicate so nothing is doubled. */
+@media (prefers-reduced-motion: reduce) {
+  .s-stats__marquee {
+    overflow: visible;
+  }
+
+  .s-stats__marquee-track {
+    width: 100%;
+    animation: none;
+  }
+
+  .s-stats__sponsors {
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-inline-end: 0;
+  }
+
+  .s-stats__sponsors[aria-hidden="true"] {
+    display: none;
+  }
+}
+
+/* --- Mobile type scale (< 800px) — from the site's own mobile CSS ----------- */
+@media (width < 800px) {
+  .s-stats__count {
+    font-size: 40px;
+    letter-spacing: 0.8px;
+  }
+
+  .s-stats__lead {
+    font-size: 28px;
+    letter-spacing: 0.56px;
+  }
+
+  .s-stats__desc {
+    font-size: var(--fs-body-sm); /* 24 → 18 */
+  }
+
+  .s-stats__num {
+    font-size: 32px;
+    letter-spacing: 0.64px;
+  }
+
+  .s-stats__figure-label,
+  .s-stats__flags,
+  .s-stats__supported-title {
+    font-size: var(--fs-body); /* 32 → 20 */
+    letter-spacing: 0.4px;
+  }
+}

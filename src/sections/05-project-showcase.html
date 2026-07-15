@@ -1,5 +1,91 @@
 <!-- Section 05 — From "What If?" → project showcase (cream). Root <section>.
      Owner: builder(05-project-showcase). -->
 <section class="s-project-showcase" id="project-showcase">
-  <!-- TODO(builder 05-project-showcase): implement per docs/spec/20-sections/05-project-showcase.md -->
+  <!-- Eyebrow + heading (entrance-reveal block 1) -->
+  <div class="container container--900 s-project-showcase__intro" data-reveal>
+    <p class="eyebrow s-project-showcase__eyebrow">From "What If?" → to a Vibe App</p>
+    <div class="s-project-showcase__heading-group">
+      <h2 class="t-h2 s-project-showcase__heading">get inspired by community</h2>
+      <p class="t-body s-project-showcase__sub">In every session, our members move from a blank screen to a functional project in under 120 minutes.  No matter your level, you can ship:</p>
+    </div>
+  </div>
+
+  <!-- Project cards: vertical stack of 4 zigzag rows (entrance-reveal block 2).
+       DOM order is desktop-canonical (Immersive 3D, Motion Tracking, Open Data
+       Integration, The Unexpected); the image side alternates via source order
+       (media-first vs text-first), which yields the left/right zigzag on wide
+       viewports and a top/bottom zigzag when the row wraps on mobile. -->
+  <div class="container container--1200 s-project-showcase__cards" data-reveal>
+    <!-- Card 1 — image left -->
+    <article class="s-project-showcase__card">
+      <div class="s-project-showcase__media">
+        <img
+          src="/assets/project-showcase/project-immersive-3d.png"
+          width="200"
+          height="200"
+          loading="lazy"
+          decoding="async"
+          alt="Community members at a laptop building an interactive 3D scene, a glowing 3D object on screen"
+        />
+      </div>
+      <div class="s-project-showcase__text">
+        <h3 class="t-card-title s-project-showcase__card-title">Immersive 3D</h3>
+        <p class="t-body s-project-showcase__card-body">Building interactive 3D apps and environments from scratch.</p>
+      </div>
+    </article>
+
+    <!-- Card 2 — image right (text-first in DOM) -->
+    <article class="s-project-showcase__card">
+      <div class="s-project-showcase__text">
+        <h3 class="t-card-title s-project-showcase__card-title">Motion Tracking</h3>
+        <p class="t-body s-project-showcase__card-body">Real-time body, face, and object detection</p>
+      </div>
+      <div class="s-project-showcase__media">
+        <img
+          src="/assets/project-showcase/project-motion-tracking.png"
+          width="200"
+          height="200"
+          loading="lazy"
+          decoding="async"
+          alt="A laptop running a real-time motion-tracking project"
+        />
+      </div>
+    </article>
+
+    <!-- Card 3 — image left -->
+    <article class="s-project-showcase__card">
+      <div class="s-project-showcase__media">
+        <img
+          src="/assets/project-showcase/project-open-data.png"
+          width="200"
+          height="200"
+          loading="lazy"
+          decoding="async"
+          alt="A member reaching toward a projected dashboard of live financial and open-data APIs"
+        />
+      </div>
+      <div class="s-project-showcase__text">
+        <h3 class="t-card-title s-project-showcase__card-title">Open Data Integration</h3>
+        <p class="t-body s-project-showcase__card-body">Playing with live APIs from NASA, global finance, or geo-mapping.</p>
+      </div>
+    </article>
+
+    <!-- Card 4 — image right (text-first in DOM) -->
+    <article class="s-project-showcase__card">
+      <div class="s-project-showcase__text">
+        <h3 class="t-card-title s-project-showcase__card-title">The Unexpected</h3>
+        <p class="t-body s-project-showcase__card-body">From a hand standing trainer tracker to a finger-controlled game. If you can vibe it, you can build it.</p>
+      </div>
+      <div class="s-project-showcase__media">
+        <img
+          src="/assets/project-showcase/project-unexpected.png"
+          width="200"
+          height="200"
+          loading="lazy"
+          decoding="async"
+          alt="A pose-detection app tracking a person doing a handstand with a skeletal overlay"
+        />
+      </div>
+    </article>
+  </div>
 </section>

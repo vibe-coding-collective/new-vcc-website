@@ -123,9 +123,15 @@ Where the three DOM copies disagree, **desktop (1280) copy is canonical**. Known
 
 ## Per-section logs (consolidated at merge by the integrator)
 
+- **§03 stats** — see `docs/deviations/03-stats.md`: sponsor logos as accessible
+  text pills (artwork not reproducible; per-brand gap log), marquee approximations
+  (36s loop, 1400px cap, pause-on-hover), flags aria-hidden, 9-vs-8-flags preserved.
 - **§04 for-vibe-coders** — see `docs/deviations/04-for-vibe-coders.md`: stable base
   city URLs, `rel="noopener"` on external links, city-row markup normalization, wrapper
   amendment adopted (no self-carried page rhythm), mobile flag sizing.
+- **§05 project-showcase** — see `docs/deviations/05-project-showcase.md`: eyebrow
+  green per corrected contract, cards stay a row at all breakpoints (capture-confirmed
+  over the spec's guess), CDN images optimized, heading hierarchy.
 
 ## Progressive enhancement
 

@@ -2,7 +2,129 @@
    Section 05 — From "What If?" → project showcase (cream)
    Owner: builder(05-project-showcase). SCOPE EVERY selector under
    `.s-project-showcase`. Spec: docs/spec/20-sections/05-project-showcase.md
-   Contract: docs/ARCHITECTURE.md · Eyebrow: `--eyebrow-bg: var(--orange)`.
-   Assets: public/assets/project-showcase/
-   (Intentionally empty — the section builder fills this in.)
+   Contract: docs/ARCHITECTURE.md.
+   Type sizes are desktop/tablet canonical; only the < 800px block scales down,
+   transcribed from the site's own mobile CSS. Cards stay a horizontal row at
+   every breakpoint (image beside text), alternating the image side per source
+   order to make the zigzag.
    ========================================================================== */
+
+/* --- Section wrapper -------------------------------------------------------
+   Cream section. INTERNAL spacing only (80px padding-block + 80px internal
+   rhythm), centered column. The page gutter, max-width and 80px inter-section
+   gap are owned by `main#app` (base.css) per the ratified contract amendment,
+   so this section carries no page gutter of its own.
+   Eyebrow color hook: GREEN (#498d44). Matches both the corrected contract
+   (ARCHITECTURE §6 / spec §5.1 — fixed on main @ 8aa14af) and the live capture
+   (css-4uqxnc / css-8ikb59). See docs/deviations/05-project-showcase.md. */
+.s-project-showcase {
+  --eyebrow-bg: var(--green);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-80);
+  padding-block: var(--space-80);
+}
+
+/* --- Eyebrow + heading intro (.container--900 supplies width/max/center) ---- */
+.s-project-showcase__intro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-32);
+}
+
+.s-project-showcase__heading-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-12);
+  width: 100%;
+}
+
+.s-project-showcase__heading {
+  text-align: center;
+}
+
+/* Center the sub-paragraph; `pre-wrap` preserves the intentional double space
+   after "120 minutes." (kept byte-exact from the source). */
+.s-project-showcase__sub {
+  text-align: center;
+  white-space: pre-wrap;
+}
+
+/* --- Project cards: vertical stack of zigzag rows -------------------------- */
+.s-project-showcase__cards {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-60);
+}
+
+/* One card = image + text side by side, vertically centered. The image side
+   alternates via DOM source order (media-first vs text-first). */
+.s-project-showcase__card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-52);
+  width: 100%;
+}
+
+.s-project-showcase__media {
+  flex-shrink: 0;
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+}
+
+.s-project-showcase__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Text column: left-aligned, vertically centered next to the image, capped 350. */
+.s-project-showcase__text {
+  flex: 1 0 0;
+  min-width: 1px;
+  max-width: var(--content-350);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* --- Tablet (< 1280px): card gap tightens 52 → 16 (site's own value) -------- */
+@media (width < 1280px) {
+  .s-project-showcase__card {
+    gap: var(--space-16);
+  }
+}
+
+/* --- Mobile (< 800px): smaller image + display/body type scale down --------- */
+@media (width < 800px) {
+  .s-project-showcase__media {
+    width: 120px;
+    height: 120px;
+  }
+
+  .s-project-showcase__heading {
+    font-size: 32px; /* 60 → 32 */
+    letter-spacing: 0.64px;
+  }
+
+  .s-project-showcase__sub {
+    font-size: var(--fs-body-xs); /* 20 → 16 */
+  }
+
+  .s-project-showcase__card-title {
+    font-size: var(--fs-body); /* 32 → 20 */
+    letter-spacing: 0.4px;
+  }
+
+  .s-project-showcase__card-body {
+    font-size: var(--fs-body-xs); /* 20 → 16 */
+  }
+}
