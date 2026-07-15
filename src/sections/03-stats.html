@@ -1,4 +1,65 @@
 <!-- Section 03 — Stats + "supported BY". Root <section>. Owner: builder(03-stats). -->
 <section class="s-stats" id="stats">
-  <!-- TODO(builder 03-stats): implement per docs/spec/20-sections/03-stats.md -->
+  <!-- Stats cluster (entrance-reveal block 1) -->
+  <div class="s-stats__cluster" data-reveal>
+    <div class="container container--900 s-stats__intro">
+      <h2 class="s-stats__headline">
+        <span class="t-hero s-stats__count">4,000+ </span>
+        <span class="t-band-title s-stats__lead">members are ALREADY HERE</span>
+      </h2>
+      <p class="t-body-lg s-stats__desc">From photographers to chefs to accountants. Seven countries. One mission: prove that anyone can build.</p>
+    </div>
+
+    <div class="s-stats__figures">
+      <div class="s-stats__figure">
+        <p class="t-stat s-stats__num">9</p>
+        <div class="s-stats__figure-labels">
+          <p class="t-card-title s-stats__figure-label">Countries</p>
+          <p class="t-card-title s-stats__flags">🇬🇧🇩🇪🇺🇸🇯🇵🇺🇦🇵🇹🇳🇱🇵🇰</p>
+        </div>
+      </div>
+      <div class="s-stats__figure">
+        <p class="t-stat s-stats__num">100%</p>
+        <p class="t-card-title s-stats__figure-label">Word of mouth</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- "supported BY" sponsor marquee (entrance-reveal block 2) -->
+  <div class="s-stats__supported" data-reveal>
+    <h3 class="t-card-title s-stats__supported-title">supported BY</h3>
+
+    <!--
+      Pure-CSS marquee (see 40-interactions.md §5): a single track holding TWO
+      identical sponsor groups; translateX(-50%) over one loop makes the second
+      group land exactly where the first began → seamless. Each group carries a
+      trailing gap so the seam spacing matches the internal spacing. A
+      prefers-reduced-motion fallback (in 03-stats.css) stops the animation and
+      shows one static, wrapped group. Sponsor artwork was not reproducible
+      (only "MacPaw" is hash-confirmed in the assets doc, and third-party marks
+      are not fabricated), so each logo renders as an accessible brand-name pill.
+    -->
+    <div class="s-stats__marquee">
+      <div class="s-stats__marquee-track">
+        <ul class="s-stats__sponsors">
+          <li class="s-stats__sponsor"><span class="s-stats__sponsor-name">OK Tech</span></li>
+          <li class="s-stats__sponsor"><span class="s-stats__sponsor-name">MacPaw</span></li>
+          <li class="s-stats__sponsor"><span class="s-stats__sponsor-name">Microsoft</span></li>
+          <li class="s-stats__sponsor"><span class="s-stats__sponsor-name">ElevenLabs</span></li>
+          <li class="s-stats__sponsor"><span class="s-stats__sponsor-name">Softr</span></li>
+          <li class="s-stats__sponsor"><span class="s-stats__sponsor-name">Valae</span></li>
+          <li class="s-stats__sponsor"><span class="s-stats__sponsor-name">Lovable</span></li>
+        </ul>
+        <ul class="s-stats__sponsors" aria-hidden="true">
+          <li class="s-stats__sponsor"><span class="s-stats__sponsor-name">OK Tech</span></li>
+          <li class="s-stats__sponsor"><span class="s-stats__sponsor-name">MacPaw</span></li>
+          <li class="s-stats__sponsor"><span class="s-stats__sponsor-name">Microsoft</span></li>
+          <li class="s-stats__sponsor"><span class="s-stats__sponsor-name">ElevenLabs</span></li>
+          <li class="s-stats__sponsor"><span class="s-stats__sponsor-name">Softr</span></li>
+          <li class="s-stats__sponsor"><span class="s-stats__sponsor-name">Valae</span></li>
+          <li class="s-stats__sponsor"><span class="s-stats__sponsor-name">Lovable</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </section>
