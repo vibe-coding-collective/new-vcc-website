@@ -197,6 +197,16 @@ Two thresholds only (spec §6). **Author desktop-first**, then override downward
 `800` and `1280` are **hard-coded literals** (media queries can't read custom
 properties). They're documented as constants at the bottom of `tokens.css`.
 
+### Page wrapper & inter-section rhythm (contract amendment 2026-07-15)
+
+`main#app` (in `base.css`, contracts-owned) provides the shared page rhythm the
+original carried on its main wrapper: `display:flex; flex-direction:column;
+gap:80px`, `max-width: var(--content-1600)` centered, and the page gutter
+(`padding-inline: 40px`, `16px` below 800). **Section builders must NOT
+self-carry a page gutter or any inter-section spacing** — your section supplies
+only its internal spacing per its spec. Nav (fixed) and footer sit outside the
+wrapper and handle their own full-bleed layout.
+
 ---
 
 ## 8. Asset convention

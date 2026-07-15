@@ -35,7 +35,7 @@ Legend: **[arch]** structural · **[content]** copy/data · **[a11y]** accessibi
 
 Where the three DOM copies disagree, **desktop (1280) copy is canonical**. Known items:
 
-- **[content] Cities list (§04).** Use the desktop set/order/casing: `delft`, `berlin`,
+- **[content] Cities list (§04).** Use the desktop set/order/casing: `berlin`, `delft`,
   `Kyiv`, `London` (links) + `boston` `TBA`, `Edinburgh` `TBA` (Scotland flag on
   Edinburgh). We do **not** show tablet's `Lisbon` or mobile's `Delft`/`edinburgh`
   variants. (`berlin` and `boston` stay lowercase — intentional original casing.)
@@ -116,6 +116,10 @@ Where the three DOM copies disagree, **desktop (1280) copy is canonical**. Known
   "supported BY" logo marquee (§03), and the footer googly-blob mascot row (§11) are
   absent from the static capture and reconstructed from live observation; treat their exact
   composition as approximate.
+- **[approx] Page-wrapper rhythm (amendment 2026-07-15)** — `main#app` carries the
+  original wrapper's `gap: 80px`, `max-width: 1600px`, and gutter (40px; 16px <800).
+  Desktop values are capture-derived; the mobile wrapper gap was not separately
+  verified and keeps 80px pending the integration visual pass.
 
 ## Progressive enhancement
 
