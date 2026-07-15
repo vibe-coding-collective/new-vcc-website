@@ -13,14 +13,10 @@
   --band-color: var(--green-bright);
   --band-tint: var(--green-tint);
 
-  /* Outer page gutter + vertical rhythm. The original carried these on a
-     shared <main> wrapper (max-1600, 40px side gutter, 80px inter-section gap)
-     that our per-section DOM doesn't have, so each section owns its own outer
-     spacing. 40px top+bottom yields the original's ~80px gap between adjacent
-     sections IF siblings adopt the same convention — flagged for a shared
-     decision (see docs/deviations/04-for-vibe-coders.md). */
-  padding-block: var(--space-40);
-  padding-inline: var(--space-40);
+  /* Page rhythm — the 40px gutter, the 80px inter-section gap, and max-1600
+     centering — is owned by `main#app` in base.css (ratified contract
+     amendment). This section carries NO outer padding; only the internal card
+     spacing below. */
 }
 
 /* --- Header band: eyebrow + heading, centered, 900px column --------------- */
@@ -195,14 +191,10 @@
 }
 
 /* ==========================================================================
-   Mobile (<800): smaller gutter/rhythm; flag shrinks to 20px (as in original).
+   Mobile (<800): tighten the internal card rhythm; flag shrinks to 20px (as in
+   the original). Outer gutter/rhythm is owned by main#app (base.css).
    ========================================================================== */
 @media (width < 800px) {
-  .s-for-vibe-coders {
-    padding-block: var(--space-24);
-    padding-inline: var(--space-16);
-  }
-
   .s-for-vibe-coders .fvc-body-inner {
     gap: var(--space-40);
   }
