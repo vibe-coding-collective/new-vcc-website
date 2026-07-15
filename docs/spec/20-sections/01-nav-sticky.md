@@ -16,8 +16,8 @@ Net effect: a light off‑white bar pinned to the **top** of the viewport that s
 while scrolling. It is ~56px tall (8px padding + button height). Because the hero header has
 `padding-top:200px`, hero content is not hidden behind it.
 
-> **Verified visually by orchestrator, 2026‑07‑15:** the bar is **pinned at `top:0` and stays
-> fixed over every section, all the way down to the footer.**
+> The `position:sticky; top:0` is **capture‑derived**; an **orchestrator live observation at
+> ~1366px viewport, 2026‑07‑15** confirms the bar stays pinned over every section down to the footer.
 
 ## Layout
 
@@ -66,11 +66,12 @@ while scrolling. It is ~56px tall (8px padding + button height). Because the her
 - Nav has an entrance animation state in the live snapshot (`opacity:0.899…; transform:none`)
   — same reveal treatment as other top‑level blocks (see `40-interactions.md`).
 - `cursor:pointer` on logo, links, buttons. No hover styles are present in the static CSS;
-  hover feedback (if any) is JS/runtime — orchestrator found **no visible hover change** on the
-  nav `find an event` button (2026‑07‑15); see `40-interactions.md` §4.
-- **Scroll‑link and `find an event` click behaviour — Verified visually by orchestrator,
-  2026‑07‑15:** these are JS `<button>`s (onclick, no href) that **smooth‑scroll**. Measured
-  landing Y at 1366px viewport (page height 12834px): `for vibe coders` → **1928** (top of the
+  hover feedback (if any) is JS/runtime — an **orchestrator live observation (~1366px, 2026‑07‑15)**
+  found **no visible hover change** on the nav `find an event` button; see `40-interactions.md` §4.
+- **Scroll‑link and `find an event` click behaviour.** Capture‑derived: they are JS `<button>`s
+  (onclick, **no href**) that **smooth‑scroll** to sections. Landing positions below are an
+  **orchestrator measurement at 1366px viewport, 2026‑07‑15 — section‑anchor semantics, not pixel
+  constants** (page height 12834px): `for vibe coders` → **1928** (top of the
   green section), `find an event` → **2948** (the cities/events block inside the green section),
   `for hosts` → **5361** (top of yellow FOR CITY LEADERS), `for sponsors` → **8860** (top of
   blue FOR sponsors). There are **no `#anchor` targets** in the DOM — implement as smooth

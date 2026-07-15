@@ -27,25 +27,28 @@ There are **no internal anchor URLs** (`#id`) either. In‑page navigation is do
 
 | Link text | href | target | Appears in |
 |---|---|---|---|
-| `contact for more` (all CTAs) | `https://calendar.app.google/z9XuskPpZPvE5A5h7` | `_blank` (one instance `_self`) | header, vibe‑coders "Start a chapter", sponsors, companies, contact CTA, nav |
+| `contact for more` (all CTAs) | `https://calendar.app.google/z9XuskPpZPvE5A5h7` | `_blank`, **except the Contact‑CTA instance which is `_self` on every breakpoint** | header, vibe‑coders "Start a chapter", sponsors, companies, contact CTA, nav |
 | `Start a chapter` | `https://calendar.app.google/z9XuskPpZPvE5A5h7` | `_blank` | FOR vibe coders (cities) |
-| `berlin` | `https://www.meetup.com/vibe-coding-collective-eu/` | `_blank` | Cities list |
-| `delft` / `Delft` | `https://luma.com/z32gtwo6` | `_blank` | Cities list |
+| `berlin` | 375 & 800: `https://www.meetup.com/vibe-coding-collective-eu/events/312898072/?` · 1280: `https://www.meetup.com/vibe-coding-collective-eu/` | `_blank` | Cities list (all breakpoints) |
+| `delft` / `Delft` | `https://luma.com/z32gtwo6` | `_blank` | Cities list (all breakpoints) |
 | `Kyiv` | `https://luma.com/zxoxma81` | `_blank` | Cities list (375 & 1280 only) |
-| `London` | `https://luma.com/bhfumnou` | `_blank` (one `_self`) | Cities list |
+| `Lisbon` | `https://www.meetup.com/vibe-coding-collective/events/313129591/` | `_blank` | Cities list (**800 only**) |
+| `London` | 375 & 1280: `https://luma.com/bhfumnou` · 800: `https://www.meetup.com/vibe-coding-collective/events/313129591/` | `_blank` (1280 adds a `_self` arrow sub‑link to the luma URL) | Cities list (all breakpoints) |
 | `Join our team` | `https://docs.google.com/forms/d/e/1FAIpQLSdF9cGO8BJeZdCznidPJDBajWgC3ER7OR1BI-xSsVV8niZUsg/viewform` | `_blank` | WHO'S DOING THIS |
+| `What'sapp` (footer) | `https://chat.whatsapp.com/BxLUpQMiXwo6d1vG7YSirT` | `_self` | Footer — **linked on 375 & 800 only; plain text (no href) on 1280** |
 | `Meetups` | `https://www.meetup.com/vibe-coding-collective/` | `_blank` | Footer |
 | `LinkedIn` | `https://www.linkedin.com/company/vibe-coding-collective/posts` | `_blank` | Footer |
 
 Buttons **without** an href (JS behaviour, not links):
 `find an event` (header + nav), `for vibe coders` / `for hosts` / `for sponsors` (desktop nav
 scroll links), and the nav logo button. `boston` and `Edinburgh`/`edinburgh` are **`TBA`** —
-plain text, not links. `What'sApp` / `What'sapp` in the footer is plain text (no href).
+plain text, not links. The footer WhatsApp label is a **link on mobile & tablet** (375/800 → `https://chat.whatsapp.com/BxLUpQMiXwo6d1vG7YSirT`, `target="_self"`) but **plain text on desktop** (`What'sApp`, 1280).
 `dan.porder@vibecoders.global` is plain text (not a `mailto:` link).
 
-> **Verified visually by orchestrator, 2026‑07‑15:** `find an event` and the three `for …`
-> nav buttons are JS `<button>`s that **smooth‑scroll** to sections (measured landing positions
-> in `40-interactions.md` §3). `find an event` scrolls (does not open a panel).
+> `find an event` and the three `for …` nav buttons are JS `<button>`s with **no href**
+> (capture‑derived); their smooth‑scroll targets were an **orchestrator measurement at 1366px
+> viewport, 2026‑07‑15 (section‑anchor semantics, not pixel constants)** — see `40-interactions.md`
+> §3. `find an event` scrolls (does not open a panel).
 
 ---
 
@@ -144,9 +147,10 @@ Numbered files live in `20-sections/`. Desktop (1280) order:
   Color is set with **both** `color` and `-webkit-text-fill-color`. Emoji/symbol runs fall
   back through Noto Sans / Noto Sans Symbols / Noto Sans Math.
 - **Runtime‑only content:** two visual regions are **empty in the static HTML** and populated
-  by the Figma runtime — the hero's 862×350 graphic block (renders live as a photo collage) and
-  the `supported BY` sponsor‑logo strip (renders live as an auto‑scrolling logo marquee). Both
-  were confirmed live by the orchestrator on 2026‑07‑15; details in `02-hero-header.md` /
+  by the Figma runtime — the hero's 862×350 graphic block and
+  the `supported BY` sponsor‑logo strip. Per **orchestrator live observation at ~1366px viewport,
+  2026‑07‑15 (not verifiable from static capture)** they render as a photo collage and an
+  auto‑scrolling logo marquee respectively; details in `02-hero-header.md` /
   `03-stats.md` / `40-interactions.md`.
 - **No `<iframe>`, `<video>`, `<embed>`, `<canvas>`, or forms** in the page (the runtime bundle
   supports Rive/Lottie/video generically, but this page uses none). All media is `<img>` (PNG)

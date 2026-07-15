@@ -17,7 +17,7 @@ TECH-LITE
 BUILDERS
 ```
 
-> **Verified visually by orchestrator, 2026‑07‑15:** live, the headline row **interleaves
+> **Orchestrator live observation at ~1366px viewport, 2026‑07‑15 (not verifiable from static capture):** live, the headline row **interleaves
 > small rounded‑square photo chips** (with yellow / green / teal backgrounds) and **one orange
 > googly‑eyes blob** between/after the words — e.g. `COMMUNITIES [photo chip] FOR / [photo chip]
 > TECH-LITE [orange googly blob] / BUILDERS [photo chip]`. These chips are runtime‑injected
@@ -70,7 +70,7 @@ After `</header>`, inside wrapper `css-dczajm`, sits:
 In the **static HTML** this is an empty 862×350 block — a Figma FRAME named `Container` with
 `"fills":[]` and no children. The next block overlaps it upward by 60px via the negative margin.
 
-> **Verified visually by orchestrator, 2026‑07‑15 — the block is NOT blank live.** It renders a
+> **Orchestrator live observation at ~1366px viewport, 2026‑07‑15 (not verifiable from static capture) — the block is NOT blank live.** It renders a
 > runtime‑injected **photo collage**: event photos masked into flower/cloud blob shapes on
 > colored rounded blobs (teal, yellow, red visible), partially overlapping, occupying this
 > 862×350 (max 1400px) frame just below the CTA buttons (`margin-bottom:-60px`). The same collage

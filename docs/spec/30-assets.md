@@ -92,7 +92,7 @@ Empty in static HTML; from Figma page data (see `03-stats.md`). Inferred URLs
 `5c67840b122b8508c56e83e052d3cc0938a886ca`, `d3ef03203f68628ad429dd38be6066d4dbd34f6c`,
 `6b3d80b37f4380613a091362ed7f2960d0a23dff`, `1c3e99651b18b91cef5b82aae350937593ce6574`,
 `5e973f77aa7840ba2e45e3022b81ae09b4b35c41`, `8e452d45246a391069309df65da2fde56013812f`.
-**Verified visually by orchestrator, 2026‑07‑15:** these render live as an **auto‑scrolling marquee** of white pills — brands **OK Tech, MacPaw, Microsoft, ElevenLabs, Softr, Valae, Lovable** (cycle order); ~30–40s loop (approx). See `03-stats.md`. Only `macpaw` is hash‑confirmed.
+**Orchestrator live observation at ~1366px viewport, 2026‑07‑15 (not verifiable from static capture):** these render live as an **auto‑scrolling marquee** of white pills — brands **OK Tech, MacPaw, Microsoft, ElevenLabs, Softr, Valae, Lovable** (cycle order); ~30–40s loop (approx). See `03-stats.md`. Only `macpaw` is hash‑confirmed.
 
 ## 7. Fonts (self‑hosted woff2)
 

@@ -70,7 +70,7 @@ Directly after the `supported BY` label is an **empty container** in the static 
 | `image 121` | `5e973f77aa7840ba2e45e3022b81ae09b4b35c41` | ~249×80 |
 | `image 123` | `8e452d45246a391069309df65da2fde56013812f` | ~183×80 |
 
-> **Verified visually by orchestrator, 2026‑07‑15 — it renders live as an auto‑scrolling
+> **Orchestrator live observation at ~1366px viewport, 2026‑07‑15 (not verifiable from static capture) — it renders live as an auto‑scrolling
 > marquee.** Seven partner logos, **each in a white rounded pill**, cycle continuously under
 > `supported BY` in this order: **OK Tech → MacPaw → Microsoft → ElevenLabs → Softr → Valae →
 > Lovable → (repeat)**. Slow continuous horizontal drift; approximate a full loop at **~30–40s**

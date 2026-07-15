@@ -23,7 +23,7 @@ You pick the location. You host the first event. The community grows from there.
 tablet variant `css-10elgb` = `aspect-ratio:1200/396`), `object-fit:cover`:
 `/_assets/v11/547a46b0dfe6a0bca6b9549c32a0783d6344f680.png` (native 2634px wide; srcSet up to 2560w).
 
-> **Verified visually by orchestrator, 2026‑07‑15:** the map banner shows labeled city markers
+> **Orchestrator live observation at ~1366px viewport, 2026‑07‑15 (not verifiable from static capture):** the map banner shows labeled city markers
 > (diamond markers; black or red text, some rotated): **EDINBURGH, LONDON, AMSTERDAM, LISBON,
 > DELFT, BERLIN, KYIV, BOSTON, NEW YORK, ISLAMABAD, OSAKA**. This city set **deliberately differs**
 > from the green section's "All cities" list (`04-for-vibe-coders.md` §4.3) — document both, do

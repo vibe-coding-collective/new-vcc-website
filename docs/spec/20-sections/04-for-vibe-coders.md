@@ -63,15 +63,18 @@ city names are `#181814` (`css-d5zdmh`) and `TBA` uses `css-edy0ng`.
 
 > Note: this "All cities" list is **separate from** the labeled city markers drawn on the yellow
 > section's map banner (EDINBURGH, LONDON, AMSTERDAM, LISBON, DELFT, BERLIN, KYIV, BOSTON,
-> NEW YORK, ISLAMABAD, OSAKA — see `06-for-city-leaders.md`). The two city sets deliberately
-> differ; document both, do not reconcile.
+> NEW YORK, ISLAMABAD, OSAKA — orchestrator live observation; the map is a raster image, so those
+> labels are not verifiable from the static capture. See `06-for-city-leaders.md`). The two city
+> sets deliberately differ; document both, do not reconcile.
 
-**The city list differs per breakpoint — reproduce each exactly (casing + flag + link):**
+**The city list differs per breakpoint — reproduce each exactly (casing + flag + link). All
+hrefs below are transcribed from `_capture/dom-375/800/1280.html` and `home-ssr.html`; every city
+link uses `target="_blank"`:**
 
 ### 375 (mobile) — order & verbatim
 ```
 🇳🇱 Delft            → https://luma.com/z32gtwo6
-🇩🇪 berlin           → https://www.meetup.com/vibe-coding-collective-eu/
+🇩🇪 berlin           → https://www.meetup.com/vibe-coding-collective-eu/events/312898072/?
 🇺🇦 Kyiv             → https://luma.com/zxoxma81
 🏴󠁧󠁢󠁥󠁮󠁧󠁿 London           → https://luma.com/bhfumnou
 🇺🇸 boston   TBA     (no link)
@@ -79,10 +82,10 @@ city names are `#181814` (`css-d5zdmh`) and `TBA` uses `css-edy0ng`.
 ```
 ### 800 (tablet) — order & verbatim
 ```
-🇩🇪 berlin           → https://www.meetup.com/vibe-coding-collective-eu/
+🇩🇪 berlin           → https://www.meetup.com/vibe-coding-collective-eu/events/312898072/?
 🇳🇱 delft            → https://luma.com/z32gtwo6
-🇵🇹 Lisbon           (no link — plain text; verified 2026‑07‑15)
-🏴󠁧󠁢󠁥󠁮󠁧󠁿 London           → https://luma.com/bhfumnou
+🇵🇹 Lisbon           → https://www.meetup.com/vibe-coding-collective/events/313129591/
+🏴󠁧󠁢󠁥󠁮󠁧󠁿 London           → https://www.meetup.com/vibe-coding-collective/events/313129591/
 🇺🇸 boston   TBA     (no link)
 🇯🇵 Edinburgh TBA    (no link)   ← note: Japan flag on Edinburgh (as‑is in source)
 ```
@@ -98,11 +101,21 @@ city names are `#181814` (`css-d5zdmh`) and `TBA` uses `css-edy0ng`.
 Differences: mobile lists `Delft` (capital D) first and `edinburgh` (lowercase); tablet swaps in
 `Lisbon` (🇵🇹) for `Kyiv`, capitalises `Edinburgh`, and uses a 🇯🇵 flag on Edinburgh; desktop
 matches tablet order but keeps `Kyiv` and the Scotland flag. `berlin` is always lowercase;
-`boston` always lowercase.
+`boston` always lowercase. **`berlin` and `London` also change href per breakpoint** — mobile/tablet
+`berlin` and tablet `London`/`Lisbon` point at dated `/events/NNN/` Meetup pages, while desktop
+uses the base Meetup/Luma URLs. On desktop (1280) the `delft` and `London` rows additionally emit a
+separate arrow‑image `<a>` to the same href (the `London` arrow one is `target="_self"`).
 
-> **Verified visually by orchestrator, 2026‑07‑15:** `Lisbon` (800 only) is **not a link** — no
-> `<a>` in any live breakpoint variant contains "Lisbon"; treat as plain text. All city links
-> open `target="_blank"` except one `London` sub‑link (the arrow image) with `target="_self"`.
+> **Correction (capture‑derived, supersedes an earlier note).** An orchestrator live query on
+> 2026‑07‑15 was **desktop‑DOM‑scoped and wrongly reported "Lisbon is not a link."** Per
+> `_capture/dom-800.html` / `home-ssr.html`, on the **800** breakpoint `Lisbon` **is** a link:
+> `<a href="https://www.meetup.com/vibe-coding-collective/events/313129591/" target="_blank">Lisbon</a>`
+> — the same href as tablet‑`London`.
+>
+> **Implementation note:** the `/events/NNN/` URLs are dated single‑event links that will go stale.
+> Recommend builders adopt the base URLs as canonical (`berlin →
+> https://www.meetup.com/vibe-coding-collective-eu/`, `London → https://luma.com/bhfumnou`) and
+> record the substitution in DEVIATIONS — but this spec states the captured truth as‑is.
 
 ## 4.4 "Your city isn't here?" CTA
 
@@ -120,5 +133,5 @@ Start a chapter
 ## Responsive summary
 
 - Value cards: 3‑across (1280) → stacked (800, 375).
-- Cities: always a vertical list; content set differs per breakpoint (above).
+- Cities: always a vertical list; content set **and some hrefs** differ per breakpoint (above).
 - Section radius 32px (≥800) / 20px (375).

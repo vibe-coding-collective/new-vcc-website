@@ -1,8 +1,8 @@
 # 40 — Interactions, Animation & Dynamic Behavior
 
 What is observable from the static HTML / extracted CSS / runtime JS is stated as fact; anything
-requiring a live render is either **Verified visually by orchestrator, 2026‑07‑15** (live‑browser
-ground‑truth pass at ~1366px) or, where still unmeasurable, marked **UNKNOWN**. The page ships a
+requiring a live render is either an **orchestrator live observation or measurement at ~1366px viewport,
+2026‑07‑15** (a desktop‑DOM live pass) or, where still unmeasurable, marked **UNKNOWN**. The page ships a
 large Figma Sites runtime (`/_runtimes/sites-runtime.<hash>.js`, ~1.2 MB) plus a page bundle
 (`/_components/v2/<hash>.js`, ~157 KB); most motion is runtime‑driven, not CSS.
 
@@ -33,15 +33,16 @@ inline styles, which reveal the pattern — **fade + slide‑up**:
 The nav is `position:sticky; top:0` inside a full‑page `pointer-events:none` overlay; only the
 nav pill has `pointer-events:auto` (see `01-nav-sticky.md`). It stays pinned at the top while
 scrolling. It also participates in the entrance reveal above.
-**Verified visually by orchestrator, 2026‑07‑15:** pinned at `top:0`, fixed over every section
-all the way down to the footer.
+The `sticky; top:0` is **capture‑derived**; an **orchestrator live observation (~1366px,
+2026‑07‑15)** confirms it stays fixed over every section down to the footer.
 
 ## 3. In‑page navigation buttons (confirmed smooth‑scroll)
 
 `find an event` (header + nav) and the desktop nav links `for vibe coders` / `for hosts` /
 `for sponsors` are `<button>`s with **no href** → JavaScript handlers.
-- **Verified visually by orchestrator, 2026‑07‑15:** they are JS `<button>`s (onclick, no href)
-  that **smooth‑scroll**. Measured landing Y at 1366px viewport (page height 12834px):
+- Capture‑derived: they are JS `<button>`s (onclick, **no href**) that **smooth‑scroll**. The
+  landing positions below are an **orchestrator measurement at 1366px viewport, 2026‑07‑15 —
+  section‑anchor semantics, not pixel constants** (page height 12834px):
   `for vibe coders` → **1928** (top of the green section), `find an event` → **2948** (the
   cities/events block inside the green section), `for hosts` → **5361** (top of yellow FOR CITY
   LEADERS), `for sponsors` → **8860** (top of blue FOR sponsors). There are **no `#anchor`
@@ -53,7 +54,7 @@ all the way down to the footer.
 - Interactive elements set `cursor:pointer` (`css-134pm3`, buttons, links) but there are **no
   `:hover`, `:active`, or `:focus` style rules in the static CSS**. Any hover/press feedback is
   applied by the runtime.
-- **Verified visually by orchestrator, 2026‑07‑15 (inconclusive but low‑risk):** hovering the nav
+- **Orchestrator live observation (~1366px, 2026‑07‑15; inconclusive but low‑risk):** hovering the nav
   `find an event` button produced **no visible before/after change**. Safe guidance: assume **no
   significant hover feedback**; builders may add a minimal press/hover affordance (e.g. translate a
   button toward its shadow) and **must mark it an intentional approximation**.
@@ -68,8 +69,8 @@ The reset CSS defines a marquee system: `.marquee-container` / `.marquee` with
 `.paused { animation-play-state:paused }` utility, and `@media (prefers-reduced-motion:reduce)`
 disabling. (No `.marquee` element is present in the static/SSR DOM — it is injected at runtime.)
 
-- **Verified visually by orchestrator, 2026‑07‑15:** the `supported BY` sponsor‑logo strip
-  **renders live as an auto‑scrolling marquee** — **7 logos in white rounded pills**, cycle order
+- **Orchestrator live observation at ~1366px viewport, 2026‑07‑15 (not verifiable from static
+  capture):** the `supported BY` sponsor‑logo strip **renders live as an auto‑scrolling marquee** — **7 logos in white rounded pills**, cycle order
   **OK Tech → MacPaw → Microsoft → ElevenLabs → Softr → Valae → Lovable → (repeat)**, slow
   continuous horizontal drift. Approximate a full loop at **~30–40s** (approximation — exact
   speed/direction not measured). See `03-stats.md` / `30-assets.md`.
@@ -77,11 +78,11 @@ disabling. (No `.marquee` element is present in the static/SSR DOM — it is inj
 ## 6. Runtime‑injected content (resolved)
 
 Two regions are empty in the static HTML and filled by the runtime (see their sections):
-- Hero 862×350 graphic block (`02-hero-header.md`) — **Verified 2026‑07‑15:** renders live as a
+- Hero 862×350 graphic block (`02-hero-header.md`) — **Orchestrator live observation, ~1366px, 2026‑07‑15 (not verifiable from static capture):** renders live as a
   **photo collage** (blob‑masked event photos on colored blobs, teal/yellow/red); the headline
   also gains **interleaved photo chips + an orange googly‑eyes blob**. Runtime‑injected (empty in
   static HTML) — reproduce, do not leave blank.
-- `supported BY` logo strip (`03-stats.md`) — **Verified 2026‑07‑15:** renders live as the 7‑logo
+- `supported BY` logo strip (`03-stats.md`) — **Orchestrator live observation, ~1366px, 2026‑07‑15 (not verifiable from static capture):** renders live as the 7‑logo
   auto‑scrolling marquee (white pills) described in §5.
 - Footer also shows a **row of six googly‑eyed blob mascots** along its bottom edge (`11-footer.md`).
 
@@ -95,9 +96,10 @@ Two regions are empty in the static HTML and filled by the runtime (see their se
 - **External actions (open in new tab):** every `contact for more` / `Start a chapter` →
   Google Calendar appointment page; `Join our team` → a Google Form; `Meetups`/`LinkedIn`/city
   links → Meetup/LinkedIn/Luma. There is no on‑site form submission or email capture.
-  The lone `target="_self"` `contact for more` is the one in the **Contact CTA** section
-  (`10-contact-cta.md`); all other `contact for more` CTAs are `target="_blank"`. (There is also a
-  single `target="_self"` on the `London` city arrow sub‑link.)
+  **`target="_self"` accounting (from captures, across all three DOM copies — 6 total):** the
+  Contact‑CTA `contact for more` is `_self` on **each** breakpoint (×3); the footer `What'sapp`
+  link is `_self` on **375 & 800** (×2); and the desktop **`London` arrow sub‑link** is `_self`
+  (×1, 1280). Every other `contact for more` and city link is `target="_blank"`.
 
 ## 8. Progressive enhancement / boot
 
