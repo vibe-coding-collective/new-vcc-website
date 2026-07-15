@@ -140,7 +140,9 @@
 @media (width < 1280px) {
   .s-reviews .rv-cards {
     flex-direction: column;
-    align-items: center;
+    /* css-a8cijb is flex-start: the original pins the 500px cards flush-left
+       against the page gutter on tablet — reviewer-caught fidelity fix. */
+    align-items: flex-start;
     padding-right: 0;
   }
 }
