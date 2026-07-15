@@ -1,9 +1,106 @@
 /* ==========================================================================
    Section 01 — Sticky nav bar (global)
-   Owner: builder(01-nav-sticky). SCOPE EVERY selector under `.s-nav-sticky`.
-   Spec: docs/spec/20-sections/01-nav-sticky.md · Contract: docs/ARCHITECTURE.md
-   Pinning: use `position: fixed; top: 0; inset-inline: 0; z-index: var(--z-nav)`
-   on `.s-nav-sticky` (nav is first-in-DOM inside a short <header>, so `sticky`
-   would only pin within that header). Assets: public/assets/nav-sticky/
-   (Intentionally empty — the section builder fills this in.)
+   Owner: builder(01-nav-sticky). EVERY selector is scoped under `.s-nav-sticky`.
+   Spec: docs/spec/20-sections/01-nav-sticky.md · Contract: docs/ARCHITECTURE.md §9
+   Pinned with position:fixed (nav is first-in-DOM inside a short <header>, so
+   `sticky` would only pin within that header). First-screen clearance under the
+   bar comes from the hero's own padding-top:200px — no body/main offset here.
+   Deviations: docs/deviations/01-nav-sticky.md
    ========================================================================== */
+
+/* --- Pinned bar (desktop / >=1280 canonical) ------------------------------ */
+.s-nav-sticky {
+  position: fixed;
+  top: 0;
+  inset-inline: 0;
+  z-index: var(--z-nav);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-24);
+  padding: var(--space-8) var(--space-40);
+  background: var(--off-white);
+  /* Matches the original's `overflow: clip`; keeps the hard button shadows
+     visually contained within the bar edges. */
+  overflow: clip;
+}
+
+/* --- Groups --------------------------------------------------------------- */
+.s-nav-sticky .nav-group {
+  display: flex;
+  align-items: center;
+}
+
+.s-nav-sticky .nav-group--start {
+  gap: var(--space-40); /* logo <-> scroll-links group */
+}
+
+.s-nav-sticky .nav-group--end {
+  flex-shrink: 0;
+  justify-content: flex-end;
+  gap: var(--space-12); /* contact for more <-> find an event */
+}
+
+/* --- Logo (also the scroll-to-top button) --------------------------------- */
+.s-nav-sticky .nav-logo {
+  flex-shrink: 0;
+  display: block;
+  width: 80px;
+  height: 80px;
+}
+
+.s-nav-sticky .nav-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* --- Desktop-only scroll links -------------------------------------------- */
+.s-nav-sticky .nav-links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-32);
+}
+
+/* .nav-link uses shared `.t-link` (Golos 900 / 16px / uppercase); only the
+   per-section color hook is set here. The original renders all three links in
+   the same blue #0056a1; the "active" class on `for vibe coders` carries no
+   visible style in the static capture, so all three read identically. */
+.s-nav-sticky .nav-link {
+  color: var(--blue);
+  white-space: nowrap;
+}
+
+/* ==========================================================================
+   Breakpoints (desktop-first; hard literals 1280 / 800 per tokens.css)
+   Responsive nav contents (single DOM show/hide, docs/DEVIATIONS.md):
+     tablet  drops the three scroll links
+     mobile  also drops `find an event`
+   ========================================================================== */
+
+/* Tablet (800–1279): tighter side padding, no scroll links. */
+@media (width < 1280px) {
+  .s-nav-sticky {
+    padding: var(--space-8) var(--space-32);
+  }
+
+  .s-nav-sticky .nav-links {
+    display: none;
+  }
+}
+
+/* Mobile (<800): smallest side padding, 60px logo, no `find an event`. */
+@media (width < 800px) {
+  .s-nav-sticky {
+    padding: var(--space-8) var(--space-12);
+  }
+
+  .s-nav-sticky .nav-logo {
+    width: 60px;
+    height: 60px;
+  }
+
+  .s-nav-sticky .nav-find-event {
+    display: none;
+  }
+}

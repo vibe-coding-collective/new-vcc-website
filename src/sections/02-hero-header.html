@@ -1,4 +1,44 @@
-<!-- Section 02 — Hero header. Root <section>. Owner: builder(02-hero-header). -->
+<!-- Section 02 — Hero header. Root <section>. Owner: builder(02-hero-header).
+     padding-top:200px clears the fixed nav (see docs/ARCHITECTURE.md §9).
+     The page's single <h1> (heading-hierarchy policy, docs/DEVIATIONS.md).
+     The interleaved photo chips, the orange googly blob, and the 862x350 photo
+     collage are RUNTIME-INJECTED on the original (no determinable asset URLs), so
+     they are reproduced here as decorative, accessible placeholders — correct
+     positions / blob colors, no invented artwork. See docs/deviations/02-hero-header.md. -->
 <section class="s-hero-header" id="hero-header">
-  <!-- TODO(builder 02-hero-header): implement per docs/spec/20-sections/02-hero-header.md -->
+  <div class="hero-inner container container--900">
+    <h1 class="hero-title t-hero">
+      communities<span class="hero-chip hero-chip--yellow" aria-hidden="true"></span>
+      FOR<span class="hero-chip hero-chip--green" aria-hidden="true"></span>
+      TECH-LITE<span class="hero-chip hero-blob hero-blob--googly" aria-hidden="true"></span>
+      BUILDERS<span class="hero-chip hero-chip--teal" aria-hidden="true"></span>
+    </h1>
+
+    <p class="hero-lead t-body-lg">
+      Join thousands of new creators building with GenAI in pubs, studios, and community spaces around the globe!
+    </p>
+
+    <div class="hero-cta-row">
+      <button type="button" class="btn btn--dark" data-scroll-target="cities">
+        find an event
+      </button>
+      <a
+        class="btn btn--light"
+        href="https://calendar.app.google/z9XuskPpZPvE5A5h7"
+        target="_blank"
+        rel="noopener"
+      >
+        contact for more
+      </a>
+    </div>
+  </div>
+
+  <!-- Runtime-injected photo collage on the original (blob-masked event photos on
+       teal/yellow/red blobs). No asset URL exists; rendered as a decorative
+       placeholder at the original's 862x350 frame. -->
+  <div class="hero-graphic" aria-hidden="true">
+    <span class="hero-graphic-blob hero-graphic-blob--teal"></span>
+    <span class="hero-graphic-blob hero-graphic-blob--yellow"></span>
+    <span class="hero-graphic-blob hero-graphic-blob--red"></span>
+  </div>
 </section>

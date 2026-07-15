@@ -1,7 +1,51 @@
 <!-- Section 01 — Sticky nav bar. Root <nav> (inside index.html's <header> banner).
-     Owner: builder(01-nav-sticky). Pin via position:fixed (see docs/ARCHITECTURE.md).
+     Owner: builder(01-nav-sticky). Pin via position:fixed (see docs/ARCHITECTURE.md §9).
      Scroll buttons carry data-scroll-target="for-vibe-coders" | "cities" |
-     "for-city-leaders" | "for-sponsors". -->
+     "for-city-leaders" | "for-sponsors" (JS lands in a later phase; no JS now).
+     Responsive contents (single DOM, show/hide per docs/DEVIATIONS.md):
+       mobile  = logo + contact for more
+       tablet  = + find an event
+       desktop = + the three "for …" scroll links -->
 <nav class="s-nav-sticky" id="nav-sticky" aria-label="Primary">
-  <!-- TODO(builder 01-nav-sticky): implement per docs/spec/20-sections/01-nav-sticky.md -->
+  <div class="nav-group nav-group--start">
+    <button
+      type="button"
+      class="nav-logo"
+      data-scroll-target="hero-header"
+      aria-label="Vibe Coding Collective, back to top"
+    >
+      <img src="/assets/nav-sticky/logo-nav.svg" alt="" width="80" height="80" />
+    </button>
+    <ul class="nav-links">
+      <li>
+        <button type="button" class="nav-link t-link" data-scroll-target="for-vibe-coders">
+          for vibe coders
+        </button>
+      </li>
+      <li>
+        <button type="button" class="nav-link t-link" data-scroll-target="for-city-leaders">
+          for hosts
+        </button>
+      </li>
+      <li>
+        <button type="button" class="nav-link t-link" data-scroll-target="for-sponsors">
+          for sponsors
+        </button>
+      </li>
+    </ul>
+  </div>
+
+  <div class="nav-group nav-group--end">
+    <a
+      class="btn btn--light"
+      href="https://calendar.app.google/z9XuskPpZPvE5A5h7"
+      target="_blank"
+      rel="noopener"
+    >
+      contact for more
+    </a>
+    <button type="button" class="btn btn--dark nav-find-event" data-scroll-target="cities">
+      find an event
+    </button>
+  </div>
 </nav>

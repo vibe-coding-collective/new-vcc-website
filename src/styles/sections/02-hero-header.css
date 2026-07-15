@@ -1,7 +1,139 @@
 /* ==========================================================================
    Section 02 — Hero header
-   Owner: builder(02-hero-header). SCOPE EVERY selector under `.s-hero-header`.
+   Owner: builder(02-hero-header). EVERY selector is scoped under `.s-hero-header`.
    Spec: docs/spec/20-sections/02-hero-header.md · Contract: docs/ARCHITECTURE.md
-   Assets: public/assets/hero-header/
-   (Intentionally empty — the section builder fills this in.)
+   padding-top:200px clears the fixed nav (§9). Chips, googly blob and the 862x350
+   collage are decorative placeholders for runtime-injected artwork (no asset URL).
+   Deviations: docs/deviations/02-hero-header.md
    ========================================================================== */
+
+/* --- Section shell (desktop / >=1280 canonical) --------------------------- */
+.s-hero-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-60); /* INTERNAL: hero content <-> collage (orig header pad-bottom) */
+  /* Page gutter (padding-inline) and the BASE inter-section rhythm are owned by
+     the `main#app` wrapper in base.css — this section must NOT self-carry them.
+     Only the internal top offset that clears the fixed nav lives here (§9). */
+  padding-block-start: 200px;
+  /* Spec: the collage frame carries margin-bottom:-60px (`css-nevt4e`). Kept as a
+     hero-region overlap — it composes with the wrapper's 80px inter-section gap to
+     a net ~20px hero->stats seam, matching the original's tight spacing. */
+  margin-block-end: -60px;
+}
+
+/* Centered content column (max 900px via .container--900). */
+.s-hero-header .hero-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-32);
+}
+
+/* --- Headline (the page's single <h1>) ------------------------------------ */
+/* Type comes from the shared `.t-hero` utility (80/900, LS 1.6, uppercase). */
+.s-hero-header .hero-title {
+  text-align: center;
+}
+
+/* Decorative headline chips + googly blob — placeholders for runtime-injected
+   photo chips (no asset URL; aria-hidden in markup). Sized in `em` so they
+   track the headline font at every breakpoint. */
+.s-hero-header .hero-chip {
+  display: inline-block;
+  vertical-align: middle;
+  width: 0.7em;
+  height: 0.7em;
+  margin-inline: 0.1em;
+  border-radius: 0.18em;
+  background: var(--grey-200);
+}
+
+.s-hero-header .hero-chip--yellow {
+  background: var(--yellow);
+}
+
+.s-hero-header .hero-chip--green {
+  background: var(--green-bright);
+}
+
+.s-hero-header .hero-chip--teal {
+  background: var(--teal);
+}
+
+/* Orange "googly-eyes" mascot blob — reproduced as a plain orange disc; the
+   eyes are runtime artwork and are intentionally not invented. */
+.s-hero-header .hero-blob--googly {
+  border-radius: 50%;
+  background: var(--orange);
+}
+
+/* --- Lead paragraph ------------------------------------------------------- */
+/* Type from shared `.t-body-lg` (24/500). */
+.s-hero-header .hero-lead {
+  text-align: center;
+}
+
+/* --- CTA row -------------------------------------------------------------- */
+/* Buttons use shared `.btn` / `.btn--dark` / `.btn--light`. */
+.s-hero-header .hero-cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-24);
+}
+
+/* --- Photo collage placeholder (original: 862x350 runtime frame) ---------- */
+.s-hero-header .hero-graphic {
+  position: relative;
+  width: 862px;
+  max-width: 100%;
+  aspect-ratio: 862 / 350;
+  margin-inline: auto;
+}
+
+.s-hero-header .hero-graphic-blob {
+  position: absolute;
+  border-radius: 42% 58% 57% 43% / 47% 42% 58% 53%;
+}
+
+.s-hero-header .hero-graphic-blob--teal {
+  inset-block-start: 10%;
+  inset-inline-start: 3%;
+  width: 42%;
+  height: 82%;
+  background: var(--teal);
+}
+
+.s-hero-header .hero-graphic-blob--yellow {
+  inset-block-start: 2%;
+  inset-inline-start: 32%;
+  width: 40%;
+  height: 80%;
+  background: var(--yellow);
+}
+
+/* Observed "red" blob approximated with --orange (no --red token exists). */
+.s-hero-header .hero-graphic-blob--red {
+  inset-block-start: 12%;
+  inset-inline-end: 3%;
+  width: 40%;
+  height: 78%;
+  background: var(--orange);
+}
+
+/* ==========================================================================
+   Breakpoints (desktop-first; hard literals 1280 / 800 per tokens.css)
+   ========================================================================== */
+
+/* Mobile (<800): the fixed 80px headline overflows narrow columns, so it scales
+   fluidly (documented mobile adaptation — a scoped override of `.t-hero`'s size,
+   not a global redefinition). Tuned so the longest word ("communities", 11 chars)
+   fits down to ~320px; base.css's overflow-wrap:break-word is the safety net. */
+@media (width < 800px) {
+  .s-hero-header .hero-title {
+    font-size: clamp(30px, 9vw, 80px);
+  }
+}
