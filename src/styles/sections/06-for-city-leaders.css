@@ -232,7 +232,9 @@
 @media (width < 800px) {
   .s-for-city-leaders {
     --fcl-avatar: 120px;
-    --fcl-avatar-lg: 150px;
+    /* 136px (not 150) so two founder cards + 16px gap fit the 295px available
+       at a 375px viewport — see the founder-width note below. */
+    --fcl-avatar-lg: 136px;
     --fcl-step-icon: 130px;
   }
 
@@ -267,6 +269,9 @@
   }
 
   .s-for-city-leaders .fcl-member--founder {
-    width: 150px;
+    /* Must satisfy 2×width + 16px gap ≤ 295px available at 375px viewport
+       (375 − 32 wrapper gutter − 48 band padding), or the second founder
+       wraps. 136px gives 288px total — reviewer-caught geometry fix. */
+    width: 136px;
   }
 }
