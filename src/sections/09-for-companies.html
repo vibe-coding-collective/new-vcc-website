@@ -1,5 +1,58 @@
 <!-- Section 09 — for companies (blue card on off-white). Root <section>.
-     Owner: builder(09-for-companies). -->
+     Owner: builder(09-for-companies).
+     CONTRACT: keep root id="for-companies".
+     Spec: docs/spec/20-sections/09-for-companies.md · Deviations: docs/deviations/09-for-companies.md
+     Copy is byte-exact from the spec / desktop capture. Note the preserved TRAILING
+     SPACE in the "team-building " card title. Two cards across on desktop/tablet;
+     they stack on mobile. -->
 <section class="s-for-companies" id="for-companies">
-  <!-- TODO(builder 09-for-companies): implement per docs/spec/20-sections/09-for-companies.md -->
+  <div class="section-card">
+    <!-- HEADER BAND (solid blue): eyebrow + heading + lede, LIGHT text -->
+    <div class="band--header fco-header">
+      <div class="fco-intro" data-reveal>
+        <p class="eyebrow">for companies</p>
+        <div class="fco-heading">
+          <h2 class="t-h2 fco-title">TEAM TRAINING</h2>
+          <p class="t-body fco-lede">Vibe Coding workshops tailored to empower your enterprise team</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- BODY BAND (blue tint over the off-white section bg): two offering cards + CTA, DARK text -->
+    <div class="band--body fco-body">
+      <ul class="fco-cards" data-reveal>
+        <li class="fco-card">
+          <img
+            class="fco-card-img"
+            src="/assets/for-companies/companies-team-building.webp"
+            width="240"
+            height="245"
+            loading="lazy"
+            decoding="async"
+            alt="Two people collaborating closely over a laptop at a vibe coding workshop table"
+          />
+          <div class="fco-card-text">
+            <h3 class="t-card-title fco-card-title">team-building </h3>
+            <p class="t-body fco-card-body">B2B training, consulting, and team-building centered on vibe coding</p>
+          </div>
+        </li>
+        <li class="fco-card">
+          <img
+            class="fco-card-img"
+            src="/assets/for-companies/companies-custom-sessions.webp"
+            width="240"
+            height="245"
+            loading="lazy"
+            decoding="async"
+            alt="A facilitator presenting AI workshop slides beside a laptop in a library setting"
+          />
+          <div class="fco-card-text">
+            <h3 class="t-card-title fco-card-title">Custom sessions</h3>
+            <p class="t-body fco-card-body">Custom sessions for enterprises looking to empower their teams</p>
+          </div>
+        </li>
+      </ul>
+      <a class="btn btn--light fco-cta" href="https://calendar.app.google/z9XuskPpZPvE5A5h7" target="_blank" rel="noopener" data-reveal>contact for more</a>
+    </div>
+  </div>
 </section>

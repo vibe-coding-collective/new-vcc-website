@@ -2,10 +2,165 @@
    Section 07 — FOR sponsors (blue card on off-white)
    Owner: builder(07-for-sponsors). SCOPE EVERY selector under `.s-for-sponsors`.
    Spec: docs/spec/20-sections/07-for-sponsors.md · Contract: docs/ARCHITECTURE.md
-   Section sits on off-white: set `background: var(--off-white)` on the root.
-   Bands: `--band-color: var(--blue)` / `--band-tint: var(--blue-tint)`;
-   eyebrow `--eyebrow-bg: var(--teal)`; heading/body text is light (--off-white).
-   ID: root id "for-sponsors" (nav "for sponsors" target) + scroll-margin-top.
-   Assets: public/assets/for-sponsors/
-   (Intentionally empty — the section builder fills this in.)
+   Deviations: docs/deviations/07-for-sponsors.md
+
+   Structure: shared .section-card → .band--header (solid blue #0056a1: eyebrow +
+   heading + lede, LIGHT text) → .band--body (blue-tint: "Why Partner With Us" +
+   five bullets in TWO columns + "contact for more" CTA, DARK text).
+   Bands/eyebrow reuse the shared classes (base.css); this file sets only the
+   color hooks + layout. Desktop-first (>=1280 canonical); overrides at 800.
    ========================================================================== */
+
+.s-for-sponsors {
+  /* Color hooks read by the shared .eyebrow / .band--header / .band--body. */
+  --band-color: var(--blue);
+  --band-tint: var(--blue-tint);
+  --eyebrow-bg: var(--teal);
+
+  /* Off-white BACKING (not the cream page): the body band's tint is
+     rgba(0,86,161,0.4) and composites over THIS background, so it must be
+     off-white to render the correct light blue (over cream it would skew warm).
+     border-radius matches the bands so the off-white never peeks past their
+     rounded corners (a square root would show off-white corner nubs against the
+     cream page). See deviations doc. Page gutter / max-width / 80px inter-section
+     gap are owned by main#app (base.css) — this section carries INTERNAL spacing
+     only. */
+  background: var(--off-white);
+  border-radius: var(--radius-card);
+
+  /* nav "for sponsors" smooth-scroll target — clear the fixed nav. */
+  scroll-margin-top: var(--nav-height);
+}
+
+@media (width < 800px) {
+  .s-for-sponsors {
+    border-radius: var(--radius-card-mobile);
+  }
+}
+
+/* =========================================================================
+   Header band — eyebrow + heading + lede, centered, LIGHT text on blue
+   ========================================================================= */
+.s-for-sponsors .fsp-intro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-32);
+  max-width: var(--content-900);
+  margin-inline: auto;
+}
+
+/* Full-width text group so copy WRAPS (rather than sizing to max-content and
+   overflowing); centred via text-align. */
+.s-for-sponsors .fsp-heading {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+  width: 100%;
+}
+
+.s-for-sponsors .fsp-title,
+.s-for-sponsors .fsp-lede {
+  text-align: center;
+  color: var(--off-white);
+}
+
+/* =========================================================================
+   Body band — label + 2-column bullets + CTA, DARK text on blue-tint
+   ========================================================================= */
+.s-for-sponsors .fsp-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-32);
+}
+
+.s-for-sponsors .fsp-partner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-32);
+  width: 100%;
+}
+
+.s-for-sponsors .fsp-partner-title {
+  text-align: center;
+  color: var(--ink);
+}
+
+/* Two columns on desktop/tablet: bullets 1-2 in column A, 3-5 in column B
+   (the original's grouping). One semantic <ul>; explicit grid placement keeps
+   the 2|3 split. Stacks to a single column on mobile. */
+.s-for-sponsors .fsp-bullets {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: repeat(3, auto);
+  column-gap: var(--space-32);
+  row-gap: var(--space-12);
+  width: 100%;
+  max-width: var(--content-1400);
+}
+
+.s-for-sponsors .fsp-bullet {
+  position: relative;
+  padding-inline-start: 30px; /* hanging indent (original li margin-inline-start:30px) */
+  color: var(--ink);
+}
+
+/* Bullet marker (base.css resets list-style; recreate the • per spec). */
+.s-for-sponsors .fsp-bullet::before {
+  content: "\2022";
+  position: absolute;
+  inset-inline-start: 8px;
+  line-height: inherit;
+}
+
+.s-for-sponsors .fsp-bullet:nth-child(1) {
+  grid-column: 1;
+  grid-row: 1;
+}
+.s-for-sponsors .fsp-bullet:nth-child(2) {
+  grid-column: 1;
+  grid-row: 2;
+}
+.s-for-sponsors .fsp-bullet:nth-child(3) {
+  grid-column: 2;
+  grid-row: 1;
+}
+.s-for-sponsors .fsp-bullet:nth-child(4) {
+  grid-column: 2;
+  grid-row: 2;
+}
+.s-for-sponsors .fsp-bullet:nth-child(5) {
+  grid-column: 2;
+  grid-row: 3;
+}
+
+/* =========================================================================
+   Tablet (800–1279): two bullet columns stay (spec: 2-col desktop AND tablet).
+   No overrides needed — the grid inherits from desktop.
+   ========================================================================= */
+
+/* =========================================================================
+   Mobile (<800): heading scales down (60px overflows 375); bullets → 1 column.
+   ========================================================================= */
+@media (width < 800px) {
+  .s-for-sponsors .fsp-title {
+    font-size: 34px;
+    letter-spacing: 0.68px;
+  }
+
+  .s-for-sponsors .fsp-bullets {
+    grid-template-columns: 1fr;
+    grid-template-rows: none;
+  }
+
+  .s-for-sponsors .fsp-bullet:nth-child(1),
+  .s-for-sponsors .fsp-bullet:nth-child(2),
+  .s-for-sponsors .fsp-bullet:nth-child(3),
+  .s-for-sponsors .fsp-bullet:nth-child(4),
+  .s-for-sponsors .fsp-bullet:nth-child(5) {
+    grid-column: 1;
+    grid-row: auto;
+  }
+}
