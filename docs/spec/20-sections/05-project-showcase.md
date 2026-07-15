@@ -5,7 +5,10 @@ No colored card — sits directly on `#fde9c9`.
 
 ## 5.1 Eyebrow + heading
 
-Eyebrow pill bg **orange `#ec6c23`** (`css-r7xudp`), light `#f6f5f2` label. **Text differs by
+Eyebrow pill bg **green `#498d44`** (`css-4uqxnc` desktop/tablet, `css-8ikb59` mobile;
+CORRECTION 2026-07-15 — this file originally said orange `css-r7xudp`, but that class
+belongs to the city-leaders/reviews eyebrows; capture-verified by builder 03/05 and the
+orchestrator), light `#f6f5f2` label. **Text differs by
 breakpoint** (arrow `→` = U+2192 with normal spaces):
 - Desktop (1280): `From "What If?" → to a Vibe App`
 - Mobile & tablet (375/800): `From "What If?" → to an app`

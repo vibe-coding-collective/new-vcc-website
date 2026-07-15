@@ -172,10 +172,12 @@ Sections set **only** these variables; the shared classes read them:
 | `--band-color` | `.band--header` | solid header-band background |
 | `--band-tint` | `.band--body` | 40%-tint body-band background |
 
-Color-by-audience (from spec §1): green = vibe coders (04); yellow/orange = city leaders
-(06); blue/teal = sponsors + companies (07, 09); orange = the cream sections' eyebrows
-(05 projects, 08 reviews). Sponsors/companies (07, 09) sit on `--off-white`, not cream —
-set `background: var(--off-white)` on their section root.
+Color-by-audience (from spec §1, corrected 2026-07-15): green = vibe coders (04);
+yellow/orange = city leaders (06); blue/teal = sponsors + companies (07, 09); the cream
+sections' eyebrows are **green for 05 projects** (capture classes `css-4uqxnc`/`css-8ikb59`
+= `#498d44` — an earlier orange transcription was a spec error, caught by builder 03/05)
+and **orange for 08 reviews** (`css-r7xudp` = `#ec6c23`). Sponsors/companies (07, 09) sit
+on `--off-white`, not cream — set `background: var(--off-white)` on their section root.
 
 ---
 
