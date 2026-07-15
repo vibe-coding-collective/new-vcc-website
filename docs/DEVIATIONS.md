@@ -121,6 +121,12 @@ Where the three DOM copies disagree, **desktop (1280) copy is canonical**. Known
   Desktop values are capture-derived; the mobile wrapper gap was not separately
   verified and keeps 80px pending the integration visual pass.
 
+## Per-section logs (consolidated at merge by the integrator)
+
+- **§04 for-vibe-coders** — see `docs/deviations/04-for-vibe-coders.md`: stable base
+  city URLs, `rel="noopener"` on external links, city-row markup normalization, wrapper
+  amendment adopted (no self-carried page rhythm), mobile flag sizing.
+
 ## Progressive enhancement
 
 - **[arch] No `#container{display:none}` boot-gate or `<noscript>` "enable JavaScript"
