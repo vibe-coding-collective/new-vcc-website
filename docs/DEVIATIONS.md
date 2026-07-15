@@ -144,6 +144,13 @@ Where the three DOM copies disagree, **desktop (1280) copy is canonical**. Known
   handled), avatars simplified to rounded rects (VISUAL-PASS ITEM: original blob-mask +
   blend tint), WebP-optimized assets, founders 2-up on mobile fixed at gate.
 
+- **§07 for-sponsors** — see `docs/deviations/07-for-sponsors.md`: 32px partner title
+  (spec's 20px prose was a transcription error, corrected at merge), single-`<ul>`
+  two-column bullet grid with correct SR order, desktop-canonical lead phrases,
+  off-white root compositing, noopener.
+- **§09 for-companies** — see `docs/deviations/09-for-companies.md`: CDN images
+  re-encoded to WebP with alpha, off-white root compositing, 20px card-gap literal,
+  mobile h2 scaling, noopener.
 - **§11 footer + interactions** — see `docs/deviations/11-footer.md`: WhatsApp kept as a
   link (`_self`) per ratified policy, real retro mark + wordmark SVGs sourced from the
   CDN, wordmark watermark capture-verified, mascots as eyeless placeholders (asset-

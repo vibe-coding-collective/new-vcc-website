@@ -21,7 +21,10 @@ Be part of the movement across 7 countries. Reach 1,100+ engaged builders. Assoc
 
 ## 7.2 Why Partner With Us (blue‑tint band, dark text)
 
-Label (Golos Black 20px UC `#181814` — `css-ubny2b`+`css-i0585y`+`css-871ihu`):
+Label (Golos Black **32px** UC `#181814` — `css-ubny2b`+`css-i0585y`+`css-871ihu`;
+CORRECTION 2026-07-16: originally transcribed as 20px, but `css-i0585y` is the 32px
+card-title class per the capture and tokens §2.2 — caught by builder 07/09, verified
+by its reviewer against `_capture/css-rules.css` and `dom-1280.html`):
 ```
 Why Partner With Us
 ```

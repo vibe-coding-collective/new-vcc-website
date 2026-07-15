@@ -1,6 +1,38 @@
 <!-- Section 07 — FOR sponsors (blue card on off-white). Root <section>.
      Owner: builder(07-for-sponsors).
-     CONTRACT: keep root id="for-sponsors" (nav "for sponsors" scroll target). -->
+     CONTRACT: keep root id="for-sponsors" (nav "for sponsors" scroll target).
+     Spec: docs/spec/20-sections/07-for-sponsors.md · Deviations: docs/deviations/07-for-sponsors.md
+     Copy is byte-exact from the spec / desktop capture. Note the STRAIGHT apostrophe
+     in "We've" (bullet 5). Desktop/tablet render the five "Why Partner With Us"
+     bullets in TWO columns (1-2 | 3-5); they stack to one column on mobile. -->
 <section class="s-for-sponsors" id="for-sponsors">
-  <!-- TODO(builder 07-for-sponsors): implement per docs/spec/20-sections/07-for-sponsors.md -->
+  <div class="section-card">
+    <!-- HEADER BAND (solid blue): eyebrow + heading + lede, LIGHT text -->
+    <div class="band--header fsp-header">
+      <div class="fsp-intro" data-reveal>
+        <p class="eyebrow">FOR sponsors</p>
+        <div class="fsp-heading">
+          <h2 class="t-h2 fsp-title">Put your brand in a room with builders</h2>
+          <p class="t-body fsp-lede">Be part of the movement across 7 countries. Reach 1,100+ engaged builders. Associate your brand with anti-gatekeeping and real skill development.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- BODY BAND (blue tint over the off-white section bg): label + 2-col bullets + CTA, DARK text -->
+    <div class="band--body fsp-body">
+      <div class="fsp-partner" data-reveal>
+        <h3 class="t-card-title fsp-partner-title">Why Partner With Us</h3>
+        <!-- One semantic list of 5 reasons; grid places 1-2 in column A, 3-5 in
+             column B on desktop/tablet (matches the original's 2|3 grouping). -->
+        <ul class="fsp-bullets">
+          <li class="t-body fsp-bullet">Builders, not browsers. People who actually ship projects and value real skill.</li>
+          <li class="t-body fsp-bullet">1,100+ members across 7 countries. Word-of-mouth growth only. No inflated numbers.</li>
+          <li class="t-body fsp-bullet">Custom solutions. We work with your goals, not templates.</li>
+          <li class="t-body fsp-bullet">Community-first approach. Your investment makes something real, not just a booth or a logo placement.</li>
+          <li class="t-body fsp-bullet">Proven model. We've run 20+ events. We know what works.</li>
+        </ul>
+      </div>
+      <a class="btn btn--light fsp-cta" href="https://calendar.app.google/z9XuskPpZPvE5A5h7" target="_blank" rel="noopener" data-reveal>contact for more</a>
+    </div>
+  </div>
 </section>
