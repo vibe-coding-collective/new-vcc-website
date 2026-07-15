@@ -82,24 +82,26 @@ variants. Each linked row is `target="_blank"` with an **added** `rel="noopener"
 
 ## Layout / spacing
 
-- **[arch] Outer section spacing is self-contained.** The original carried the page gutter
-  (40px sides), max-width (1600, via `.container--1600`), and the **80px inter-section gap**
-  on a shared `<main>` wrapper. Our per-section DOM (sections are direct children of
-  `<main id="app">`, no wrapper) has none of that, so section 04 sets its own
-  `padding-inline: 40px` + `padding-block: 40px` (40 top + 40 bottom → the original's ~80px
-  gap between two adjacent sections *iff siblings use the same convention*).
-  **> FLAG for the orchestrator:** inter-section vertical rhythm is a genuine cross-section
-  concern (cream sections use internal `padding:80px 0`; card sections sit in an 80px gap) —
-  it can't be made perfectly consistent by one section alone. Recommend ratifying a shared
-  convention (e.g. every top-level section owns `padding-block: 40px`) or a shared wrapper.
+- **[arch] Outer section spacing comes from the shared wrapper (RESOLVED).** The original
+  carried the page gutter (40px sides), max-width (1600), and the **80px inter-section gap**
+  on a shared `<main>` wrapper. This section initially self-carried an approximation and
+  flagged the gap; the orchestrator ratified the wrapper as a contract amendment
+  (`main#app` in base.css, main commit `8fa82d8`), and commit `4d4e4b6` on this branch
+  **removed all self-carried page rhythm** (root `padding-inline`/`padding-block` and the
+  mobile 16px/24px variants). Section 04 now supplies internal spacing only and depends on
+  `main#app` for gutter/centering/inter-section gap. (Consequence: the section renders
+  edge-to-edge if built against a pre-amendment `base.css` — an artifact of isolation, not
+  a bug; correct after merging into main ≥ `8fa82d8`.)
 - **[arch] Bands use the contract's shared 52px side padding** (`.band--header` /
   `.band--body` in base.css). The original's bands used **32px** horizontal inside a 52px
   vertical band; the 52px value is the ARCHITECTURE §5 shared-pattern choice, kept for
   consistency across all card sections (04/06/07/09). Noted for traceability.
-- **[arch] Mobile adaptations (<800):** section gutter → 16px, `padding-block` → 24px,
-  body-inner gap → 40px, and the city-row **flag shrinks to 20px** (matches the original's
-  mobile `css-qwbybc` 20px flag; the city name stays 32px as in the original). Tablet
-  (<1280): value cards stack (gap 40) and body-inner gap → 52px.
+- **[arch] Mobile adaptations (<800):** body-inner gap → 40px, and the city-row **flag
+  shrinks to 20px** (matches the original's mobile `css-qwbybc` 20px flag; the city name
+  stays 32px as in the original). Tablet (<1280): value cards stack (gap 40) and
+  body-inner gap → 52px. (The former mobile gutter/padding-block overrides were removed
+  in `4d4e4b6` along with the rest of the self-carried page rhythm — the wrapper's 16px
+  mobile gutter applies instead.)
 
 ## Interaction hooks (no JS this phase — per ARCHITECTURE §9)
 
