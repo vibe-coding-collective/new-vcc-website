@@ -1,0 +1,7 @@
+/*
+ * Global base stylesheet (placeholder).
+ *
+ * Design tokens (CSS custom properties), the reset, and base element styles are
+ * intentionally NOT defined here yet — they land in the contracts task once the
+ * design spec is finalized. This file stays importable but empty for now.
+ */
