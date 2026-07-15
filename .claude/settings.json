@@ -1,0 +1,27 @@
+{
+  "model": "claude-fable-5",
+  "env": {
+    "CLAUDE_CODE_SUBAGENT_MODEL": "claude-opus-4-8"
+  },
+  "permissions": {
+    "allow": [
+      "Bash(git status)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git branch:*)",
+      "Bash(git switch:*)",
+      "Bash(git checkout:*)",
+      "Bash(git worktree:*)",
+      "Bash(git merge:*)",
+      "Bash(git rebase:*)",
+      "Bash(git push:*)",
+      "Bash(git pull:*)",
+      "Bash(git fetch:*)",
+      "Bash(gh pr:*)",
+      "Bash(gh repo view:*)",
+      "Bash(gh browse:*)"
+    ]
+  }
+}

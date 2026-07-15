@@ -1,0 +1,4 @@
+# Files (gitignored / untracked) to copy into each new agent worktree.
+# Uses .gitignore syntax. Add local env files here so isolated workers keep their config.
+.env
+.env.local

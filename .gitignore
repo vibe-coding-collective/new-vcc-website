@@ -1,0 +1,26 @@
+# Dependencies
+node_modules/
+.pnp/
+.pnp.js
+
+# Build output
+dist/
+build/
+.next/
+out/
+.output/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Claude Code worktrees & local state
+.claude/worktrees/
+.claude/settings.local.json
+
+# OS / editor
+.DS_Store
+*.log
+.vscode/
+.idea/
