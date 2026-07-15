@@ -104,10 +104,10 @@
   --shadow-hard: 6px 6px 0 0 var(--shadow-grey);
 
   /* --- Layout constants ------------------------------------------------- */
-  --nav-height: 72px; /* APPROX height of the pinned nav bar (8px pad ×2 + ~56px pill).
-                         Used for scroll-padding so smooth-scroll targets clear the
-                         fixed nav. If section 01 lands on a materially different
-                         height, report it so this token is updated. */
+  --nav-height: 96px; /* MEASURED height of the pinned nav (section 01 builder,
+                         2026-07-15): 80px logo box + 2×8px padding on desktop/tablet.
+                         Mobile override below (76px). Used for scroll-padding so
+                         smooth-scroll targets clear the fixed nav. */
   --z-nav: 100; /* pinned nav sits above section content */
 
   /* --- Per-section component hooks (defaults live in base.css) ----------
@@ -128,3 +128,10 @@
    Author desktop-first (values above are the ≥1280 canon), then override
    downward: first @media (width < 1280px), then @media (width < 800px).
    -------------------------------------------------------------------------- */
+
+/* Mobile value for the measured nav height (60px logo + 2×8px padding). */
+@media (width < 800px) {
+  :root {
+    --nav-height: 76px;
+  }
+}
