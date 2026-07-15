@@ -1,0 +1,9 @@
+/* ==========================================================================
+   Section 03 — Stats + "supported BY"
+   Owner: builder(03-stats). SCOPE EVERY selector under `.s-stats`.
+   Spec: docs/spec/20-sections/03-stats.md · Contract: docs/ARCHITECTURE.md
+   Note: the "supported BY" marquee is THIS section's own CSS @keyframes
+   animation (must include a prefers-reduced-motion fallback).
+   Assets: public/assets/stats/
+   (Intentionally empty — the section builder fills this in.)
+   ========================================================================== */

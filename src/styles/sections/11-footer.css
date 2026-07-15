@@ -1,0 +1,9 @@
+/* ==========================================================================
+   Section 11 — Footer (dark)
+   Owner: builder(11-footer). SCOPE EVERY selector under `.s-footer`.
+   Spec: docs/spec/20-sections/11-footer.md · Contract: docs/ARCHITECTURE.md
+   Root is the <footer> contentinfo landmark: `background: var(--ink)`;
+   links teal (--teal), copyright light (--off-white).
+   Assets: public/assets/footer/
+   (Intentionally empty — the section builder fills this in.)
+   ========================================================================== */

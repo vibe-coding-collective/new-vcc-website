@@ -1,0 +1,12 @@
+/* ==========================================================================
+   Section 04 — FOR vibe coders (green card)
+   Owner: builder(04-for-vibe-coders). SCOPE EVERY selector under
+   `.s-for-vibe-coders`. Spec: docs/spec/20-sections/04-for-vibe-coders.md
+   Contract: docs/ARCHITECTURE.md
+   Bands: set `--band-color: var(--green-bright)` on .band--header and
+   `--band-tint: var(--green-tint)` on .band--body; eyebrow `--eyebrow-bg: var(--green)`.
+   IDs: root id "for-vibe-coders" (nav target) is set in the HTML; also give the
+   "All cities" block `id="cities"` (nav "find an event" target) + scroll-margin-top.
+   Assets: public/assets/for-vibe-coders/
+   (Intentionally empty — the section builder fills this in.)
+   ========================================================================== */

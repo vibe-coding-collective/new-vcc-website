@@ -4,9 +4,38 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vibe Coding Collective</title>
+    <meta
+      name="description"
+      content="Join thousands of new creators building with GenAI in pubs, studios, and community spaces around the globe!"
+    />
   </head>
   <body>
-    <main id="app"></main>
+    <!--
+      Landmarks: <header> banner (holds the pinned nav) · <main id="app"> (the
+      page content, sections 02–10) · <footer> contentinfo (section 11's root).
+      Sections are separate files inlined at build time by the vcc-html-includes
+      Vite plugin (see vite.config.ts / docs/ARCHITECTURE.md). DOM order is
+      nav-FIRST — a deliberate deviation from the original's nav-last overlay
+      (see docs/DEVIATIONS.md).
+    -->
+    <header>
+      <!-- @include: src/sections/01-nav-sticky.html -->
+    </header>
+
+    <main id="app">
+      <!-- @include: src/sections/02-hero-header.html -->
+      <!-- @include: src/sections/03-stats.html -->
+      <!-- @include: src/sections/04-for-vibe-coders.html -->
+      <!-- @include: src/sections/05-project-showcase.html -->
+      <!-- @include: src/sections/06-for-city-leaders.html -->
+      <!-- @include: src/sections/07-for-sponsors.html -->
+      <!-- @include: src/sections/08-reviews.html -->
+      <!-- @include: src/sections/09-for-companies.html -->
+      <!-- @include: src/sections/10-contact-cta.html -->
+    </main>
+
+    <!-- @include: src/sections/11-footer.html -->
+
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>

@@ -1,0 +1,19 @@
+/* ==========================================================================
+   Section stylesheet index — imported in page (DOM) order.
+   --------------------------------------------------------------------------
+   THIS FILE (the @import list) is owned by the contracts layer. Each imported
+   file is owned SOLELY by its section builder, who must scope every selector
+   under that section's `.s-<slug>` root. Do not add global/element selectors
+   in a section file, and do not reorder or edit this index from a section task.
+   ========================================================================== */
+@import "./sections/01-nav-sticky.css";
+@import "./sections/02-hero-header.css";
+@import "./sections/03-stats.css";
+@import "./sections/04-for-vibe-coders.css";
+@import "./sections/05-project-showcase.css";
+@import "./sections/06-for-city-leaders.css";
+@import "./sections/07-for-sponsors.css";
+@import "./sections/08-reviews.css";
+@import "./sections/09-for-companies.css";
+@import "./sections/10-contact-cta.css";
+@import "./sections/11-footer.css";
