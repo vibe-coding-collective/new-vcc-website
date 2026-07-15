@@ -39,8 +39,9 @@ Legend: **[arch]** structural · **[content]** copy/data · **[a11y]** accessibi
   (`aria-hidden="true"`) is `display:none` so nothing is doubled for AT or layout.
 - **[approx] Pause-on-hover** added in pure CSS (`animation-play-state: paused`), matching
   the original marquee system's documented `pause-on-hover`. Optional, no JS.
-- **[arch] Marquee is inset within the section's 24px gutters, not full-bleed.** Simpler;
-  the original's exact bleed was not measured.
+- **[arch] Marquee is inset within the page wrapper's gutter (`main#app`), not full-bleed.**
+  Simpler; the original's exact bleed was not measured. (Reworded at the gate — the section
+  no longer carries its own gutter post-amendment.)
 
 ## Structure / a11y
 
