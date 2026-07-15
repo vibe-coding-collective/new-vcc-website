@@ -61,13 +61,11 @@ Legend: **[arch]** structural · **[content]** copy/data · **[a11y]** accessibi
 - **[approx] No hover/press states.** The original has none observable (spec §40.4); none
   added. Keyboard focus uses the UA default ring (base.css does not suppress it).
 
-## Measurement (reported to orchestrator, tokens.css NOT edited)
+## Measurement (RESOLVED — token updated on main)
 
-- **Nav height exceeds the `--nav-height: 72px` token.** The logo button is 80×80 px
-  (desktop/tablet) / 60×60 px (mobile) per the captured CSS (`css-hoya1r` / `css-3h1llp`)
-  and is the tallest item, so the box-model bar height is **80 + 2×8 = ~96 px** on
-  desktop/tablet and **60 + 2×8 = ~76 px** on mobile — vs the 72 px token used for
-  `scroll-padding-top`. First-screen clearance is unaffected (hero `padding-top:200px`
-  clears either), but in-page smooth-scroll targets would sit ~24 px under the desktop bar.
-  Recommend the integrator bump `--nav-height` to ~96px (or reduce the logo box) — see
-  final report.
+- **Nav height vs token.** The logo button is 80×80 px (desktop/tablet) / 60×60 px
+  (mobile) per the captured CSS (`css-hoya1r` / `css-3h1llp`), giving a real bar height
+  of **96 px** desktop/tablet and **76 px** mobile. This builder measured and reported it
+  without editing tokens.css; the integrator updated `--nav-height` to the measured
+  values on main (commit `8c5b8e8`: 96px, with a `<800px` override to 76px). No further
+  action needed.

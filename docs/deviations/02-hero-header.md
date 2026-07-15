@@ -62,3 +62,9 @@ Legend: **[arch]** structural · **[content]** copy/data · **[a11y]** accessibi
   `find an event`) — both are faithful to their respective source blocks.
 - **[approx] No hover/press states** (original has none; spec §40.4). Keyboard focus uses the
   UA default ring.
+- **[arch] `data-reveal` added at the integration gate** (reviewer finding): `.hero-inner`
+  and `.hero-graphic` now carry the reveal marker per 40-interactions.md §1 (the hero is a
+  listed reveal block; only the nav is exempt). The builder had omitted it; added by the
+  orchestrator before merge. The `.gitkeep` explainer comment moved here too — the sentinel
+  file itself is now empty (its rationale: hero imagery is runtime-injected on the original,
+  so the directory ships empty until the asset-recovery task fills it).

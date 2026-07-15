@@ -1,5 +1,0 @@
-# hero-header has no committed image assets.
-# The headline chips, the orange googly blob, and the 862x350 photo collage are
-# RUNTIME-INJECTED on the original (no determinable asset URLs), so they are built
-# as decorative CSS placeholders in 02-hero-header.{html,css}. This file only keeps
-# the directory under version control. See docs/deviations/02-hero-header.md.
