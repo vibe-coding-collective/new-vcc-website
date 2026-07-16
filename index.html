@@ -22,20 +22,22 @@
 
     <!--
       Canonical + social. Absolute URLs are REQUIRED here: scrapers do not resolve
-      relative og:image paths. They point at the production apex, which is correct
-      post-cutover but means share previews only resolve once DNS moves.
+      relative og:image paths. They must point at WWW, the primary domain — not the
+      apex, which 308-redirects to www. A redirecting og:image is a known cause of
+      share cards rendering with no image, because several scrapers refuse to follow
+      one. If the primary ever moves back to the apex, these four URLs move with it.
     -->
-    <link rel="canonical" href="https://vibecoders.global/" />
+    <link rel="canonical" href="https://www.vibecoders.global/" />
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Vibe Coding Collective" />
-    <meta property="og:url" content="https://vibecoders.global/" />
+    <meta property="og:url" content="https://www.vibecoders.global/" />
     <meta property="og:title" content="Vibe Coding Collective" />
     <meta
       property="og:description"
       content="Join thousands of new creators building with GenAI in pubs, studios, and community spaces around the globe!"
     />
-    <meta property="og:image" content="https://vibecoders.global/og-image.png" />
+    <meta property="og:image" content="https://www.vibecoders.global/og-image.png" />
     <meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
@@ -50,7 +52,7 @@
       name="twitter:description"
       content="Join thousands of new creators building with GenAI in pubs, studios, and community spaces around the globe!"
     />
-    <meta name="twitter:image" content="https://vibecoders.global/og-image.png" />
+    <meta name="twitter:image" content="https://www.vibecoders.global/og-image.png" />
   </head>
   <body>
     <!--
