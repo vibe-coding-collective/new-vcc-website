@@ -18,8 +18,10 @@
  *
  * This module only toggles the `js` / `is-revealed` classes and performs the
  * scroll; ALL reveal presentation lives in src/styles/interactions.css. It
- * self-initializes on import (main.ts does `import './interactions'`). main.ts is
- * a deferred ES module, so the DOM is fully parsed by the time this runs.
+ * self-initializes on load (main.ts does `import './interactions'`; main.ts is a
+ * deferred ES module, so the DOM is fully parsed by then) — except under Vitest,
+ * where the self-call is gated off so importing the module leaks no document-level
+ * listener into unit tests; those call `initInteractions()` explicitly.
  */
 
 const SCROLL_TARGET_ATTR = 'data-scroll-target'
@@ -119,6 +121,12 @@ export function initInteractions(doc: Document = document, win: BrowserWindow = 
   setupReveal(doc, win)
 }
 
-// Self-initialize on import. main.ts loads this as a deferred module, so the DOM
-// (including the footer) is already parsed here.
-initInteractions()
+// Self-initialize on load in the browser (dev + production build). main.ts loads this
+// as a deferred module, so the DOM (including the footer) is already parsed here. The
+// guard skips this under Vitest (import.meta.env.MODE === 'test') so importing the module
+// in a unit test does not leak a persistent document click listener; tests call
+// initInteractions() explicitly. import.meta.env.MODE is a Vite-static string, so this
+// tree-shakes to a constant (initInteractions() always runs) in the production bundle.
+if (import.meta.env.MODE !== 'test') {
+  initInteractions()
+}

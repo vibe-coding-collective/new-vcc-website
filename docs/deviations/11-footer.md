@@ -127,3 +127,16 @@ Legend: **[arch]** structural · **[content]** copy/data · **[a11y]** accessibi
   (`import './styles/interactions.css'` and `import './interactions'`); nothing else changed.
   Note: main.ts's existing header comment still says interactive behavior "arrives in a later
   phase" — left untouched per the imports-only grant; the file's owner may refresh it.
+- **[arch] RESOLVED (polish pass 2026-07-16): the self-init is gated out of unit tests
+  (reviewer N1).** `interactions.ts` still self-initializes on load for dev + production, but
+  the bottom `initInteractions()` call is now guarded by `import.meta.env.MODE !== 'test'`, so
+  importing the module under Vitest no longer leaks a persistent document-level click listener
+  into the test environment. Dev/production behavior is unchanged — `import.meta.env.MODE` is a
+  Vite-static string, so the guard tree-shakes to a constant and `initInteractions()` always
+  runs in the browser bundle. The unit tests already call `initInteractions()` explicitly; a
+  new regression test asserts a bare import wires no document listener (all 15 prior tests still
+  pass, 16 with the new one). **On the guard choice:** `import.meta.vitest === undefined` (the
+  first-suggested form) was tested and rejected — inside an *imported source module* Vitest
+  leaves `import.meta.vitest` undefined unless in-source testing (`includeSource`) is configured,
+  so that check would not have skipped the self-call; the `MODE` check needs no config change
+  and is the standard Vite-static env guard.
