@@ -78,11 +78,21 @@ being right the moment the clone became the real `vibecoders.global` under our o
   `1,100+` sitting inside a "No inflated numbers" pledge that the hero contradicted.
 - **[content] Countries reads `10` everywhere.** The original says `9` (§03 stat),
   "Seven countries" (§03 desc) and "7 countries" (§07 lede + bullet).
-- **[content] The §03 flag row is knowingly short of the stat.** It still carries the
-  original's **8** flags (🇬🇧🇩🇪🇺🇸🇯🇵🇺🇦🇵🇹🇳🇱🇵🇰) against a stat of **10**. Deliberate,
-  not an oversight: the row is `aria-hidden="true"` decoration, and the operator will add
-  the two missing flags once those countries are confirmed. **Do not "fix" the stat down
-  to match the flags — add the flags up to match the stat.**
+- **[content] RESOLVED — the §03 flag row now carries 10 flags, matching the stat.** The
+  original shipped **8** flags (🇬🇧🇩🇪🇺🇸🇯🇵🇺🇦🇵🇹🇳🇱🇵🇰) against its own stat of `9`. The
+  operator confirmed the roster (2026-07-16), so the row now reads
+  🇺🇸🏴󠁧󠁢󠁥󠁮󠁧󠁿🇳🇱🇵🇹🇮🇳🇺🇦🇯🇵🏴󠁧󠁢󠁳󠁣󠁴󠁿🇩🇪🇵🇰 — US, **England**, Netherlands, Portugal, **India**, Ukraine,
+  Japan, **Scotland**, Germany, Pakistan. Measured against the original's 8: **7 are kept**
+  (US, NL, PT, UA, JP, DE, PK), the single 🇬🇧 (GB) is **replaced by separate England +
+  Scotland flags** — consistent with §04, which already flags Edinburgh with the Scotland
+  flag — and **India** is added. Net 8 − 1 + 3 = **10**: the flags were raised to match the
+  stat, not the stat filed down to match the flags.
+- **[content] England and Scotland are encoded as TAG SEQUENCES,** not regional-indicator
+  pairs: `U+1F3F4` + 6 tag chars (`gbeng` / `gbsct`) + the `U+E007F` cancel tag. The tag
+  chars are **invisible** in an editor, so the run looks like it carries stray characters —
+  do not "tidy" it. Edit it by codepoint and re-check the grapheme count is 10:
+  `[...new Intl.Segmenter("en",{granularity:"grapheme"}).segment(run)].length`. Rendering
+  caveat for the two tag sequences: see the emoji-fallback bullet under **Fonts & emoji**.
 
 ## Links / URLs
 
@@ -108,9 +118,26 @@ being right the moment the clone became the real `vibecoders.global` under our o
   (spec §2.1) — leftover. Not bundled.
 - **[a11y/perf] Noto emoji/symbol fallback fonts NOT bundled; rely on the system emoji
   stack.** The original appends `Noto Sans` / `Noto Sans Symbols` / `Noto Sans Math` for
-  flag/arrow/symbol runs. We let flags and arrows fall back to the OS emoji font, which
-  renders regional-indicator and tag-sequence flags natively on modern platforms. Slight
-  cross-platform rendering variance is accepted for the payload saving.
+  flag/arrow/symbol runs. We let flags and arrows fall back to the OS emoji font, so flag
+  glyph coverage is **font-stack dependent, not platform-level** — and the §03 flag row
+  (10 flags, shipped 2026-07-16) is where that shows:
+  - **macOS / iOS** (Apple Color Emoji) render the whole row correctly — regional-indicator
+    pairs and the England/Scotland tag sequences alike.
+  - **Chrome / Edge on Windows** fall back to **Segoe UI Emoji, which ships no country-flag
+    glyphs at all.** The whole row degrades, not just the tag sequences: the 8
+    regional-indicator pairs draw as boxed letter pairs (`US`, `NL`, …) and England/Scotland
+    as two identical plain black flags 🏴. This is **not a regression** — the original's
+    8-flag row already degraded the same way there.
+  - **Firefox on Windows** bundles Twemoji Mozilla and renders both regional-indicator and
+    subdivision flags correctly.
+  - Android/Noto renders regional-indicator pairs; subdivision-flag support is newer, so
+    treat England/Scotland there as unverified rather than assumed.
+
+  **Accepted, not unnoticed:** the row is `aria-hidden="true"` decoration, the `10` stat
+  beside it carries the actual meaning, and the flag **count** — and so the 5+5 wrap — holds
+  regardless of glyph coverage (10 grapheme clusters either way; `text-wrap: balance`
+  re-measures whatever the font gives it). Bundling Noto to fix it would cost far more than
+  the blemish is worth. Cross-platform rendering variance is the price of the payload saving.
 
 ## Components & styling approximations
 
@@ -152,7 +179,8 @@ being right the moment the clone became the real `vibecoders.global` under our o
 - **§03 stats** — see `docs/deviations/03-stats.md`: REAL sponsor logos shipped
   (recovered from page data, brand→hash mapping orchestrator-confirmed; same usage
   as the original site; licensing note logged), marquee approximations (36s loop,
-  1400px cap, pause-on-hover), flags aria-hidden, 9-vs-8-flags preserved.
+  1400px cap, pause-on-hover), flags aria-hidden, flag row raised 8 → 10 to match the
+  stat (England/Scotland as tag sequences; `text-wrap: balance` evens the 2-line wrap).
 - **§04 for-vibe-coders** — see `docs/deviations/04-for-vibe-coders.md`: stable base
   city URLs, `rel="noopener"` on external links, city-row markup normalization, wrapper
   amendment adopted (no self-carried page rhythm), mobile flag sizing.

@@ -77,7 +77,7 @@
   text-align: center;
 }
 
-/* "9" / "100%" — stat scale, green. */
+/* "10" / "100%" — stat scale, green. */
 .s-stats__num {
   color: var(--green);
 }
@@ -89,10 +89,20 @@
 }
 
 /* Flag run keeps the 32px card-title size; uppercase has no effect on emoji and
-   the OS emoji font is used per the fonts/emoji deviation (regional-indicator
-   flags render natively on modern platforms). */
+   the OS emoji font is used per the fonts/emoji deviation. The run mixes 8
+   regional-indicator pairs with England/Scotland TAG SEQUENCES (U+1F3F4 + 6 tag
+   chars + U+E007F cancel) — the tag chars are invisible, so don't "clean up" the
+   string (`src/03-stats.test.ts` guards it). Flag GLYPH coverage is font-stack-
+   dependent and not fixable here — Segoe UI Emoji ships no flag glyphs at all,
+   so Chrome/Edge on Windows degrades the whole row (see DEVIATIONS); the
+   grapheme count, and so the wrap below, holds regardless.
+   10 flags no longer fit one line at ANY breakpoint, so
+   `text-wrap: balance` keeps the unavoidable 2-line wrap even (5+5) rather than
+   orphaning flags; browsers without it (pre-Chrome 114 / Safari 17.5 / Firefox
+   121) get the natural wrap — uneven, not broken. */
 .s-stats__flags {
   text-transform: none;
+  text-wrap: balance;
 }
 
 /* --- "supported BY" + sponsor marquee -------------------------------------- */

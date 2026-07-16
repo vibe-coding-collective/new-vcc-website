@@ -58,8 +58,10 @@ in `docs/DEVIATIONS.md`.** Do not "restore" these values.
 - The original's copy elsewhere says "Seven countries" (this paragraph) and "7 countries"
   (sponsors), while its stat says 9. Its membership figure varies 4,000+ / 1,200+ / 1,100+.
 - **This build says `4,000+` members and `10` countries throughout** (operator decision,
-  2026-07-16). The flag row still carries the original's 8 flags pending confirmation of
-  the two missing countries.
+  2026-07-16), and its flag row now carries **10** flags matching that stat — the operator
+  confirmed the roster on 2026-07-16. Roster and rationale: **Content corrections** in
+  `docs/DEVIATIONS.md`. (This bullet describes OUR build, not the original — it is the one
+  non-historical note in this file.)
 
 ## "supported BY" sponsor‑logo strip
 
