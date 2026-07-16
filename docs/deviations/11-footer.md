@@ -41,11 +41,15 @@ Legend: **[arch]** structural · **[content]** copy/data · **[a11y]** accessibi
     "mascot row" entry below).
   No text-fallback was needed (the task's fallback path only applies if the real footer
   variant is not determinable — it was). The blue nav logo was **not** copied or recolored.
-- **[perf] `logo-footer-mark.svg` is heavy (~447 KB).** It is the same stippled micro-path
-  monogram style as the committed nav logo (`logo-nav.svg`, ~447 KB) — off-white instead of
-  blue — so the raw real artwork is kept to match the established repo standard rather than
-  altering it. Flagged as a known SVG-optimization opportunity for a later pass (reducing
-  coordinate precision could shrink it substantially without visible change).
+- **[perf] RESOLVED (polish pass 2026-07-16): `logo-footer-mark.svg` minified via a 2-decimal
+  precision pass.** Was 447,541 B raw / 156,654 B gzip; now **329,807 B raw / 109,468 B gzip**
+  — 117,734 B (26.3 %) off raw, 47,186 B (30.1 %) off gzip. Same treatment as the nav logo
+  (`logo-nav.svg`, likewise minified this pass): path coordinates rounded to ≤2 decimals with
+  trailing zeros dropped; `viewBox="0 0 100 93.0005"`, all attributes, the `#F6F5F2` fills and
+  all 20 paths are byte-preserved. **Verified visually identical** with a headless-Chrome 2×/4×
+  render diff on a dark background (mean per-channel delta ≈0.13/255; <0.15 % of pixels differ
+  perceptibly, all edge antialiasing). One-off script, no committed deps — the "known
+  SVG-optimization opportunity for a later pass" flagged here is now actioned.
 - **[approx] RESOLVED: the wordmark is the ONE bottom-anchored blob graphic, no longer a
   faint centered watermark.** Earlier this same SVG was rendered centered at `opacity: 0.16`
   as a faint watermark *and* the bottom blobs were a **separate** placeholder row — two
