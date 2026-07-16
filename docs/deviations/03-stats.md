@@ -55,6 +55,14 @@ Legend: **[arch]** structural · **[content]** copy/data · **[a11y]** accessibi
 - **[arch] Marquee is inset within the page wrapper's gutter (`main#app`), not full-bleed.**
   Simpler; the original's exact bleed was not measured. (Reworded at the gate — the section
   no longer carries its own gutter post-amendment.)
+- **[perf] Marquee hardening (polish pass 2026-07-16).** (1) The 14 marquee `<img>`s switched
+  from `loading="lazy"` to `loading="eager"`: they are tiny (4.5–11 KB, ~57 KB total) and the
+  track animates from first paint, so lazy-loading risked a first-loop pop-in as off-screen
+  logos decoded mid-scroll — eager load removes that risk. (2) Added `max-width: 200px` +
+  `object-fit: contain` to `.s-stats__sponsor-logo` as a guard so a future extreme-aspect logo
+  can't stretch its pill (and the track) unboundedly wide; `object-fit` keeps the aspect ratio
+  (letterboxes rather than distorts) if the cap is ever hit. No effect on the current logos,
+  which render ≤~100 px wide at the fixed 32 px display height.
 
 ## Structure / a11y
 
