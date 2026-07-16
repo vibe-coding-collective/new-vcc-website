@@ -5,6 +5,85 @@ section, for the integrator to consolidate into `docs/DEVIATIONS.md`. Legend
 mirrors `DEVIATIONS.md`: **[arch]** structural · **[content]** copy/data ·
 **[a11y]** accessibility · **[perf]** payload/assets · **[approx]** approximated.
 
+## ⚠️ INTENTIONAL DIVERGENCES (LOUD) — team batch (2026-07-16)
+
+**Surfaced verbatim to the operator.** Everything in this block is a deliberate departure
+from `https://vibecoders.global/`, or a known quality gap we are shipping on purpose.
+
+### 1. [content] Two role titles corrected: "Creative Technologies" → "Creative Technologist"
+**The ORIGINAL says "Creative Technologies"** on both cards. Operator-directed correction,
+applied to **Cavan Judge** and **Joseph Wan**. We deliberately do NOT match the original
+here. Guarded by a test so a future "fidelity" pass cannot silently revert it.
+
+### 2. [content] Three people ADDED — the original's team block has 12, ours has 15
+Appended after the existing 10 non-founders (founders stay 2):
+- **Maitri Bhat** — *Marketing Strategist*
+- **Cherry Feng** — *Social Media Expansion*
+- **"Maybe you?" / VOLUNTEER** — a recruitment card, always LAST, whose name is a link to
+  `https://calendar.app.google/z9XuskPpZPvE5A5h7` (`target="_blank"` + `rel="noopener"`,
+  matching this section's existing external-CTA convention on "Join our team").
+
+### 3. [content/arch] The volunteer doodle is EXEMPT from the grey tint — it stays YELLOW
+**Operator decision.** Every other avatar gets the `mix-blend-mode: color` grey tint that
+renders it greyscale; the doodle would be desaturated to grey by it. It keeps the orange
+squiggle frame + squircle mask so the card still sits consistently in the grid. A test
+asserts this exemption applies to **exactly one** card.
+
+### 4. ⚠️ [perf] KNOWN QUALITY GAP — Maitri's and Cherry's photos are only 106×106
+The supplied sources are **106×106**. They render at ~129 CSS px (and ~150–160px at
+tablet), i.e. **upscaled even at 1×, and ~2.4× upscaled on a retina display** — they will
+look noticeably softer than the other 13. **Not upscaled** (per instruction; upscaling
+would add blur, not detail). The operator is sending high-res replacements — **the swap is
+a one-file drop-in**: overwrite `team-maitri-bhat.webp` / `team-cherry-feng.webp`, no
+markup or CSS change needed, because the two cards deliberately carry **no** per-person
+framing rule (they use the default "photo fills the squircle" framing).
+To avoid stacking lossy loss on top of a resolution deficit, these two ship **lossless**
+WebP (5.2 / 5.4 KB) rather than the q72 used for the original 12 — still inside the
+existing 5–20 KB range. The doodle is lossless too (16.7 KB; hard-edged flat colour).
+
+### 5. [approx] Maitri's/Cherry's transparent corners were FLATTENED onto their own backdrop
+Both sources arrived as rounded-corner PNGs with transparent (antialiased) corners whose
+curve very nearly coincides with our squircle mask — which rendered a visible off-white
+halo around those two avatars, and only those two. They are now composited onto a flat
+colour sampled from each photo's own border (rgb(176) / rgb(146)) and ship fully opaque,
+exactly like the other 13, so the squircle mask does 100% of the shaping. The flattened
+pixels sit outside the mask and are never visible.
+
+### 6. [a11y] The volunteer doodle is DECORATIVE (`alt=""`); the VOLUNTEER link is underlined
+- **`alt=""`** on the doodle, per this section's existing convention (descriptive `alt` for
+  content images that identify a person; `alt=""` for decorative art like the step icons).
+  The adjacent "Maybe you? / VOLUNTEER" text carries the entire meaning; describing the
+  drawing would only add noise before it.
+- **JUDGMENT CALL — the VOLUNTEER link carries an explicit underline.** `base.css` strips
+  link styling site-wide (`a { color: inherit; text-decoration: none }`), which would have
+  left the roster's only link visually IDENTICAL to the 14 static names beside it —
+  unrecognisable as a click target. There is no original to copy (the card is new), and a
+  link that cannot be identified as one is a usability bug, so it is underlined.
+
+### 7. [approx] Luisa's and Poppy's squircle sits ~9px right of the original's
+Ours centres the squircle window inside the 200px frame on all 15 cards. The original
+centres it on 10 of its 12 (within ~1.2px of sub-pixel jitter) but places **Luisa's and
+Poppy's ~9px LEFT of centre** — a Figma runtime artifact, visible only as the squircle
+sitting slightly off-centre within its decorative squiggle. **Their FACE FRAMING is
+reproduced exactly** (the photo box and mask offset match to ≤0.02px); only the squircle's
+placement inside the frame differs. Centring all 15 is simpler, looks intentional, and is
+what the other 10 already do.
+
+### 8. RESOLVED, NOT a divergence — the original does **not** stretch faces
+Flagged for investigation: the original's `<img>`s were reported as computing
+`object-fit: fill` with natural sizes that disagree with their rendered aspect (e.g.
+Sofiia: natural 130×133 rendered into a 131×188 box), implying the original vertically
+**stretches** faces by up to 1.41×. **Measured directly on all 13 photo elements at 1366:
+every one computes `object-fit: cover` with `object-position: 50% 50%` — not `fill`.**
+`cover` preserves the asset's aspect and crops the overflow, so the layout box aspect
+differing from the image aspect is expected and harmless. **There is no distortion in the
+original, and none to diverge from.** Our build uses the same `cover` + `50% 50%`.
+Related: our shipped assets are the SAME crops as the original's, at higher resolution —
+each one's aspect matches the original's natural aspect to ≤0.008 (e.g. our Sofiia
+353×360 = 0.981 vs the original's 130×133 = 0.977). The earlier concern that our Sofiia
+(0.98) mismatched "the aspect the original renders her at" (0.70) compared our asset
+against the original's layout BOX, not its image. No re-download was needed.
+
 ## ⚠️ INTENTIONAL DIVERGENCES (LOUD) — mobile-parity batch (2026-07-16)
 
 **Surfaced verbatim to the operator.**
@@ -21,7 +100,10 @@ an overlapping row). **We built to the TRUE original.** Concretely on `<800`:
   mobile variant). Our members were already 120px, so this is essentially a founder-size fix.
 - How-it-works `--fcl-step-icon` **130px → 100px**; the steps already stack in a column (matches).
 
-### Team ARRANGEMENT: original mobile is a zigzag; ours is a 2-column grid — [arch] deliberate
+### ~~Team ARRANGEMENT: original mobile is a zigzag; ours is a 2-column grid~~ — SUPERSEDED
+> **Obsolete.** The zigzag was subsequently built (see "Fast-path fix … mobile team ZIGZAG"
+> at the foot of this file) and its amplitude/rhythm/alignment corrected in the team batch.
+> Retained only as the historical record of the decision. Original text follows.
 The original's mobile team is a **single-file zigzag** — one person per row, avatar alternating
 flush-left (x≈12) / flush-right (x≈243), each row a horizontal `[text | avatar]` strip, ~167px
 vertical pitch (measured live). **Ours keeps the clean 2-column grid** (avatar-over-label cards,
@@ -74,9 +156,10 @@ keeps a scoped 16px override (`css-p8lmy`).
 
 ## Team roster & photos
 
-- **[content] 12-person desktop/tablet roster, Dan Porder first** (per `DEVIATIONS.md`
-  §"Team roster"). Mobile's 8-person / Sofiia-first variant is **not** followed:
-  membership + order are canonical; only **layout** adapts responsively (see below).
+- **[content] 15-person roster, Dan Porder first** — the original's 12 (2 founders + 10)
+  **plus the 3 operator-added people** (Maitri, Cherry, and the "Maybe you?" recruitment
+  card, which stays last). See LOUD §2. Mobile's 8-person / Sofiia-first variant is **not**
+  followed: membership + order are canonical; only **layout** adapts responsively (see below).
 - **[content] Photo → person mapping recovered from DOM order.** Although
   `30-assets.md`/spec flag the mapping as UNKNOWN (the masked composites use different
   hashes than the Figma `dan/sofiia/…` refs), the **desktop DOM pairs each photo hash
@@ -143,11 +226,29 @@ keeps a scoped 16px override (`css-p8lmy`).
   | 11 | Uvin Withana | `avatar-frame-10.svg` | `3e09fbda…` |
   | 12 | **Poppy Astrini** | `avatar-frame-06.svg` | `54ee46ec…` (shared) |
 
-- **[approx] Per-instance mask-position offsets not reproduced; photo centred at 64%.**
-  The Figma runtime places each squircle with per-card sub-pixel `mask-position` values
-  (e.g. `14.6px 41.65px`) — runtime artifacts. We centre the photo at
-  `--fcl-avatar-photo: 64%` of the box, matching the capture's photo:frame ratio
-  (≈128.8/200 ≈ 0.64; the founder card `dom-1280`#1 computes to a centred squircle).
+- **~~[approx] Per-instance mask-position offsets not reproduced; photo centred at 64%.~~
+  RESOLVED (team batch, 2026-07-16) — and this entry was WRONG, in the way the operator
+  eventually noticed ("photos are not zoomed on faces like the original's").** The
+  per-card `mask-position` values (e.g. `14.6px 41.65px`) are **not runtime artifacts**:
+  they ARE the per-person face framing. The original sizes each photo individually
+  (Dan 158.91×230.66, Luisa 265.23×198.92, …) and slides the ~129px squircle over it, so
+  the window lands tight on that person's face. Centring a uniform 128px `object-fit:cover`
+  box instead showed each person's full width = visibly looser framing.
+  **Now reproduced per person.** Each card carries a `fcl-member--<slug>` modifier whose
+  CSS sets four ratios (`--fcl-photo-w/h/x/y`, plus `--fcl-win` for Joseph). Values are
+  expressed as RATIOS OF THE FRAME WIDTH and scaled with `calc()`, so one table serves
+  every breakpoint — confirmed by measuring the original at **1366** (200px frame,
+  128.772 mask) and **375** (120px frame, 77.26 mask): the ratios agree to 4 decimal
+  places. **Verified: our photo box and offset now match the original's to ≤0.02px on all
+  12 people.** The 3 added people have no measured counterpart and use the default
+  (photo fills the window).
+  - **Joseph Wan's card genuinely uses a SMALLER squircle** — mask `a23e76da…` at
+    **117.944²** where every other card uses `e54b773c…`/`5af4bfba…` at **128.772²**
+    (0.5897 vs 0.6439 of the frame). Confirmed at both 1366 and 375, and visible. Reproduced.
+  - **Load-bearing:** `.fcl-avatar-img` needs `max-width: none`. `base.css` resets
+    `img { max-width: 100% }`, which silently clamps the deliberately-oversized photos back
+    to the window width — heights still apply, so it distorts the crop rather than failing
+    loudly. This bit during the build; a test now guards it.
 - **[perf] Assets shipped: 1 frame SVG (`avatar-frame.svg`, ~1.06 KB) + 1 mask SVG
   (840 B).** The 10 per-hash frames were all HEAD-200 from `/_assets/v11/…` on
   2026-07-16 and then collapsed to one (see the RESOLVED note above), so only the single
@@ -161,7 +262,15 @@ keeps a scoped 16px override (`css-p8lmy`).
   mask asset would hide the masked layer (a known CSS limitation); mitigated because
   the asset is shipped in `public/` and build-verified to land in `dist/`.
 - **[perf] Team photos served as WebP** (~250×360, q72; ~6–20 KB each) instead of the
-  original PNGs (fetched at `?h=512`, downscaled to 360px tall).
+  original PNGs (fetched at `?h=512`, downscaled to 360px tall). These 12 are the SAME
+  crops as the original's, at higher resolution — each one's aspect matches the original's
+  natural aspect to ≤0.008, which is why reproducing the original's per-person photo box +
+  mask offset yields the identical framing, only sharper.
+  The **3 added** assets (LOUD §2/§4/§5) ship lossless: `team-maitri-bhat.webp` (106×106,
+  5.2 KB), `team-cherry-feng.webp` (106×106, 5.4 KB), `team-maybe-you.webp` (194×191,
+  16.7 KB, the only avatar with an alpha channel — it is a doodle on transparency, so the
+  `.fcl-avatar-img` off-white background supplies its squircle; without that, yellow art on
+  the yellow band would be invisible).
 
 ## Semantics / a11y
 
@@ -174,6 +283,10 @@ keeps a scoped 16px override (`css-p8lmy`).
 - **[a11y] `rel="noopener"` added** to the `Join our team` `target="_blank"` link
   (the original omits it). URL unchanged:
   `https://docs.google.com/forms/d/e/1FAIpQLSdF9cGO8BJeZdCznidPJDBajWgC3ER7OR1BI-xSsVV8niZUsg/viewform`.
+- **[a11y] The added VOLUNTEER link follows the same convention** — `target="_blank"` +
+  `rel="noopener"` → `https://calendar.app.google/z9XuskPpZPvE5A5h7`. It is the roster's only
+  link, so it is underlined to be recognisable as one (LOUD §6); the doodle beside it is
+  decorative (`alt=""`), since the "Maybe you? / VOLUNTEER" text carries the meaning.
 
 ## Layout / responsive
 
@@ -198,13 +311,45 @@ keeps a scoped 16px override (`css-p8lmy`).
     the bigger box (`--fcl-avatar-photo: 64%`).
   - **Verified live:** my rendered avatar rects at 1366 match the original's exactly — founders
     x278/x889 (200×200), members x176/x583/x990, column pitch 407, row pitch 332, founder→member
-    pitch 332 (queried from both DOMs).
-  - **Tablet (<1280):** 3 FLEXIBLE columns (`repeat(3, 1fr)`, 150px avatars, 24/40 gaps) — the
-    fixed 280px tracks + 407px pitch overflow below 1280, so they reflow; founders stay a centred
-    2-up row (230px cards, 80px gap). **Column choice logged: 3** (keeps the desktop rhythm;
-    drops to 2 only at mobile).
-  - **Mobile (<800):** unchanged from the reviewer-verified build — 2 columns, founders 136px /
-    regular 120px, 24/40 gaps, founder pitch shim reset to 0. Membership/order untouched.
+    pitch 332 (queried from both DOMs). **Re-verified after the team batch — still true.**
+  - **[arch] Card-internal rhythm corrected (team batch, 2026-07-16) — this was the operator's
+    "spacing is slightly off".** The columns and the 332px row pitch already matched, so a pitch
+    check passed; what differed was how the space is DISTRIBUTED inside each card. Measured on
+    the live original at **1366 AND 800** — the three gaps are CONSTANTS, identical at both
+    widths (they do NOT scale with the frame):
+
+    | gap | original | ours (before) | ours (now) |
+    |---|---|---|---|
+    | avatar → role | **40.4px** | 16.6 | 40.6 |
+    | role → name | **0px** | 4 | 0.2 |
+    | name → next row's avatar | **32px** | 52.5 | 32.5 |
+    | row pitch | 332.8 | 332 | 332 |
+
+    The caption sat too close to its photo and too far from the next row. Fixed with
+    `.fcl-member { gap: 40px }` · `.fcl-member-meta { gap: 0 }` · `.fcl-members { row-gap: 32px }`
+    · `.fcl-founders { margin-block-end: -8px }` (the parent `.fcl-team` flex gap already
+    contributes 40px, and the founders→members transition must use the same 32px as every other
+    row). All four metrics now match within **0.8px**.
+  - **[arch] A trailing row of ONE now CENTRES, as the original does.** The original lays the
+    roster out as a CENTRED wrap: its 10th member (Poppy, alone in the last row) sits in the
+    MIDDLE column at x583 — not the left column a grid puts her in. Ours left-aligned it. Now
+    `.fcl-members > :last-child:nth-child(3n + 1) { grid-column: 2 }`, which reproduces the
+    original's behaviour both for its 10-person roster and for our 13th card (the "Maybe you?"
+    card — verified centred at x583). A trailing row of TWO would still left-align (not
+    expressible in a 3-track grid); revisit with a flex wrap if the roster ever ends 3n+2.
+  - **Tablet (<1280):** 3 FLEXIBLE columns (`repeat(3, 1fr)`, 150px avatars, 24px column /
+    40px row gaps) — the fixed 280px tracks + 407px pitch overflow below 1280, so they reflow;
+    founders stay a centred 2-up row (230px cards, 80px gap). **Column choice logged: 3** (keeps
+    the desktop rhythm; drops to 2 only at mobile). Tablet inherits the corrected 40px
+    avatar→caption gap from the base rule, which is right: that gap is a CONSTANT in the
+    original (40.4px at 800 as well as at 1366).
+    **[approx] logged:** the original does NOT shrink its frames at 800 — it keeps **200px**
+    avatars and just tightens the column pitch to 224 (x76/300/524). Ours uses 150px. That is
+    the pre-existing tablet divergence, deliberately left alone in the team batch (out of the
+    operator's brief, and changing it risks the load-bearing 1280 fit).
+  - **Mobile (<800):** the single-file ZIGZAG (see the fast-path note at the foot of this file),
+    uniform 120px frames, 166px pitch, amplitude x12/x243 — all corrected in the team batch to
+    match the original exactly. Membership/order untouched.
 - **[arch] Steps stack to a column below 1280** (spec §6.2: 3-across desktop →
   stacked at 800 & 375).
 - **[approx] Mobile display type scaled down** (h2 60→34px, band-title 52→30px, step
@@ -242,7 +387,22 @@ keeps a scoped 16px override (`css-p8lmy`).
   per row, 120px avatar hugging alternating edges, text strip on the opposite side;
   founders start LEFT, members start RIGHT (both verified against the live original at
   true 375 — the members' inverted start was caught and fixed during verification).
-- **[approx]** Our zigzag amplitude is inset ~28px vs the original (avatars at x40/x215
-  vs the original's x12/x243) because rows sit inside the band padding + wrapper gutter —
-  same content-gutter class of approximation as the hero collage bleed. Structure,
-  sizes, and rhythm match.
+- **~~[approx]~~ Zigzag amplitude inset ~28px — RESOLVED (team batch, 2026-07-16).** The
+  rows sat at x40/x215 instead of the original's x12/x243 because each list is nested
+  inside `main#app`'s 16px page gutter PLUS the band's 24px mobile padding (16 + 24 = 40,
+  vs the original's 12px gutter). The two lists now bleed back out by the 28px difference
+  (`width: calc(100% + 56px); margin-inline: -28px` — the width must grow too, or the
+  centred flex item just shrinks its margin box and nothing moves). **Verified at true 375:
+  avatars now at x=12 / x=243, right edges 132 / 363 — identical to the original.** No
+  overflow introduced: `scrollWidth === innerWidth` at 320/360/375/390.
+- **Mobile rhythm fixes found while measuring (same batch):**
+  - **Founders→members pitch was 206px vs 166px everywhere else.** `.fcl-founders` set
+    `margin-block-end: var(--space-46)` intending "list gap ≈ row pitch", but that stacked
+    on top of the parent `.fcl-team`'s 40px flex gap (46 + 40 = 86). Now 6px → a uniform
+    166px pitch, matching the original's single continuous ~166.6px rhythm.
+  - **Text is LEFT-aligned on every row, not alternating.** Measured on all 8 of the
+    original's mobile cards: computed `text-align: left` throughout (text starts at x=12
+    when the avatar is right, x=148 when it is left). Ours flipped to `text-align: right`
+    on the reversed rows, pushing copy against the avatar instead of the viewport edge.
+    Only the row DIRECTION alternates now. Our strips land at x=12..227 / x=148..363 —
+    exactly the original's.
