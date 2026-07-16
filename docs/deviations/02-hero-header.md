@@ -21,8 +21,10 @@ findings (flagged to the orchestrator).
   transparent field, resolving spec 1a's open question ("baked into the PNG or applied by the
   runtime — confirm on view" → **baked in**). So the CSS chip `background`/`border-radius`
   frame was removed — a solid CSS backer would fill the tile's rounded-transparent corners
-  and read as a hard square. Em-based sizing is kept per the current CSS. The earlier
-  `--green-bright` vs `--green` chip-colour choice is now moot (colours are baked into the assets).
+  and read as a hard square. Chips render at the original's real size — **1.2em (~96px** at the
+  80px headline), up from the placeholder's 0.7em — with the googly at **0.95em (~76px)**, its
+  icon-node height (see the sizing/line-break entry below). The earlier `--green-bright` vs
+  `--green` chip-colour choice is now moot (colours are baked into the assets).
 - **[content] Orange googly blob = real recovered SVG.** The plain `--orange` disc is replaced
   by `hero-googly-blob.svg` (self-contained: `Body` `#EC6C23` + white `#F6F5F2` sclera + dark
   `#181814` pupils). The earlier "eyes omitted / not invented" deviation is resolved — the real
@@ -51,6 +53,23 @@ findings (flagged to the orchestrator).
 - **[content] The `--red` collage-blob approximation is now moot.** No CSS collage blob remains
   (the red/orange is baked into `hero-collage-3.webp`), so the earlier "approximate red with
   `--orange` / suggest a `--red` token" note no longer applies to this section.
+- **[arch][approx] Headline chip size + the live 3-line break (supersedes the earlier "0.7em
+  kept" note).** Per orchestrator adjudication, the chips are the original's real **1.2em (~96px)**
+  and the googly **0.95em (~76px)** — not the placeholder 0.7em. To keep the live 1366 line
+  break with chips that big, three minimal moves (all scoped to `.s-hero-header`):
+  (1) the heading column is widened from the 900 content cap to **`max-width:950px`** (h1 only;
+  the lead paragraph is re-capped to 900) — logged [approx] since the spec's content cap is 900;
+  (2) `TECH-LITE` is wrapped in a `.hero-nowrap` (`white-space:nowrap`) span so it never splits at
+  its hyphen; (3) the h1 gets `line-height:1.18` so a ~96px chip on one line can't touch the text
+  on the next (the 80px/1.0 line box is shorter than the chip). The chip-2 (green) run is glued to
+  the front of `TECH-LITE` (not the tail of `FOR`) so the wrap groups it onto line 2, exactly as
+  live. **Verified with a headless-Chrome render of the built page** (fonts loaded):
+  at **1366** the break is exactly `COMMUNITIES [chip] FOR / [chip] TECH-LITE [blob] / BUILDERS
+  [chip]` (the documented 3 lines); at **800** it reflows to 4 lines with `TECH-LITE` intact (no
+  hyphen split). Mobile safety: measured unit ratios (communities ≈ 7.86×font-size, chip = 1.2×fs)
+  give the widest unbreakable unit `communities+chip` ≈ 311px at 375px (≤343 avail) and ≈277px at
+  320px (≤288 avail) — so no overflow down to ~320px; `overflow-wrap:break-word` remains the
+  sub-320 safety net.
 
 ## Structure / type / a11y
 

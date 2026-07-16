@@ -25,18 +25,36 @@
   margin-block-end: -60px;
 }
 
-/* Centered content column (max 900px via .container--900). */
+/* Centered content column. The `.container--900` utility caps it at 900, but the
+   headline needs a touch more room to keep the live 3-line break with real ~96px
+   chips, so this scoped rule lifts the cap to 950 (the h1 self-limits to 950; the
+   lead paragraph is re-capped to 900 below to hold the spec's body measure). */
 .s-hero-header .hero-inner {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: var(--space-32);
+  max-width: 950px;
 }
 
 /* --- Headline (the page's single <h1>) ------------------------------------ */
 /* Type comes from the shared `.t-hero` utility (80/900, LS 1.6, uppercase). */
 .s-hero-header .hero-title {
   text-align: center;
+  /* Widened from the 900px content cap to 950px so the headline keeps the
+     original's live 3-line break at 1366 once the chips are their real ~96px
+     size (see deviations — [approx], spec cap is 900). Only the heading box is
+     widened; the lead paragraph stays capped at 900 below. */
+  max-width: 950px;
+  /* Real chips are 1.2em (~96px) — larger than the 80px/1.0 line box — so add
+     leading to stop a chip on one line touching the text on the next. */
+  line-height: 1.18;
+}
+
+/* Keep multi-word display tokens intact when the column narrows (e.g. stop
+   `TECH-LITE` breaking at its hyphen). Markup wraps the specific run. */
+.s-hero-header .hero-nowrap {
+  white-space: nowrap;
 }
 
 /* Headline photo chips (real recovered assets). Each webp bakes in its own
@@ -47,9 +65,9 @@
 .s-hero-header .hero-chip {
   display: inline-block;
   vertical-align: middle;
-  width: 0.7em;
-  height: 0.7em;
-  margin-inline: 0.1em;
+  width: 1.2em; /* ~96px at the 80px headline — the original's chip size */
+  height: 1.2em;
+  margin-inline: 0.08em;
   object-fit: contain;
 }
 
@@ -61,16 +79,18 @@
 .s-hero-header .hero-blob--googly {
   display: inline-block;
   vertical-align: middle;
-  height: 0.7em;
+  height: 0.95em; /* ~76px at the 80px headline — matches the icon node height */
   width: auto;
   aspect-ratio: 89.6 / 75.85;
-  margin-inline: 0.1em;
+  margin-inline: 0.08em;
 }
 
 /* --- Lead paragraph ------------------------------------------------------- */
-/* Type from shared `.t-body-lg` (24/500). */
+/* Type from shared `.t-body-lg` (24/500). Re-capped to the 900 content measure
+   (the parent column is widened to 950 for the headline only). */
 .s-hero-header .hero-lead {
   text-align: center;
+  max-width: var(--content-900);
 }
 
 /* --- CTA row -------------------------------------------------------------- */
