@@ -197,13 +197,18 @@
   grid-column: 2;
 }
 
-/* MEASURED RHYTHM (live original, CDP @1366 AND @800 — the three values below are
-   CONSTANTS in the original, identical at both widths, so they do not scale with the
-   frame): avatar → role 40.4px · role → name 0px · name → next row's avatar 32px.
-   Ours was 16.6 / 4 / 52.5 — the same 332px row pitch, but the caption sat too close
-   to the photo and too far from the next row. That is the "very slightly more spaced
-   out" the operator saw. The 0.56px slack vs the measured 40.4/32 is the frame img's
-   letterbox (a 198.88-tall squiggle centred in our square 200px box). */
+/* MEASURED RHYTHM (live original, CDP @1366 AND @800).
+   role → name 0px and name → next row's avatar 32px ARE constants — verified uniform
+   across all 12 cards at both widths. avatar → role is NOT: the original varies it
+   16.0–43.9px (mode 40.36, 8/12 within 1.3px) because its caption wrapper height
+   floats with each photo's overflow. We ship a UNIFORM 40.4 — the modal value — which
+   matches 8/12 closely and runs ~24px tighter than the original only on Luisa and
+   Poppy (~10px on Joseph); that intentional normalization is logged in
+   docs/deviations/06-for-city-leaders.md. Ours was 16.6 / 4 / 52.5 — the same 332px
+   row pitch, but the caption sat too close to the photo and too far from the next
+   row. That is the "very slightly more spaced out" the operator saw. The 0.56px slack
+   vs the measured 40.4/32 is the frame img's letterbox (a 198.88-tall squiggle centred
+   in our square 200px box). */
 .s-for-city-leaders .fcl-member {
   display: flex;
   flex-direction: column;
@@ -422,7 +427,7 @@
 
   .s-for-city-leaders .fcl-founders {
     gap: var(--space-80);
-    /* The 12px desktop rhythm shim is desktop-specific (see the base rule);
+    /* The desktop rhythm shim (-8px, see the base rule) is desktop-specific;
        reset here so tablet keeps its own rhythm. */
     margin-block-end: 0;
   }
@@ -519,16 +524,14 @@
     flex-direction: row-reverse;
   }
 
-  /* The original's MEMBERS list starts on the RIGHT (measured: first member
-     avatar at x=243) while the founders start left — invert the members'
-     alternation relative to the founders'. */
-  .s-for-city-leaders .fcl-members .fcl-member:nth-child(odd) {
-    flex-direction: row-reverse;
-  }
-
-  .s-for-city-leaders .fcl-members .fcl-member:nth-child(even) {
-    flex-direction: row;
-  }
+  /* NO members-list inversion. An earlier fast-path copied the original's surface
+     coordinate ("first member avatar at x=243, so members start RIGHT") without the
+     rule behind it: the original's mobile roster starts with SOFIIA (its 8-person
+     mobile variant), so its Abhinav-on-the-right is simply the alternation continuing
+     from Dan-on-the-left. We ship DAN first (ratified divergence), so forcing members
+     to start right put Sofiia and Abhinav on the same edge — a visible stutter at the
+     founders→members seam. The base rules already alternate correctly across both
+     lists: founders end on R (Sofiia), members resume on L (Abhinav). */
 
   .s-for-city-leaders .fcl-member--founder {
     width: 100%; /* zigzag rows are full-width strips, no 2-up sizing */

@@ -60,14 +60,38 @@ pixels sit outside the mask and are never visible.
   unrecognisable as a click target. There is no original to copy (the card is new), and a
   link that cannot be identified as one is a usability bug, so it is underlined.
 
-### 7. [approx] Luisa's and Poppy's squircle sits ~9px right of the original's
-Ours centres the squircle window inside the 200px frame on all 15 cards. The original
-centres it on 10 of its 12 (within ~1.2px of sub-pixel jitter) but places **Luisa's and
-Poppy's ~9px LEFT of centre** — a Figma runtime artifact, visible only as the squircle
-sitting slightly off-centre within its decorative squiggle. **Their FACE FRAMING is
-reproduced exactly** (the photo box and mask offset match to ≤0.02px); only the squircle's
-placement inside the frame differs. Centring all 15 is simpler, looks intentional, and is
-what the other 10 already do.
+### 7. [approx] Luisa's and Poppy's whole CARD sits ~9.6px right of the original's
+**CORRECTED AT THE GATE (2026-07-16)** — the first draft of this entry named the wrong
+mechanism, claiming the original placed those two *squircles* ~9px off-centre *within their
+squiggles*. It does not: the reviewer pixel-scanned the original and found Luisa's and
+Poppy's windows are its **best-centred** (+0.25px vs Erika's +1.50px). What the tester and
+reviewer independently measured is that the original shifts their **entire card — squiggle
+and window together — ~9.6px LEFT of the column** (painted squiggle bbox: Poppy x573–773,
+Luisa x981–1181, vs Eric's x583–783). The phantom "9px off-centre" came from measuring
+against `css-us4svo`, a Figma auto-layout box that is 219.27px wide on exactly those two
+cards (their 265px 2-up photo widens it) instead of the painted 200px frame.
+We place all 15 cards on the clean column with the window centred. **Face framing is
+reproduced exactly either way** (photo box + mask offset match to ≤0.023px); only the
+card's column placement differs on those two.
+
+### 7b. [approx] Uniform caption gap vs the original's per-card float
+The original's avatar→role gap is **not** constant: it varies **16.0–43.9px** across the 12
+cards (mode 40.36) because its caption wrapper height floats with each photo's overflow. We
+ship a uniform **40.4** — the modal value, matching 8/12 within ~1.3px — which runs ~24px
+tighter than the original on **Luisa and Poppy** and ~10px on **Joseph**. Deliberate
+normalization; the alternative is per-card caption offsets that encode a Figma artifact.
+
+### 7c. [approx] Frame height and per-card window wobble normalized
+Our squiggle frame renders **200×200**; the original's is **200×198.875** (Δ1.125px), which
+is the main driver of the sub-pixel vertical residual in the framing match. The original's
+mask window also **wobbles per card** (y 34.224–35.469, x 35.454–36.687); ours sits
+perfectly centred on every card. Same class of deliberate normalization as §7.
+
+### 7d. Not reproduced: a latent bug in the ORIGINAL
+The original's **Poppy card stacks two photos** — a leftover copy of Luisa's image
+(`5205b639`) sitting underneath Poppy's own (`daf8c55d`), both at opacity 1 in the same
+window. Invisible in the render but real, and almost certainly unintended. We ship one
+photo per card. Recording it so nobody "restores" it as fidelity.
 
 ### 8. RESOLVED, NOT a divergence — the original does **not** stretch faces
 Flagged for investigation: the original's `<img>`s were reported as computing
@@ -307,8 +331,10 @@ keeps a scoped 16px override (`css-p8lmy`).
     single continuous 333px rhythm.
   - Founders and regular members share the **same 200px frame** on desktop (the original's only
     difference is 2-up vs 3-up), so `--fcl-avatar` and `--fcl-avatar-lg` are both 200px here (was
-    150/190). The inner mask/tint/frame composite is unchanged — it scales proportionally with
-    the bigger box (`--fcl-avatar-photo: 64%`).
+    150/190). The inner mask/tint/frame composite scales proportionally with the bigger box.
+    (Historical note: this originally read `--fcl-avatar-photo: 64%` — the uniform-photo-box
+    variable that the team batch DELETED when it replaced the one-size-fits-all crop with the
+    original's per-person framing ratios. See §"per-person framing" below.)
   - **Verified live:** my rendered avatar rects at 1366 match the original's exactly — founders
     x278/x889 (200×200), members x176/x583/x990, column pitch 407, row pitch 332, founder→member
     pitch 332 (queried from both DOMs). **Re-verified after the team batch — still true.**
@@ -406,3 +432,16 @@ keeps a scoped 16px override (`css-p8lmy`).
     on the reversed rows, pushing copy against the avatar instead of the viewport edge.
     Only the row DIRECTION alternates now. Our strips land at x=12..227 / x=148..363 —
     exactly the original's.
+
+### 9. Mobile zigzag: the members-list inversion was REMOVED at the gate (2026-07-16)
+An earlier fast-path (main `942e347`) added `.fcl-members .fcl-member:nth-child(odd|even)`
+rules forcing the members list to start on the RIGHT, justified by a real measurement of the
+original ("first member avatar at x=243"). The measurement was right; the inference was not.
+The original's **mobile roster starts with Sofiia** (its 8-person mobile variant), so its
+Abhinav-on-the-right is just the alternation continuing from Dan-on-the-left. We ship **Dan
+first** (ratified roster divergence), so the copied rule put **Sofiia and Abhinav on the same
+edge** — a visible stutter at the founders→members seam, live in production. Both the tester
+and the reviewer caught it independently. Fix = delete the inversion: the base rules already
+alternate correctly across the two lists (founders end R on Sofiia → members resume L on
+Abhinav). **Lesson recorded: copy the RULE, not the coordinate — a surface measurement taken
+from a page whose roster differs will not transfer.**
