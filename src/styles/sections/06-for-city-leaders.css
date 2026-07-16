@@ -377,7 +377,17 @@
    counterpart in the original, so there is nothing to be faithful to; a link that
    cannot be recognised as one is a usability bug. Keyboard focus keeps the default
    outline from base.css. */
+/* The roster's only link, so it must not read as a 15th name. Colour + underline,
+   both deliberate:
+   - COLOUR: --blue is the site's established link idiom (§01 nav scroll-links, §04
+     city links). It is also the accessible choice on this band: #0056a1 on the
+     yellow-tint body band (~rgb(254,224,136)) measures 5.69:1 — passes WCAG AA for
+     normal AND large text. --teal (the footer's link colour) manages only 2.25:1
+     here and would fail even the 3:1 large-text bar.
+   - UNDERLINE stays: base.css strips link decoration site-wide, and colour alone is
+     the failure mode WCAG 1.4.1 names (never signal a link by hue alone). */
 .s-for-city-leaders .fcl-member--volunteer .fcl-name a {
+  color: var(--blue);
   text-decoration: underline;
   text-decoration-thickness: 2px;
   text-underline-offset: 3px;

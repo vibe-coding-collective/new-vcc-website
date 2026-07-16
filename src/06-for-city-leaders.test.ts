@@ -118,8 +118,8 @@ describe('§06 team — operator-directed content', () => {
 
   it('renders the volunteer name as an external link to the booking calendar', () => {
     const card = cardsOf('fcl-members').at(-1) ?? ''
-    const anchor = card.match(/<a\b([\s\S]*?)>VOLUNTEER<\/a>/)
-    expect(anchor, 'VOLUNTEER is not wrapped in an <a>').not.toBeNull()
+    const anchor = card.match(/<a\b([\s\S]*?)>BECOME A VOLUNTEER<\/a>/)
+    expect(anchor, 'BECOME A VOLUNTEER is not wrapped in an <a>').not.toBeNull()
     expect(anchor?.[1]).toContain('href="https://calendar.app.google/z9XuskPpZPvE5A5h7"')
     expect(anchor?.[1]).toContain('target="_blank"')
     // rel=noopener on every target=_blank, per this section's a11y/security convention.

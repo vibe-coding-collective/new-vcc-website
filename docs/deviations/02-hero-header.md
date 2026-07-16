@@ -215,8 +215,15 @@ live site with headless Chrome at 1366 (screenshots + DOM-rect queries).
   members3 (orange-right) clockwise.** One `@keyframes hero-spin` (`to{rotate 1turn}` via
   `transform`); CCW via `animation-direction: reverse`. Gated behind
   **`@media (hover: hover) and (prefers-reduced-motion: no-preference)`** so touch devices don't
-  stick a spin on tap and reduced-motion users get none. **[approx] unhover snaps back to rest**
-  — the original eases the stop; the CSS snap is a logged approximation. No positioning conflict:
+  stick a spin on tap and reduced-motion users get none. **Unhover HOLDS the angle reached**
+  (operator request, 2026-07-16 — previously it snapped instantly back to 0). Implemented by
+  attaching the animation to every icon ALWAYS but `paused`, and flipping only
+  `animation-play-state` to `running` on `:hover`: pausing freezes the animation at its
+  current time, so the icon keeps its rotation and the next hover resumes from exactly there.
+  (The old rule attached the animation *via* `:hover`, so unhover removed it and the
+  transform reverted to 0.) Verified by CDP hover→unhover: 144° while hovering → frozen at
+  150° on unhover → still 150° 1.7s later. **[approx]** the original eases the stop; ours
+  freezes instantly at the reached angle. No positioning conflict:
   the collage uses `inset-*` for placement (not a transform), so the rotation `transform` is
   free. **Verified via CDP forced `:hover`:** every element's computed animation matches
   (name `hero-spin`, 1s, linear, infinite; direction normal/reverse per node), and an emulated
