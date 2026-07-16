@@ -67,15 +67,17 @@
 
         <!-- Founders: larger avatars, first row of two.
              AVATAR TREATMENT (restored from the original, per capture): each avatar layers
-             (1) a decorative orange squiggle FRAME <img> (avatar-frame-NN.svg, one hand-drawn
-             shape per card, sits behind), (2) a member PHOTO masked into a squircle blob
+             (1) a decorative orange squiggle FRAME <img> (the shared avatar-frame.svg, sits
+             behind), (2) a member PHOTO masked into a squircle blob
              (mask-image=avatar-mask.svg, mask-mode:alpha) and (3) a grey mix-blend-mode:color
-             TINT overlay (::after) that renders the photo grayscale. Frame→person assignment
-             is the real desktop-capture DOM order (see .fcl-avatar CSS + deviations doc). -->
+             TINT overlay (::after) that renders the photo grayscale. The original shipped a
+             per-card frame file, but all 10 were geometrically identical (path delta ≤0.001)
+             and were collapsed to one shared avatar-frame.svg (see deviations doc for the
+             historical frame→person provenance). -->
         <ul class="fcl-founders">
           <li class="fcl-member fcl-member--founder">
             <div class="fcl-avatar fcl-avatar--lg">
-              <img class="fcl-avatar-frame" src="/assets/for-city-leaders/avatar-frame-01.svg" alt="" aria-hidden="true" width="200" height="199" loading="lazy" decoding="async" />
+              <img class="fcl-avatar-frame" src="/assets/for-city-leaders/avatar-frame.svg" alt="" aria-hidden="true" width="200" height="199" loading="lazy" decoding="async" />
               <span class="fcl-avatar-media">
                 <img class="fcl-avatar-img" src="/assets/for-city-leaders/team-dan-porder.webp" alt="Dan Porder" loading="lazy" decoding="async" />
               </span>
@@ -87,7 +89,7 @@
           </li>
           <li class="fcl-member fcl-member--founder">
             <div class="fcl-avatar fcl-avatar--lg">
-              <img class="fcl-avatar-frame" src="/assets/for-city-leaders/avatar-frame-02.svg" alt="" aria-hidden="true" width="200" height="199" loading="lazy" decoding="async" />
+              <img class="fcl-avatar-frame" src="/assets/for-city-leaders/avatar-frame.svg" alt="" aria-hidden="true" width="200" height="199" loading="lazy" decoding="async" />
               <span class="fcl-avatar-media">
                 <img class="fcl-avatar-img" src="/assets/for-city-leaders/team-sofiia-matsiutsia.webp" alt="Sofiia Matsiutsia" loading="lazy" decoding="async" />
               </span>
@@ -99,12 +101,14 @@
           </li>
         </ul>
 
-        <!-- Remaining team. Joseph / Luisa / Poppy share avatar-frame-06 (the reused
-             "Union" squiggle) — exactly as the desktop capture assigns them. -->
+        <!-- Remaining team. (Provenance: in the original capture Joseph / Luisa / Poppy
+             reused the frame-06 "Union" squiggle while the others had per-hash files; since
+             all 10 frames were geometrically identical they are now the single shared
+             avatar-frame.svg — see deviations doc.) -->
         <ul class="fcl-members">
           <li class="fcl-member">
             <div class="fcl-avatar">
-              <img class="fcl-avatar-frame" src="/assets/for-city-leaders/avatar-frame-03.svg" alt="" aria-hidden="true" width="200" height="199" loading="lazy" decoding="async" />
+              <img class="fcl-avatar-frame" src="/assets/for-city-leaders/avatar-frame.svg" alt="" aria-hidden="true" width="200" height="199" loading="lazy" decoding="async" />
               <span class="fcl-avatar-media">
                 <img class="fcl-avatar-img" src="/assets/for-city-leaders/team-abhinav.webp" alt="Abhinav" loading="lazy" decoding="async" />
               </span>
@@ -116,7 +120,7 @@
           </li>
           <li class="fcl-member">
             <div class="fcl-avatar">
-              <img class="fcl-avatar-frame" src="/assets/for-city-leaders/avatar-frame-04.svg" alt="" aria-hidden="true" width="200" height="199" loading="lazy" decoding="async" />
+              <img class="fcl-avatar-frame" src="/assets/for-city-leaders/avatar-frame.svg" alt="" aria-hidden="true" width="200" height="199" loading="lazy" decoding="async" />
               <span class="fcl-avatar-media">
                 <img class="fcl-avatar-img" src="/assets/for-city-leaders/team-cavan-judge.webp" alt="Cavan Judge" loading="lazy" decoding="async" />
               </span>
@@ -128,7 +132,7 @@
           </li>
           <li class="fcl-member">
             <div class="fcl-avatar">
-              <img class="fcl-avatar-frame" src="/assets/for-city-leaders/avatar-frame-05.svg" alt="" aria-hidden="true" width="200" height="199" loading="lazy" decoding="async" />
+              <img class="fcl-avatar-frame" src="/assets/for-city-leaders/avatar-frame.svg" alt="" aria-hidden="true" width="200" height="199" loading="lazy" decoding="async" />
               <span class="fcl-avatar-media">
                 <img class="fcl-avatar-img" src="/assets/for-city-leaders/team-liberatus-fusi.webp" alt="Liberatus Fusi" loading="lazy" decoding="async" />
               </span>
@@ -140,7 +144,7 @@
           </li>
           <li class="fcl-member">
             <div class="fcl-avatar">
-              <img class="fcl-avatar-frame" src="/assets/for-city-leaders/avatar-frame-06.svg" alt="" aria-hidden="true" width="200" height="199" loading="lazy" decoding="async" />
+              <img class="fcl-avatar-frame" src="/assets/for-city-leaders/avatar-frame.svg" alt="" aria-hidden="true" width="200" height="199" loading="lazy" decoding="async" />
               <span class="fcl-avatar-media">
                 <img class="fcl-avatar-img" src="/assets/for-city-leaders/team-joseph-wan.webp" alt="Joseph Wan" loading="lazy" decoding="async" />
               </span>
@@ -152,7 +156,7 @@
           </li>
           <li class="fcl-member">
             <div class="fcl-avatar">
-              <img class="fcl-avatar-frame" src="/assets/for-city-leaders/avatar-frame-07.svg" alt="" aria-hidden="true" width="200" height="199" loading="lazy" decoding="async" />
+              <img class="fcl-avatar-frame" src="/assets/for-city-leaders/avatar-frame.svg" alt="" aria-hidden="true" width="200" height="199" loading="lazy" decoding="async" />
               <span class="fcl-avatar-media">
                 <img class="fcl-avatar-img" src="/assets/for-city-leaders/team-erika-tsai.webp" alt="Erika Tsai" loading="lazy" decoding="async" />
               </span>
@@ -164,7 +168,7 @@
           </li>
           <li class="fcl-member">
             <div class="fcl-avatar">
-              <img class="fcl-avatar-frame" src="/assets/for-city-leaders/avatar-frame-06.svg" alt="" aria-hidden="true" width="200" height="199" loading="lazy" decoding="async" />
+              <img class="fcl-avatar-frame" src="/assets/for-city-leaders/avatar-frame.svg" alt="" aria-hidden="true" width="200" height="199" loading="lazy" decoding="async" />
               <span class="fcl-avatar-media">
                 <img class="fcl-avatar-img" src="/assets/for-city-leaders/team-luisa-von-funcke.webp" alt="Luisa Von Funcke" loading="lazy" decoding="async" />
               </span>
@@ -176,7 +180,7 @@
           </li>
           <li class="fcl-member">
             <div class="fcl-avatar">
-              <img class="fcl-avatar-frame" src="/assets/for-city-leaders/avatar-frame-08.svg" alt="" aria-hidden="true" width="200" height="199" loading="lazy" decoding="async" />
+              <img class="fcl-avatar-frame" src="/assets/for-city-leaders/avatar-frame.svg" alt="" aria-hidden="true" width="200" height="199" loading="lazy" decoding="async" />
               <span class="fcl-avatar-media">
                 <img class="fcl-avatar-img" src="/assets/for-city-leaders/team-flien-groeneveld.webp" alt="Flien Groeneveld" loading="lazy" decoding="async" />
               </span>
@@ -188,7 +192,7 @@
           </li>
           <li class="fcl-member">
             <div class="fcl-avatar">
-              <img class="fcl-avatar-frame" src="/assets/for-city-leaders/avatar-frame-09.svg" alt="" aria-hidden="true" width="200" height="199" loading="lazy" decoding="async" />
+              <img class="fcl-avatar-frame" src="/assets/for-city-leaders/avatar-frame.svg" alt="" aria-hidden="true" width="200" height="199" loading="lazy" decoding="async" />
               <span class="fcl-avatar-media">
                 <img class="fcl-avatar-img" src="/assets/for-city-leaders/team-eric-lonergan.webp" alt="Eric Lonergan" loading="lazy" decoding="async" />
               </span>
@@ -200,7 +204,7 @@
           </li>
           <li class="fcl-member">
             <div class="fcl-avatar">
-              <img class="fcl-avatar-frame" src="/assets/for-city-leaders/avatar-frame-10.svg" alt="" aria-hidden="true" width="200" height="199" loading="lazy" decoding="async" />
+              <img class="fcl-avatar-frame" src="/assets/for-city-leaders/avatar-frame.svg" alt="" aria-hidden="true" width="200" height="199" loading="lazy" decoding="async" />
               <span class="fcl-avatar-media">
                 <img class="fcl-avatar-img" src="/assets/for-city-leaders/team-uvin-withana.webp" alt="Uvin Withana" loading="lazy" decoding="async" />
               </span>
@@ -212,7 +216,7 @@
           </li>
           <li class="fcl-member">
             <div class="fcl-avatar">
-              <img class="fcl-avatar-frame" src="/assets/for-city-leaders/avatar-frame-06.svg" alt="" aria-hidden="true" width="200" height="199" loading="lazy" decoding="async" />
+              <img class="fcl-avatar-frame" src="/assets/for-city-leaders/avatar-frame.svg" alt="" aria-hidden="true" width="200" height="199" loading="lazy" decoding="async" />
               <span class="fcl-avatar-media">
                 <img class="fcl-avatar-img" src="/assets/for-city-leaders/team-poppy-astrini.webp" alt="Poppy Astrini" loading="lazy" decoding="async" />
               </span>
