@@ -5,6 +5,51 @@ section, for the integrator to consolidate into `docs/DEVIATIONS.md`. Legend
 mirrors `DEVIATIONS.md`: **[arch]** structural · **[content]** copy/data ·
 **[a11y]** accessibility · **[perf]** payload/assets · **[approx]** approximated.
 
+## ⚠️ INTENTIONAL DIVERGENCES (LOUD) — mobile-parity batch (2026-07-16)
+
+**Surfaced verbatim to the operator.**
+
+### The mobile brief's team/how-it-works sizes were DESKTOP values (measurement artifact) — corrected
+An upstream brief specified, for the ORIGINAL at 375px: team flower frames **200px** in a "dense
+overlapping 2-up collage", and how-it-works icons **170px** in an "overlapping row". Those are the
+original's **DESKTOP** values (the headless width-clamp artifact — see §02's LOUD note). Measured
+at TRUE 375 device metrics (agreeing with the SSR capture `dom-375.html`, class `css-yb99np` =
+120×119px / `css-uyaw1n` = 100×100px), the original's REAL mobile is: team frames **120px** and
+how-it-works icons **100px, stacked in a COLUMN** (`css-a8cjdg` is `flex-direction: column`, not
+an overlapping row). **We built to the TRUE original.** Concretely on `<800`:
+- Team member + founder frames set to a **uniform 120px** (founders were 136px; there is NO 200px
+  mobile variant). Our members were already 120px, so this is essentially a founder-size fix.
+- How-it-works `--fcl-step-icon` **130px → 100px**; the steps already stack in a column (matches).
+
+### Team ARRANGEMENT: original mobile is a zigzag; ours is a 2-column grid — [arch] deliberate
+The original's mobile team is a **single-file zigzag** — one person per row, avatar alternating
+flush-left (x≈12) / flush-right (x≈243), each row a horizontal `[text | avatar]` strip, ~167px
+vertical pitch (measured live). **Ours keeps the clean 2-column grid** (avatar-over-label cards,
+two per row) for the 12-person roster. Rationale: (a) the brief's specific arrangement directive
+(200px overlap) was itself based on the erroneous measurement above; (b) faithfully reworking two
+separate `<ul>`s (founders + members) into a continuous alternating-side zigzag risked NEW
+horizontal-overflow regressions — directly against the operator's "nothing cut off / outside the
+viewport" directive — for a secondary element the operator did not flag; (c) our grid is faithful
+in frame SIZE (120px) and never overflows (`scrollWidth === innerWidth` at 320–390). This is a
+deliberate, low-risk arrangement divergence; the exact zigzag can be a follow-up if desired.
+
+### Standing divergences (re-logged per the operator's order)
+- **[content] 12-person roster, Dan first.** The original's MOBILE variant shows only **8** people
+  with **Sofiia first**; desktop shows the full team. Per the ratified go-live policy we keep the
+  **12-person desktop-canonical roster (Dan Porder first)** on mobile too — we deliberately do NOT
+  follow the original mobile's 8-person / Sofiia-first ordering.
+- **[content] Corrected figures.** The lede reads "**4,000+** members" (original mobile capture:
+  "1,200+"); the sponsor/among-us counts elsewhere read **10 countries / 4,000+** (original:
+  7 countries / 1,100+). Go-live content policy — never restore the original's numbers.
+
+### Mobile type step-down (this section's headings) — [arch]
+`.fcl-title` (H2), `.fcl-block-title` (band title) and `.fcl-step-title` (card title) no longer
+hand-roll their mobile sizes; they now inherit the shared **tokens.css** `<800` overrides
+(H2 → 32px/0.64, band → 28px/0.56, card → 20px/0.4 — matching original `css-i05ae1` / `css-n164e2`
+/ `css-z2l67j`). This FIXED prior wrong values (block-title was 30px → now 28; step-title 24px →
+now 20). Team NAME inherits the tokens `--fs-eyebrow` (→ 18px, `css-gmhvhh`); only the team ROLE
+keeps a scoped 16px override (`css-p8lmy`).
+
 ## Map & its city labels
 
 - **[content/arch] The 11 map city labels are part of the map image, not DOM text.**

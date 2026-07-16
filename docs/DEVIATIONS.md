@@ -168,6 +168,21 @@ being right the moment the clone became the real `vibecoders.global` under our o
   Desktop values are capture-derived; the mobile wrapper gap was not separately
   verified and keeps 80px pending the integration visual pass.
 
+## Mobile parity batch (2026-07-16)
+
+- **[arch] Mobile display type is tokenized** (`tokens.css` mobile `:root`): H2 32/0.64,
+  band-title 28/0.56, card-title 20/0.4, eyebrow/name 18 — transcribed from the original's
+  own mobile classes; sections no longer hand-roll heading scaling (documented exceptions:
+  §07's 28px H2, team/reviewer name+role 18/16).
+- **[approx] Hero collage mobile bleed clips at the 16px content gutter,** not the true
+  viewport edge (~16px less side-blob visible than the original). Center blob + all sizes
+  exact. Full-bleed clip is a possible future refinement.
+- **⚠️ LOUD (standing, re-flagged): 12-person roster (Dan first) and corrected figures
+  (4,000+/10)** are kept on mobile; the original's mobile shows 8 people (Sofiia first)
+  and the old contradictory figures.
+- Team arrangement: initially shipped as a 2-col grid (logged divergence); superseded the
+  same day by the operator-approved fast-path zigzag matching the original (see below).
+
 ## Per-section logs (consolidated at merge by the integrator)
 
 - **§01 nav-sticky** — see `docs/deviations/01-nav-sticky.md`: single deduplicated logo

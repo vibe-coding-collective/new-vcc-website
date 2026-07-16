@@ -9,6 +9,15 @@ Source of truth followed: **desktop (1280) canonical** per `docs/DEVIATIONS.md`.
 Copy/glyphs are byte-exact from `docs/spec/20-sections/07-for-sponsors.md` and the
 `_capture/dom-1280.html` sponsors block.
 
+## Mobile-parity batch (2026-07-16)
+
+- **[arch] This section's H2 is the documented EXCEPTION to the shared 32px mobile heading.**
+  The other section H2s step to 32px on mobile via the tokens.css `<800` `.t-h2` override
+  (`css-i05ae1`), but the original sizes "Put your brand in a room with builders" at **28px/0.56**
+  on mobile (`css-n164e2`, the band-title tier — it's a long heading). So `.fsp-title` keeps a
+  scoped `@media (width < 800px)` override at 28px (was 34px). The lede also steps 20 → 16px
+  (`css-n6l5zh`). Verified at 375/320: no horizontal overflow (`scrollWidth === innerWidth`).
+
 ---
 
 ## Discrepancy caught (surfaced to the orchestrator; I followed the capture)

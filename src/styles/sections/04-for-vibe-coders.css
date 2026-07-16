@@ -203,15 +203,12 @@
     font-size: var(--fs-body);
   }
 
-  /* Section heading scales 60px -> 32px (letter-spacing 1.2 -> 0.64) on mobile,
-     matching the original's own mobile class (capture css-i05ae1). At 60px the
-     longest word ("HACKATHONS") is wider than the ~295px mobile header band, and
-     the centered flex .fvc-heading-group could not shrink to fit (base.css sets
-     overflow-wrap:break-word, which soft-wraps but does NOT lower an element's
-     min-content, so the group stayed ~448px and drove a ~37px page overflow).
-     The reduced size keeps every word inside the band and clears the overflow. */
-  .s-for-vibe-coders .fvc-heading {
-    font-size: var(--fs-card-title);
-    letter-spacing: var(--ls-card-title);
+  /* Subtitle steps 20 → 16 on mobile (original css-n6l5zh). */
+  .s-for-vibe-coders .fvc-subtitle {
+    font-size: var(--fs-body-xs);
   }
+
+  /* NOTE: the section heading no longer scales itself here — the shared `.t-h2`
+     now steps to 32px/0.64 on mobile via the tokens.css `:root` override
+     (css-i05ae1), which fixes the same 60px-overflow this block used to guard. */
 }

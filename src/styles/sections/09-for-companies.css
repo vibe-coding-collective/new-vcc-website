@@ -123,9 +123,10 @@
    Mobile (<800): heading scales down (60px overflows 375); cards stack.
    ========================================================================= */
 @media (width < 800px) {
-  .s-for-companies .fco-title {
-    font-size: 34px;
-    letter-spacing: 0.68px;
+  /* .fco-title (.t-h2) steps to 32px via the shared tokens.css mobile override
+     (css-i05ae1); no section-scoped heading size needed. */
+  .s-for-companies .fco-lede {
+    font-size: var(--fs-body-xs); /* 20 → 16 (original css-n6l5zh) */
   }
 
   .s-for-companies .fco-cards {

@@ -113,11 +113,8 @@
     gap: var(--space-16); /* css-93wn6p */
   }
 
-  .s-contact-cta .cta-heading {
-    font-size: var(--fs-body); /* 32 -> 20 (css-z2l67j) */
-    letter-spacing: 0.4px;
-  }
-
+  /* .cta-heading (.t-card-title) → 20px/0.4 now comes from the shared tokens.css
+     mobile override (css-z2l67j); no section-scoped size needed. */
   .s-contact-cta .cta-lede {
     font-size: var(--fs-body-sm); /* 24 -> 18 (css-rqghrp) */
   }
