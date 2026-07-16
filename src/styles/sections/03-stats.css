@@ -210,6 +210,12 @@
 
 /* --- Mobile type scale (< 800px) — from the site's own mobile CSS ----------- */
 @media (width < 800px) {
+  /* The original's mobile marquee renders the logo scans at 50px, not the
+     desktop 80px (builder-measured at true 375, operator-approved fast path). */
+  .s-stats__sponsor-logo {
+    height: 50px;
+  }
+
   .s-stats__count {
     font-size: 40px;
     letter-spacing: 0.8px;

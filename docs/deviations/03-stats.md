@@ -156,3 +156,11 @@ Legend: **[arch]** structural · **[content]** copy/data · **[a11y]** accessibi
   flag row still had 8 flags "pending confirmation"), and `00-overview.md` mis-stated the
   ORIGINAL's own flag count as 9 when the capture shows 8. Fixing the first is not syncing;
   fixing the second makes the historical record *more* faithful. Check before assuming.
+
+## Fast-path fix (operator-approved, 2026-07-16)
+
+- **[content] Mobile marquee logos 50px** (desktop stays 80px): the original's mobile
+  variant renders the logo scans at 50px (builder-measured at true 375, CDP). Verified
+  ours at 50px post-fix. NOTE: the first attempt landed the rule in the reduced-motion
+  block by mistake — caught by the fast path's mandatory browser verification before
+  merge; the rule now lives in the `<800` block where it belongs.
