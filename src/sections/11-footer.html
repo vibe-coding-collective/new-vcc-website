@@ -4,14 +4,21 @@
      Spec: docs/spec/20-sections/11-footer.md · Contract: docs/ARCHITECTURE.md.
      WhatsApp kept as a LINK per the ratified DEVIATIONS policy (desktop original is
      plain text) — target="_self" per capture. Meetups/LinkedIn open in a new tab.
-     Watermark wordmark + googly-blob mascot row are decorative (aria-hidden); the
-     mascots' real googly-eye artwork is runtime-injected on the original and pending
-     the asset-recovery task. See docs/deviations/11-footer.md. -->
+     The ONE decorative footer graphic is the colorful VCC wordmark — a horizontal
+     cluster of 5 googly-eyed blobs (spec css-nu3ilp; 31-recovered-assets.md Group 3,
+     node 12:253). Rendered LARGE and bottom-cropped so the blob tops peek up from the
+     band's bottom edge — that IS the "mascot row" seen live; there is NO separate
+     mascot element in the original. Decorative → aria-hidden / alt="". See
+     docs/deviations/11-footer.md. -->
 <footer class="s-footer" id="footer">
-  <!-- Colorful retro VCC wordmark, faint watermark behind the content (spec css-nu3ilp). -->
-  <div class="footer-watermark" aria-hidden="true">
+  <!-- Colorful retro VCC wordmark: a horizontal row of 5 googly-eyed blobs
+       (red / yellow / green / teal / blue; spec css-nu3ilp, node 12:253). Rendered
+       large, bottom-anchored and partially cropped by the footer's overflow:hidden so
+       the blob tops peek up from the bottom edge (the live "mascot row"). One element,
+       decorative → aria-hidden / alt="". -->
+  <div class="footer-wordmark" aria-hidden="true">
     <img
-      class="footer-watermark-img"
+      class="footer-wordmark-img"
       src="/assets/footer/logo-footer-wordmark.svg"
       alt=""
       width="708"
@@ -71,17 +78,5 @@
         <p class="footer-copy-line t-body">London, UK. 2026</p>
       </div>
     </div>
-  </div>
-
-  <!-- Decorative googly-blob mascot row peeking from the bottom edge (live observation:
-       red / orange / yellow / green / teal / blue, left→right). CSS placeholder blobs —
-       no invented eye artwork; real mascots are runtime-injected on the original. -->
-  <div class="footer-mascots" aria-hidden="true">
-    <span class="footer-mascot footer-mascot--red"></span>
-    <span class="footer-mascot footer-mascot--orange"></span>
-    <span class="footer-mascot footer-mascot--yellow"></span>
-    <span class="footer-mascot footer-mascot--green"></span>
-    <span class="footer-mascot footer-mascot--teal"></span>
-    <span class="footer-mascot footer-mascot--blue"></span>
   </div>
 </footer>

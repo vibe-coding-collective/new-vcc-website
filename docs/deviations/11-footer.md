@@ -34,8 +34,11 @@ Legend: **[arch]** structural · **[content]** copy/data · **[a11y]** accessibi
   - `logo-footer-mark.svg` — the **white/off-white retro VCC mark** (`562debcb…`, 100×93,
     entirely `#F6F5F2`). This is the "centered white retro logo" from the live observation.
     Given as an `<img alt="Vibe Coding Collective">`.
-  - `logo-footer-wordmark.svg` — the **colorful retro VCC wordmark** (`34e7cef0…`, 708×202).
-    The `alt`-empty / `aria-hidden` watermark behind the content (spec `css-nu3ilp`).
+  - `logo-footer-wordmark.svg` — the **colorful retro VCC wordmark** (`34e7cef0…`, 708×202),
+    which is actually a horizontal cluster of **5 googly-eyed blobs** (red/yellow/green/teal/
+    blue, no orange). It is the SINGLE decorative footer graphic (spec `css-nu3ilp`, node
+    `12:253`), `alt`-empty / `aria-hidden`; rendered large + bottom-cropped (see the
+    "mascot row" entry below).
   No text-fallback was needed (the task's fallback path only applies if the real footer
   variant is not determinable — it was). The blue nav logo was **not** copied or recolored.
 - **[perf] `logo-footer-mark.svg` is heavy (~447 KB).** It is the same stippled micro-path
@@ -43,29 +46,38 @@ Legend: **[arch]** structural · **[content]** copy/data · **[a11y]** accessibi
   blue — so the raw real artwork is kept to match the established repo standard rather than
   altering it. Flagged as a known SVG-optimization opportunity for a later pass (reducing
   coordinate precision could shrink it substantially without visible change).
-- **[approx] Wordmark watermark opacity/offset approximated.** The capture places the
-  wordmark `position:absolute; top:201px` but records no opacity; rendered centered at
-  `opacity: 0.16` so it reads as a faint watermark behind the content — consistent with the
-  live "black band with a centered white retro logo" observation. The static-capture's exact
-  placement/opacity is not recoverable; this is a visual-pass tuning item.
+- **[approx] RESOLVED: the wordmark is the ONE bottom-anchored blob graphic, no longer a
+  faint centered watermark.** Earlier this same SVG was rendered centered at `opacity: 0.16`
+  as a faint watermark *and* the bottom blobs were a **separate** placeholder row — two
+  representations of what is really one element. Per `31-recovered-assets.md` Group 3 the
+  footer has a SINGLE wordmark element (node `12:253`), so it is now rendered exactly once:
+  full opacity, `width: min(var(--content-1400), 92%)`, bottom-anchored, `translate: 0 46%`
+  so the lower ~46% is cropped by `overflow:hidden` and the blob tops peek up. The static
+  capture's recorded `top:201px` at intrinsic 708×202 is clearly overridden by the live
+  render (LARGE, bottom-cropped per the orchestrator screenshot), so the **scale/crop are
+  visual-pass tuning values**; the element sits behind the content (`z-index:0`).
 
-## Footer — mascot row (runtime-injected; decorative placeholders)
+## Footer — "mascot row" = the wordmark rendered large — RESOLVED
 
-- **[approx][content] Six googly-blob mascots = decorative CSS placeholder blobs, no eye
-  artwork.** Live, a row of six googly-eyed blob mascots peeks up from the footer's bottom
-  edge (colors left→right red / orange / yellow / green / teal / blue). They are
-  **runtime-injected** — absent from the static capture, no determinable asset URL — so they
-  are reproduced as `aria-hidden` `<span>` blobs in the observed colors, lower halves clipped
-  by the footer's `overflow: hidden` (the "peek"). **No googly-eye artwork is invented.** The
-  real mascots are queued for the asset-recovery task.
-- **[content][approx] `red` mascot uses the literal `#eb3722`; `green` uses `--green-bright`.**
-  No `--red` token exists in `tokens.css`, and the row already contains a distinct `orange`
-  blob (`--orange` #ec6c23), so `orange` cannot double as `red`. `#eb3722` is the brand red
-  taken from the **real** footer wordmark SVG (`fill="var(--fill-0, #EB3722)"`), used as a
-  logged literal. `green` uses `--green-bright` (#91bd3c) — the playful lime the real retro
-  logo itself uses — matching the section-02 hero-chip precedent. **Recommendation:** add a
-  `--red` (#eb3722) token to `tokens.css` (also requested by §02); this row and the hero
-  collage's "red" blob would then use it instead of literals/approximations.
+- **[content] RESOLVED: the six placeholder blobs are removed; the live "mascot row" IS the
+  wordmark.** Per `31-recovered-assets.md` **Group 3** (orchestrator-corrected), there is **no
+  separate runtime-injected mascot row** in the original — the "row of googly-eyed blobs peeking
+  from the bottom edge" is the colorful footer **wordmark** (`logo-footer-wordmark.svg`, node
+  `12:253`) rendered large and cropped at the band's bottom edge. Reading the SVG confirms it is
+  literally a horizontal cluster of **5 googly-eyed blobs** — red `#EB3722`, yellow `#FFD226`,
+  lime `#91BD3C`, teal `#1CA9B0`, blue `#0056A1` (each = body + 2 white eyes + 2 dark pupils),
+  spanning X≈[21,684] and Y≈[41,182] of the 0–202 viewBox. The six `aria-hidden <span>`
+  placeholder blobs and every `.footer-mascot*` rule were **deleted** and replaced by the real
+  wordmark, bottom-cropped.
+- **[content] The earlier "six mascots incl. orange" live reading was a mis-segmentation.** The
+  prior deviation logged six blobs including **orange**; the real wordmark has **five** and no
+  orange (the orange blob belongs to the §02 hero mascot). The JSON is authoritative (Group 3);
+  the observer over-counted / mis-attributed an orange. No 6th/orange blob exists in the page data.
+- **[content] Obsolete color-token notes withdrawn.** The prior `#eb3722` literal and
+  `--green-bright` blob-fill choices — and the "add a `--red` token *for this row*"
+  recommendation — no longer apply: the CSS placeholder blobs are gone and the real SVG carries
+  its own colors. (A `--red` token may still be worth adding for §02; that is out of this
+  section's scope.)
 
 ## Footer — layout / structure
 
