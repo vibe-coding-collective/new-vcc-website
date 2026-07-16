@@ -54,11 +54,17 @@ pixels sit outside the mask and are never visible.
   content images that identify a person; `alt=""` for decorative art like the step icons).
   The adjacent "Maybe you? / VOLUNTEER" text carries the entire meaning; describing the
   drawing would only add noise before it.
-- **JUDGMENT CALL — the VOLUNTEER link carries an explicit underline.** `base.css` strips
-  link styling site-wide (`a { color: inherit; text-decoration: none }`), which would have
-  left the roster's only link visually IDENTICAL to the 14 static names beside it —
-  unrecognisable as a click target. There is no original to copy (the card is new), and a
-  link that cannot be identified as one is a usability bug, so it is underlined.
+- **The link reads "BECOME A VOLUNTEER", coloured `--blue` + underlined** (operator
+  request, 2026-07-16: make it clearly a CTA, not a 15th name). `base.css` strips link
+  styling site-wide (`a { color: inherit; text-decoration: none }`), which had left the
+  roster's only link visually IDENTICAL to the 14 static names beside it. Colour choice is
+  not arbitrary: `--blue` (#0056a1) is the site's established link idiom (§01 nav
+  scroll-links, §04 city links) AND the accessible option on this band — measured **5.69:1**
+  against the yellow-tint body band (~rgb(254,224,136)), passing WCAG AA for normal and
+  large text; `--teal` (the footer's link colour) manages only **2.25:1** here and would
+  fail even the 3:1 large-text bar. The underline stays because colour alone is exactly the
+  failure mode WCAG 1.4.1 names. Verified at 1366/375/320: no overflow, `rgb(0,86,161)` vs
+  the neighbours' `rgb(24,24,20)`.
 
 ### 7. [approx] Luisa's and Poppy's whole CARD sits ~9.6px right of the original's
 **CORRECTED AT THE GATE (2026-07-16)** — the first draft of this entry named the wrong

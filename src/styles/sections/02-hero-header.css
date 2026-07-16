@@ -152,9 +152,9 @@
    Pure CSS. Per-node direction from the page data. Gated behind (hover: hover)
    so touch devices don't stick a spin on tap, and behind
    (prefers-reduced-motion: no-preference) so reduced-motion users get none.
-   On unhover the element snaps back to rest — the original eases the stop; this
-   snap is a logged approximation ([approx] in deviations). Rotation is applied
-   via `transform` (the collage uses inset-* for placement, not a transform, so
+   On unhover the element KEEPS the angle it had reached (operator request,
+   2026-07-16) — see the play-state note below. Rotation is applied via
+   `transform` (the collage uses inset-* for placement, not a transform, so
    there is no positioning conflict).
    ========================================================================== */
 @keyframes hero-spin {
@@ -164,25 +164,36 @@
 }
 
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
-  /* Headline photo chips — ALL clockwise. */
-  .s-hero-header .hero-chip:hover {
-    animation: hero-spin 1s linear infinite;
+  /* The spin is attached to every icon ALWAYS but starts PAUSED, and only runs
+     while hovered. `animation-play-state: paused` freezes the animation at its
+     current time, so on unhover the icon HOLDS the rotation it had reached, and
+     the next hover resumes from exactly there. (Previously the animation was
+     attached by `:hover` itself, so unhover removed it and the transform reverted
+     to 0 — the instant snap-back the operator saw.) A paused animation at t=0 is
+     rotate(0), so nothing moves until first hover. */
+  .s-hero-header .hero-chip,
+  .s-hero-header .hero-blob--googly,
+  .s-hero-header .hero-graphic-photo--1,
+  .s-hero-header .hero-graphic-photo--2,
+  .s-hero-header .hero-graphic-photo--3 {
+    animation: hero-spin 1s linear infinite paused;
   }
 
-  /* Orange googly blob — counterclockwise (reverse plays 1turn -> 0). */
-  .s-hero-header .hero-blob--googly:hover {
-    animation: hero-spin 1s linear infinite reverse;
+  /* Counterclockwise pair — googly blob + collage members1 (left, teal). Must come
+     AFTER the shorthand above, which resets animation-direction to `normal`. */
+  .s-hero-header .hero-blob--googly,
+  .s-hero-header .hero-graphic-photo--1 {
+    animation-direction: reverse;
   }
 
-  /* Collage members1 (left, teal) — counterclockwise. */
-  .s-hero-header .hero-graphic-photo--1:hover {
-    animation: hero-spin 1s linear infinite reverse;
-  }
-
-  /* Collage members2 (centre) + members3 (right, orange) — clockwise. */
+  /* Chips + collage members2 (centre) / members3 (right, orange) stay clockwise
+     via the shorthand's default direction. Hover is the only thing that runs it. */
+  .s-hero-header .hero-chip:hover,
+  .s-hero-header .hero-blob--googly:hover,
+  .s-hero-header .hero-graphic-photo--1:hover,
   .s-hero-header .hero-graphic-photo--2:hover,
   .s-hero-header .hero-graphic-photo--3:hover {
-    animation: hero-spin 1s linear infinite;
+    animation-play-state: running;
   }
 }
 
