@@ -17,9 +17,12 @@
   --band-tint: var(--yellow-tint);
   --eyebrow-bg: var(--orange);
 
-  /* Local avatar sizing (overridden at breakpoints). */
+  /* Local avatar sizing (overridden at breakpoints). --fcl-avatar / --fcl-avatar-lg
+     are the FRAME footprint (the box); the masked photo is centred within it at
+     --fcl-avatar-photo (the capture's photo:frame ratio ≈ 128.8/200 ≈ 0.64). */
   --fcl-avatar: 150px;
   --fcl-avatar-lg: 190px;
+  --fcl-avatar-photo: 64%;
   --fcl-step-icon: 170px;
 
   /* Nav "for hosts" smooth-scroll target clears the fixed nav. Page gutter,
@@ -169,16 +172,22 @@
   text-align: center;
 }
 
-/* Avatar frame: rounded-rect photo (20px radius per design tokens). The
-   original's organic blob-mask + mix-blend tint + per-person SVG frame is
-   simplified to a clean frame — see deviations doc. */
+/* Avatar: the original layered "blob" composite, restored (deviations doc §avatars).
+   Three stacked layers in one grid cell:
+     1. .fcl-avatar-frame — a hand-drawn ORANGE squiggle <img> (one shape per card),
+        fills the box, sits behind.
+     2. .fcl-avatar-img   — the member PHOTO, masked into an organic squircle blob
+        (mask-image = avatar-mask.svg, mask-mode:alpha), centred at ~64% of the box.
+     3. .fcl-avatar-media::after — a grey mix-blend-mode:color TINT masked to the same
+        squircle, which renders the photo grayscale (the original's #d9d9d9/#fff tints
+        both read as neutral under `color`). The orange is the FRAME, not a tint. */
 .s-for-city-leaders .fcl-avatar {
+  position: relative;
   flex-shrink: 0;
+  display: grid;
+  place-items: center;
   width: var(--fcl-avatar);
   height: var(--fcl-avatar);
-  border-radius: var(--radius-card-mobile); /* 20px */
-  overflow: hidden;
-  background: var(--off-white);
 }
 
 .s-for-city-leaders .fcl-avatar--lg {
@@ -186,11 +195,60 @@
   height: var(--fcl-avatar-lg);
 }
 
+/* Decorative orange squiggle frame — fills the box, painted behind the photo. */
+.s-for-city-leaders .fcl-avatar-frame {
+  grid-area: 1 / 1;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Masked-photo cell: centred, ~64% of the box, isolated so the tint's blend stays
+   on the photo and never desaturates the orange frame behind it. */
+.s-for-city-leaders .fcl-avatar-media {
+  grid-area: 1 / 1;
+  position: relative;
+  isolation: isolate;
+  width: var(--fcl-avatar-photo);
+  aspect-ratio: 1;
+}
+
+/* Photo + tint share the squircle mask. border-radius is the graceful state: if a
+   browser can't apply mask-image the photo stays a visible 20px rounded-rect — never
+   a blank box (progressive enhancement per the brief). */
+.s-for-city-leaders .fcl-avatar-img,
+.s-for-city-leaders .fcl-avatar-media::after {
+  border-radius: var(--radius-card-mobile); /* 20px fallback */
+  -webkit-mask-image: url("/assets/for-city-leaders/avatar-mask.svg");
+  mask-image: url("/assets/for-city-leaders/avatar-mask.svg");
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  mask-mode: alpha;
+}
+
 .s-for-city-leaders .fcl-avatar-img {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center 30%; /* bias toward faces */
+  background: var(--off-white); /* fills the squircle before the photo paints */
+}
+
+/* Grey tint over the photo; mix-blend-mode:color desaturates it to grayscale. */
+.s-for-city-leaders .fcl-avatar-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: var(--grey-200);
+  mix-blend-mode: color;
+  pointer-events: none;
 }
 
 .s-for-city-leaders .fcl-member-meta {

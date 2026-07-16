@@ -41,17 +41,72 @@ mirrors `DEVIATIONS.md`: **[arch]** structural · **[content]** copy/data ·
     hash** (`5205b639…`, byte-identical on fetch). Poppy's card additionally layers a
     **distinct overlay** (`daf8c55d…`, a different person). To avoid showing the same
     face twice, **Poppy uses her distinct overlay image**; Luisa uses `5205b639…`.
-- **[arch/approx] Avatar treatment simplified to clean 20px-radius frames.** The
-  original composites each avatar as a photo masked into an **organic blob**
-  (`mask-image` blob SVG, `mask-mode:alpha`) + a `mix-blend-mode:color` tint
-  (`#d9d9d9` / `#fff` / `#ec6c23`) + a per-person decorative SVG outline frame, with
-  founders larger. That system needs per-person blob/frame assets and a
-  photo→blob→position mapping that is not reliably reproducible. Per design-tokens §4
-  ("20px = team-avatar frames") and the task brief, avatars are rendered as **20px
-  rounded-rect frames** (`object-fit:cover`, face-biased position); founders keep the
-  larger size. Consequence: photos show their **original backgrounds** (mountains,
-  brick wall, etc.) rather than being blob-cut-out. The `mix-blend` color tints are
-  dropped.
+- **[approx] Avatar treatment UPGRADED to the original blob composite (resolves the
+  earlier "simplified to 20px rounded-rect" deviation).** Each avatar now layers, per
+  the capture: (1) a member **photo masked into an organic squircle blob**
+  (`mask-image` = `avatar-mask.svg`, `mask-mode:alpha`), (2) a **grey
+  `mix-blend-mode:color` tint** (`--grey-200` `#d9d9d9`) that renders the photo
+  **grayscale**, and (3) a hand-drawn **orange squiggle frame** `<img>`
+  (`avatar-frame-NN.svg`) behind the photo. Founders keep the clone's larger box
+  (`--fcl-avatar-lg`, incl. the 136px mobile fix — not regressed). Findings that
+  shaped the (faithful) implementation, each verified from the recovered assets:
+  - **The "organic blob" mask is a squircle, and there is only one shape.** All 8
+    recovered mask assets (6 SVG + 2 PNG) are the **byte-identical** continuous-corner
+    rounded-square (superellipse, corner ratio 0.3575) at different export sizes —
+    confirmed by md5 of the SVG path data and by alpha-contour analysis of the PNGs.
+    So we ship **one** mask (`avatar-mask.svg` = `e54b773c…`, 128.8² squircle, 840 B)
+    and scale it via `mask-size`; the other 7 would be exact duplicates.
+  - **The "orange" is the frame, not a tint** — every frame is filled brand orange
+    (`fill="var(--fill-0,#EC6C23)"` → renders orange as a plain `<img>`).
+    **CORRECTION (reviewer-verified at the gate, 2026-07-16):** the 10 shipped frame
+    files are geometrically IDENTICAL (max pairwise path delta ≤0.001 on a 200-unit
+    canvas; the capture applies no rotation) — the original renders the SAME squiggle
+    on every card. The 10 per-hash files are kept for capture provenance only, and the
+    frame→person table below records provenance, not visual variety. A polish-pass item
+    may collapse them to one file (consistent with the 8→1 mask decision).
+  - **No orange TINT exists.** Grepping the capture CSS, `mix-blend-mode:color` layers
+    use only `#d9d9d9` (×7) and `#fff` (×2); `#ec6c23` appears solely as the eyebrow
+    pill bg and the frame fill — never as a tint. Under the `color` blend both grey and
+    white are neutral (saturation 0) → identical **grayscale**; we use grey uniformly.
+    The tokens file corroborates this ("`--grey-200`: team-avatar tint layer",
+    "`--white`: two team-avatar tint layers"). The earlier review's "orange tint on
+    Joseph / Luisa / Poppy" is those three **sharing the orange `Union` frame**
+    (`avatar-frame-06`), which the DOM-order recovery reproduces exactly.
+- **[approx] Frame→person mapping is DOM-order-recovered from `dom-1280` (best
+  available; the spec flags it as not cleanly determinable).** `avatar-frame-NN.svg` is
+  numbered by first-appearance order of each distinct desktop frame:
+
+  | # | Person (role) | Frame file | Source hash |
+  |---|---|---|---|
+  | 1 | Dan Porder (Founder) | `avatar-frame-01.svg` | `f73502ca…` |
+  | 2 | Sofiia Matsiutsia (Founder) | `avatar-frame-02.svg` | `c0c7bb72…` |
+  | 3 | Abhinav | `avatar-frame-03.svg` | `afba83f1…` |
+  | 4 | Cavan Judge | `avatar-frame-04.svg` | `d23a14bd…` |
+  | 5 | Liberatus Fusi | `avatar-frame-05.svg` | `726114d6…` |
+  | 6 | **Joseph Wan** | `avatar-frame-06.svg` | `54ee46ec…` (shared "Union") |
+  | 7 | Erika Tsai | `avatar-frame-07.svg` | `a9b92873…` |
+  | 8 | **Luisa Von Funcke** | `avatar-frame-06.svg` | `54ee46ec…` (shared) |
+  | 9 | Flien Groeneveld | `avatar-frame-08.svg` | `5f0b8f56…` |
+  | 10 | Eric Lonergan | `avatar-frame-09.svg` | `96a1a79b…` |
+  | 11 | Uvin Withana | `avatar-frame-10.svg` | `3e09fbda…` |
+  | 12 | **Poppy Astrini** | `avatar-frame-06.svg` | `54ee46ec…` (shared) |
+
+- **[approx] Per-instance mask-position offsets not reproduced; photo centred at 64%.**
+  The Figma runtime places each squircle with per-card sub-pixel `mask-position` values
+  (e.g. `14.6px 41.65px`) — runtime artifacts. We centre the photo at
+  `--fcl-avatar-photo: 64%` of the box, matching the capture's photo:frame ratio
+  (≈128.8/200 ≈ 0.64; the founder card `dom-1280`#1 computes to a centred squircle).
+- **[perf] Assets shipped: 10 frame SVGs (~1.06–1.08 KB each) + 1 mask SVG (840 B),
+  all HEAD-200 from `/_assets/v11/…` on 2026-07-16.** NOT shipped: the 7 smaller
+  120×119 frames and the 4 mobile-size mask exports (§31 Group 4) — our responsive
+  layout reflows the same 12 desktop cards, so the 200px frames + the single scalable
+  squircle mask cover every breakpoint.
+- **[a11y] Frame `<img>` is decorative** (`alt=""` + `aria-hidden="true"`); the photo
+  keeps its descriptive `alt="<Name>"`.
+- **Graceful degradation:** if `mask-image` is unsupported the photo falls back to a
+  visible 20px rounded-rect (`border-radius`), never a blank box. A true 404 of the
+  mask asset would hide the masked layer (a known CSS limitation); mitigated because
+  the asset is shipped in `public/` and build-verified to land in `dist/`.
 - **[perf] Team photos served as WebP** (~250×360, q72; ~6–20 KB each) instead of the
   original PNGs (fetched at `?h=512`, downscaled to 360px tall).
 
