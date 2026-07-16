@@ -140,34 +140,29 @@
   margin: 0;
 }
 
-/* White rounded "pill" per the live observation, holding the sponsor's REAL
-   recovered logo (docs/spec/31-recovered-assets.md Group 2). Fixed height,
-   centered. */
+/* Marquee item — a BARE logo, NO CSS pill. The off-white rounded pill is BAKED
+   INTO each recovered PNG (docs/spec/31-recovered-assets.md Group 2), so the
+   original renders the images directly on the cream background; a CSS pill here
+   would double it (measured live: no separate pill element). Just a flex item
+   that shrink-wraps its logo. */
 .s-stats__sponsor {
   display: flex;
   flex-shrink: 0;
   align-items: center;
-  justify-content: center;
-  min-width: 180px;
-  height: 80px;
-  padding-inline: var(--space-32);
-  background: var(--off-white);
-  border-radius: var(--radius-card);
 }
 
-/* Recovered sponsor wordmark. The scans have DIFFERING intrinsic heights
-   (120 / 160 / 240px), so a FIXED display height normalizes the row while
-   `width: auto` preserves each logo's aspect ratio; `display: block` drops the
-   inline descender gap so the pill centers it cleanly. */
+/* Recovered sponsor logo at the original's MEASURED 80px display height;
+   `width: auto` preserves each aspect ratio → intrinsic widths ~171-249px
+   (Valae narrowest, ElevenLabs widest). `display: block` drops the inline
+   descender gap. */
 .s-stats__sponsor-logo {
   display: block;
   width: auto;
-  height: 32px;
-  /* Guard against a future extreme-aspect logo stretching its pill — and the marquee
-     track — unboundedly wide. `max-width` caps the rendered width; `object-fit: contain`
-     keeps the aspect ratio (letterboxing rather than distorting) if the cap is ever hit.
-     No effect on the current logos, which render <=~100px wide at the fixed 32px height. */
-  max-width: 200px;
+  height: 80px;
+  /* Guard: cap a future extreme-aspect logo so it can't stretch the marquee track
+     unboundedly wide. 300px clears the widest current logo (ElevenLabs ~249px);
+     object-fit: contain keeps the aspect (letterboxes) if the cap is ever hit. */
+  max-width: 300px;
   object-fit: contain;
 }
 

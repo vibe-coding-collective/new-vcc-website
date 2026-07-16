@@ -129,3 +129,56 @@ findings (flagged to the orchestrator).
   whitespace-significant `<h1>` (chips are glued directly to `communities` / `TECH-LITE` /
   `BUILDERS` with no intervening comment). The built output was byte-verified identical to
   the pre-strip output except for the removed comments.
+
+## Visual-parity pass (operator findings, 2026-07-16)
+
+Two operator-reported discrepancies vs the live original, fixed and verified against the
+live site with headless Chrome at 1366 (screenshots + DOM-rect queries).
+
+- **[arch] Collage reworked to the MEASURED live geometry (supersedes the earlier "placed
+  directly at full frame height with a natural overlap").** The prior build rendered three
+  same-height images across an 862×350 frame. The original actually composes them at (frame-
+  relative, measured live at 1366): **members1 354×358 at x0,y34** (left, teal); **members2
+  287×287 at x266,y0** — *raised 34px and smaller* (centre, yellow); **members3 354×358 at
+  x445,y34** (right, orange). Composition box **799×392**, centred. Overlaps: centre-over-left
+  ~88px, right-over-centre ~108px. Z-order left<centre<right (source order = paint order,
+  unchanged). Implemented as percentages of the 799×392 box (`inset-inline-start`/`inset-block-
+  start` + width/height %) so it scales as the frame responds to `max-width:100%`. **Verified:**
+  my rendered rects at 1366 match the live original's actual collage-image rects *exactly*
+  (members1 rel 0/34 354×358, members2 rel 266/0 287×287, members3 rel 445/34 354×358 — queried
+  from both DOMs).
+- **[perf] `hero-collage-2.webp` hash cross-check — PASS, no re-download.** Confirmed our
+  centre image is the **de323857…** source (1894×1894 **square**): our file is 760×760 square
+  (vs 760×778 for collage-1/-3), and a download of `de323857…?w=380` visually diffs identical
+  to ours (same yellow flower blob + group photo). collage-1 (teal, `d6369c47…`) and collage-3
+  (orange, `8badb11d…`) also confirmed by colour/side. Chip hashes were already byte-checked
+  (see above); left unchanged.
+- **[approx] The collage as a whole sits ~44px lower in the hero than the original** (my
+  composition-top y≈763 vs original y≈719 at 1366). This is the pre-existing hero vertical
+  rhythm (the `line-height:1.18` headline + the 60px `hero-inner`→`hero-graphic` gap), NOT the
+  collage-layout fix — the collage's *internal* geometry matches the original to the pixel.
+  Left as-is to avoid destabilising the verified 1366 three-line headline break (out of this
+  fix's scope).
+- **[approx] Below ~1366 the collage width scales proportionally but is not container-matched to
+  the original.** My frame is the 799px composition box with `max-width:100%`, so it tracks the
+  `main#app` content width (viewport − 80px) and only begins shrinking below ~880px viewport. The
+  original tracks a *narrower* hero column, so it starts shrinking sooner (measured: 799px @1366
+  → 636px @900, whereas mine stays 799px @900). The composition scales **uniformly / without
+  distortion** either way, and at the measured/verified 1366 width they are identical. This is
+  not a regression — the prior build's `width:862px` frame was even wider at those mid widths.
+  Fully matching the original's responsive column would be a deeper hero-layout change and its
+  exact container relationship isn't specified; left as a documented approximation since the
+  operator's finding + verification target is the 1366 geometry.
+- **[content] Hover spins added (pure CSS; Figma motion: trigger=hover, 1s/revolution, linear,
+  continuous).** On `:hover` each decorative picture spins continuously at 1s/turn, linear.
+  Per-node direction from the page data: **headline chips ALL clockwise; googly blob
+  counterclockwise; collage members1 (teal-left) counterclockwise, members2 (centre) clockwise,
+  members3 (orange-right) clockwise.** One `@keyframes hero-spin` (`to{rotate 1turn}` via
+  `transform`); CCW via `animation-direction: reverse`. Gated behind
+  **`@media (hover: hover) and (prefers-reduced-motion: no-preference)`** so touch devices don't
+  stick a spin on tap and reduced-motion users get none. **[approx] unhover snaps back to rest**
+  — the original eases the stop; the CSS snap is a logged approximation. No positioning conflict:
+  the collage uses `inset-*` for placement (not a transform), so the rotation `transform` is
+  free. **Verified via CDP forced `:hover`:** every element's computed animation matches
+  (name `hero-spin`, 1s, linear, infinite; direction normal/reverse per node), and an emulated
+  `prefers-reduced-motion: reduce` disables all five (`animation-name: none`).

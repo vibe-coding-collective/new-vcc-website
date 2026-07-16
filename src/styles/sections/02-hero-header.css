@@ -2,7 +2,7 @@
    Section 02 — Hero header
    Owner: builder(02-hero-header). EVERY selector is scoped under `.s-hero-header`.
    Spec: docs/spec/20-sections/02-hero-header.md · Contract: docs/ARCHITECTURE.md
-   padding-top:200px clears the fixed nav (§9). Chips, googly blob and the 862x350
+   padding-top:200px clears the fixed nav (§9). Chips, googly blob and the 799x392
    collage now use the REAL recovered Group-1 assets (docs/spec/31-recovered-assets.md);
    each served image bakes in its own colored tile/blob + flower/squircle mask, so the
    old CSS colored-blob + border-radius masks are gone (they would double-up / crop).
@@ -103,37 +103,87 @@
   gap: var(--space-24);
 }
 
-/* --- Photo collage (original: 862x350 frame) ----------------------------- */
-/* Three self-contained recovered composites placed left->right (members1/2/3) at
-   full frame height. They overlap because each ~square blob is wider than a third
-   of the 862px frame; source order 1->3 is the paint order, so the right blob
-   sits over the middle over the left (matches the live stacking). */
+/* --- Photo collage — MEASURED live geometry at 1366 (see deviations) ------
+   Three self-contained recovered composites (members1/2/3). The two OUTER blobs
+   (354x358) sit 34px LOWER than the RAISED, SMALLER centre blob (members2,
+   287x287 — the 1894x1894 square source de323857…). They overlap: centre over
+   left ~88px, right over centre ~108px. Everything is expressed as a percentage
+   of the 799x392 composition box so the whole collage scales as the frame
+   responds down. Source order 1->3 = paint order → right over centre over left
+   (z-order left < centre < right, matching the live stacking). */
 .s-hero-header .hero-graphic {
   position: relative;
-  width: 862px;
+  width: 799px; /* composition bounding box width (measured) */
   max-width: 100%;
-  aspect-ratio: 862 / 350;
+  aspect-ratio: 799 / 392; /* 799 wide x 392 tall composition */
   margin-inline: auto;
 }
 
 .s-hero-header .hero-graphic-photo {
   position: absolute;
-  inset-block-start: 0;
-  height: 100%;
-  width: auto;
 }
 
+/* members1 — LEFT (teal) · 354x358 at frame-relative x0, y34 */
 .s-hero-header .hero-graphic-photo--1 {
   inset-inline-start: 0;
+  inset-block-start: 8.673%; /* 34/392 */
+  width: 44.305%; /* 354/799 */
+  height: 91.327%; /* 358/392 */
 }
 
+/* members2 — CENTRE (yellow), raised + smaller · 287x287 at x266, y0 */
 .s-hero-header .hero-graphic-photo--2 {
-  inset-inline-start: 50%;
-  transform: translateX(-50%);
+  inset-inline-start: 33.292%; /* 266/799 */
+  inset-block-start: 0;
+  width: 35.920%; /* 287/799 */
+  height: 73.214%; /* 287/392 */
 }
 
+/* members3 — RIGHT (orange) · 354x358 at x445, y34 */
 .s-hero-header .hero-graphic-photo--3 {
-  inset-inline-end: 0;
+  inset-inline-start: 55.695%; /* 445/799 */
+  inset-block-start: 8.673%;
+  width: 44.305%;
+  height: 91.327%;
+}
+
+/* ==========================================================================
+   Hover spins (Figma motion: trigger=hover, 1s/revolution, linear, continuous).
+   Pure CSS. Per-node direction from the page data. Gated behind (hover: hover)
+   so touch devices don't stick a spin on tap, and behind
+   (prefers-reduced-motion: no-preference) so reduced-motion users get none.
+   On unhover the element snaps back to rest — the original eases the stop; this
+   snap is a logged approximation ([approx] in deviations). Rotation is applied
+   via `transform` (the collage uses inset-* for placement, not a transform, so
+   there is no positioning conflict).
+   ========================================================================== */
+@keyframes hero-spin {
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  /* Headline photo chips — ALL clockwise. */
+  .s-hero-header .hero-chip:hover {
+    animation: hero-spin 1s linear infinite;
+  }
+
+  /* Orange googly blob — counterclockwise (reverse plays 1turn -> 0). */
+  .s-hero-header .hero-blob--googly:hover {
+    animation: hero-spin 1s linear infinite reverse;
+  }
+
+  /* Collage members1 (left, teal) — counterclockwise. */
+  .s-hero-header .hero-graphic-photo--1:hover {
+    animation: hero-spin 1s linear infinite reverse;
+  }
+
+  /* Collage members2 (centre) + members3 (right, orange) — clockwise. */
+  .s-hero-header .hero-graphic-photo--2:hover,
+  .s-hero-header .hero-graphic-photo--3:hover {
+    animation: hero-spin 1s linear infinite;
+  }
 }
 
 /* ==========================================================================
