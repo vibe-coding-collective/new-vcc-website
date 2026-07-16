@@ -56,12 +56,14 @@ mirrors `DEVIATIONS.md`: **[arch]** structural · **[content]** copy/data ·
     confirmed by md5 of the SVG path data and by alpha-contour analysis of the PNGs.
     So we ship **one** mask (`avatar-mask.svg` = `e54b773c…`, 128.8² squircle, 840 B)
     and scale it via `mask-size`; the other 7 would be exact duplicates.
-  - **The per-card variety comes from the frames, and the "orange" is the frame, not
-    a tint.** The 17 recovered frame outlines are genuinely distinct shapes, and every
-    one is filled brand orange (`fill="var(--fill-0,#EC6C23)"` → renders orange as a
-    plain `<img>`). The desktop capture (`dom-1280`, our canonical 12-person roster)
-    uses **10 distinct 200×198.9 frames**; we ship those 10 and assign each card its
-    **real capture frame by DOM order** (table below).
+  - **The "orange" is the frame, not a tint** — every frame is filled brand orange
+    (`fill="var(--fill-0,#EC6C23)"` → renders orange as a plain `<img>`).
+    **CORRECTION (reviewer-verified at the gate, 2026-07-16):** the 10 shipped frame
+    files are geometrically IDENTICAL (max pairwise path delta ≤0.001 on a 200-unit
+    canvas; the capture applies no rotation) — the original renders the SAME squiggle
+    on every card. The 10 per-hash files are kept for capture provenance only, and the
+    frame→person table below records provenance, not visual variety. A polish-pass item
+    may collapse them to one file (consistent with the 8→1 mask decision).
   - **No orange TINT exists.** Grepping the capture CSS, `mix-blend-mode:color` layers
     use only `#d9d9d9` (×7) and `#fff` (×2); `#ec6c23` appears solely as the eyebrow
     pill bg and the frame fill — never as a tint. Under the `color` blend both grey and
