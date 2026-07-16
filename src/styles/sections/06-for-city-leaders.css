@@ -330,28 +330,23 @@
    ========================================================================= */
 @media (width < 800px) {
   .s-for-city-leaders {
+    /* The original keeps a UNIFORM 120px frame for every person on mobile
+       (css-yb99np, measured live at true 375 — founders get no larger frame, and
+       there is NO 200px mobile variant; that figure was a desktop-clamp artifact
+       in an upstream brief). So founders match members at 120px. */
     --fcl-avatar: 120px;
-    /* 136px (not 150) so two founder cards + 16px gap fit the 295px available
-       at a 375px viewport — see the founder-width note below. */
-    --fcl-avatar-lg: 136px;
-    --fcl-step-icon: 130px;
+    --fcl-avatar-lg: 120px;
+    /* How-It-Works icons are 100px on mobile (css-uyaw1n), stacked in a column
+       — NOT a 170px "overlapping row" (that's the desktop value). */
+    --fcl-step-icon: 100px;
   }
 
-  /* Scale display type down so it fits 375px (desktop scale is canonical but
-     unusable at 375 — a documented mobile adaptation). */
-  .s-for-city-leaders .fcl-title {
-    font-size: 34px;
-    letter-spacing: 0.68px;
-  }
-
-  .s-for-city-leaders .fcl-block-title {
-    font-size: 30px;
-    letter-spacing: 0.6px;
-  }
-
-  .s-for-city-leaders .fcl-step-title {
-    font-size: 24px;
-    letter-spacing: 0.48px;
+  /* Section heading (.t-h2 → 32px), block titles (.t-band-title → 28px), step
+     titles (.t-card-title → 20px) and NAMES (.t-team-name → 18px) all step down
+     via the shared tokens.css mobile overrides. Only the team ROLE needs a scoped
+     size: the original drops it to 16px (css-p8lmy) while names/eyebrows stay 18. */
+  .s-for-city-leaders .fcl-role {
+    font-size: var(--fs-body-xs); /* 20 → 16 */
   }
 
   .s-for-city-leaders .fcl-body {
