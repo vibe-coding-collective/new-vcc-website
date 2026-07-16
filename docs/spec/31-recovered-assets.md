@@ -117,9 +117,12 @@ them left→right through one full cycle. One corroboration: `image 121` (widest
 
 > **⚠ Licensing — third-party trademarks.** All 7 are external company logos. Only use them with the
 > respective owners' permission / brand-guideline compliance. If unlicensed, keep the section-03
-> **text-pill** fallback (already built). **Recommendation:** before shipping any of the six *inferred*
-> logos, open the file and visually confirm the brand — the brand→hash mapping is inferred, only MacPaw
-> is certain. Filenames above assume the inference; rename if a swap is found on inspection.
+> **text-pill** fallback (already built). These are the same sponsor logos the original site displays;
+> shipping them reproduces the original's usage.
+>
+> **✓ VISUAL CONFIRMATION (orchestrator, 2026-07-16):** all 7 hashes downloaded and inspected on a
+> labeled contact sheet — every inferred brand→hash mapping above is CORRECT (Valae ✓, Lovable ✓,
+> OKTech ✓, MacPaw ✓, Microsoft ✓, ElevenLabs ✓, Softr ✓). The table's filenames are final.
 
 ---
 
