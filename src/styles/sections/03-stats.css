@@ -136,12 +136,6 @@
   animation: s-stats-marquee 36s linear infinite;
 }
 
-/* Courtesy pause-on-hover (the original's marquee system documented it) so a
-   sponsor can be read. Optional pure-CSS approximation, no JS. */
-.s-stats__marquee:hover .s-stats__marquee-track {
-  animation-play-state: paused;
-}
-
 .s-stats__sponsors {
   display: flex;
   align-items: center;
