@@ -79,5 +79,12 @@ export default defineConfig({
   plugins: [htmlIncludes(), stripHtmlComments()],
   test: {
     environment: 'happy-dom',
+    /* Vitest's default `exclude` covers node_modules/ and dist/ but NOT .claude/ —
+       where worker git worktrees live. Without this, a gate run in the main checkout
+       silently ALSO executes every worktree's copy of every test (43 real tests read
+       as 86), so main's gate could go green on a worktree's code or red on a worker's
+       half-finished edit. Mirrors eslint.config.js's `.claude/**` ignore; tsconfig is
+       already safe because it includes only ["src", "vite.config.ts"]. */
+    exclude: ['**/node_modules/**', '**/dist/**', '.claude/**'],
   },
 })
