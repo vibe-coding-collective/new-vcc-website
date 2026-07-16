@@ -59,10 +59,30 @@ Where the three DOM copies disagree, **desktop (1280) copy is canonical**. Known
 - **[content] Project-card DOM order (§05).** Keep desktop order (Immersive 3D, Motion
   Tracking, Open Data Integration, The Unexpected); ignore the mobile/tablet middle-two swap.
 
-> **Preserved as-is (NOT deviations — do not "fix"):** the stat says **9** Countries with
-> **8** flags; copy elsewhere says "Seven countries" / "7 countries"; mixed curly vs
-> straight apostrophes; the double space after `120 minutes.`; trailing spaces in a few
+> **Preserved as-is (NOT deviations — do not "fix"):** mixed curly vs straight
+> apostrophes; the double space after `120 minutes.`; trailing spaces in a few
 > source strings. Reproduce verbatim (see spec §7).
+>
+> The original's contradictory membership/country figures were also on this list
+> until go-live; they are now reconciled — see **Content corrections** below.
+
+## Content corrections (go-live, 2026-07-16)
+
+The clone reproduced the original's self-contradicting membership and country figures
+verbatim, per spec §7. That was right while this repo was a fidelity exercise. It stopped
+being right the moment the clone became the real `vibecoders.global` under our own name.
+**Operator decision (2026-07-16): reconcile to the true figures.**
+
+- **[content] Membership reads `4,000+` everywhere.** The original says `4,000+` (§03
+  hero), `1,200+` (§06 lede) and `1,100+` (§07 lede + bullet) — a ~4x spread, with the
+  `1,100+` sitting inside a "No inflated numbers" pledge that the hero contradicted.
+- **[content] Countries reads `10` everywhere.** The original says `9` (§03 stat),
+  "Seven countries" (§03 desc) and "7 countries" (§07 lede + bullet).
+- **[content] The §03 flag row is knowingly short of the stat.** It still carries the
+  original's **8** flags (🇬🇧🇩🇪🇺🇸🇯🇵🇺🇦🇵🇹🇳🇱🇵🇰) against a stat of **10**. Deliberate,
+  not an oversight: the row is `aria-hidden="true"` decoration, and the operator will add
+  the two missing flags once those countries are confirmed. **Do not "fix" the stat down
+  to match the flags — add the flags up to match the stat.**
 
 ## Links / URLs
 

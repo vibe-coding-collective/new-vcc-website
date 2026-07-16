@@ -47,12 +47,19 @@ supported BY
 | flag string | Golos Black 32 (Noto fallback for emoji) | — | `css-126xrq`+`css-871ihu` |
 | `supported BY` | Golos Black 32 / 1.5 / 0.64px, UC | `#181814` | `css-65o562`/`css-9a7xzl`+`css-871ihu` |
 
-## Data notes (discrepancies — reproduce verbatim, do not "fix")
+## Data notes (discrepancies in THE ORIGINAL — superseded at go-live, do NOT re-apply)
 
-- Number says **`9`** Countries but the flag string contains **8** flags:
+This section records what the **original** site says. It is a description of the source,
+not an instruction for this build. **We deliberately diverge — see "Content corrections"
+in `docs/DEVIATIONS.md`.** Do not "restore" these values.
+
+- The original's number says **`9`** Countries but its flag string contains **8** flags:
   🇬🇧 GB · 🇩🇪 DE · 🇺🇸 US · 🇯🇵 JP · 🇺🇦 UA · 🇵🇹 PT · 🇳🇱 NL · 🇵🇰 PK.
-- Copy elsewhere says "Seven countries" (this paragraph) and "7 countries" (sponsors), while
-  the stat says 9. All are intentional as‑is content.
+- The original's copy elsewhere says "Seven countries" (this paragraph) and "7 countries"
+  (sponsors), while its stat says 9. Its membership figure varies 4,000+ / 1,200+ / 1,100+.
+- **This build says `4,000+` members and `10` countries throughout** (operator decision,
+  2026-07-16). The flag row still carries the original's 8 flags pending confirmation of
+  the two missing countries.
 
 ## "supported BY" sponsor‑logo strip
 

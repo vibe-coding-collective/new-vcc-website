@@ -31,7 +31,9 @@ The full protocol the models follow lives in **[CLAUDE.md](./CLAUDE.md)**.
 - **researcher** — studies the live site and produces the implementation spec under `docs/spec/`.
 
 ## Status
-**Scaffolding only.** The actual site build begins when the operator provides the detailed build brief in a fresh Claude Code session.
+**The clone is built.** All eleven sections (`src/sections/01-nav-sticky.html` → `11-footer.html`) are implemented against the specs in [`docs/spec/`](./docs/spec/) using the real recovered assets, and the full gate — `npm run verify` (typecheck · lint · tests · build) — is green. Deliberate departures from the original are logged in [DEVIATIONS.md](./docs/DEVIATIONS.md).
+
+Not yet deployed to a host.
 
 ## License
 MIT — see [LICENSE](./LICENSE).
