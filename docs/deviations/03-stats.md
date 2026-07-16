@@ -89,6 +89,29 @@ Legend: **[arch]** structural · **[content]** copy/data · **[a11y]** accessibi
   keeps only internal spacing: `padding-block: 24px 80px` (asymmetric per spec) and the
   80px gap between the stats cluster and the "supported BY" strip.
 
+## Visual-parity pass (operator finding, 2026-07-16)
+
+- **[arch] Removed the CSS pill — logos now render BARE at 80px (supersedes the earlier
+  "32px logo in an off-white pill" treatment).** Operator finding: the original renders each
+  sponsor as a **bare `<img>` at 80px height directly on the cream background** — the off-white
+  rounded pill is **baked into the recovered PNG**, not a separate element. The prior build
+  doubled it (a CSS pill *plus* the baked pill) and shrank the logo to 32px inside. **Verified
+  live** (DOM query at 1366): every sponsor image is `height: 80px`, its parent has
+  `background: transparent` and `padding: 0` (no pill element), and the widths follow intrinsic
+  ratios **171–249px** (Valae 171 → ElevenLabs 249). Also verified our PNGs carry the baked
+  off-white pill (viewed the decoded files). Fix: dropped `background`/`padding-inline`/
+  `min-width`/`border-radius` from `.s-stats__sponsor` (now just a shrink-wrapping flex item)
+  and set `.s-stats__sponsor-logo { height: 80px; width: auto }` (was 32px). The `max-width`
+  guard was raised **200px → 300px** to clear the 80px-height logos (widest ~249px) while still
+  capping a hypothetical extreme-aspect logo (`object-fit: contain` letterboxes if hit).
+- **[unchanged] Marquee mechanics kept:** duplicate track, `translateX(-50%)` loop, 36s, pause-
+  on-hover, `aria-hidden` duplicate with `alt=""`, eager loading, `role="list"` semantics, and
+  the reduced-motion static-wrapped fallback. **Seam math re-verified with the new dimensions:**
+  the 7 logos sum **1406px** (202+200+201+249+183+171+200), and one track copy = 1406 + 7×24px
+  gaps = **1574px** — matching the live measurement and exceeding the 1400px viewport cap
+  (1574 > 1400), so the two-copy loop stays seamless on every width. (Item gap is the existing
+  24px; already correct.)
+
 ## Preserved as canon (NOT deviations — do not "fix")
 
 - **"9" Countries with 8 flags** (🇬🇧🇩🇪🇺🇸🇯🇵🇺🇦🇵🇹🇳🇱🇵🇰), "Seven countries" in the
