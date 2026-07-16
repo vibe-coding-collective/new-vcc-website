@@ -1,0 +1,888 @@
+{
+ "_note": "Trimmed attribution excerpt from /_json/e8b7663c-e6ea-4195-9e28-fee26262baf4/_index.json (full=4.17MB). Maps each recovered /_assets/v11 hash to its Figma asset entry + referencing node(s).",
+ "source_json": "/_json/e8b7663c-e6ea-4195-9e28-fee26262baf4/_index.json",
+ "sponsor_source_order": [
+  "image9(idx0)",
+  "image118(idx1)",
+  "image119(idx2)",
+  "macpaw(idx3)",
+  "image120(idx4)",
+  "image121(idx5)",
+  "image123(idx6)"
+ ],
+ "assets": {
+  "5a562b3b849d4ac058cf94ecbb4ccd72c2b22cc0": {
+   "label": "hero.chip.after-communities (h1_photo2)",
+   "url": "5a562b3b849d4ac058cf94ecbb4ccd72c2b22cc0.png",
+   "asset_type": "PAINT_ASSET",
+   "declared_size": {
+    "x": 288.0,
+    "y": 288.0
+   },
+   "refs": [
+    {
+     "id": "85:18964",
+     "name": "h1_photo2 2",
+     "anc": "Main heading > Container > h1_photo2 2"
+    },
+    {
+     "id": "78:305",
+     "name": "h1_photo2 2",
+     "anc": "Main heading > Container > h1_photo2 2"
+    },
+    {
+     "id": "83:1144",
+     "name": "h1_photo2 2",
+     "anc": "Main heading > Container > h1_photo2 2"
+    },
+    {
+     "id": "85:18446",
+     "name": "h1_photo2 2",
+     "anc": "Main heading > Container > h1_photo2 2"
+    }
+   ]
+  },
+  "a60fb94841952ed196647c3674aab30f088c04ce": {
+   "label": "hero.chip.before-TECH-LITE (h1_photo4)",
+   "url": "a60fb94841952ed196647c3674aab30f088c04ce.png",
+   "asset_type": "PAINT_ASSET",
+   "declared_size": {
+    "x": 288.0,
+    "y": 288.0
+   },
+   "refs": [
+    {
+     "id": "85:18966",
+     "name": "h1_photo4 1",
+     "anc": "Main heading > Container > h1_photo4 1"
+    },
+    {
+     "id": "78:331",
+     "name": "h1_photo4 1",
+     "anc": "Main heading > Container > h1_photo4 1"
+    },
+    {
+     "id": "85:18448",
+     "name": "h1_photo4 1",
+     "anc": "Main heading > Container > h1_photo4 1"
+    },
+    {
+     "id": "78:330",
+     "name": "h1_photo4 1",
+     "anc": "Main heading > Container > h1_photo4 1"
+    }
+   ]
+  },
+  "8eb6191f8de2f90ec18753c99c5ba19ffc762aa2": {
+   "label": "hero.chip.after-BUILDERS (h1_photo5)",
+   "url": "8eb6191f8de2f90ec18753c99c5ba19ffc762aa2.png",
+   "asset_type": "PAINT_ASSET",
+   "declared_size": {
+    "x": 288.0,
+    "y": 288.0
+   },
+   "refs": [
+    {
+     "id": "85:18970",
+     "name": "h1_photo5 1",
+     "anc": "Main heading > Container > h1_photo5 1"
+    },
+    {
+     "id": "78:318",
+     "name": "h1_photo5 1",
+     "anc": "Main heading > Container > h1_photo5 1"
+    },
+    {
+     "id": "78:317",
+     "name": "h1_photo5 1",
+     "anc": "Main heading > Container > h1_photo5 1"
+    },
+    {
+     "id": "83:1149",
+     "name": "h1_photo5 1",
+     "anc": "Main heading > Container > h1_photo5 1"
+    }
+   ]
+  },
+  "f991abb570b9d8df72c1e09a4e57963894663628": {
+   "label": "hero.googly.desktop",
+   "url": "f991abb570b9d8df72c1e09a4e57963894663628.svg",
+   "asset_type": "GENERATED_ASSET",
+   "declared_size": {
+    "x": 89.6000159851683,
+    "y": 75.8530759521309
+   },
+   "refs": [
+    {
+     "id": "I14:524;479:506",
+     "name": "Icon",
+     "anc": "Main heading > Container > Icon"
+    }
+   ]
+  },
+  "c6fb4b8c949728c9f09dc81d9de08402eaa79f6d": {
+   "label": "hero.googly.tablet",
+   "url": "c6fb4b8c949728c9f09dc81d9de08402eaa79f6d.svg",
+   "asset_type": "GENERATED_ASSET",
+   "declared_size": {
+    "x": 56.0000018564776,
+    "y": 47.4081688012157
+   },
+   "refs": [
+    {
+     "id": "I83:1148;479:506",
+     "name": "Icon",
+     "anc": "Main heading > Container > Icon"
+    }
+   ]
+  },
+  "66823e03c2c0eeaa51a2574025cc7d4b91be1873": {
+   "label": "hero.googly.mobile",
+   "url": "66823e03c2c0eeaa51a2574025cc7d4b91be1873.svg",
+   "asset_type": "GENERATED_ASSET",
+   "declared_size": {
+    "x": 56.0000018564776,
+    "y": 47.4081688012157
+   },
+   "refs": [
+    {
+     "id": "I56:2098;479:506",
+     "name": "Icon",
+     "anc": "Main heading > Container > Icon"
+    }
+   ]
+  },
+  "d6369c47dedead1915b65c8b0adbb4de5ae97729": {
+   "label": "hero.collage.members1",
+   "url": "d6369c47dedead1915b65c8b0adbb4de5ae97729.png",
+   "asset_type": "PAINT_ASSET",
+   "declared_size": {
+    "x": 1894.0,
+    "y": 1938.0
+   },
+   "refs": [
+    {
+     "id": "85:18980",
+     "name": "members1 1",
+     "anc": "Container > Container > members1 1"
+    },
+    {
+     "id": "84:8269",
+     "name": "members1 1",
+     "anc": "Container > Container > members1 1"
+    },
+    {
+     "id": "84:7757",
+     "name": "members1 1",
+     "anc": "Container > Container > members1 1"
+    },
+    {
+     "id": "85:17944",
+     "name": "members1 1",
+     "anc": "Container > Container > members1 1"
+    }
+   ]
+  },
+  "de323857ad977125c4dae433c37bbfaa6e05ed31": {
+   "label": "hero.collage.members2",
+   "url": "de323857ad977125c4dae433c37bbfaa6e05ed31.png",
+   "asset_type": "PAINT_ASSET",
+   "declared_size": {
+    "x": 1894.0,
+    "y": 1894.0
+   },
+   "refs": [
+    {
+     "id": "84:8267",
+     "name": "members2 1",
+     "anc": "Container > Container > members2 1"
+    },
+    {
+     "id": "84:7243",
+     "name": "members2 1",
+     "anc": "Container > Container > members2 1"
+    },
+    {
+     "id": "85:18460",
+     "name": "members2 1",
+     "anc": "Container > Container > members2 1"
+    },
+    {
+     "id": "85:18978",
+     "name": "members2 1",
+     "anc": "Container > Container > members2 1"
+    }
+   ]
+  },
+  "8badb11d697555e42060d6b20370b2b9a2baa855": {
+   "label": "hero.collage.members3",
+   "url": "8badb11d697555e42060d6b20370b2b9a2baa855.png",
+   "asset_type": "PAINT_ASSET",
+   "declared_size": {
+    "x": 1894.0,
+    "y": 1938.0
+   },
+   "refs": [
+    {
+     "id": "85:18979",
+     "name": "members3 1",
+     "anc": "Container > Container > members3 1"
+    },
+    {
+     "id": "85:18461",
+     "name": "members3 1",
+     "anc": "Container > Container > members3 1"
+    },
+    {
+     "id": "84:7756",
+     "name": "members3 1",
+     "anc": "Container > Container > members3 1"
+    },
+    {
+     "id": "85:17943",
+     "name": "members3 1",
+     "anc": "Container > Container > members3 1"
+    }
+   ]
+  },
+  "4f79c701f27104707bdbfaafd0642c59f158ff3e": {
+   "label": "sponsor.macpaw (idx3)",
+   "url": "4f79c701f27104707bdbfaafd0642c59f158ff3e.png",
+   "asset_type": "PAINT_ASSET",
+   "declared_size": {
+    "x": 600.0,
+    "y": 240.0
+   },
+   "refs": [
+    {
+     "id": "179:326",
+     "name": "macpaw 1",
+     "anc": "Container > Container > macpaw 1"
+    },
+    {
+     "id": "179:325",
+     "name": "macpaw 1",
+     "anc": "Container > Container > macpaw 1"
+    },
+    {
+     "id": "179:324",
+     "name": "macpaw 1",
+     "anc": "Container > Container > macpaw 1"
+    }
+   ]
+  },
+  "5c67840b122b8508c56e83e052d3cc0938a886ca": {
+   "label": "sponsor.image9 (idx0)",
+   "url": "5c67840b122b8508c56e83e052d3cc0938a886ca.png",
+   "asset_type": "PAINT_ASSET",
+   "declared_size": {
+    "x": 256.0,
+    "y": 120.0
+   },
+   "refs": [
+    {
+     "id": "90:20768",
+     "name": "image 9",
+     "anc": "Container > Container > image 9"
+    },
+    {
+     "id": "90:20767",
+     "name": "image 9",
+     "anc": "Container > Container > image 9"
+    },
+    {
+     "id": "90:20769",
+     "name": "image 9",
+     "anc": "Container > Container > image 9"
+    }
+   ]
+  },
+  "d3ef03203f68628ad429dd38be6066d4dbd34f6c": {
+   "label": "sponsor.image118 (idx1)",
+   "url": "d3ef03203f68628ad429dd38be6066d4dbd34f6c.png",
+   "asset_type": "PAINT_ASSET",
+   "declared_size": {
+    "x": 400.0,
+    "y": 160.0
+   },
+   "refs": [
+    {
+     "id": "90:20772",
+     "name": "image 118",
+     "anc": "Container > Container > image 118"
+    },
+    {
+     "id": "90:20771",
+     "name": "image 118",
+     "anc": "Container > Container > image 118"
+    },
+    {
+     "id": "90:20770",
+     "name": "image 118",
+     "anc": "Container > Container > image 118"
+    }
+   ]
+  },
+  "6b3d80b37f4380613a091362ed7f2960d0a23dff": {
+   "label": "sponsor.image119 (idx2)",
+   "url": "6b3d80b37f4380613a091362ed7f2960d0a23dff.png",
+   "asset_type": "PAINT_ASSET",
+   "declared_size": {
+    "x": 404.0,
+    "y": 160.0
+   },
+   "refs": [
+    {
+     "id": "90:20774",
+     "name": "image 119",
+     "anc": "Container > Container > image 119"
+    },
+    {
+     "id": "90:20773",
+     "name": "image 119",
+     "anc": "Container > Container > image 119"
+    },
+    {
+     "id": "90:20775",
+     "name": "image 119",
+     "anc": "Container > Container > image 119"
+    }
+   ]
+  },
+  "1c3e99651b18b91cef5b82aae350937593ce6574": {
+   "label": "sponsor.image120 (idx4)",
+   "url": "1c3e99651b18b91cef5b82aae350937593ce6574.png",
+   "asset_type": "PAINT_ASSET",
+   "declared_size": {
+    "x": 402.0,
+    "y": 160.0
+   },
+   "refs": [
+    {
+     "id": "90:20777",
+     "name": "image 120",
+     "anc": "Container > Container > image 120"
+    },
+    {
+     "id": "90:20776",
+     "name": "image 120",
+     "anc": "Container > Container > image 120"
+    },
+    {
+     "id": "90:20778",
+     "name": "image 120",
+     "anc": "Container > Container > image 120"
+    }
+   ]
+  },
+  "5e973f77aa7840ba2e45e3022b81ae09b4b35c41": {
+   "label": "sponsor.image121 (idx5)",
+   "url": "5e973f77aa7840ba2e45e3022b81ae09b4b35c41.png",
+   "asset_type": "PAINT_ASSET",
+   "declared_size": {
+    "x": 498.0,
+    "y": 160.0
+   },
+   "refs": [
+    {
+     "id": "90:20780",
+     "name": "image 121",
+     "anc": "Container > Container > image 121"
+    },
+    {
+     "id": "90:20779",
+     "name": "image 121",
+     "anc": "Container > Container > image 121"
+    },
+    {
+     "id": "90:20781",
+     "name": "image 121",
+     "anc": "Container > Container > image 121"
+    }
+   ]
+  },
+  "8e452d45246a391069309df65da2fde56013812f": {
+   "label": "sponsor.image123 (idx6)",
+   "url": "8e452d45246a391069309df65da2fde56013812f.png",
+   "asset_type": "PAINT_ASSET",
+   "declared_size": {
+    "x": 366.0,
+    "y": 160.0
+   },
+   "refs": [
+    {
+     "id": "190:334",
+     "name": "image 123",
+     "anc": "Container > Container > image 123"
+    },
+    {
+     "id": "190:333",
+     "name": "image 123",
+     "anc": "Container > Container > image 123"
+    },
+    {
+     "id": "190:332",
+     "name": "image 123",
+     "anc": "Container > Container > image 123"
+    }
+   ]
+  },
+  "34e7cef03b76dea60414a4e330b3d08f8d43e2af": {
+   "label": "footer.wordmark-flat (all 5 blobs)",
+   "url": "34e7cef03b76dea60414a4e330b3d08f8d43e2af.svg",
+   "asset_type": "GENERATED_ASSET",
+   "declared_size": {
+    "x": 708.0,
+    "y": 202.0
+   },
+   "refs": [
+    {
+     "id": "12:253",
+     "name": "fotter",
+     "anc": "Desktop > Footer > fotter"
+    },
+    {
+     "id": "12:253",
+     "name": "fotter",
+     "anc": "Desktop > Footer > fotter"
+    }
+   ]
+  },
+  "8ee7b15c6406bbd0773700046d2992c1cb02ea4c": {
+   "label": "footer.blob.red.body",
+   "url": "8ee7b15c6406bbd0773700046d2992c1cb02ea4c.svg",
+   "asset_type": "GENERATED_ASSET",
+   "declared_size": {
+    "x": 107.424797058105,
+    "y": 56.5784378051758
+   },
+   "refs": [
+    {
+     "id": "56:2542",
+     "name": "Vector 89",
+     "anc": "fotter > Container > Vector 89"
+    },
+    {
+     "id": "56:2542",
+     "name": "Vector 89",
+     "anc": "fotter > Container > Vector 89"
+    }
+   ]
+  },
+  "b96a14534612d6058dcd7c019f39393032cf2fc3": {
+   "label": "footer.blob.blue.body",
+   "url": "b96a14534612d6058dcd7c019f39393032cf2fc3.svg",
+   "asset_type": "GENERATED_ASSET",
+   "declared_size": {
+    "x": 107.424789428711,
+    "y": 56.9518699645996
+   },
+   "refs": [
+    {
+     "id": "56:2550",
+     "name": "Vector 89",
+     "anc": "fotter > Container > Vector 89"
+    },
+    {
+     "id": "56:2550",
+     "name": "Vector 89",
+     "anc": "fotter > Container > Vector 89"
+    }
+   ]
+  },
+  "96b9ee3d0bb3a2c6d48426d2b640bfcb18d2857e": {
+   "label": "footer.blob.yellow.body",
+   "url": "96b9ee3d0bb3a2c6d48426d2b640bfcb18d2857e.svg",
+   "asset_type": "GENERATED_ASSET",
+   "declared_size": {
+    "x": 71.758415222168,
+    "y": 61.0460472106934
+   },
+   "refs": [
+    {
+     "id": "56:2559",
+     "name": "Vector 96",
+     "anc": "Container > Container > Vector 96"
+    },
+    {
+     "id": "56:2559",
+     "name": "Vector 96",
+     "anc": "Container > Container > Vector 96"
+    }
+   ]
+  },
+  "a7658f4bae9384f3900da4f59548a4d06fe0717a": {
+   "label": "footer.blob.lime.body",
+   "url": "a7658f4bae9384f3900da4f59548a4d06fe0717a.svg",
+   "asset_type": "GENERATED_ASSET",
+   "declared_size": {
+    "x": 61.9910316467285,
+    "y": 54.3169403076172
+   },
+   "refs": [
+    {
+     "id": "83:1520",
+     "name": "Vector 94",
+     "anc": "fotter > Container > Vector 94"
+    },
+    {
+     "id": "56:2534",
+     "name": "Vector 94",
+     "anc": "fotter > Container > Vector 94"
+    },
+    {
+     "id": "56:2534",
+     "name": "Vector 94",
+     "anc": "fotter > Container > Vector 94"
+    },
+    {
+     "id": "83:1520",
+     "name": "Vector 94",
+     "anc": "fotter > Container > Vector 94"
+    }
+   ]
+  },
+  "0e4f3ba2a51ee3d5b83000bb28a8d42dcb7de93e": {
+   "label": "footer.blob.teal.body",
+   "url": "0e4f3ba2a51ee3d5b83000bb28a8d42dcb7de93e.svg",
+   "asset_type": "GENERATED_ASSET",
+   "declared_size": {
+    "x": 78.908561706543,
+    "y": 64.8604507446289
+   },
+   "refs": [
+    {
+     "id": "56:2568",
+     "name": "Vector 96",
+     "anc": "Container > Container > Vector 96"
+    },
+    {
+     "id": "83:1554",
+     "name": "Vector 96",
+     "anc": "Container > Container > Vector 96"
+    },
+    {
+     "id": "56:2568",
+     "name": "Vector 96",
+     "anc": "Container > Container > Vector 96"
+    },
+    {
+     "id": "83:1554",
+     "name": "Vector 96",
+     "anc": "Container > Container > Vector 96"
+    }
+   ]
+  },
+  "e54b773c654e901a476251f8dee607a350253ef5": {
+   "label": "avatar.mask.common",
+   "url": "e54b773c654e901a476251f8dee607a350253ef5.svg",
+   "asset_type": "GENERATED_ASSET",
+   "declared_size": {
+    "x": 128.771835327148,
+    "y": 128.771835327148
+   },
+   "refs": [
+    {
+     "id": "199:1456",
+     "name": "Rectangle 9",
+     "anc": "Group 25 > Mask group > Rectangle 9"
+    },
+    {
+     "id": "199:1509",
+     "name": "Rectangle 9",
+     "anc": "Group 31 > Mask group > Rectangle 9"
+    },
+    {
+     "id": "199:1397",
+     "name": "Rectangle 9",
+     "anc": "Group 26 > Mask group > Rectangle 9"
+    },
+    {
+     "id": "199:1470",
+     "name": "Rectangle 9",
+     "anc": "Group 25 > Mask group > Rectangle 9"
+    }
+   ]
+  },
+  "3e9082a3bec76117a60ed087768ef4e329865da1": {
+   "label": "avatar.mask.png1",
+   "url": "3e9082a3bec76117a60ed087768ef4e329865da1.png",
+   "asset_type": "GENERATED_ASSET",
+   "declared_size": {
+    "x": 128.769973754883,
+    "y": 128.769989013672
+   },
+   "refs": [
+    {
+     "id": "199:1148",
+     "name": "Rectangle 9",
+     "anc": "Group 12 > Mask group > Rectangle 9"
+    },
+    {
+     "id": "199:1379",
+     "name": "Rectangle 9",
+     "anc": "Group 12 > Mask group > Rectangle 9"
+    },
+    {
+     "id": "199:1592",
+     "name": "Rectangle 9",
+     "anc": "Group 12 > Mask group > Rectangle 9"
+    },
+    {
+     "id": "199:1331",
+     "name": "Rectangle 9",
+     "anc": "Group 12 > Mask group > Rectangle 9"
+    }
+   ]
+  },
+  "5af4bfba75e7e7192f379e5ef04869392ecaf3fe": {
+   "label": "avatar.mask.founder",
+   "url": "5af4bfba75e7e7192f379e5ef04869392ecaf3fe.svg",
+   "asset_type": "GENERATED_ASSET",
+   "declared_size": {
+    "x": 128.771850585938,
+    "y": 128.771850585938
+   },
+   "refs": [
+    {
+     "id": "199:1548",
+     "name": "Rectangle 9",
+     "anc": "Group 30 > Mask group > Rectangle 9"
+    },
+    {
+     "id": "199:1534",
+     "name": "Rectangle 9",
+     "anc": "Group 30 > Mask group > Rectangle 9"
+    },
+    {
+     "id": "199:1541",
+     "name": "Rectangle 9",
+     "anc": "Group 30 > Mask group > Rectangle 9"
+    },
+    {
+     "id": "199:689",
+     "name": "Rectangle 9",
+     "anc": "Group 21 > Mask group > Rectangle 9"
+    }
+   ]
+  },
+  "a23e76da4c565fc192bb02ec64558b3bdd825909": {
+   "label": "avatar.mask.desk2",
+   "url": "a23e76da4c565fc192bb02ec64558b3bdd825909.svg",
+   "asset_type": "GENERATED_ASSET",
+   "declared_size": {
+    "x": 117.944458007812,
+    "y": 117.944458007812
+   },
+   "refs": [
+    {
+     "id": "199:1032",
+     "name": "Rectangle 9",
+     "anc": "Group 15 > Mask group > Rectangle 9"
+    },
+    {
+     "id": "199:1025",
+     "name": "Rectangle 9",
+     "anc": "Group 15 > Mask group > Rectangle 9"
+    },
+    {
+     "id": "199:1025",
+     "name": "Rectangle 9",
+     "anc": "Group 15 > Mask group > Rectangle 9"
+    },
+    {
+     "id": "199:1032",
+     "name": "Rectangle 9",
+     "anc": "Group 15 > Mask group > Rectangle 9"
+    }
+   ]
+  },
+  "a912d2aac01286b942ab337bd9e1595ec7dc384d": {
+   "label": "avatar.mask.mobile1",
+   "url": "a912d2aac01286b942ab337bd9e1595ec7dc384d.svg",
+   "asset_type": "GENERATED_ASSET",
+   "declared_size": {
+    "x": 77.2630996704102,
+    "y": 77.2630996704102
+   },
+   "refs": [
+    {
+     "id": "199:1694",
+     "name": "Rectangle 9",
+     "anc": "Group 28 > Mask group > Rectangle 9"
+    },
+    {
+     "id": "199:1646",
+     "name": "Rectangle 9",
+     "anc": "Group 26 > Mask group > Rectangle 9"
+    },
+    {
+     "id": "199:793",
+     "name": "Rectangle 9",
+     "anc": "Group 23 > Mask group > Rectangle 9"
+    },
+    {
+     "id": "199:735",
+     "name": "Rectangle 9",
+     "anc": "Group 22 > Mask group > Rectangle 9"
+    }
+   ]
+  },
+  "9fca8ea511ee349466b485011cab77017b329b77": {
+   "label": "avatar.mask.mobile2",
+   "url": "9fca8ea511ee349466b485011cab77017b329b77.svg",
+   "asset_type": "GENERATED_ASSET",
+   "declared_size": {
+    "x": 77.2631072998047,
+    "y": 77.2631072998047
+   },
+   "refs": [
+    {
+     "id": "199:696",
+     "name": "Rectangle 9",
+     "anc": "Group 21 > Mask group > Rectangle 9"
+    },
+    {
+     "id": "199:696",
+     "name": "Rectangle 9",
+     "anc": "Group 21 > Mask group > Rectangle 9"
+    }
+   ]
+  },
+  "03709987aa34d78db18394d298ea9e598b3bb1b8": {
+   "label": "avatar.mask.mobile3",
+   "url": "03709987aa34d78db18394d298ea9e598b3bb1b8.svg",
+   "asset_type": "GENERATED_ASSET",
+   "declared_size": {
+    "x": 70.7666702270508,
+    "y": 70.7666702270508
+   },
+   "refs": [
+    {
+     "id": "199:1039",
+     "name": "Rectangle 9",
+     "anc": "Group 15 > Mask group > Rectangle 9"
+    },
+    {
+     "id": "199:1039",
+     "name": "Rectangle 9",
+     "anc": "Group 15 > Mask group > Rectangle 9"
+    }
+   ]
+  },
+  "3cb9dac8fbd4c341f933f067c6d3e79dc183332f": {
+   "label": "avatar.mask.mobilepng",
+   "url": "3cb9dac8fbd4c341f933f067c6d3e79dc183332f.png",
+   "asset_type": "GENERATED_ASSET",
+   "declared_size": {
+    "x": 77.2619857788086,
+    "y": 77.2619934082031
+   },
+   "refs": [
+    {
+     "id": "199:988",
+     "name": "Rectangle 9",
+     "anc": "Group 12 > Mask group > Rectangle 9"
+    },
+    {
+     "id": "199:988",
+     "name": "Rectangle 9",
+     "anc": "Group 12 > Mask group > Rectangle 9"
+    }
+   ]
+  },
+  "54ee46ec3d526893d265a6557144564dbc88e156": {
+   "label": "avatar.frame.union",
+   "url": "54ee46ec3d526893d265a6557144564dbc88e156.svg",
+   "asset_type": "GENERATED_ASSET",
+   "declared_size": {
+    "x": 199.999984741211,
+    "y": 198.883651733398
+   },
+   "refs": [
+    {
+     "id": "199:1146",
+     "name": "Union",
+     "anc": "Group 32 > Group 12 > Union"
+    },
+    {
+     "id": "199:1377",
+     "name": "Union",
+     "anc": "Group 32 > Group 12 > Union"
+    },
+    {
+     "id": "199:1230",
+     "name": "Union",
+     "anc": "Group 32 > Group 12 > Union"
+    },
+    {
+     "id": "199:1582",
+     "name": "Union",
+     "anc": "Group 33 > Group 12 > Union"
+    }
+   ]
+  },
+  "f73502cadea2f4886912b551fe26ecd1cc739d2c": {
+   "label": "avatar.frame.g9",
+   "url": "f73502cadea2f4886912b551fe26ecd1cc739d2c.svg",
+   "asset_type": "GENERATED_ASSET",
+   "declared_size": {
+    "x": 200.000085103762,
+    "y": 198.883756911455
+   },
+   "refs": [
+    {
+     "id": "199:679",
+     "name": "Group 9",
+     "anc": "Container > Group 21 > Group 9"
+    },
+    {
+     "id": "199:686",
+     "name": "Group 9",
+     "anc": "Container > Group 21 > Group 9"
+    },
+    {
+     "id": "199:686",
+     "name": "Group 9",
+     "anc": "Container > Group 21 > Group 9"
+    },
+    {
+     "id": "199:679",
+     "name": "Group 9",
+     "anc": "Container > Group 21 > Group 9"
+    }
+   ]
+  },
+  "dc6bab2b57808ae44afac1c454f6a3e6a8387b05": {
+   "label": "avatar.frame.founder",
+   "url": "dc6bab2b57808ae44afac1c454f6a3e6a8387b05.svg",
+   "asset_type": "GENERATED_ASSET",
+   "declared_size": {
+    "x": 119.999992370605,
+    "y": 119.330192565918
+   },
+   "refs": [
+    {
+     "id": "199:986",
+     "name": "Union",
+     "anc": "Group 32 > Group 12 > Union"
+    },
+    {
+     "id": "199:1037",
+     "name": "Union",
+     "anc": "Group 33 > Group 15 > Union"
+    },
+    {
+     "id": "199:986",
+     "name": "Union",
+     "anc": "Group 32 > Group 12 > Union"
+    },
+    {
+     "id": "199:1037",
+     "name": "Union",
+     "anc": "Group 33 > Group 15 > Union"
+    }
+   ]
+  }
+ }
+}
