@@ -140,9 +140,9 @@
   margin: 0;
 }
 
-/* White rounded "pill" per the live observation. Brand-name text stands in for
-   the runtime-injected logo artwork (only "MacPaw" is hash-confirmed in the
-   assets doc; third-party marks are not fabricated — see deviations). */
+/* White rounded "pill" per the live observation, holding the sponsor's REAL
+   recovered logo (docs/spec/31-recovered-assets.md Group 2). Fixed height,
+   centered. */
 .s-stats__sponsor {
   display: flex;
   flex-shrink: 0;
@@ -155,12 +155,14 @@
   border-radius: var(--radius-card);
 }
 
-.s-stats__sponsor-name {
-  font-weight: var(--fw-black);
-  font-size: var(--fs-body);
-  line-height: var(--lh-normal);
-  color: var(--ink);
-  white-space: nowrap;
+/* Recovered sponsor wordmark. The scans have DIFFERING intrinsic heights
+   (120 / 160 / 240px), so a FIXED display height normalizes the row while
+   `width: auto` preserves each logo's aspect ratio; `display: block` drops the
+   inline descender gap so the pill centers it cleanly. */
+.s-stats__sponsor-logo {
+  display: block;
+  width: auto;
+  height: 32px;
 }
 
 @keyframes s-stats-marquee {
