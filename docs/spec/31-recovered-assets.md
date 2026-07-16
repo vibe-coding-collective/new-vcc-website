@@ -68,10 +68,13 @@ re-tinted, but as a plain `<img>` it renders orange.)
 
 ### 1c. 862×350 photo collage — 3 PNGs (photos only)
 
-Frame `84:7242` ("Container", 862×350) contains **exactly three plain photo rectangles** — no mask
-or colored-blob child nodes. The "flower/cloud mask shapes" and "teal/yellow/red blob backgrounds"
-from the live observation are a **runtime CSS composite** (identical pattern to the team avatars in
-§4), **not** separate assets. Left→right stacking order is `members1, members2, members3`.
+Frame `84:7242` ("Container", 862×350) contains three photo-fill rectangles with no mask or
+colored-blob child NODES. **CORRECTION (2026-07-16, confirmed on download by builder 02 and its
+reviewer):** this section's original "runtime CSS composite" conclusion was a HEAD-request-only
+inference and is WRONG — the served PNG bodies BAKE IN the colored blob/tile + flower mask + cream
+outline on transparency. The assets are self-contained composites; no CSS masking is needed (and
+applying it would double the blobs). Same applies to the §1a chips. Left→right stacking order is
+`members1, members2, members3`.
 
 | Element | URL | HEAD | Bytes | Type | Intrinsic | Suggested path | Attribution |
 |---|---|---|---|---|---|---|---|

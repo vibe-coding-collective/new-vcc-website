@@ -3,7 +3,9 @@
    Owner: builder(02-hero-header). EVERY selector is scoped under `.s-hero-header`.
    Spec: docs/spec/20-sections/02-hero-header.md · Contract: docs/ARCHITECTURE.md
    padding-top:200px clears the fixed nav (§9). Chips, googly blob and the 862x350
-   collage are decorative placeholders for runtime-injected artwork (no asset URL).
+   collage now use the REAL recovered Group-1 assets (docs/spec/31-recovered-assets.md);
+   each served image bakes in its own colored tile/blob + flower/squircle mask, so the
+   old CSS colored-blob + border-radius masks are gone (they would double-up / crop).
    Deviations: docs/deviations/02-hero-header.md
    ========================================================================== */
 
@@ -23,56 +25,72 @@
   margin-block-end: -60px;
 }
 
-/* Centered content column (max 900px via .container--900). */
+/* Centered content column. The `.container--900` utility caps it at 900, but the
+   headline needs a touch more room to keep the live 3-line break with real ~96px
+   chips, so this scoped rule lifts the cap to 950 (the h1 self-limits to 950; the
+   lead paragraph is re-capped to 900 below to hold the spec's body measure). */
 .s-hero-header .hero-inner {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: var(--space-32);
+  max-width: 950px;
 }
 
 /* --- Headline (the page's single <h1>) ------------------------------------ */
 /* Type comes from the shared `.t-hero` utility (80/900, LS 1.6, uppercase). */
 .s-hero-header .hero-title {
   text-align: center;
+  /* Widened from the 900px content cap to 950px so the headline keeps the
+     original's live 3-line break at 1366 once the chips are their real ~96px
+     size (see deviations — [approx], spec cap is 900). Only the heading box is
+     widened; the lead paragraph stays capped at 900 below. */
+  max-width: 950px;
+  /* Real chips are 1.2em (~96px) — larger than the 80px/1.0 line box — so add
+     leading to stop a chip on one line touching the text on the next. */
+  line-height: 1.18;
 }
 
-/* Decorative headline chips + googly blob — placeholders for runtime-injected
-   photo chips (no asset URL; aria-hidden in markup). Sized in `em` so they
-   track the headline font at every breakpoint. */
+/* Keep multi-word display tokens intact when the column narrows (e.g. stop
+   `TECH-LITE` breaking at its hyphen). Markup wraps the specific run. */
+.s-hero-header .hero-nowrap {
+  white-space: nowrap;
+}
+
+/* Headline photo chips (real recovered assets). Each webp bakes in its own
+   colored rounded-square tile + flower-masked photo + cream outline on
+   transparency, so NO CSS background/border-radius is applied (that would show a
+   square backer behind the tile's rounded corners). Sized in `em` so they track
+   the headline font at every breakpoint. Decorative (alt=""). */
 .s-hero-header .hero-chip {
   display: inline-block;
   vertical-align: middle;
-  width: 0.7em;
-  height: 0.7em;
-  margin-inline: 0.1em;
-  border-radius: 0.18em;
-  background: var(--grey-200);
+  width: 1.2em; /* ~96px at the 80px headline — the original's chip size */
+  height: 1.2em;
+  margin-inline: 0.08em;
+  object-fit: contain;
 }
 
-.s-hero-header .hero-chip--yellow {
-  background: var(--yellow);
-}
-
-.s-hero-header .hero-chip--green {
-  background: var(--green-bright);
-}
-
-.s-hero-header .hero-chip--teal {
-  background: var(--teal);
-}
-
-/* Orange "googly-eyes" mascot blob — reproduced as a plain orange disc; the
-   eyes are runtime artwork and are intentionally not invented. */
+/* Orange googly-eyes mascot blob (real recovered SVG: orange body + white/dark
+   eyes, self-contained). Intrinsic ratio 89.6/75.85 (~1.18, wider than tall);
+   height tracks the headline font, width follows the aspect. The one desktop SVG
+   scales losslessly to every breakpoint (the tablet/mobile exports are the same
+   shape — see deviations). Decorative (alt=""). */
 .s-hero-header .hero-blob--googly {
-  border-radius: 50%;
-  background: var(--orange);
+  display: inline-block;
+  vertical-align: middle;
+  height: 0.95em; /* ~76px at the 80px headline — matches the icon node height */
+  width: auto;
+  aspect-ratio: 89.6 / 75.85;
+  margin-inline: 0.08em;
 }
 
 /* --- Lead paragraph ------------------------------------------------------- */
-/* Type from shared `.t-body-lg` (24/500). */
+/* Type from shared `.t-body-lg` (24/500). Re-capped to the 900 content measure
+   (the parent column is widened to 950 for the headline only). */
 .s-hero-header .hero-lead {
   text-align: center;
+  max-width: var(--content-900);
 }
 
 /* --- CTA row -------------------------------------------------------------- */
@@ -85,7 +103,11 @@
   gap: var(--space-24);
 }
 
-/* --- Photo collage placeholder (original: 862x350 runtime frame) ---------- */
+/* --- Photo collage (original: 862x350 frame) ----------------------------- */
+/* Three self-contained recovered composites placed left->right (members1/2/3) at
+   full frame height. They overlap because each ~square blob is wider than a third
+   of the 862px frame; source order 1->3 is the paint order, so the right blob
+   sits over the middle over the left (matches the live stacking). */
 .s-hero-header .hero-graphic {
   position: relative;
   width: 862px;
@@ -94,34 +116,24 @@
   margin-inline: auto;
 }
 
-.s-hero-header .hero-graphic-blob {
+.s-hero-header .hero-graphic-photo {
   position: absolute;
-  border-radius: 42% 58% 57% 43% / 47% 42% 58% 53%;
+  inset-block-start: 0;
+  height: 100%;
+  width: auto;
 }
 
-.s-hero-header .hero-graphic-blob--teal {
-  inset-block-start: 10%;
-  inset-inline-start: 3%;
-  width: 42%;
-  height: 82%;
-  background: var(--teal);
+.s-hero-header .hero-graphic-photo--1 {
+  inset-inline-start: 0;
 }
 
-.s-hero-header .hero-graphic-blob--yellow {
-  inset-block-start: 2%;
-  inset-inline-start: 32%;
-  width: 40%;
-  height: 80%;
-  background: var(--yellow);
+.s-hero-header .hero-graphic-photo--2 {
+  inset-inline-start: 50%;
+  transform: translateX(-50%);
 }
 
-/* Observed "red" blob approximated with --orange (no --red token exists). */
-.s-hero-header .hero-graphic-blob--red {
-  inset-block-start: 12%;
-  inset-inline-end: 3%;
-  width: 40%;
-  height: 78%;
-  background: var(--orange);
+.s-hero-header .hero-graphic-photo--3 {
+  inset-inline-end: 0;
 }
 
 /* ==========================================================================
