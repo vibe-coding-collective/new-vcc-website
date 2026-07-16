@@ -198,8 +198,10 @@
 }
 
 /* MEASURED RHYTHM (live original, CDP @1366 AND @800).
-   role → name 0px and name → next row's avatar 32px ARE constants — verified uniform
-   across all 12 cards at both widths. avatar → role is NOT: the original varies it
+   role → name 0px is uniform across all 12 cards, and name → next row's avatar 32px is
+   uniform at every ROW BOUNDARY (per-card it reads 34.3–56.4, because a row gap measures
+   from the LOWEST name in that row — `row-gap: 32px` is the right model). avatar → role
+   is neither: the original varies it
    16.0–43.9px (mode 40.36, 8/12 within 1.3px) because its caption wrapper height
    floats with each photo's overflow. We ship a UNIFORM 40.4 — the modal value — which
    matches 8/12 closely and runs ~24px tighter than the original only on Luisa and

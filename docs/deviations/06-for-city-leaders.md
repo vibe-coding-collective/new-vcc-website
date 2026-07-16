@@ -74,6 +74,12 @@ We place all 15 cards on the clean column with the window centred. **Face framin
 reproduced exactly either way** (photo box + mask offset match to ≤0.023px); only the
 card's column placement differs on those two.
 
+**Scope note (reviewer, gate):** this is a live delta only for **Luisa**, who occupies the
+same grid slot in both builds (9.31px). For **Poppy** it describes the ORIGINAL's geometry
+only — she is no longer the trailing lone card in ours (§2 added 3 people), so she now sits
+at x176, column 1 of row 5, and her placement difference is dominated by that roster reflow
+rather than by 9.6px. Don't go hunting for a 9.6px Poppy shift; it has been subsumed.
+
 ### 7b. [approx] Uniform caption gap vs the original's per-card float
 The original's avatar→role gap is **not** constant: it varies **16.0–43.9px** across the 12
 cards (mode 40.36) because its caption wrapper height floats with each photo's overflow. We

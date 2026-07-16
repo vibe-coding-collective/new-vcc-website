@@ -1,5 +1,9 @@
 # Dependencies
-node_modules/
+# NO trailing slash: `node_modules/` matches directories ONLY. The disk-constraint
+# workflow symlinks node_modules into worker worktrees, and a symlink is a FILE —
+# so the slashed pattern let `git add -A` commit the symlink as a blob (caught at
+# review, 2026-07-16). Slash-less matches both the real directory and the symlink.
+node_modules
 .pnp/
 .pnp.js
 
@@ -24,3 +28,4 @@ out/
 *.log
 .vscode/
 .idea/
+.vercel
