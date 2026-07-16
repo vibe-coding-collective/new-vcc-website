@@ -125,3 +125,8 @@ Legend: **[arch]** structural · **[content]** copy/data · **[a11y]** accessibi
   mobile capture changed the quote **font** class (css-42ggai) and the **card width**, but the
   box's padding class was not separately re-verified per breakpoint; the desktop padding is
   used at all sizes (comfortable in a ≥343px card). Low-risk; flagged for the visual pass.
+- **[content] §08's own heading (`what people say`) stays 60px on mobile** vs the
+  original's 32px (`css-i05ae1` — the same mobile class §04's heading now uses). It fits
+  (short words, no overflow), so it was out of scope for the overflow fix; it is covered
+  by the systemic mobile `--fs-h2` step-down queued with the integrator (reviewer-flagged
+  at the gate, 2026-07-16).
