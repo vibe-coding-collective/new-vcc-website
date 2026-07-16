@@ -35,10 +35,12 @@
     </div>
   </div>
 
-  <!-- 862x350 photo collage — three REAL recovered composites (members1/2/3). Each
-       served PNG bakes in its colored blob + flower/squircle-masked event photo +
-       cream outline, so no CSS blob/mask is applied; the self-contained WebPs are
-       placed left->right with a natural overlap. Decorative (aria-hidden wrapper). -->
+  <!-- Photo collage — three REAL recovered composites (members1/2/3). Each served
+       PNG bakes in its colored blob + flower/squircle-masked event photo + cream
+       outline, so no CSS blob/mask is applied. Positioned to the MEASURED live
+       geometry (1366): outer blobs 354x358 sit 34px lower than the raised, smaller
+       287x287 centre; they overlap left/centre/right. Each picture spins on hover
+       (pure CSS, see 02-hero-header.css). Decorative (aria-hidden wrapper). -->
   <div class="hero-graphic" aria-hidden="true" data-reveal>
     <img class="hero-graphic-photo hero-graphic-photo--1" src="/assets/hero-header/hero-collage-1.webp" alt="" width="760" height="778" loading="lazy" decoding="async" />
     <img class="hero-graphic-photo hero-graphic-photo--2" src="/assets/hero-header/hero-collage-2.webp" alt="" width="760" height="760" loading="lazy" decoding="async" />
