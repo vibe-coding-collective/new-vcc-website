@@ -96,7 +96,7 @@ Numbered files live in `20-sections/`. Desktop (1280) order:
 |---|---|---|---|
 | 0 | `01-nav-sticky.md` | **Sticky nav bar** | Pinned top pill: logo + (desktop) 3 scroll links + `contact for more` + `find an event`. Contents differ per breakpoint. |
 | 1 | `02-hero-header.md` | **Hero header** | `communities / FOR / TECH-LITE / BUILDERS` (80px), a paragraph, and two CTAs, over 200px top padding. Followed by an **empty 862×350 graphic block**. |
-| 2 | `03-stats.md` | **Stats + supported BY** | `4,000+ members are ALREADY HERE`, `9 Countries` + 9 flag emoji, `100% Word of mouth`, and a `supported BY` logo strip (runtime‑injected, empty in static HTML). |
+| 2 | `03-stats.md` | **Stats + supported BY** | `4,000+ members are ALREADY HERE`, `9 Countries` + 8 flag emoji, `100% Word of mouth`, and a `supported BY` logo strip (runtime‑injected, empty in static HTML). |
 | 3 | `04-for-vibe-coders.md` | **FOR vibe coders** | Green rounded card: hackathon pitch, 3 value cards, the **All cities** list (differs per breakpoint), `Start a chapter`. |
 | 4 | `05-project-showcase.md` | **From "What If?" (projects)** | Cream section: `get inspired by community`, 4 alternating image/text project cards. |
 | 5 | `06-for-city-leaders.md` | **FOR CITY LEADERS** | Yellow rounded card: chapter pitch + panoramic map, `How It Works` (3 steps), `WHO'S DOING THIS` (team grid), `Join our team`. |

@@ -147,6 +147,12 @@ Legend: **[arch]** structural · **[content]** copy/data · **[a11y]** accessibi
 - **Superseded:** the original's `"9" Countries` with 8 flags and its "Seven countries"
   paragraph were on this list while the repo was a pure fidelity exercise. The go-live content
   corrections (stat → `10`, paragraph → "Ten countries") and the 10-flag row above replaced
-  them — see **Content corrections** in `docs/DEVIATIONS.md`. `docs/spec/**` still records the
-  original's 9-and-8: that is the historical capture of the ORIGINAL site and is correct as-is.
-  **Do not "sync" the spec to our markup.**
+  them — see **Content corrections** in `docs/DEVIATIONS.md`.
+- **On `docs/spec/**`:** its record of the original's 9-and-8 is the historical capture of the
+  ORIGINAL site. **Do not "sync" those values to our markup** — they are supposed to disagree
+  with us. But do not read that as "the spec never needs touching": it is not uniformly
+  historical, and it is not self-consistent. Two lines there needed correcting alongside this
+  change — `20-sections/03-stats.md` carried a bullet describing **this build** (it claimed the
+  flag row still had 8 flags "pending confirmation"), and `00-overview.md` mis-stated the
+  ORIGINAL's own flag count as 9 when the capture shows 8. Fixing the first is not syncing;
+  fixing the second makes the historical record *more* faithful. Check before assuming.

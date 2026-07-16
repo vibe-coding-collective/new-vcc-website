@@ -118,15 +118,26 @@ being right the moment the clone became the real `vibecoders.global` under our o
   (spec §2.1) — leftover. Not bundled.
 - **[a11y/perf] Noto emoji/symbol fallback fonts NOT bundled; rely on the system emoji
   stack.** The original appends `Noto Sans` / `Noto Sans Symbols` / `Noto Sans Math` for
-  flag/arrow/symbol runs. We let flags and arrows fall back to the OS emoji font.
-  Regional-indicator flags render natively on every current platform. The **England /
-  Scotland tag sequences** in the §03 flag row (shipped 2026-07-16) do **not**: a platform
-  whose emoji font lacks them — notably **Windows / Segoe UI Emoji** — draws **both** as the
-  same plain black waving flag 🏴, so that row shows two identical black flags rather than
-  England and Scotland. **Accepted, not unnoticed:** the row is `aria-hidden="true"`
-  decoration, the flag count (and so the 5+5 wrap) is unaffected, the `10` stat carries the
-  meaning, and bundling Noto to fix it would cost far more than the blemish is worth.
-  Cross-platform rendering variance is the price of the payload saving.
+  flag/arrow/symbol runs. We let flags and arrows fall back to the OS emoji font, so flag
+  glyph coverage is **font-stack dependent, not platform-level** — and the §03 flag row
+  (10 flags, shipped 2026-07-16) is where that shows:
+  - **macOS / iOS** (Apple Color Emoji) render the whole row correctly — regional-indicator
+    pairs and the England/Scotland tag sequences alike.
+  - **Chrome / Edge on Windows** fall back to **Segoe UI Emoji, which ships no country-flag
+    glyphs at all.** The whole row degrades, not just the tag sequences: the 8
+    regional-indicator pairs draw as boxed letter pairs (`US`, `NL`, …) and England/Scotland
+    as two identical plain black flags 🏴. This is **not a regression** — the original's
+    8-flag row already degraded the same way there.
+  - **Firefox on Windows** bundles Twemoji Mozilla and renders both regional-indicator and
+    subdivision flags correctly.
+  - Android/Noto renders regional-indicator pairs; subdivision-flag support is newer, so
+    treat England/Scotland there as unverified rather than assumed.
+
+  **Accepted, not unnoticed:** the row is `aria-hidden="true"` decoration, the `10` stat
+  beside it carries the actual meaning, and the flag **count** — and so the 5+5 wrap — holds
+  regardless of glyph coverage (10 grapheme clusters either way; `text-wrap: balance`
+  re-measures whatever the font gives it). Bundling Noto to fix it would cost far more than
+  the blemish is worth. Cross-platform rendering variance is the price of the payload saving.
 
 ## Components & styling approximations
 
