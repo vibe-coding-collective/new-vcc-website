@@ -103,6 +103,28 @@ variants. Each linked row is `target="_blank"` with an **added** `rel="noopener"
   in `4d4e4b6` along with the rest of the self-carried page rhythm — the wrapper's 16px
   mobile gutter applies instead.)
 
+## Mobile horizontal-overflow fix — heading size (2026-07-16)
+
+- **[arch] `.fvc-heading` now scales `60px → 32px` (letter-spacing `1.2 → 0.64px`) at `< 800`.**
+  Root cause of a **~37px document-level horizontal scroll at 375** (and ~64px at 320): the
+  heading kept its desktop `--fs-h2: 60px` on mobile because the global token has no mobile
+  override. At 60px the longest word (`HACKATHONS`) is wider than the ~295px mobile header band,
+  and the **centered flex `.fvc-heading-group` could not shrink to fit** — `base.css` sets
+  `overflow-wrap: break-word`, which soft-wraps at layout time but does **not** lower an
+  element's `min-content`, so the flex item resolved to ~448px and pushed the page ~37px wide.
+  The 32px / 0.64px values are **the original's own mobile heading** (capture `css-i05ae1`, vs
+  desktop `css-p5pzcn` 60px / 1.2px), so this is a fidelity *restoration*, not an invention.
+  Verified with headless Chrome: `documentElement.scrollWidth === innerWidth` at **375 and
+  320** (and across 360/390/414/…/799); desktop **1366** and tablet **800** rects are
+  byte-identical before/after (change is entirely inside `@media (width < 800px)`).
+- **[flag → orchestrator, out of scope] The global `--fs-h2` token has no mobile step-down.**
+  The original scales *every* section heading to 32px on mobile (same `css-i05ae1` class on
+  §08's `what people say`, etc.). Only §04 (long word) actually overflowed, so only §04's
+  heading is fixed here; §05/§06/§09 headings still render 60px on mobile (they fit, so no
+  overflow — but they diverge from the original's 32px). The systemic fix is a mobile
+  `--fs-h2` (and sibling display sizes) override in `tokens.css`, which is **not owned by this
+  section** — flagged for the integrator.
+
 ## Interaction hooks (no JS this phase — per ARCHITECTURE §9)
 
 - **`id="cities"`** set on the `All cities` block (`.fvc-cities`) — the nav "find an event"

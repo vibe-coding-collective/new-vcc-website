@@ -86,6 +86,29 @@ Legend: **[arch]** structural · **[content]** copy/data · **[a11y]** accessibi
   `32 → 20px` at `< 800`, following the shared `--radius-card` / `--radius-card-mobile`
   convention.
 
+## Mobile horizontal-overflow fix — reviewer meta (2026-07-16)
+
+- **[content] Reviewer text scales down on mobile to the original's own mobile values, and the
+  row inset tightens `32 → 28px`.** Root cause of a **~16px document-level horizontal scroll at
+  375** (contributor alongside §04's heading; the wider of the two set `scrollWidth`): the
+  name/role/location kept their desktop 20px sizes on mobile (the tokens `--fs-eyebrow` /
+  `--fs-body` have no mobile step-down), and `.rv-name`/`.rv-role`/`.rv-location` are
+  `white-space: nowrap`. The nowrap `name + role` line, offset by `padding-left 32 + avatar 100
+  + gap 16 = 148px`, ran past the viewport. Restored the capture's mobile sizes at `< 800`:
+  **name `20 → 18px` (css-xw2kgc), role & location `20 → 16px` (css-53h18j / css-jg1rhv)**, and
+  the reviewer-row inset **`32 → 28px` (css-69mn3x)** — all faithful to the original's 375 DOM.
+- **[a11y improvement, divergence from original] `.rv-nameline { flex-wrap: wrap }` at `< 800`.**
+  With the restored mobile sizes the `name + role` line fits on **one line at 375, identical to
+  the original**. But the fixed-overflow target also requires **320**, which is narrower than the
+  original's captured 375 breakpoint — at 320 even the reduced nowrap line (~184px) exceeds the
+  available meta width (~144px). `flex-wrap` lets `name` and `role` **stack** (name line 1, role
+  line 2) instead of overflowing, so there is never a horizontal scrollbar at any phone width.
+  The original keeps a single nowrap line and was not verified below 375; the operator wants a
+  usable mobile site, so this graceful wrap is a deliberate improvement over the source.
+- **Verification (headless Chrome):** `documentElement.scrollWidth === innerWidth` at **375 and
+  320** and across a 320→799 sweep; desktop **1366** and tablet **800** `.rv-*` rects are
+  byte-identical before/after (all changes live inside `@media (width < 800px)`).
+
 ## Interactions
 
 - **[approx] `data-reveal` on the intro and the testimonials block** (per 40-interactions.md
