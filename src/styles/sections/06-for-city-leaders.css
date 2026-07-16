@@ -169,7 +169,11 @@
    column carries a centred 200px avatar + its label; the 127px column-gap makes
    the pitch 407 (280 + 127), and justify-content centres the fixed tracks. Row
    pitch ~333px (frame-top to frame-top) comes from the 52px row-gap over the
-   ~280px card height. Tablet/mobile switch to flexible columns (see breakpoints). */
+   ~280px card height. Tablet/mobile switch to flexible columns (see breakpoints).
+   LOAD-BEARING FIT (reviewer-flagged): at exactly 1280px viewport this grid needs
+   3×280 + 2×127 = 1094px of the 1096px available (1280 − 80 wrapper gutter − 104
+   band padding) — only ~2px slack. If you grow the band padding, page gutter,
+   column-gap, or track width, re-check 1280px for horizontal overflow. */
 .s-for-city-leaders .fcl-members {
   display: grid;
   grid-template-columns: repeat(3, 280px);
@@ -311,6 +315,9 @@
 
   .s-for-city-leaders .fcl-founders {
     gap: var(--space-80);
+    /* The 12px desktop rhythm shim is desktop-specific (see the base rule);
+       reset here so tablet keeps its own rhythm. */
+    margin-block-end: 0;
   }
 
   .s-for-city-leaders .fcl-member--founder {

@@ -2,7 +2,7 @@
    Section 02 — Hero header
    Owner: builder(02-hero-header). EVERY selector is scoped under `.s-hero-header`.
    Spec: docs/spec/20-sections/02-hero-header.md · Contract: docs/ARCHITECTURE.md
-   padding-top:200px clears the fixed nav (§9). Chips, googly blob and the 862x350
+   padding-top:200px clears the fixed nav (§9). Chips, googly blob and the 799x392
    collage now use the REAL recovered Group-1 assets (docs/spec/31-recovered-assets.md);
    each served image bakes in its own colored tile/blob + flower/squircle mask, so the
    old CSS colored-blob + border-radius masks are gone (they would double-up / crop).
