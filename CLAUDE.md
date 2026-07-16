@@ -9,8 +9,25 @@ Rebuild the Vibe Coding Collective website by studying the live site at <https:/
 - **Orchestrator = the main session (Fable 5, max effort).** You plan, decompose, delegate, review, and integrate. You do **not** write feature code directly — you coordinate workers and keep your context for the plan and the integration picture.
 - **Workers = subagents (Opus 4.8, max effort)** defined in `.claude/agents/`: `builder`, `reviewer`, `tester`, `researcher`. `CLAUDE_CODE_SUBAGENT_MODEL` in `.claude/settings.json` forces **every** subagent to Opus 4.8, so even an ad-hoc/general-purpose spawn runs on Opus.
 
+## Right-size first — offer Dan the fast path
+**Read this before delegating anything.** Everything below it is built for **parallel, multi-worker fidelity work**, and it is not free: on a two-line copy change it has cost 30+ minutes of wall-clock for ~2 minutes of editing. Running it by reflex is itself a failure mode — the checklist already names it (*wasted coordination overhead*). Classify the task first:
+
+- **Fidelity work** → default to the **full protocol**. Reverse-engineering the original, or anything where *"does this match the source?"* is the question. Also anything multi-worker, touching shared contracts (`vite.config.ts`, `tokens.css`, `base.css`, `sections.css`), or spanning more than ~2 files.
+- **Small, or improvement-on-its-own-merits** → **offer the fast path.** A copy tweak, a layout nit, a bug fix, or anything Dan asks for to make the site *better* rather than *closer to the original*. "Improvement" is about intent, not size — a large improvement task still gets the offer; Dan may still choose the full protocol for it.
+
+**Present the choice — Dan decides. Never silently pick either one.** One line on what the change is, what the fast path skips, and the rough cost of each:
+
+> This is a copy/layout change to `<files>` — improvement, not fidelity. **Fast path:** I edit directly, run `npm run verify`, show you the result (~2 min). **Full protocol:** builder in a worktree + tester + adversarial reviewer (~30 min). Which?
+
+**On the fast path:**
+- The orchestrator **may edit directly** — the "no feature code" rule in *Roles & models* is lifted, and rules 1–3 below don't apply (no fan-out, so nothing to collide).
+- Skip the worktree, the separate `tester` spawn, and the `reviewer` spawn.
+- **Never skipped, whatever the path:** `npm run verify` passes with its exit code captured explicitly (never `verify | tail && commit` — the pipe eats the status); the change is verified **in a browser** if it is visible; work lands on a branch and merges through you; DEVIATIONS.md is updated if it diverges from the original; and every intentional divergence is flagged **loudly** to Dan in the summary he reads, not just logged.
+
+**Escalate mid-flight, don't tough it out.** If a "small" change turns out to touch shared contracts, spread past ~2 files, or contradict the spec/deviation records, say so and switch to the full protocol. The fast path is a starting default, not a commitment.
+
 ## Coordination rules (non-negotiable)
-These exist to prevent the failure modes that break parallel agent work:
+These exist to prevent the failure modes that break parallel agent work. They are non-negotiable **when the full protocol is in play** — see *Right-size first* above for when it isn't:
 
 1. **Decompose by file ownership, not by feature.** Before any parallel work, split the task so **no two workers can touch the same file**. State each worker's owned paths explicitly in its task. *(Prevents file-clobber collisions.)*
 2. **Contracts first, sequentially.** Shared interfaces, types, design tokens, and routes are defined and committed by **one** worker (or you) *before* dependent workers start. Workers build against the committed contract and never silently change it. *(Prevents intent drift.)*
