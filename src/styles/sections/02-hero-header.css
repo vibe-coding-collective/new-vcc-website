@@ -190,12 +190,51 @@
    Breakpoints (desktop-first; hard literals 1280 / 800 per tokens.css)
    ========================================================================== */
 
-/* Mobile (<800): the fixed 80px headline overflows narrow columns, so it scales
-   fluidly (documented mobile adaptation — a scoped override of `.t-hero`'s size,
-   not a global redefinition). Tuned so the longest word ("communities", 11 chars)
-   fits down to ~320px; base.css's overflow-wrap:break-word is the safety net. */
+/* Mobile (<800). All values below are the ORIGINAL's real mobile variant,
+   measured live at TRUE 375/320 device metrics (CDP setDeviceMetricsOverride) and
+   cross-checked against the SSR capture (dom-375 / css-rules) — the two agree.
+   NB: an upstream brief quoted 96px chips / 287–354px collage / 200px team frames
+   for mobile; those are the DESKTOP values (a headless width-clamp artifact) and
+   are NOT what the original renders at 375. See docs/deviations/02-hero-header.md. */
 @media (width < 800px) {
+  /* Headline words run ~40px on the original (css-anqubw). Our headline is one
+     wrapping <h1> (not the original's 4 nowrap word-boxes), so clamp it: 40px at
+     375, easing toward 34px near 320 where the big inline chips crowd the line —
+     base.css overflow-wrap:break-word is the safety net. */
   .s-hero-header .hero-title {
-    font-size: clamp(30px, 9vw, 80px);
+    font-size: clamp(34px, 10.6vw, 40px);
+    line-height: 1.14;
+  }
+
+  /* Chips + googly keep a FIXED pixel size on mobile (60px / 56×47 — the original
+     does NOT scale them with the smaller headline font). This is the operator's
+     "chips look missing" fix: our em-sizing had collapsed them to ~40px/38px. */
+  .s-hero-header .hero-chip {
+    width: 60px;
+    height: 60px;
+  }
+
+  .s-hero-header .hero-blob--googly {
+    height: 47px; /* width auto via aspect-ratio → ~56px (original 56×47) */
+  }
+
+  /* Collage: the original renders the composition ~viewport-wide on mobile — a
+     fixed ~389px box (centre blob ~140, side blobs ~172) whose sides bleed to the
+     viewport edges — rather than shrinking it to the ~343px column (which had
+     collapsed the blobs to ~123/152). Pin the composition box to 389px and clip
+     the section so the side bleed never extends the document (overflow stays 0). */
+  .s-hero-header {
+    overflow-x: clip;
+  }
+
+  .s-hero-header .hero-graphic {
+    width: 389px;
+    max-width: none;
+    /* Centre the oversized composition within the section (its gutters are
+       symmetric, so section-centre = viewport-centre) so the sides bleed
+       symmetrically like the original. `align-items:center` / `margin:auto` do
+       NOT centre an item wider than its container, so compute the (negative) side
+       margins explicitly; the section's overflow-x:clip contains the bleed. */
+    margin-inline: calc((100% - 389px) / 2);
   }
 }

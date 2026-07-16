@@ -5,6 +5,45 @@ The integrator consolidates these into `docs/DEVIATIONS.md` at merge time.
 Legend: **[arch]** structural · **[content]** copy/data · **[a11y]** accessibility ·
 **[perf]** payload/assets · **[approx]** unverifiable-so-approximated.
 
+## ⚠️ INTENTIONAL DIVERGENCES (LOUD) — mobile-parity batch (2026-07-16)
+
+**Surfaced verbatim to the operator.**
+
+### The mobile brief's headline numbers were the original's DESKTOP values (a measurement artifact) — corrected to the TRUE mobile
+An upstream mobile-parity brief specified, for the ORIGINAL **at 375px**: hero chips **96×96**,
+googly **90×76**, collage centre **287×287** / sides **354×358** (full desktop art, bleeding),
+team frames **200px**, how-it-works icons **170px**, page height **≈24,845px**. Those are the
+original's **DESKTOP** values — the headless-Chrome width-clamp artifact the project memory warns
+about ("`--window-size` clamps at 500px"). Measured directly at **TRUE 375/320 device metrics**
+(CDP `Emulation.setDeviceMetricsOverride`, mobile UA) — which **agrees with the static SSR
+capture** `dom-375.html` (its `data-height` 11,155 ≈ my live docHeight 11,377) — the original's
+REAL mobile is: chips **60×60**, googly **56×47**, collage centre **~140** / sides **~172**
+(bleeding), team frames **120px**, how-it-works icons **100px**, page height **≈11,377px**.
+**We built to the TRUE original, not the brief.** (The operator's own complaint — "chips look
+missing" — is consistent with the TRUE gap: our *em*-sized chips had collapsed to ~40px, so the
+fix is 60px — not the brief's 96px.) Evidence saved to the batch scratchpad: `orig-hero-375.png`
+(live original) vs `final-hero-375.png` (ours).
+
+### Hero mobile, fixed to the true original — [arch]
+- **Chips 60×60, googly 56×47 at a FIXED px size** on `<800` (was em-derived → ~40.5/37.9px).
+- **Headline ~40px** (css-anqubw) via `clamp(34px, 10.6vw, 40px)` — 40 at 375, easing toward 34
+  near 320 (our headline is one wrapping `<h1>`, not the original's four nowrap word-boxes, so it
+  soft-breaks rather than overflow).
+- **Collage rendered ~viewport-wide.** The 799×392 composition box is pinned to a fixed **389px**
+  on mobile (centre blob ~140, sides ~172 — the original's mobile blob sizes) and centred so the
+  sides bleed symmetrically; the shrink-to-column behaviour (which had collapsed the blobs to
+  ~123/152) is gone. `overflow-x: clip` on `.s-hero-header` contains the bleed:
+  `documentElement.scrollWidth === innerWidth` (overflow 0) at 320 / 360 / 375 / 390.
+- **[approx] The collage clips at the section content edge (the 16px page gutter), not the true
+  viewport edge.** Viewport-edge clipping would require editing `base.css` (`main#app`, out of
+  grant), so the decorative side blobs show ~16px less than the original. Centre blob and every
+  blob SIZE are exact.
+
+Desktop (≥1280) and tablet (800–1279) are **provably unchanged** — 1366 & 800 key rects (chips
+96, googly 89.77, collage 799/720, headline 80, team 200/150) are byte-identical before/after.
+All edits are inside `@media (width < 800px)` blocks (plus the FIXED-px chip/googly rules, which
+only take effect there).
+
 ## Recovered hero assets swapped in (RESOLVES the earlier placeholders)
 
 The chips, googly blob and collage now use the **real recovered Group-1 assets**
