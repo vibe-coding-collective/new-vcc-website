@@ -132,10 +132,34 @@ mirrors `DEVIATIONS.md`: **[arch]** structural · **[content]** copy/data ·
 
 ## Layout / responsive
 
-- **[arch] Team rows: explicit column counts per breakpoint** (desktop 5×2, tablet
-  3+3+3+1, mobile 2×5) via CSS grid, instead of the original's fixed-pixel
-  `space-between` rows. Founders remain a distinct centred row of two at a larger
-  size. Membership/order unchanged (LAYOUT-only adaptation, as instructed).
+- **[arch] Team grid reworked to the MEASURED live geometry (visual-parity pass, operator
+  finding, 2026-07-16 — supersedes the earlier "desktop 5×2 at 150/190px" layout).** The
+  original desktop grid was measured live at 1366 and reproduced to the pixel:
+  - **Founders 2-up**, avatar frames **200×199**, centres **611px** apart (frame-edge gap
+    ~411px) → landing at viewport **x278 / x889**. Implemented as a centred flex row of two
+    280px cards (card > avatar, so long names sit on one line) with a **331px** gap
+    (280 + 331 = 611 centre pitch).
+  - **Regular members 3 PER ROW**, frames **200×199**, on a **407px** column pitch (frame-edge
+    gap ~207px) → landing at viewport **x176 / x583 / x990**. Implemented as
+    `grid-template-columns: repeat(3, 280px); column-gap: 127px; justify-content: center`
+    (280 + 127 = 407 pitch; the 200px avatar centred in each 280px track puts the frame edges
+    207px apart and the frames at the measured x's). Row pitch **~333px** via a 52px `row-gap`
+    over the ~280px card, plus a 12px `margin-block-end` on the founders row so the
+    founder→first-member pitch is uniform (~332px) with the member rows, matching the original's
+    single continuous 333px rhythm.
+  - Founders and regular members share the **same 200px frame** on desktop (the original's only
+    difference is 2-up vs 3-up), so `--fcl-avatar` and `--fcl-avatar-lg` are both 200px here (was
+    150/190). The inner mask/tint/frame composite is unchanged — it scales proportionally with
+    the bigger box (`--fcl-avatar-photo: 64%`).
+  - **Verified live:** my rendered avatar rects at 1366 match the original's exactly — founders
+    x278/x889 (200×200), members x176/x583/x990, column pitch 407, row pitch 332, founder→member
+    pitch 332 (queried from both DOMs).
+  - **Tablet (<1280):** 3 FLEXIBLE columns (`repeat(3, 1fr)`, 150px avatars, 24/40 gaps) — the
+    fixed 280px tracks + 407px pitch overflow below 1280, so they reflow; founders stay a centred
+    2-up row (230px cards, 80px gap). **Column choice logged: 3** (keeps the desktop rhythm;
+    drops to 2 only at mobile).
+  - **Mobile (<800):** unchanged from the reviewer-verified build — 2 columns, founders 136px /
+    regular 120px, 24/40 gaps, founder pitch shim reset to 0. Membership/order untouched.
 - **[arch] Steps stack to a column below 1280** (spec §6.2: 3-across desktop →
   stacked at 800 & 375).
 - **[approx] Mobile display type scaled down** (h2 60→34px, band-title 52→30px, step

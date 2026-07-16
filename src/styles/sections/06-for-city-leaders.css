@@ -19,9 +19,12 @@
 
   /* Local avatar sizing (overridden at breakpoints). --fcl-avatar / --fcl-avatar-lg
      are the FRAME footprint (the box); the masked photo is centred within it at
-     --fcl-avatar-photo (the capture's photo:frame ratio ≈ 128.8/200 ≈ 0.64). */
-  --fcl-avatar: 150px;
-  --fcl-avatar-lg: 190px;
+     --fcl-avatar-photo (the capture's photo:frame ratio ≈ 128.8/200 ≈ 0.64).
+     DESKTOP: measured live at 1366 — founders AND regular members share the same
+     200x199 frame (only the layout differs: founders 2-up, members 3-up), so both
+     vars are 200px here; the tablet/mobile blocks scale them down. */
+  --fcl-avatar: 200px;
+  --fcl-avatar-lg: 200px;
   --fcl-avatar-photo: 64%;
   --fcl-step-icon: 170px;
 
@@ -139,28 +142,40 @@
   gap: var(--space-40);
 }
 
-/* Founders: their own centred row, larger avatars. */
+/* Founders: their own centred row of two, spaced per the live measurement —
+   avatar frames 200px with centres ~611px apart (frame-edge gap ~411px). The
+   280px card (wider than the 200px avatar) lets long names sit on one line as
+   they do live, while the flex gap sets the centre-to-centre pitch. */
 .s-for-city-leaders .fcl-founders {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: var(--space-46);
+  gap: 331px; /* card-edge gap → avatar centres 611px apart (280 + 331 = 611) */
   width: 100%;
+  /* Composes with the 40px .fcl-team gap so the founder-frame-top → first-member-
+     frame-top pitch is ~332px, matching the uniform ~333px row rhythm the live
+     original keeps through the whole roster (measured). Reset at mobile. */
+  margin-block-end: var(--space-12);
 }
 
-/* Founder cards get an explicit width so long names wrap under the avatar
-   (and two fit per row on mobile) instead of stretching the flex row. */
+/* Founder card = the shared 280px member-column width, so the centred 200px
+   avatar lands at the measured x278/x889 and names wrap sensibly. */
 .s-for-city-leaders .fcl-member--founder {
-  width: 230px;
+  width: 280px;
 }
 
-/* Remaining team: explicit column counts per breakpoint keep rows balanced
-   (desktop 5×2, tablet 3+3+3+1, mobile 2×5) instead of the fixed-pixel rows
-   the original hard-codes. */
+/* Remaining team: 3 columns, avatar frames 200px on a 407px centre pitch
+   (avatar-edge gap ~207px), matching the live measurement at 1366. Each 280px
+   column carries a centred 200px avatar + its label; the 127px column-gap makes
+   the pitch 407 (280 + 127), and justify-content centres the fixed tracks. Row
+   pitch ~333px (frame-top to frame-top) comes from the 52px row-gap over the
+   ~280px card height. Tablet/mobile switch to flexible columns (see breakpoints). */
 .s-for-city-leaders .fcl-members {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: var(--space-40) var(--space-24);
+  grid-template-columns: repeat(3, 280px);
+  justify-content: center;
+  column-gap: 127px;
+  row-gap: var(--space-52);
   width: 100%;
 }
 
@@ -279,9 +294,27 @@
     max-width: var(--content-600);
   }
 
-  /* Team → 3 columns. */
+  /* Team scales to fit the narrower canvas: 150px avatars and 3 FLEXIBLE columns
+     (the fixed 280px desktop tracks + 407px pitch overflow below 1280). Column
+     choice: 3 (keeps the desktop rhythm; drops to 2 only at mobile). Founders
+     stay a centred 2-up row at a tighter gap. */
+  .s-for-city-leaders {
+    --fcl-avatar: 150px;
+    --fcl-avatar-lg: 150px;
+  }
+
   .s-for-city-leaders .fcl-members {
     grid-template-columns: repeat(3, 1fr);
+    column-gap: var(--space-24);
+    row-gap: var(--space-40);
+  }
+
+  .s-for-city-leaders .fcl-founders {
+    gap: var(--space-80);
+  }
+
+  .s-for-city-leaders .fcl-member--founder {
+    width: 230px;
   }
 }
 
@@ -318,13 +351,17 @@
     gap: var(--space-40);
   }
 
-  /* Team → 2 columns; founders shrink + tighten so two fit a 375px row. */
+  /* Team → 2 columns; founders shrink + tighten so two fit a 375px row. Gaps are
+     reset from the desktop 127/52 tracks to the mobile-fit 24/40. */
   .s-for-city-leaders .fcl-members {
     grid-template-columns: repeat(2, 1fr);
+    column-gap: var(--space-24);
+    row-gap: var(--space-40);
   }
 
   .s-for-city-leaders .fcl-founders {
     gap: var(--space-16);
+    margin-block-end: 0; /* reset the desktop pitch shim (verified mobile layout) */
   }
 
   .s-for-city-leaders .fcl-member--founder {
