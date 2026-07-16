@@ -129,9 +129,10 @@ Where the three DOM copies disagree, **desktop (1280) copy is canonical**. Known
 - **§02 hero-header** — see `docs/deviations/02-hero-header.md`: chips/blob/collage as
   aria-hidden CSS placeholders (runtime-injected originals; asset-recovery task queued),
   clamp() mobile headline, -60px hero→stats overlap kept, data-reveal added at gate.
-- **§03 stats** — see `docs/deviations/03-stats.md`: sponsor logos as accessible
-  text pills (artwork not reproducible; per-brand gap log), marquee approximations
-  (36s loop, 1400px cap, pause-on-hover), flags aria-hidden, 9-vs-8-flags preserved.
+- **§03 stats** — see `docs/deviations/03-stats.md`: REAL sponsor logos shipped
+  (recovered from page data, brand→hash mapping orchestrator-confirmed; same usage
+  as the original site; licensing note logged), marquee approximations (36s loop,
+  1400px cap, pause-on-hover), flags aria-hidden, 9-vs-8-flags preserved.
 - **§04 for-vibe-coders** — see `docs/deviations/04-for-vibe-coders.md`: stable base
   city URLs, `rel="noopener"` on external links, city-row markup normalization, wrapper
   amendment adopted (no self-carried page rhythm), mobile flag sizing.
@@ -161,9 +162,10 @@ Where the three DOM copies disagree, **desktop (1280) copy is canonical**. Known
   breakpoints (desktop-canonical).
 - **§11 footer + interactions** — see `docs/deviations/11-footer.md`: WhatsApp kept as a
   link (`_self`) per ratified policy, real retro mark + wordmark SVGs sourced from the
-  CDN, wordmark watermark capture-verified, mascots as eyeless placeholders (asset-
-  recovery task), reveal params approximation, no-JS gate (`html.js`), reduced-motion
-  paths, `--red` token added at merge for the brand red.
+  CDN, the "mascot row" resolved as the single 5-blob wordmark rendered large and
+  bottom-cropped (page-data finding corrected the earlier six-blob live reading; scale/
+  crop flagged for visual-pass tuning), reveal params approximation, no-JS gate
+  (`html.js`), reduced-motion paths, `--red` token added at merge for the brand red.
 
 ## Progressive enhancement
 

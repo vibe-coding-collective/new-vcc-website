@@ -4,28 +4,41 @@ Owner: builder(03-stats). The integrator consolidates these into `docs/DEVIATION
 Legend: **[arch]** structural · **[content]** copy/data · **[a11y]** accessibility ·
 **[perf]** payload/assets · **[approx]** unverifiable-so-approximated.
 
-## Sponsor logos → accessible text pills (the "supported BY" strip)
+## Sponsor logos → REAL recovered logos (the "supported BY" strip) — RESOLVED
 
-- **[perf/content] Each sponsor renders as an accessible white brand-name pill, not
-  logo artwork.** The 7 logos are runtime-injected on the original and only **MacPaw**
-  is hash-confirmed in `30-assets.md`; the other six brand→hash mappings are unknown, and
-  third-party trademarks are not fabricated (contract instruction). Per the contract's
-  fallback path, each pill shows the brand name as styled text. Per-brand gap log (all 7
-  need real artwork sourced later, in this cycle order):
-  - **OK Tech** — no confirmed asset hash. Text pill.
-  - **MacPaw** — hash confirmed (`4f79c701…`) but not downloaded; kept as a text pill so
-    the strip is visually consistent (1 real logo among 6 text pills would look broken).
-  - **Microsoft** — no confirmed asset hash. Text pill.
-  - **ElevenLabs** — no confirmed asset hash. Text pill.
-  - **Softr** — no confirmed asset hash. Text pill.
-  - **Valae** — no confirmed asset hash. Text pill.
-  - **Lovable** — no confirmed asset hash. Text pill.
-- **[perf] `public/assets/stats/` ships empty** (no binaries) as a result of the text-pill
-  fallback. When brand→hash mappings are confirmed, drop optimized logos here and swap the
-  pill contents for `<img>`.
-- Pill style is an approximation of the "white rounded pill" live observation:
-  `--off-white` background, 32px radius, 80px tall, min-width 180px, Golos 900 20px ink
-  label (brand casing preserved). No hard shadow (not observed).
+- **[perf/content] RESOLVED: each pill now holds the sponsor's REAL recovered logo PNG.**
+  Supersedes the earlier text-pill fallback (kept only while the artwork was unrecovered).
+  The 7 logos were mined from the Figma page-data — see `docs/spec/31-recovered-assets.md`
+  **Group 2**. The brand→hash mapping was **visually confirmed by the orchestrator**
+  (2026-07-16 labeled contact sheet), so all 7 filenames are final. Files in DOM/cycle
+  order (byte sizes HEAD-verified against Group 2, intrinsic dims read from the PNGs):
+  - **OK Tech** — `logo-ok-tech.png` (404×160, 10 764 B)
+  - **MacPaw** — `logo-macpaw.png` (600×240, 11 227 B) — the one name-certain node (`macpaw 1`).
+  - **Microsoft** — `logo-microsoft.png` (402×160, 7 908 B)
+  - **ElevenLabs** — `logo-elevenlabs.png` (498×160, 7 216 B)
+  - **Softr** — `logo-softr.png` (366×160, 6 647 B)
+  - **Valae** — `logo-valae.png` (256×120, 4 548 B)
+  - **Lovable** — `logo-lovable.png` (400×160, 8 499 B)
+- **[a11y] Accessible name moved from text → `alt`.** The VISIBLE track's `<img>` carries
+  the brand name as its `alt`; the aria-hidden duplicate track (`aria-hidden="true"`) uses
+  `alt=""`, so each logo is announced **exactly once** (no double-announce). The
+  `role="list"` + `<li>` structure and both tracks are otherwise unchanged.
+- **[approx] Display height normalized to 32px** (`.s-stats__sponsor-logo { height: 32px;
+  width: auto }`). The scans have differing intrinsic heights (120 / 160 / 240px); a fixed
+  display height keeps the pill row visually even while `width: auto` preserves each aspect
+  ratio. Pill style unchanged from the live observation: `--off-white` bg, 32px radius,
+  80px tall, min-width 180px, logo centered. No hard shadow (not observed).
+- **[perf] `public/assets/stats/` now ships the 7 PNGs** (4.5–11 KB each, ~56.8 KB total).
+  No lossless PNG optimizer was available in the build environment (oxipng / optipng /
+  pngcrush / zopflipng / pngquant all absent) and adding one is out of this task's file
+  scope, so the PNGs ship **byte-identical to the orchestrator-confirmed source** — they are
+  already tiny. A lossless re-compression pass is a trivial later opportunity.
+- **[legal] Licensing / provenance.** All 7 are third-party company trademarks. They are the
+  **same sponsor logos the original vibecoders.global displays**, recovered from its own
+  `/_assets/v11/` host, so shipping them **reproduces the original's usage** rather than
+  introducing new marks; the orchestrator confirmed the mapping. Use remains subject to each
+  owner's brand guidelines — if a mark must be pulled, revert that pill to the prior text-pill
+  treatment (preserved in git history).
 
 ## Marquee (spec §40.5 / contract §9)
 

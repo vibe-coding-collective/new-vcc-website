@@ -8,35 +8,45 @@
    ========================================================================== */
 
 .s-footer {
-  position: relative; /* positioning context for the watermark + mascot row */
-  overflow: hidden; /* clips the mascots peeking past the bottom edge */
+  position: relative; /* positioning context for the wordmark graphic */
+  overflow: hidden; /* clips the wordmark's blobs peeking past the bottom edge */
   background: var(--ink);
   color: var(--off-white);
 }
 
-/* --- Colorful retro wordmark, faint watermark behind the content (css-nu3ilp).
-   The capture places it position:absolute; the exact opacity/offset aren't in
-   the capture, so it's centered and dialled back to read as a watermark. -------- */
-.s-footer .footer-watermark {
+/* --- Colorful retro VCC wordmark = the one decorative footer graphic (css-nu3ilp;
+   31-recovered-assets.md Group 3, node 12:253). The SVG is a horizontal cluster of
+   5 googly-eyed blobs (red/yellow/green/teal/blue). It is rendered LARGE (spanning
+   most of the band width) and BOTTOM-ANCHORED, then pushed down so its lower part is
+   clipped by the footer's overflow:hidden — leaving the blob tops (with their googly
+   eyes) peeking up from the bottom edge. That crop IS the "row of blob mascots
+   peeking up" seen live; there is NO separate mascot element. Decorative, behind the
+   content column. --------------------------------------------------------------------- */
+.s-footer .footer-wordmark {
   position: absolute;
-  inset: 0;
-  z-index: 0;
+  inset-inline: 0;
+  bottom: 0;
+  z-index: 0; /* decorative; below the content column */
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
   pointer-events: none;
 }
 
-.s-footer .footer-watermark-img {
-  width: min(708px, 82%);
+.s-footer .footer-wordmark-img {
+  width: min(var(--content-1400), 92%);
   height: auto;
-  opacity: 0.16;
+  /* [approx] Push the wordmark down so its lower ~46% is cropped by the band's
+     bottom edge and the top ~54% (blob tops + googly eyes) peeks up. The live
+     element's exact scale/crop are not measurable from the static capture, so this
+     is a visual-pass tuning value; it sits behind the content (z-index 0). */
+  translate: 0 46%;
 }
 
 /* --- Content column (css-suww2: column; align-items:center; padding:80px). ------ */
 .s-footer .footer-inner {
   position: relative;
-  z-index: 1; /* above the watermark */
+  z-index: 1; /* above the wordmark graphic */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -90,54 +100,11 @@
   color: var(--off-white);
 }
 
-/* --- Decorative googly-blob mascot row (live observation). No eye artwork; the
-   blobs peek up from the bottom edge and their lower halves are clipped by the
-   footer's overflow:hidden. Colors left→right: red / orange / yellow / green /
-   teal / blue. No --red token exists, so red is the brand red (#eb3722, sourced
-   from the real footer wordmark asset) as a logged literal. ---------------------- */
-.s-footer .footer-mascots {
-  position: absolute;
-  inset-inline: 0;
-  bottom: 0;
-  z-index: 0; /* decorative; sits below the content column */
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  gap: var(--space-24);
-  pointer-events: none;
-}
-
-.s-footer .footer-mascot {
-  width: 64px;
-  height: 64px;
-  /* organic blob silhouette (not a perfect circle) */
-  border-radius: 46% 46% 50% 50% / 56% 56% 44% 44%;
-  translate: 0 46%; /* peek: lower ~46% is clipped by the footer's overflow:hidden */
-}
-
-.s-footer .footer-mascot--red {
-  background: #eb3722;
-} /* logged literal — no --red token (matches the brand red in the real wordmark) */
-.s-footer .footer-mascot--orange {
-  background: var(--orange);
-}
-.s-footer .footer-mascot--yellow {
-  background: var(--yellow);
-}
-.s-footer .footer-mascot--green {
-  background: var(--green-bright); /* the playful lime used in the real retro logo */
-}
-.s-footer .footer-mascot--teal {
-  background: var(--teal);
-}
-.s-footer .footer-mascot--blue {
-  background: var(--blue);
-}
-
 /* --- Tablet (800–1279): unchanged from desktop. ------------------------------- */
 
-/* --- Mobile (<800): stack the two-column row, center everything, shrink padding
-   and mascots so six blobs fit a 375px viewport. ------------------------------- */
+/* --- Mobile (<800): stack the two-column row, center everything, shrink padding.
+   The wordmark auto-scales (its width is a % of the band), so it needs no override.
+   ------------------------------------------------------------------------------- */
 @media (width < 800px) {
   .s-footer .footer-inner {
     padding: var(--space-60) var(--space-24);
@@ -159,14 +126,5 @@
   .s-footer .footer-copy {
     align-items: center;
     text-align: center;
-  }
-
-  .s-footer .footer-mascots {
-    gap: var(--space-16);
-  }
-
-  .s-footer .footer-mascot {
-    width: 40px;
-    height: 40px;
   }
 }
