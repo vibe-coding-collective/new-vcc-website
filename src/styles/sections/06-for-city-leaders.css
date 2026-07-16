@@ -18,14 +18,16 @@
   --eyebrow-bg: var(--orange);
 
   /* Local avatar sizing (overridden at breakpoints). --fcl-avatar / --fcl-avatar-lg
-     are the FRAME footprint (the box); the masked photo is centred within it at
-     --fcl-avatar-photo (the capture's photo:frame ratio ≈ 128.8/200 ≈ 0.64).
+     are the FRAME footprint (the box); the squircle WINDOW is centred within it at
+     --fcl-win of the frame width (the capture's mask:frame ratio 128.772/200 = 0.6439).
      DESKTOP: measured live at 1366 — founders AND regular members share the same
      200x199 frame (only the layout differs: founders 2-up, members 3-up), so both
-     vars are 200px here; the tablet/mobile blocks scale them down. */
+     vars are 200px here; the tablet/mobile blocks scale them down.
+     Everything inside the avatar is expressed as a RATIO of the frame width and
+     scaled with calc(), so one set of per-person numbers serves every breakpoint
+     (verified against the live original at both 1366/200px and 375/120px). */
   --fcl-avatar: 200px;
   --fcl-avatar-lg: 200px;
-  --fcl-avatar-photo: 64%;
   --fcl-step-icon: 170px;
 
   /* Nav "for hosts" smooth-scroll target clears the fixed nav. Page gutter,
@@ -152,10 +154,11 @@
   justify-content: center;
   gap: 331px; /* card-edge gap → avatar centres 611px apart (280 + 331 = 611) */
   width: 100%;
-  /* Composes with the 40px .fcl-team gap so the founder-frame-top → first-member-
-     frame-top pitch is ~332px, matching the uniform ~333px row rhythm the live
-     original keeps through the whole roster (measured). Reset at mobile. */
-  margin-block-end: var(--space-12);
+  /* The founders→members transition must use the SAME 32px name→next-frame gap as
+     every other row (the original keeps one uniform ~332px pitch across the whole
+     roster, founders included). The parent .fcl-team flex gap already contributes
+     40px, so pull back the 8px difference. Reset at tablet/mobile. */
+  margin-block-end: -8px;
 }
 
 /* Founder card = the shared 280px member-column width, so the centred 200px
@@ -179,15 +182,40 @@
   grid-template-columns: repeat(3, 280px);
   justify-content: center;
   column-gap: 127px;
-  row-gap: var(--space-52);
+  row-gap: var(--space-32); /* measured: name.bottom -> next row's frame.top = 32 */
   width: 100%;
 }
 
+/* Trailing row of ONE centres, matching the original: it lays the roster out as a
+   CENTRED wrap, so its 10th member (Poppy, alone in the last row) sits in the MIDDLE
+   column at x583 — not the left column a grid would put her in. Our 13th (the
+   "Maybe you?" card) is the same case. Reads as: "last item, and it starts a row".
+   NOTE: a trailing row of TWO would still left-align — not expressible in a 3-track
+   grid; revisit (flex wrap) if the roster ever ends 3n+2. Ignored at mobile, where
+   .fcl-members is a single flex column. */
+.s-for-city-leaders .fcl-members > :last-child:nth-child(3n + 1) {
+  grid-column: 2;
+}
+
+/* MEASURED RHYTHM (live original, CDP @1366 AND @800).
+   role → name 0px is uniform across all 12 cards, and name → next row's avatar 32px is
+   uniform at every ROW BOUNDARY (per-card it reads 34.3–56.4, because a row gap measures
+   from the LOWEST name in that row — `row-gap: 32px` is the right model). avatar → role
+   is neither: the original varies it
+   16.0–43.9px (mode 40.36, 8/12 within 1.3px) because its caption wrapper height
+   floats with each photo's overflow. We ship a UNIFORM 40.4 — the modal value — which
+   matches 8/12 closely and runs ~24px tighter than the original only on Luisa and
+   Poppy (~10px on Joseph); that intentional normalization is logged in
+   docs/deviations/06-for-city-leaders.md. Ours was 16.6 / 4 / 52.5 — the same 332px
+   row pitch, but the caption sat too close to the photo and too far from the next
+   row. That is the "very slightly more spaced out" the operator saw. The 0.56px slack
+   vs the measured 40.4/32 is the frame img's letterbox (a 198.88-tall squiggle centred
+   in our square 200px box). */
 .s-for-city-leaders .fcl-member {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--space-16);
+  gap: var(--space-40);
   text-align: center;
 }
 
@@ -196,23 +224,28 @@
      1. .fcl-avatar-frame — a hand-drawn ORANGE squiggle <img> (one shared shape —
         the original's per-card files are geometrically identical), fills the box,
         sits behind.
-     2. .fcl-avatar-img   — the member PHOTO, masked into an organic squircle blob
-        (mask-image = avatar-mask.svg, mask-mode:alpha), centred at ~64% of the box.
-     3. .fcl-avatar-media::after — a grey mix-blend-mode:color TINT masked to the same
-        squircle, which renders the photo grayscale (the original's #d9d9d9/#fff tints
-        both read as neutral under `color`). The orange is the FRAME, not a tint. */
+     2. .fcl-avatar-media — the squircle WINDOW (mask-image = avatar-mask.svg,
+        mask-mode:alpha) centred in the frame at --fcl-win; it CROPS the photo.
+     3. .fcl-avatar-img   — the member PHOTO, sized and offset PER PERSON inside that
+        window so the face lands in it (see "per-person face framing" below).
+     4. .fcl-avatar-media::after — a grey mix-blend-mode:color TINT over the photo,
+        which renders it grayscale (the original's #d9d9d9/#fff tints both read as
+        neutral under `color`). The orange is the FRAME, not a tint.
+
+   --fcl-frame is the avatar's OWN box size, so the founder (--lg) and regular
+   variants each scale their inner geometry from the box they actually render at. */
 .s-for-city-leaders .fcl-avatar {
+  --fcl-frame: var(--fcl-avatar);
   position: relative;
   flex-shrink: 0;
   display: grid;
   place-items: center;
-  width: var(--fcl-avatar);
-  height: var(--fcl-avatar);
+  width: var(--fcl-frame);
+  height: var(--fcl-frame);
 }
 
 .s-for-city-leaders .fcl-avatar--lg {
-  width: var(--fcl-avatar-lg);
-  height: var(--fcl-avatar-lg);
+  --fcl-frame: var(--fcl-avatar-lg);
 }
 
 /* Decorative orange squiggle frame — fills the box, painted behind the photo. */
@@ -225,21 +258,20 @@
   user-select: none;
 }
 
-/* Masked-photo cell: centred, ~64% of the box, isolated so the tint's blend stays
-   on the photo and never desaturates the orange frame behind it. */
+/* The squircle WINDOW: centred in the frame, --fcl-win of the frame width, isolated so
+   the tint's blend stays on the photo and never desaturates the orange frame behind it.
+   It CLIPS the (deliberately oversized) photo — overflow:hidden is what crops when the
+   mask can't. border-radius is the graceful state: if a browser can't apply mask-image
+   the photo stays a visible 20px rounded-rect — never a blank box (progressive
+   enhancement per the brief). The squircle is strictly inside that 20px rounded rect,
+   so the fallback radius never clips the mask when both apply. */
 .s-for-city-leaders .fcl-avatar-media {
   grid-area: 1 / 1;
   position: relative;
   isolation: isolate;
-  width: var(--fcl-avatar-photo);
+  overflow: hidden;
+  width: calc(var(--fcl-frame) * var(--fcl-win));
   aspect-ratio: 1;
-}
-
-/* Photo + tint share the squircle mask. border-radius is the graceful state: if a
-   browser can't apply mask-image the photo stays a visible 20px rounded-rect — never
-   a blank box (progressive enhancement per the brief). */
-.s-for-city-leaders .fcl-avatar-img,
-.s-for-city-leaders .fcl-avatar-media::after {
   border-radius: var(--radius-card-mobile); /* 20px fallback */
   -webkit-mask-image: url("/assets/for-city-leaders/avatar-mask.svg");
   mask-image: url("/assets/for-city-leaders/avatar-mask.svg");
@@ -252,12 +284,25 @@
   mask-mode: alpha;
 }
 
+/* PER-PERSON FACE FRAMING (the whole point — see the ratio table below).
+   The photo is rendered at its own size and offset INSIDE the window, exactly as the
+   original does, so the squircle crops tight on each face. object-fit:cover keeps the
+   asset's own aspect (never stretches a face); object-position 50% 50% matches the
+   original's computed value on all 12 cards. */
 .s-for-city-leaders .fcl-avatar-img {
   display: block;
-  width: 100%;
-  height: 100%;
+  position: absolute;
+  left: calc(var(--fcl-frame) * var(--fcl-photo-x));
+  top: calc(var(--fcl-frame) * var(--fcl-photo-y));
+  width: calc(var(--fcl-frame) * var(--fcl-photo-w));
+  height: calc(var(--fcl-frame) * var(--fcl-photo-h));
+  /* LOAD-BEARING: base.css resets `img { max-width: 100% }`, which silently clamps
+     these deliberately OVERSIZED photos back to the window width and undoes the whole
+     face-framing effect (heights still applied, so it distorts the crop rather than
+     failing loudly). Do not remove. */
+  max-width: none;
   object-fit: cover;
-  object-position: center 30%; /* bias toward faces */
+  object-position: 50% 50%;
   background: var(--off-white); /* fills the squircle before the photo paints */
 }
 
@@ -271,10 +316,79 @@
   pointer-events: none;
 }
 
+/* =========================================================================
+   PER-PERSON FACE FRAMING — measured from the live original, CDP @1366
+   =========================================================================
+   The original does NOT render a uniform avatar: each card sizes its photo
+   individually and slides the squircle mask over it (per-card `mask-position`),
+   so the ~129px window lands tight on that person's face. Reproducing only the
+   window (our old uniform 128px `object-fit:cover` box) showed the whole person
+   = visibly looser framing than the original. This table restores it.
+
+   All values are RATIOS OF THE FRAME WIDTH, so they hold at every breakpoint —
+   verified against the live original at 1366 (200px frame, 128.772 mask) AND at
+   375 (120px frame, 77.26 mask): the ratios agree to 4 decimal places.
+
+     --fcl-photo-w/h : the photo's own box   ÷ frame width   (original: photo rect)
+     --fcl-photo-x/y : photo's offset from the window's top-left ÷ frame width.
+                       NEGATIVE = the photo overflows the window (it is the original's
+                       `mask-position` negated: the mask sat at +x/+y INTO the photo).
+     --fcl-win       : squircle window ÷ frame width (128.772/200 = .6439 for all
+                       except Joseph, whose card genuinely uses the smaller 117.944
+                       mask export — reproduced, it is visible).
+
+   The DEFAULT below (photo exactly fills the window, no offset) is what a card with
+   no per-person entry gets — used by the three added members, who have no original
+   counterpart to measure. Per-person rules must stay AFTER this default: same
+   specificity, so source order wins. */
+.s-for-city-leaders .fcl-member {
+  --fcl-win: 0.6439;
+  --fcl-photo-w: var(--fcl-win);
+  --fcl-photo-h: var(--fcl-win);
+  --fcl-photo-x: 0;
+  --fcl-photo-y: 0;
+}
+
+/* Measured @1366 (frame 200px). Comment = the original's raw rect + mask placement. */
+.s-for-city-leaders .fcl-member--dan       { --fcl-photo-w: .7945; --fcl-photo-h: 1.1533; --fcl-photo-x: -.0731; --fcl-photo-y: -.2083; } /* photo 158.91x230.66, mask 128.77 at 14.61,41.65 */
+.s-for-city-leaders .fcl-member--sofiia    { --fcl-photo-w: .6541; --fcl-photo-h:  .9413; --fcl-photo-x: -.0047; --fcl-photo-y: -.1010; } /* photo 130.81x188.27, mask 128.77 at 0.93,20.20 */
+.s-for-city-leaders .fcl-member--abhinav   { --fcl-photo-w: .6541; --fcl-photo-h:  .9536; --fcl-photo-x: -.0049; --fcl-photo-y: -.1438; } /* photo 130.81x190.72, mask 128.77 at 0.98,28.77 */
+.s-for-city-leaders .fcl-member--cavan     { --fcl-photo-w: .7274; --fcl-photo-h: 1.0575; --fcl-photo-x: -.0415; --fcl-photo-y: -.1010; } /* photo 145.48x211.50, mask 128.77 at 8.30,20.21 */
+.s-for-city-leaders .fcl-member--liberatus { --fcl-photo-w: .6846; --fcl-photo-h:  .9902; --fcl-photo-x: -.0171; --fcl-photo-y: -.1272; } /* photo 136.92x198.05, mask 128.77 at 3.41,25.44 */
+.s-for-city-leaders .fcl-member--joseph    { --fcl-photo-w: .6159; --fcl-photo-h:  .8958; --fcl-photo-x: -.0099; --fcl-photo-y: -.0773; --fcl-win: .5897; } /* photo 123.17x179.16, mask 117.94 at 1.98,15.47 */
+.s-for-city-leaders .fcl-member--erika     { --fcl-photo-w: .6785; --fcl-photo-h:  .9902; --fcl-photo-x: -.0157; --fcl-photo-y: -.1149; } /* photo 135.70x198.05, mask 128.77 at 3.14,22.99 */
+.s-for-city-leaders .fcl-member--luisa     { --fcl-photo-w: 1.3262; --fcl-photo-h: .9946; --fcl-photo-x: -.4099; --fcl-photo-y: -.1854; } /* photo 265.23x198.92, mask 128.77 at 81.97,37.07 — wide 2-up source, window picks her face */
+.s-for-city-leaders .fcl-member--flien     { --fcl-photo-w: .6602; --fcl-photo-h:  .9536; --fcl-photo-x: -.0048; --fcl-photo-y: -.1089; } /* photo 132.03x190.72, mask 128.77 at 0.97,21.79 */
+.s-for-city-leaders .fcl-member--eric      { --fcl-photo-w: .6602; --fcl-photo-h:  .9536; --fcl-photo-x: -.0047; --fcl-photo-y: -.1088; } /* photo 132.03x190.72, mask 128.77 at 0.94,21.76 */
+.s-for-city-leaders .fcl-member--uvin      { --fcl-photo-w: .6663; --fcl-photo-h:  .9658; --fcl-photo-x: -.0110; --fcl-photo-y: -.0843; } /* photo 133.25x193.16, mask 128.77 at 2.20,16.87 */
+.s-for-city-leaders .fcl-member--poppy     { --fcl-photo-w: .7100; --fcl-photo-h:  .9900; --fcl-photo-x: -.0350; --fcl-photo-y: -.1750; } /* photo 142.00x198.00, mask 128.77 at 7.00,35.00 */
+
+/* Volunteer ("Maybe you?") doodle — OPERATOR DECISION: exempt from the grey tint so it
+   stays YELLOW. It keeps the orange squiggle frame + squircle mask so the card still
+   sits consistently in the grid. Photos keep the tint. */
+.s-for-city-leaders .fcl-member--volunteer .fcl-avatar-media::after {
+  content: none;
+}
+
+/* The volunteer NAME is the roster's only link. base.css strips link styling site-wide
+   (`a { color: inherit; text-decoration: none }`), which would leave it visually
+   IDENTICAL to the 14 static names next to it — undiscoverable as a click target. It
+   therefore carries an explicit underline. JUDGMENT CALL (logged): this card has no
+   counterpart in the original, so there is nothing to be faithful to; a link that
+   cannot be recognised as one is a usability bug. Keyboard focus keeps the default
+   outline from base.css. */
+.s-for-city-leaders .fcl-member--volunteer .fcl-name a {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+/* Role and name sit on consecutive lines with NO extra gap — measured 0px in the
+   original at both 1366 and 800 (line-height alone separates them). */
 .s-for-city-leaders .fcl-member-meta {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 0;
   width: 100%;
 }
 
@@ -315,7 +429,7 @@
 
   .s-for-city-leaders .fcl-founders {
     gap: var(--space-80);
-    /* The 12px desktop rhythm shim is desktop-specific (see the base rule);
+    /* The desktop rhythm shim (-8px, see the base rule) is desktop-specific;
        reset here so tablet keeps its own rhythm. */
     margin-block-end: 0;
   }
@@ -368,9 +482,38 @@
   .s-for-city-leaders .fcl-founders {
     flex-direction: column;
     gap: var(--space-46);
-    margin-block-end: var(--space-46); /* keep list-to-list rhythm ≈ row pitch */
+    /* List-to-list rhythm must EQUAL the 46px row pitch: the original runs one uniform
+       ~166.6px pitch straight through founders → members (measured live at 375). The
+       parent .fcl-team flex gap already contributes 40px, so this adds the last 6.
+       (Was var(--space-46), which stacked ON TOP of that 40 → an 86px gap and a 206px
+       pitch at the boundary vs 166 for every other row.) */
+    margin-block-end: 6px;
   }
 
+  /* ZIGZAG AMPLITUDE — fixes the logged "inset ~28px" divergence.
+     Measured live at true 375: the original's rows hug the viewport, avatars at x=12
+     (left) / x=243 with right edge 363 — i.e. a 12px gutter. Ours sat at x=40 / 335
+     because every row is nested inside main#app's 16px page gutter PLUS the band's 24px
+     mobile padding (16 + 24 = 40). Pull the two lists — and only them — back out by the
+     28px difference (40 − 12) so the amplitude matches the original exactly.
+     SAFE: the negative margin only spends gutter that already exists (the lists sit
+     40px inside the viewport before it), so it cannot cause horizontal overflow.
+     Non-negotiable and verified: scrollWidth === innerWidth at 320/360/375/390.
+     The width MUST grow with the margins: the base rule pins `width: 100%`, and the
+     parent .fcl-team centres its items, so a bare negative margin only shrinks the
+     margin box and moves nothing. calc(100% + 56px) makes the margin box exactly 100%
+     again → it still centres, but the border box now reaches 28px past each side. */
+  .s-for-city-leaders .fcl-founders,
+  .s-for-city-leaders .fcl-members {
+    width: calc(100% + 56px);
+    margin-inline: -28px;
+  }
+
+  /* Text is LEFT-aligned on EVERY row, whichever side the avatar is on — measured on
+     all 8 of the original's mobile cards (computed text-align:left throughout; its text
+     starts at x=12 when the avatar is right, x=148 when the avatar is left). Ours used
+     to flip to text-align:right on the reversed rows, which pushed the copy against the
+     avatar instead of the viewport edge. Only the ROW DIRECTION alternates. */
   .s-for-city-leaders .fcl-member {
     flex-direction: row;
     align-items: center;
@@ -381,21 +524,16 @@
 
   .s-for-city-leaders .fcl-member:nth-child(even) {
     flex-direction: row-reverse;
-    text-align: right;
   }
 
-  /* The original's MEMBERS list starts on the RIGHT (measured: first member
-     avatar at x=243) while the founders start left — invert the members'
-     alternation relative to the founders'. */
-  .s-for-city-leaders .fcl-members .fcl-member:nth-child(odd) {
-    flex-direction: row-reverse;
-    text-align: right;
-  }
-
-  .s-for-city-leaders .fcl-members .fcl-member:nth-child(even) {
-    flex-direction: row;
-    text-align: left;
-  }
+  /* NO members-list inversion. An earlier fast-path copied the original's surface
+     coordinate ("first member avatar at x=243, so members start RIGHT") without the
+     rule behind it: the original's mobile roster starts with SOFIIA (its 8-person
+     mobile variant), so its Abhinav-on-the-right is simply the alternation continuing
+     from Dan-on-the-left. We ship DAN first (ratified divergence), so forcing members
+     to start right put Sofiia and Abhinav on the same edge — a visible stutter at the
+     founders→members seam. The base rules already alternate correctly across both
+     lists: founders end on R (Sofiia), members resume on L (Abhinav). */
 
   .s-for-city-leaders .fcl-member--founder {
     width: 100%; /* zigzag rows are full-width strips, no 2-up sizing */
