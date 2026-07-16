@@ -124,3 +124,9 @@ Copy/glyphs are byte-exact from `docs/spec/20-sections/07-for-sponsors.md` and t
 - **Straight apostrophe** in `We've` (bullet 5; source `&#x27;`). Eyebrow source casing
   `FOR sponsors` kept (display uppercases via `.eyebrow`). `1,100+` / `7 countries` /
   `20+` reproduced as-is.
+
+## Content correction (operator, 2026-07-16)
+
+- **[content] "We've run 40+ events"** (was `20+`, matching the original). Operator-
+  supplied true figure — same class of correction as the membership/country reconciliation
+  in DEVIATIONS.md → Content corrections. Do not "restore" the original's 20+.

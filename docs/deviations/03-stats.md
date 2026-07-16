@@ -164,3 +164,13 @@ Legend: **[arch]** structural · **[content]** copy/data · **[a11y]** accessibi
   ours at 50px post-fix. NOTE: the first attempt landed the rule in the reduced-motion
   block by mistake — caught by the fast path's mandatory browser verification before
   merge; the rule now lives in the `<800` block where it belongs.
+
+## Fast-path fix (operator-reported, 2026-07-16): marquee does NOT pause on hover
+
+- **Removed** the pause-on-hover rule (`.s-stats__marquee:hover` →
+  `animation-play-state: paused`). It was an embellishment we added, justified at the
+  time by the Figma marquee system *documenting* the capability — but the original does
+  not use it: the captured CSS contains **zero** `:hover` rules of any kind
+  (`grep -c ':hover' docs/spec/_capture/css-rules.css` = 0), and the operator confirmed
+  from the live site that the original keeps scrolling under the cursor while ours
+  stopped. Now faithful: the marquee runs continuously regardless of pointer.
