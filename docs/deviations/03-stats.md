@@ -74,13 +74,16 @@ Legend: **[arch]** structural · **[content]** copy/data · **[a11y]** accessibi
   wrapper carries no meaning; the rendered text is byte-identical.
 - **[arch] Stat pair is plain `<div>`/`<p>`, not a `<dl>`.** A description-list's dt/dd
   order fights the number-over-label visual; plain elements read correctly to AT
-  ("9 Countries 🇬🇧…🇵🇰  100% Word of mouth").
+  ("10 Countries  100% Word of mouth" — the flag row is `aria-hidden="true"`, so AT never
+  announces it; it is decoration only).
 
 ## Type / layout
 
 - **[arch] Single semantic DOM; only the `< 800px` block scales type down** (desktop and
-  tablet type are identical in the capture). Mobile values transcribed from the site's own
-  mobile CSS: 4,000+ 80→40 (ls .8), lead 52→28 (ls .56), desc 24→18, 9/100% 60→32 (ls .64),
+  tablet type are identical in the capture). Mobile values transcribed from the ORIGINAL's own
+  mobile CSS — the labels below are the ORIGINAL's rendered text, so the stat appears here as
+  `9`, though ours now reads `10` (see Content corrections in `docs/DEVIATIONS.md`):
+  4,000+ 80→40 (ls .8), lead 52→28 (ls .56), desc 24→18, 9/100% 60→32 (ls .64),
   Countries/Word of mouth/flags/supported BY 32→20 (ls .4).
 - **[approx] Paragraph `line-height: 0` (a Figma quirk) not reproduced** — uses the shared
   `.t-body-lg` (lh 1.5) so the sentence wraps sanely on narrow screens.
@@ -112,7 +115,38 @@ Legend: **[arch]** structural · **[content]** copy/data · **[a11y]** accessibi
   (1574 > 1400), so the two-copy loop stays seamless on every width. (Item gap is the existing
   24px; already correct.)
 
+## Flag row raised to 10 (operator finding, 2026-07-16)
+
+- **[content] The row now carries 10 flags, matching the `10` Countries stat.** Supersedes the
+  earlier deliberate gap (8 flags against a stat of 10, held open pending the operator
+  confirming the countries). The row reads 🇺🇸🏴󠁧󠁢󠁥󠁮󠁧󠁿🇳🇱🇵🇹🇮🇳🇺🇦🇯🇵🏴󠁧󠁢󠁳󠁣󠁴󠁿🇩🇪🇵🇰 — US, England,
+  Netherlands, Portugal, India, Ukraine, Japan, Scotland, Germany, Pakistan. Against the
+  original's 8 (🇬🇧🇩🇪🇺🇸🇯🇵🇺🇦🇵🇹🇳🇱🇵🇰): **7 kept** (US NL PT UA JP DE PK), 🇬🇧 (GB) **replaced by
+  separate England + Scotland flags** — consistent with §04, which already puts the Scotland
+  flag on Edinburgh — and **India added**. Net 8 − 1 + 3 = **10**.
+- **[content] England / Scotland are TAG SEQUENCES**, not regional-indicator pairs: `U+1F3F4` +
+  6 tag chars (`gbeng` / `gbsct`) + the `U+E007F` cancel tag. The tag chars are **invisible**,
+  so the run looks like it carries stray characters — never retype it by hand and don't "tidy"
+  it; edit by codepoint and re-check the grapheme count is 10. Platforms whose emoji font lacks
+  these sequences (notably Windows / Segoe UI Emoji) draw **both** as the same plain black 🏴 —
+  accepted; see the emoji-fallback bullet in `docs/DEVIATIONS.md`.
+- **[arch] `text-wrap: balance` on `.s-stats__flags` — the 2-line wrap is INTENDED.** 10 flags
+  no longer fit on one line at ANY breakpoint (1280: 288px column @ 32px; 375: 159.5px @ 20px;
+  320: 132px @ 20px), so the row always wraps. Natural wrap strands flags (8+2 at 1280, 7+3 at
+  375, 6+4 at 320); `balance` gives a tidy centered **5+5** at every width and re-balances if a
+  platform's emoji font measures flags wider, which a hard-coded `max-width` would not.
+  Browsers never break *inside* a flag (verified: all 10 graphemes stay intact) and there is no
+  horizontal page overflow at any width, so **no `overflow-wrap` / `word-break` guard is needed
+  — do not add one.** Pre-Chrome 114 / Safari 17.5 / Firefox 121 fall back to the natural wrap:
+  uneven, not broken. `balance` also fixes a pre-existing blemish — the shipped 8-flag row
+  already orphaned a flag on mobile (7+1 at 375, 6+2 at 320).
+
 ## Preserved as canon (NOT deviations — do not "fix")
 
-- **"9" Countries with 8 flags** (🇬🇧🇩🇪🇺🇸🇯🇵🇺🇦🇵🇹🇳🇱🇵🇰), "Seven countries" in the
-  paragraph, and the trailing space in `4,000+ ` are reproduced verbatim per spec §7.
+- **The trailing space in `4,000+ `** is reproduced verbatim per spec §7.
+- **Superseded:** the original's `"9" Countries` with 8 flags and its "Seven countries"
+  paragraph were on this list while the repo was a pure fidelity exercise. The go-live content
+  corrections (stat → `10`, paragraph → "Ten countries") and the 10-flag row above replaced
+  them — see **Content corrections** in `docs/DEVIATIONS.md`. `docs/spec/**` still records the
+  original's 9-and-8: that is the historical capture of the ORIGINAL site and is correct as-is.
+  **Do not "sync" the spec to our markup.**
