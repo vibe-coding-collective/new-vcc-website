@@ -235,3 +235,14 @@ keeps a scoped 16px override (`css-p8lmy`).
   `.t-team-name` utility while source casing is preserved for screen readers
   (`CAVAN JUDGE`/`JOSEPH WAN`/`ERIKA TSAI` are uppercase in source; `Dan Porder` etc.
   are title-case and display as caps).
+
+## Fast-path fix (operator-approved, 2026-07-16): mobile team ZIGZAG
+
+- The 2-col mobile grid is replaced by the original's single-file zigzag: one person
+  per row, 120px avatar hugging alternating edges, text strip on the opposite side;
+  founders start LEFT, members start RIGHT (both verified against the live original at
+  true 375 — the members' inverted start was caught and fixed during verification).
+- **[approx]** Our zigzag amplitude is inset ~28px vs the original (avatars at x40/x215
+  vs the original's x12/x243) because rows sit inside the band padding + wrapper gutter —
+  same content-gutter class of approximation as the hero collage bleed. Structure,
+  sizes, and rhythm match.
