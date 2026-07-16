@@ -23,7 +23,12 @@ Legend: **[arch]** structural · **[content]** copy/data · **[a11y]** accessibi
   only lossless-enough lever: every path coordinate is rounded to ≤2 decimals with trailing
   zeros dropped (max error 0.005 user-units → ≈0.01 px at 2× the 80 px display); the root
   `viewBox`, every attribute, the colors, ids and element structure are byte-preserved (still
-  21 paths, no scientific notation). **Verified visually identical:** original vs minified were
+  21 paths, no scientific notation). **GATE CORRECTION (2026-07-16):** the precision pass
+  also corrupted the XML declaration (`version="1.0"` → `version="1"`), which breaks SVG
+  rendering via `<img>` in all browsers — caught by the reviewer's real-load-path render,
+  fixed and re-verified through `<img>` at the gate. The geometry verification below was
+  accurate but did not exercise the committed bytes through the real load path.
+  **Verified visually identical:** original vs minified were
   rendered with headless Chrome at 2× (160 px) and 4× (400 px) display size — mean per-channel
   delta ≈0.07/255 and <0.08 % of pixels differ perceptibly (>16/255), all isolated edge
   antialiasing (an amplified-12× diff shows only faint outline tracing over solid-black

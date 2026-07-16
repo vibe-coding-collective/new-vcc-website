@@ -46,7 +46,9 @@ Legend: **[arch]** structural · **[content]** copy/data · **[a11y]** accessibi
   — 117,734 B (26.3 %) off raw, 47,186 B (30.1 %) off gzip. Same treatment as the nav logo
   (`logo-nav.svg`, likewise minified this pass): path coordinates rounded to ≤2 decimals with
   trailing zeros dropped; `viewBox="0 0 100 93.0005"`, all attributes, the `#F6F5F2` fills and
-  all 20 paths are byte-preserved. **Verified visually identical** with a headless-Chrome 2×/4×
+  all 20 paths are byte-preserved. **GATE CORRECTION (2026-07-16):** same XML-declaration
+  corruption as the nav logo (`version="1"`), fixed and re-verified through the real `<img>`
+  path at the gate. **Verified visually identical** with a headless-Chrome 2×/4×
   render diff on a dark background (mean per-channel delta ≈0.13/255; <0.15 % of pixels differ
   perceptibly, all edge antialiasing). One-off script, no committed deps — the "known
   SVG-optimization opportunity for a later pass" flagged here is now actioned.
