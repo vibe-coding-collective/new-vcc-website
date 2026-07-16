@@ -61,9 +61,13 @@ mirrors `DEVIATIONS.md`: **[arch]** structural · **[content]** copy/data ·
     **CORRECTION (reviewer-verified at the gate, 2026-07-16):** the 10 shipped frame
     files are geometrically IDENTICAL (max pairwise path delta ≤0.001 on a 200-unit
     canvas; the capture applies no rotation) — the original renders the SAME squiggle
-    on every card. The 10 per-hash files are kept for capture provenance only, and the
-    frame→person table below records provenance, not visual variety. A polish-pass item
-    may collapse them to one file (consistent with the 8→1 mask decision).
+    on every card. **RESOLVED (polish pass 2026-07-16): the 10 per-hash files were
+    collapsed to a single `avatar-frame.svg`** — frame-06's content (the majority
+    geometry and the cleanest structure, no `<g>` wrapper) kept canonical; the max
+    0.001-unit shift on the four non-identical frames is ≤0.002 px at 2× display,
+    invisible. This mirrors the 8→1 mask decision. All 12 cards reference the one file
+    now; the frame→person table below is retained as **historical provenance**, not
+    visual variety.
   - **No orange TINT exists.** Grepping the capture CSS, `mix-blend-mode:color` layers
     use only `#d9d9d9` (×7) and `#fff` (×2); `#ec6c23` appears solely as the eyebrow
     pill bg and the frame fill — never as a tint. Under the `color` blend both grey and
@@ -72,9 +76,12 @@ mirrors `DEVIATIONS.md`: **[arch]** structural · **[content]** copy/data ·
     "`--white`: two team-avatar tint layers"). The earlier review's "orange tint on
     Joseph / Luisa / Poppy" is those three **sharing the orange `Union` frame**
     (`avatar-frame-06`), which the DOM-order recovery reproduces exactly.
-- **[approx] Frame→person mapping is DOM-order-recovered from `dom-1280` (best
-  available; the spec flags it as not cleanly determinable).** `avatar-frame-NN.svg` is
-  numbered by first-appearance order of each distinct desktop frame:
+- **[approx] Frame→person mapping — HISTORICAL PROVENANCE (the per-hash files are now
+  collapsed to one; see the RESOLVED note above).** DOM-order-recovered from `dom-1280`
+  (best available; the spec flags it as not cleanly determinable). Recorded for
+  provenance only — the `avatar-frame-NN.svg` files below were numbered by
+  first-appearance order of each distinct desktop frame, then deduplicated to the single
+  `avatar-frame.svg`:
 
   | # | Person (role) | Frame file | Source hash |
   |---|---|---|---|
@@ -96,11 +103,12 @@ mirrors `DEVIATIONS.md`: **[arch]** structural · **[content]** copy/data ·
   (e.g. `14.6px 41.65px`) — runtime artifacts. We centre the photo at
   `--fcl-avatar-photo: 64%` of the box, matching the capture's photo:frame ratio
   (≈128.8/200 ≈ 0.64; the founder card `dom-1280`#1 computes to a centred squircle).
-- **[perf] Assets shipped: 10 frame SVGs (~1.06–1.08 KB each) + 1 mask SVG (840 B),
-  all HEAD-200 from `/_assets/v11/…` on 2026-07-16.** NOT shipped: the 7 smaller
-  120×119 frames and the 4 mobile-size mask exports (§31 Group 4) — our responsive
-  layout reflows the same 12 desktop cards, so the 200px frames + the single scalable
-  squircle mask cover every breakpoint.
+- **[perf] Assets shipped: 1 frame SVG (`avatar-frame.svg`, ~1.06 KB) + 1 mask SVG
+  (840 B).** The 10 per-hash frames were all HEAD-200 from `/_assets/v11/…` on
+  2026-07-16 and then collapsed to one (see the RESOLVED note above), so only the single
+  canonical frame ships. NOT shipped: the 7 smaller 120×119 frames and the 4 mobile-size
+  mask exports (§31 Group 4) — our responsive layout reflows the same 12 desktop cards,
+  so the 200px frame + the single scalable squircle mask cover every breakpoint.
 - **[a11y] Frame `<img>` is decorative** (`alt=""` + `aria-hidden="true"`); the photo
   keeps its descriptive `alt="<Name>"`.
 - **Graceful degradation:** if `mask-image` is unsupported the photo falls back to a

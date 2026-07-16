@@ -16,12 +16,24 @@ Legend: **[arch]** structural · **[content]** copy/data · **[a11y]** accessibi
   resolution-independent, so a single file scales cleanly to the 60/80 px box sizes set
   in CSS. Shipped one **`logo-nav.svg`** (byte-exact copy of the desktop original) and
   dropped the redundant two. Cuts the logo payload from ~1.3 MB (3 files) to 448 KB.
-- **[perf] Logo shipped un-minified (448 KB raw / ~152 KB gzip).** It is genuine vector
-  detail (21 ornate-script paths, ~3.9 avg decimal places from Figma), not embedded
-  raster. A 2–3-decimal precision pass was prototyped and verified pixel-clean at ≤80 px
-  display but saves only ~24–48 KB gzip; for a brand mark I kept the byte-exact CDN asset
-  over a lossy rewrite. Recommend a uniform `svgo` pass across all site assets in a later
-  perf phase rather than a one-off here.
+- **[perf] RESOLVED (polish pass 2026-07-16): logo minified via a 2-decimal precision pass.**
+  Was 447,910 B raw / 152,223 B gzip; now **334,184 B raw / 104,081 B gzip** — 113,726 B
+  (25.4 %) off raw, 48,142 B (31.6 %) off gzip. The mark is genuine vector detail (21
+  ornate-script paths, ~3.9 avg decimal places from Figma), so coordinate precision is the
+  only lossless-enough lever: every path coordinate is rounded to ≤2 decimals with trailing
+  zeros dropped (max error 0.005 user-units → ≈0.01 px at 2× the 80 px display); the root
+  `viewBox`, every attribute, the colors, ids and element structure are byte-preserved (still
+  21 paths, no scientific notation). **GATE CORRECTION (2026-07-16):** the precision pass
+  also corrupted the XML declaration (`version="1.0"` → `version="1"`), which breaks SVG
+  rendering via `<img>` in all browsers — caught by the reviewer's real-load-path render,
+  fixed and re-verified through `<img>` at the gate. The geometry verification below was
+  accurate but did not exercise the committed bytes through the real load path.
+  **Verified visually identical:** original vs minified were
+  rendered with headless Chrome at 2× (160 px) and 4× (400 px) display size — mean per-channel
+  delta ≈0.07/255 and <0.08 % of pixels differ perceptibly (>16/255), all isolated edge
+  antialiasing (an amplified-12× diff shows only faint outline tracing over solid-black
+  interiors). Done with a one-off script, no committed deps — the earlier "recommend a later
+  svgo pass" note is now actioned here.
 
 ## Structure / interaction
 

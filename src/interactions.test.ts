@@ -230,3 +230,23 @@ describe('initInteractions — wiring', () => {
     expect(scrollSpy).toHaveBeenCalledWith({ behavior: 'smooth', block: 'start' })
   })
 })
+
+describe('module import — no self-init side effects (reviewer N1)', () => {
+  it('wires no document click listener at import time (self-call gated off under Vitest)', () => {
+    // If the module had self-initialized on import, initInteractions() would have added a
+    // delegated click listener to the real `document`; a bubbling click on a trigger would
+    // then scroll. The import.meta.env.MODE === 'test' guard skips that self-call, so no
+    // listener leaks — importing the module is side-effect-free in the test environment.
+    document.body.innerHTML = `
+      <button data-scroll-target="dest">go</button>
+      <section id="dest"></section>
+    `
+    const dest = document.getElementById('dest')!
+    const scrollSpy = vi.fn()
+    dest.scrollIntoView = scrollSpy
+
+    document.querySelector('button')!.dispatchEvent(new Event('click', { bubbles: true }))
+
+    expect(scrollSpy).not.toHaveBeenCalled()
+  })
+})

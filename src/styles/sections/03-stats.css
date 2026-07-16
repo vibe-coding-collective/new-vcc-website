@@ -163,6 +163,12 @@
   display: block;
   width: auto;
   height: 32px;
+  /* Guard against a future extreme-aspect logo stretching its pill — and the marquee
+     track — unboundedly wide. `max-width` caps the rendered width; `object-fit: contain`
+     keeps the aspect ratio (letterboxing rather than distorting) if the cap is ever hit.
+     No effect on the current logos, which render <=~100px wide at the fixed 32px height. */
+  max-width: 200px;
+  object-fit: contain;
 }
 
 @keyframes s-stats-marquee {

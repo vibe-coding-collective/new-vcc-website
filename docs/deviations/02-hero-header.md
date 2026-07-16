@@ -115,3 +115,17 @@ findings (flagged to the orchestrator).
   recovered assets (7 files: `hero-chip-1/2/3.webp`, `hero-collage-1/2/3.webp`,
   `hero-googly-blob.svg`), so the placeholder sentinel that kept the empty directory tracked is
   gone.
+
+## Build output (polish/hardening pass 2026-07-16)
+
+- **[perf] Working-documentation HTML comments are stripped from the production build
+  (site-wide).** A build-only Vite plugin (`vcc-strip-html-comments`, `apply: 'build'`,
+  `transformIndexHtml` order `'post'` so it runs AFTER include inlining) removes every
+  `<!-- … -->` span from `dist/index.html`; the dev server keeps the comments intact as
+  living documentation. This section's block comments (the asset-provenance note above the
+  `<h1>` and the collage note) are among those dropped from `dist`. **The verified 1366
+  three-line headline break is unaffected:** the strip removes only the comment spans and
+  preserves every surrounding byte, and none of this section's comments sit inside the
+  whitespace-significant `<h1>` (chips are glued directly to `communities` / `TECH-LITE` /
+  `BUILDERS` with no intervening comment). The built output was byte-verified identical to
+  the pre-strip output except for the removed comments.

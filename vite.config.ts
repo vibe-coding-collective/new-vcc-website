@@ -49,8 +49,34 @@ function htmlIncludes(): Plugin {
   }
 }
 
+/**
+ * Build-only HTML comment stripper. Runs at transformIndexHtml order 'post' — i.e.
+ * AFTER htmlIncludes (order 'pre') has inlined every "<!-- @include: … -->" marker —
+ * so it only ever sees real section markup, never the include markers, and thus
+ * cannot break the include mechanism or its missing-file hard error. `apply: 'build'`
+ * keeps the dev server (and the section files' live working-documentation comments)
+ * untouched. Only the comment spans themselves are removed; every surrounding byte is
+ * preserved, so all non-comment content stays byte-identical. Downlevel/conditional
+ * comments ("<!--[if …]>") are preserved defensively — none exist today.
+ */
+const HTML_COMMENT_RE = /<!--[\s\S]*?-->/g
+function stripHtmlComments(): Plugin {
+  return {
+    name: 'vcc-strip-html-comments',
+    apply: 'build',
+    transformIndexHtml: {
+      order: 'post',
+      handler(html) {
+        return html.replace(HTML_COMMENT_RE, (comment) =>
+          /^<!--\s*\[/.test(comment) ? comment : '',
+        )
+      },
+    },
+  }
+}
+
 export default defineConfig({
-  plugins: [htmlIncludes()],
+  plugins: [htmlIncludes(), stripHtmlComments()],
   test: {
     environment: 'happy-dom',
   },

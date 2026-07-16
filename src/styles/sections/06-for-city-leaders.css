@@ -174,8 +174,9 @@
 
 /* Avatar: the original layered "blob" composite, restored (deviations doc §avatars).
    Three stacked layers in one grid cell:
-     1. .fcl-avatar-frame — a hand-drawn ORANGE squiggle <img> (one shape per card),
-        fills the box, sits behind.
+     1. .fcl-avatar-frame — a hand-drawn ORANGE squiggle <img> (one shared shape —
+        the original's per-card files are geometrically identical), fills the box,
+        sits behind.
      2. .fcl-avatar-img   — the member PHOTO, masked into an organic squircle blob
         (mask-image = avatar-mask.svg, mask-mode:alpha), centred at ~64% of the box.
      3. .fcl-avatar-media::after — a grey mix-blend-mode:color TINT masked to the same

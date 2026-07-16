@@ -41,11 +41,17 @@ Legend: **[arch]** structural · **[content]** copy/data · **[a11y]** accessibi
     "mascot row" entry below).
   No text-fallback was needed (the task's fallback path only applies if the real footer
   variant is not determinable — it was). The blue nav logo was **not** copied or recolored.
-- **[perf] `logo-footer-mark.svg` is heavy (~447 KB).** It is the same stippled micro-path
-  monogram style as the committed nav logo (`logo-nav.svg`, ~447 KB) — off-white instead of
-  blue — so the raw real artwork is kept to match the established repo standard rather than
-  altering it. Flagged as a known SVG-optimization opportunity for a later pass (reducing
-  coordinate precision could shrink it substantially without visible change).
+- **[perf] RESOLVED (polish pass 2026-07-16): `logo-footer-mark.svg` minified via a 2-decimal
+  precision pass.** Was 447,541 B raw / 156,654 B gzip; now **329,807 B raw / 109,468 B gzip**
+  — 117,734 B (26.3 %) off raw, 47,186 B (30.1 %) off gzip. Same treatment as the nav logo
+  (`logo-nav.svg`, likewise minified this pass): path coordinates rounded to ≤2 decimals with
+  trailing zeros dropped; `viewBox="0 0 100 93.0005"`, all attributes, the `#F6F5F2` fills and
+  all 20 paths are byte-preserved. **GATE CORRECTION (2026-07-16):** same XML-declaration
+  corruption as the nav logo (`version="1"`), fixed and re-verified through the real `<img>`
+  path at the gate. **Verified visually identical** with a headless-Chrome 2×/4×
+  render diff on a dark background (mean per-channel delta ≈0.13/255; <0.15 % of pixels differ
+  perceptibly, all edge antialiasing). One-off script, no committed deps — the "known
+  SVG-optimization opportunity for a later pass" flagged here is now actioned.
 - **[approx] RESOLVED: the wordmark is the ONE bottom-anchored blob graphic, no longer a
   faint centered watermark.** Earlier this same SVG was rendered centered at `opacity: 0.16`
   as a faint watermark *and* the bottom blobs were a **separate** placeholder row — two
@@ -123,3 +129,16 @@ Legend: **[arch]** structural · **[content]** copy/data · **[a11y]** accessibi
   (`import './styles/interactions.css'` and `import './interactions'`); nothing else changed.
   Note: main.ts's existing header comment still says interactive behavior "arrives in a later
   phase" — left untouched per the imports-only grant; the file's owner may refresh it.
+- **[arch] RESOLVED (polish pass 2026-07-16): the self-init is gated out of unit tests
+  (reviewer N1).** `interactions.ts` still self-initializes on load for dev + production, but
+  the bottom `initInteractions()` call is now guarded by `import.meta.env.MODE !== 'test'`, so
+  importing the module under Vitest no longer leaks a persistent document-level click listener
+  into the test environment. Dev/production behavior is unchanged — `import.meta.env.MODE` is a
+  Vite-static string, so the guard tree-shakes to a constant and `initInteractions()` always
+  runs in the browser bundle. The unit tests already call `initInteractions()` explicitly; a
+  new regression test asserts a bare import wires no document listener (all 15 prior tests still
+  pass, 16 with the new one). **On the guard choice:** `import.meta.vitest === undefined` (the
+  first-suggested form) was tested and rejected — inside an *imported source module* Vitest
+  leaves `import.meta.vitest` undefined unless in-source testing (`includeSource`) is configured,
+  so that check would not have skipped the self-call; the `MODE` check needs no config change
+  and is the standard Vite-static env guard.
