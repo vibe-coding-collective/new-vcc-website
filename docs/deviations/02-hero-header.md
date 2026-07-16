@@ -5,29 +5,52 @@ The integrator consolidates these into `docs/DEVIATIONS.md` at merge time.
 Legend: **[arch]** structural · **[content]** copy/data · **[a11y]** accessibility ·
 **[perf]** payload/assets · **[approx]** unverifiable-so-approximated.
 
-## Runtime-injected visuals reproduced as placeholders (no invented artwork)
+## Recovered hero assets swapped in (RESOLVES the earlier placeholders)
 
-- **[approx][content] Headline photo chips + orange googly blob = decorative CSS placeholders.**
-  Live, the `<h1>` interleaves small rounded-square photo chips (yellow after COMMUNITIES,
-  green before TECH-LITE, teal after BUILDERS) and an orange googly-eyes blob after
-  TECH-LITE (orchestrator live observation). These are **runtime-injected** — absent from
-  the static capture, no determinable asset URL — so they are reproduced as decorative
-  `<span>`s with the correct colors/positions and `aria-hidden="true"`. No photographic or
-  mascot artwork is invented. Chips are sized in `em` so they track the headline font.
-- **[approx] Googly blob rendered as a plain orange disc; eyes omitted.** Drawing googly
-  eyes would be inventing artwork (disallowed), so the blob is a plain `--orange` circle
-  placeholder marking the mascot's position.
-- **[content][approx] Green chip uses `--green-bright` (#91bd3c).** The observation says
-  "green"; the brighter lime reads as the more playful chip color. (`--green` #498d44 is the
-  alternative.)
-- **[approx] 862×350 photo collage = decorative colored-blob placeholder.** Live, this frame
-  holds blob-masked event photos on teal/yellow/red blobs (runtime-injected, no asset URL).
-  Reproduced at the original's 862×350 aspect (scaling below via `aspect-ratio`) as three
-  overlapping organic blobs in the observed colors, `aria-hidden`. The masked photos
-  themselves are intentionally not invented.
-- **[approx] Observed "red" collage blob approximated with `--orange` (#ec6c23).** No `--red`
-  token exists in `tokens.css`; the nearest warm token is used rather than hard-coding a new
-  color. Suggest a `--red` token if the real collage is added later.
+The chips, googly blob and collage now use the **real recovered Group-1 assets**
+(`docs/spec/31-recovered-assets.md`). All 9 source files were downloaded and byte-checked
+against the spec's stated sizes (exact match) before optimizing. The prior "no asset URL /
+decorative placeholder" deviations are **resolved**; the swap surfaced two spec-vs-reality
+findings (flagged to the orchestrator).
+
+- **[content] Headline photo chips = real recovered photos (3).** The three `<span>`
+  colour-blocks are now `<img>` chips — `hero-chip-1.webp` (yellow, after `communities`),
+  `hero-chip-2.webp` (green, before `TECH-LITE`), `hero-chip-3.webp` (teal, after
+  `BUILDERS`) — in the definite JSON node order. **On-view finding:** each served PNG already
+  bakes in its colored rounded-square tile + flower-masked photo + cream outline on a
+  transparent field, resolving spec 1a's open question ("baked into the PNG or applied by the
+  runtime — confirm on view" → **baked in**). So the CSS chip `background`/`border-radius`
+  frame was removed — a solid CSS backer would fill the tile's rounded-transparent corners
+  and read as a hard square. Em-based sizing is kept per the current CSS. The earlier
+  `--green-bright` vs `--green` chip-colour choice is now moot (colours are baked into the assets).
+- **[content] Orange googly blob = real recovered SVG.** The plain `--orange` disc is replaced
+  by `hero-googly-blob.svg` (self-contained: `Body` `#EC6C23` + white `#F6F5F2` sclera + dark
+  `#181814` pupils). The earlier "eyes omitted / not invented" deviation is resolved — the real
+  eyes ship. **Desktop SVG only:** the tablet/mobile exports are the same shape (aspect ~1.18)
+  and SVG scales losslessly, so shipping them would be unreferenced dead weight — kept lean per
+  the inventory's own "ship the desktop SVG only and scale it" guidance. Flagged to the
+  orchestrator in case the literal on-disk 9-file set is wanted.
+- **[content] 862×350 collage = three real recovered composites.** The three CSS
+  `hero-graphic-blob` `<span>`s are replaced by `hero-collage-1/2/3.webp` (members1/2/3,
+  left→right). **On-view finding — contradicts inventory spec 1c:** spec 1c (HEAD-only, "PNG
+  body not fetched") called these "plain photo rectangles" and said the flower masks +
+  teal/yellow/red blob backgrounds are a runtime CSS composite "not present as assets." The
+  **downloaded PNG bodies show the opposite** — each bakes in the colored blob (collage-1
+  ~teal, -2 ~yellow, -3 ~orange), the flower/squircle photo mask, and the cream outline, all
+  on transparency. So the task's planned approach (keep CSS blobs, clip the photos into them)
+  was **not** applied — it would double the colored blob and crop the baked flower silhouette
+  into a rounded rect. The self-contained composites are placed directly at full frame height
+  with a natural overlap (source order 1→3 = paint order → right-over-middle-over-left,
+  matching the live stacking). More faithful than the placeholder path; reported as a
+  spec-vs-reality gap.
+- **[perf] Assets optimized on download (batch-1 precedent: ~2× display size, WebP).** Chips
+  288² PNG → 192² WebP q82 (~7.0–7.6 KB each, was ~102–114 KB). Collage ~1894² PNG → 760px-edge
+  WebP q80 (38–47 KB each, was 1.69–2.39 MB). Googly SVG shipped as-is (1.44 KB). Total hero
+  imagery ≈150 KB referenced (dir `du -sh` 160 KB) — down from ~5.9 MB of raw source PNGs.
+  Per-file sizes are in the builder report.
+- **[content] The `--red` collage-blob approximation is now moot.** No CSS collage blob remains
+  (the red/orange is baked into `hero-collage-3.webp`), so the earlier "approximate red with
+  `--orange` / suggest a `--red` token" note no longer applies to this section.
 
 ## Structure / type / a11y
 
@@ -35,10 +58,13 @@ Legend: **[arch]** structural · **[content]** copy/data · **[a11y]** accessibi
   policy (`DEVIATIONS.md`). Accessible name resolves to "communities FOR TECH-LITE BUILDERS"
   (the aria-hidden chips contribute nothing). Source casing kept byte-exact
   (`communities` lowercase; visual uppercase from `.t-hero`).
-- **[a11y] Alt-text convention.** All decorative placeholders (chips, googly blob, collage
-  blobs) are marked `aria-hidden="true"` — stronger than `alt=""` and appropriate since they
-  are `<span>`/`<div>` placeholders, not `<img>`. No meaningful content photos are present
-  in this section, so no descriptive alt text applies here.
+- **[a11y] Alt-text convention (now real `<img>`s).** The chips and googly are decorative
+  `<img alt="">` inline in the `<h1>` — the canonical decorative-image convention; they add
+  nothing to the accessible name, which stays "communities FOR TECH-LITE BUILDERS". The
+  collage photos are `<img alt="">` inside the `hero-graphic` wrapper, which keeps its
+  `aria-hidden="true"`: the collage is a decorative composite (event photos in the runtime-style
+  flower/blob treatment), intentionally not exposed to AT, matching the section's established
+  convention. Logged per the task's "follow the existing alt convention" instruction.
 - **[a11y] `contact for more` `<a>` gains `rel="noopener"`** (added to the `target="_blank"`
   link; security/perf, no visual change).
 - **[arch][approx] Mobile headline scales via `clamp(30px, 9vw, 80px)`.** The captured
@@ -65,6 +91,8 @@ Legend: **[arch]** structural · **[content]** copy/data · **[a11y]** accessibi
 - **[arch] `data-reveal` added at the integration gate** (reviewer finding): `.hero-inner`
   and `.hero-graphic` now carry the reveal marker per 40-interactions.md §1 (the hero is a
   listed reveal block; only the nav is exempt). The builder had omitted it; added by the
-  orchestrator before merge. The `.gitkeep` explainer comment moved here too — the sentinel
-  file itself is now empty (its rationale: hero imagery is runtime-injected on the original,
-  so the directory ships empty until the asset-recovery task fills it).
+  orchestrator before merge. `data-reveal` on both blocks is preserved through this asset swap.
+- **[perf] `.gitkeep` sentinel removed.** `public/assets/hero-header/` now holds the real
+  recovered assets (7 files: `hero-chip-1/2/3.webp`, `hero-collage-1/2/3.webp`,
+  `hero-googly-blob.svg`), so the placeholder sentinel that kept the empty directory tracked is
+  gone.

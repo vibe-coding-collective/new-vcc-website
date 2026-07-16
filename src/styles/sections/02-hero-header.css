@@ -3,7 +3,9 @@
    Owner: builder(02-hero-header). EVERY selector is scoped under `.s-hero-header`.
    Spec: docs/spec/20-sections/02-hero-header.md · Contract: docs/ARCHITECTURE.md
    padding-top:200px clears the fixed nav (§9). Chips, googly blob and the 862x350
-   collage are decorative placeholders for runtime-injected artwork (no asset URL).
+   collage now use the REAL recovered Group-1 assets (docs/spec/31-recovered-assets.md);
+   each served image bakes in its own colored tile/blob + flower/squircle mask, so the
+   old CSS colored-blob + border-radius masks are gone (they would double-up / crop).
    Deviations: docs/deviations/02-hero-header.md
    ========================================================================== */
 
@@ -37,36 +39,32 @@
   text-align: center;
 }
 
-/* Decorative headline chips + googly blob — placeholders for runtime-injected
-   photo chips (no asset URL; aria-hidden in markup). Sized in `em` so they
-   track the headline font at every breakpoint. */
+/* Headline photo chips (real recovered assets). Each webp bakes in its own
+   colored rounded-square tile + flower-masked photo + cream outline on
+   transparency, so NO CSS background/border-radius is applied (that would show a
+   square backer behind the tile's rounded corners). Sized in `em` so they track
+   the headline font at every breakpoint. Decorative (alt=""). */
 .s-hero-header .hero-chip {
   display: inline-block;
   vertical-align: middle;
   width: 0.7em;
   height: 0.7em;
   margin-inline: 0.1em;
-  border-radius: 0.18em;
-  background: var(--grey-200);
+  object-fit: contain;
 }
 
-.s-hero-header .hero-chip--yellow {
-  background: var(--yellow);
-}
-
-.s-hero-header .hero-chip--green {
-  background: var(--green-bright);
-}
-
-.s-hero-header .hero-chip--teal {
-  background: var(--teal);
-}
-
-/* Orange "googly-eyes" mascot blob — reproduced as a plain orange disc; the
-   eyes are runtime artwork and are intentionally not invented. */
+/* Orange googly-eyes mascot blob (real recovered SVG: orange body + white/dark
+   eyes, self-contained). Intrinsic ratio 89.6/75.85 (~1.18, wider than tall);
+   height tracks the headline font, width follows the aspect. The one desktop SVG
+   scales losslessly to every breakpoint (the tablet/mobile exports are the same
+   shape — see deviations). Decorative (alt=""). */
 .s-hero-header .hero-blob--googly {
-  border-radius: 50%;
-  background: var(--orange);
+  display: inline-block;
+  vertical-align: middle;
+  height: 0.7em;
+  width: auto;
+  aspect-ratio: 89.6 / 75.85;
+  margin-inline: 0.1em;
 }
 
 /* --- Lead paragraph ------------------------------------------------------- */
@@ -85,7 +83,11 @@
   gap: var(--space-24);
 }
 
-/* --- Photo collage placeholder (original: 862x350 runtime frame) ---------- */
+/* --- Photo collage (original: 862x350 frame) ----------------------------- */
+/* Three self-contained recovered composites placed left->right (members1/2/3) at
+   full frame height. They overlap because each ~square blob is wider than a third
+   of the 862px frame; source order 1->3 is the paint order, so the right blob
+   sits over the middle over the left (matches the live stacking). */
 .s-hero-header .hero-graphic {
   position: relative;
   width: 862px;
@@ -94,34 +96,24 @@
   margin-inline: auto;
 }
 
-.s-hero-header .hero-graphic-blob {
+.s-hero-header .hero-graphic-photo {
   position: absolute;
-  border-radius: 42% 58% 57% 43% / 47% 42% 58% 53%;
+  inset-block-start: 0;
+  height: 100%;
+  width: auto;
 }
 
-.s-hero-header .hero-graphic-blob--teal {
-  inset-block-start: 10%;
-  inset-inline-start: 3%;
-  width: 42%;
-  height: 82%;
-  background: var(--teal);
+.s-hero-header .hero-graphic-photo--1 {
+  inset-inline-start: 0;
 }
 
-.s-hero-header .hero-graphic-blob--yellow {
-  inset-block-start: 2%;
-  inset-inline-start: 32%;
-  width: 40%;
-  height: 80%;
-  background: var(--yellow);
+.s-hero-header .hero-graphic-photo--2 {
+  inset-inline-start: 50%;
+  transform: translateX(-50%);
 }
 
-/* Observed "red" blob approximated with --orange (no --red token exists). */
-.s-hero-header .hero-graphic-blob--red {
-  inset-block-start: 12%;
-  inset-inline-end: 3%;
-  width: 40%;
-  height: 78%;
-  background: var(--orange);
+.s-hero-header .hero-graphic-photo--3 {
+  inset-inline-end: 0;
 }
 
 /* ==========================================================================

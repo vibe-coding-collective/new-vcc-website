@@ -2,16 +2,18 @@
      padding-top:200px clears the fixed nav (see docs/ARCHITECTURE.md §9).
      The page's single <h1> (heading-hierarchy policy, docs/DEVIATIONS.md).
      The interleaved photo chips, the orange googly blob, and the 862x350 photo
-     collage are RUNTIME-INJECTED on the original (no determinable asset URLs), so
-     they are reproduced here as decorative, accessible placeholders — correct
-     positions / blob colors, no invented artwork. See docs/deviations/02-hero-header.md. -->
+     collage were runtime-injected on the original; the REAL recovered assets
+     (Group 1, docs/spec/31-recovered-assets.md) now replace the placeholders.
+     On-view inspection showed the served PNGs bake in their colored tiles/blobs +
+     flower/squircle masks + cream outlines, so they ship as self-contained
+     decorative composites (no CSS blob/mask needed). See docs/deviations/02-hero-header.md. -->
 <section class="s-hero-header" id="hero-header">
   <div class="hero-inner container container--900" data-reveal>
     <h1 class="hero-title t-hero">
-      communities<span class="hero-chip hero-chip--yellow" aria-hidden="true"></span>
-      FOR<span class="hero-chip hero-chip--green" aria-hidden="true"></span>
-      TECH-LITE<span class="hero-chip hero-blob hero-blob--googly" aria-hidden="true"></span>
-      BUILDERS<span class="hero-chip hero-chip--teal" aria-hidden="true"></span>
+      communities<img class="hero-chip" src="/assets/hero-header/hero-chip-1.webp" alt="" width="96" height="96" decoding="async" />
+      FOR<img class="hero-chip" src="/assets/hero-header/hero-chip-2.webp" alt="" width="96" height="96" decoding="async" />
+      TECH-LITE<img class="hero-blob--googly" src="/assets/hero-header/hero-googly-blob.svg" alt="" width="90" height="76" decoding="async" />
+      BUILDERS<img class="hero-chip" src="/assets/hero-header/hero-chip-3.webp" alt="" width="96" height="96" decoding="async" />
     </h1>
 
     <p class="hero-lead t-body-lg">
@@ -33,12 +35,13 @@
     </div>
   </div>
 
-  <!-- Runtime-injected photo collage on the original (blob-masked event photos on
-       teal/yellow/red blobs). No asset URL exists; rendered as a decorative
-       placeholder at the original's 862x350 frame. -->
+  <!-- 862x350 photo collage — three REAL recovered composites (members1/2/3). Each
+       served PNG bakes in its colored blob + flower/squircle-masked event photo +
+       cream outline, so no CSS blob/mask is applied; the self-contained WebPs are
+       placed left->right with a natural overlap. Decorative (aria-hidden wrapper). -->
   <div class="hero-graphic" aria-hidden="true" data-reveal>
-    <span class="hero-graphic-blob hero-graphic-blob--teal"></span>
-    <span class="hero-graphic-blob hero-graphic-blob--yellow"></span>
-    <span class="hero-graphic-blob hero-graphic-blob--red"></span>
+    <img class="hero-graphic-photo hero-graphic-photo--1" src="/assets/hero-header/hero-collage-1.webp" alt="" width="760" height="778" loading="lazy" decoding="async" />
+    <img class="hero-graphic-photo hero-graphic-photo--2" src="/assets/hero-header/hero-collage-2.webp" alt="" width="760" height="760" loading="lazy" decoding="async" />
+    <img class="hero-graphic-photo hero-graphic-photo--3" src="/assets/hero-header/hero-collage-3.webp" alt="" width="760" height="778" loading="lazy" decoding="async" />
   </div>
 </section>
