@@ -145,9 +145,18 @@
    Mobile (<800): heading scales down (60px overflows 375); bullets → 1 column.
    ========================================================================= */
 @media (width < 800px) {
+  /* DOCUMENTED EXCEPTION to the shared 32px mobile H2: the original sizes this
+     particular (long) heading at 28px/0.56 on mobile — css-n164e2, the band-title
+     tier — not the 32px css-i05ae1 the other section H2s use. Kept scoped so the
+     tokens-level `.t-h2` (32px) doesn't apply here. See deviations doc. */
   .s-for-sponsors .fsp-title {
-    font-size: 34px;
-    letter-spacing: 0.68px;
+    font-size: 28px;
+    letter-spacing: 0.56px;
+  }
+
+  /* Lede steps 20 → 16 on mobile (original css-n6l5zh). */
+  .s-for-sponsors .fsp-lede {
+    font-size: var(--fs-body-xs);
   }
 
   .s-for-sponsors .fsp-bullets {

@@ -131,9 +131,41 @@
    downward: first @media (width < 1280px), then @media (width < 800px).
    -------------------------------------------------------------------------- */
 
-/* Mobile value for the measured nav height (60px logo + 2×8px padding). */
+/* Mobile overrides on the shared design tokens (single source of truth). The
+   original ships a dedicated mobile variant that steps the display type down at
+   <800; these values are transcribed from its own mobile classes (dom-375.html +
+   css-rules.css), so every section's H2 / band-title / card-title lands on the
+   original's mobile size WITHOUT each section hand-rolling its own font override.
+   Only font-size + letter-spacing change; the line-heights already match the
+   originals (H2 1.2, band 1.5, card 1.5), so --lh-* are left alone.
+
+   Section files therefore no longer scale these headings themselves; the two
+   documented exceptions keep a scoped override because the original sizes them
+   differently: §07 "Put your brand…" is 28px (css-n164e2, not the 32px H2), and
+   the team/reviewer NAME+ROLE run at 18/16px (css-gmhvhh / css-p8lmy) which share
+   --fs-eyebrow with the eyebrow pill and so cannot be tokenised here. */
 @media (width < 800px) {
   :root {
-    --nav-height: 76px;
+    --nav-height: 76px; /* 60px logo + 2×8px padding */
+
+    /* Section H2 → 32px (css-i05ae1). Affects every `.t-h2`. */
+    --fs-h2: 32px;
+    --ls-h2: 0.64px;
+
+    /* In-band titles ("How It Works", "All cities", "members are ALREADY HERE")
+       → 28px (css-n164e2). Affects every `.t-band-title`. */
+    --fs-band-title: 28px;
+    --ls-band-title: 0.56px;
+
+    /* Card / step / value / city-name titles → 20px (css-z2l67j). Affects every
+       `.t-card-title`. */
+    --fs-card-title: 20px;
+    --ls-card-title: 0.4px;
+
+    /* Eyebrow pills AND team/reviewer NAMES → 18px on mobile (css-xw2kgc /
+       css-gmhvhh — both 18). Covers `.eyebrow`, `.t-team-name`. (`.t-team-role`
+       also reads this but the original drops ROLES to 16px, so §06/§08 keep a
+       scoped role override; `.t-eyebrow` is unused in the markup.) */
+    --fs-eyebrow: 18px;
   }
 }

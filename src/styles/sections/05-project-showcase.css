@@ -110,18 +110,11 @@
     height: 120px;
   }
 
-  .s-project-showcase__heading {
-    font-size: 32px; /* 60 → 32 */
-    letter-spacing: 0.64px;
-  }
-
+  /* Heading (.t-h2 → 32px) and card titles (.t-card-title → 20px) now step down
+     via the shared tokens.css mobile override; only the body-copy sizes, which
+     aren't display tokens, are scoped here. */
   .s-project-showcase__sub {
     font-size: var(--fs-body-xs); /* 20 → 16 */
-  }
-
-  .s-project-showcase__card-title {
-    font-size: var(--fs-body); /* 32 → 20 */
-    letter-spacing: 0.4px;
   }
 
   .s-project-showcase__card-body {

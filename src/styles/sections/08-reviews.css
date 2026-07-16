@@ -157,19 +157,17 @@
     font-size: var(--fs-body-xs);
   }
 
-  /* Reviewer meta scales down on mobile to the original's own mobile values:
-     name 20 -> 18 (css-xw2kgc), role & location 20 -> 16 (css-53h18j / css-jg1rhv),
-     and the row inset tightens 32 -> 28 (css-69mn3x). At the desktop 20px sizes the
-     nowrap "name + role" line, offset by the 100px avatar + inset, ran past the
-     viewport (~16px over at 375). The reduced sizes reproduce the original's single
-     mobile line at 375; flex-wrap lets name/role stack (rather than overflow) below
-     ~340px, which the fixed 320px target requires — the 375 capture stays one line. */
+  /* Reviewer meta scales to the original's mobile values: NAME 20 -> 18 now comes
+     from the shared tokens.css --fs-eyebrow override (css-xw2kgc, same 18px as team
+     names + eyebrows), so no scoped name rule here; ROLE + LOCATION step to 16px
+     (css-53h18j / css-jg1rhv) below, and the row inset tightens 32 -> 28 (css-69mn3x).
+     At the desktop 20px sizes the nowrap "name + role" line, offset by the 100px
+     avatar + inset, ran past the viewport (~16px over at 375). The reduced sizes
+     reproduce the original's single mobile line at 375; flex-wrap lets name/role
+     stack (rather than overflow) below ~340px, which the fixed 320px target
+     requires — the 375 capture stays one line. */
   .s-reviews .rv-reviewer {
     padding-left: var(--space-28);
-  }
-
-  .s-reviews .rv-name {
-    font-size: var(--fs-body-sm);
   }
 
   .s-reviews .rv-role,
