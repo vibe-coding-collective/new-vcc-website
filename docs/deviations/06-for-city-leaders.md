@@ -29,25 +29,28 @@ renders it greyscale; the doodle would be desaturated to grey by it. It keeps th
 squiggle frame + squircle mask so the card still sits consistently in the grid. A test
 asserts this exemption applies to **exactly one** card.
 
-### 4. ⚠️ [perf] KNOWN QUALITY GAP — Maitri's and Cherry's photos are only 106×106
-The supplied sources are **106×106**. They render at ~129 CSS px (and ~150–160px at
-tablet), i.e. **upscaled even at 1×, and ~2.4× upscaled on a retina display** — they will
-look noticeably softer than the other 13. **Not upscaled** (per instruction; upscaling
-would add blur, not detail). The operator is sending high-res replacements — **the swap is
-a one-file drop-in**: overwrite `team-maitri-bhat.webp` / `team-cherry-feng.webp`, no
-markup or CSS change needed, because the two cards deliberately carry **no** per-person
-framing rule (they use the default "photo fills the squircle" framing).
-To avoid stacking lossy loss on top of a resolution deficit, these two ship **lossless**
-WebP (5.2 / 5.4 KB) rather than the q72 used for the original 12 — still inside the
-existing 5–20 KB range. The doodle is lossless too (16.7 KB; hard-edged flat colour).
+### 4. ✅ [perf] RESOLVED (2026-07-21) — Maitri's and Cherry's photos replaced at 360×360
+Originally shipped at **106×106** (upscaled even at 1×, ~2.4× on retina, visibly softer than
+the other 13), pending hi-res replacements. On **2026-07-21** the operator supplied high-res
+sources; both were **square-cropped tight on the face** (matching the other members' head-and-
+shoulders framing) and exported at **360×360 grayscale WebP** (10.6 / 11.9 KB, q88 — inside
+the existing 5–20 KB range). As planned, the swap was a **one-file drop-in**: same filenames,
+no markup or CSS change, because the two cards deliberately carry **no** per-person framing
+rule (they use the default "photo fills the squircle" framing).
+The grayscale bake is deliberate belt-and-suspenders: the `.fcl-avatar-media::after` grey
+`mix-blend-mode:color` tint already desaturates every avatar on the page (all 12 originals
+ship in **colour**), so storing these two as B&W simply agrees with what renders — chosen to
+match the files they replaced and the operator's instruction. The doodle stays lossless
+(16.7 KB; hard-edged flat colour).
 
-### 5. [approx] Maitri's/Cherry's transparent corners were FLATTENED onto their own backdrop
-Both sources arrived as rounded-corner PNGs with transparent (antialiased) corners whose
-curve very nearly coincides with our squircle mask — which rendered a visible off-white
-halo around those two avatars, and only those two. They are now composited onto a flat
-colour sampled from each photo's own border (rgb(176) / rgb(146)) and ship fully opaque,
-exactly like the other 13, so the squircle mask does 100% of the shaping. The flattened
-pixels sit outside the mask and are never visible.
+### 5. [approx] (Moot since §4's 2026-07-21 replacement) Transparent corners were FLATTENED
+This applied to the ORIGINAL 106×106 sources, which arrived as rounded-corner PNGs with
+transparent (antialiased) corners whose curve very nearly coincided with our squircle mask —
+rendering a visible off-white halo around those two avatars, and only those two. They were
+composited onto a flat colour sampled from each photo's own border (rgb(176) / rgb(146)) and
+shipped fully opaque, so the squircle mask did 100% of the shaping. **The 2026-07-21 hi-res
+replacements are opaque JPEG sources with no transparency, so no flattening is needed — this
+divergence no longer applies.**
 
 ### 6. [a11y] The volunteer doodle is DECORATIVE (`alt=""`); the VOLUNTEER link is underlined
 - **`alt=""`** on the doodle, per this section's existing convention (descriptive `alt` for
@@ -302,9 +305,10 @@ keeps a scoped 16px override (`css-p8lmy`).
   crops as the original's, at higher resolution — each one's aspect matches the original's
   natural aspect to ≤0.008, which is why reproducing the original's per-person photo box +
   mask offset yields the identical framing, only sharper.
-  The **3 added** assets (LOUD §2/§4/§5) ship lossless: `team-maitri-bhat.webp` (106×106,
-  5.2 KB), `team-cherry-feng.webp` (106×106, 5.4 KB), `team-maybe-you.webp` (194×191,
-  16.7 KB, the only avatar with an alpha channel — it is a doodle on transparency, so the
+  The **3 added** assets (LOUD §2/§4/§5): `team-maitri-bhat.webp` (360×360, 10.6 KB, q88
+  grayscale) and `team-cherry-feng.webp` (360×360, 11.9 KB, q88 grayscale) — replaced their
+  106×106 originals on 2026-07-21 (§4); plus `team-maybe-you.webp` (194×191,
+  16.7 KB, lossless — the only avatar with an alpha channel — it is a doodle on transparency, so the
   `.fcl-avatar-img` off-white background supplies its squircle; without that, yellow art on
   the yellow band would be invisible).
 
